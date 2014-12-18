@@ -1,5 +1,16 @@
 <?php namespace App\Util;
 
+\HTML::macro('button', function ($type = 'button', $name, $options = array()){
+	if (!isset($options['type']))
+		$options['type'] = $type;
+
+	if (array_key_exists('id', $options)) {
+		return $options['id'];
+	}
+
+	return '<button ' . \HTML::attributes($options) . '>' . $name . '</button>' ;
+});
+
 	//<div class="menu">
 	//    <ul>
 	//        {{ \HTML::menu_active('/','Home') }}

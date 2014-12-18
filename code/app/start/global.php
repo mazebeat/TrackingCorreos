@@ -30,20 +30,6 @@ ClassLoader::addDirectories(array(app_path() . '/commands',
 
 Log::useFiles(storage_path() . '/logs/app.log');
 
-//Log::listen(function ($level, $message, $context) {
-//
-//	$apiName = php_sapi_name();
-//	$date    = Carbon::now();
-//
-//	Queue::push(function () use ($level, $message, $context, $apiName, $date) {
-//		DB::insert("INSERT INTO " . Config::get('database.connections.sqlite.prefix') . "logs (php_sapi_name, level, message, context, created_at) VALUES (?, ?, ?, ?, ?)", array($apiName,
-//			$level,
-//			$message,
-//			json_encode($context),
-//			$date));
-//	});
-//});
-
 /*
 |--------------------------------------------------------------------------
 | Application Error Handler
@@ -103,4 +89,3 @@ App::shutdown(function () {
 		App::make('log.buffer')->close();
 	}
 });
-

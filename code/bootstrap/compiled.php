@@ -52,7 +52,6 @@ use ArrayAccess;
 use Closure;
 use ReflectionClass;
 use ReflectionParameter;
-
 class Container implements ArrayAccess
 {
     protected $resolved = array();
@@ -379,7 +378,6 @@ namespace Symfony\Component\HttpKernel;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
 interface HttpKernelInterface
 {
     const MASTER_REQUEST = 1;
@@ -390,7 +388,6 @@ namespace Symfony\Component\HttpKernel;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
 interface TerminableInterface
 {
     public function terminate(Request $request, Response $response);
@@ -404,8 +401,26 @@ interface ResponsePreparerInterface
 }
 namespace Illuminate\Foundation;
 
+use Closure;
+use Illuminate\Config\FileEnvironmentVariablesLoader;
+use Illuminate\Config\FileLoader;
+use Illuminate\Container\Container;
+use Illuminate\Events\EventServiceProvider;
+use Illuminate\Exception\ExceptionServiceProvider;
 use Illuminate\Filesystem\Filesystem;
-
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Routing\RoutingServiceProvider;
+use Illuminate\Support\Contracts\ResponsePreparerInterface;
+use Illuminate\Support\Facades\Facade;
+use Stack\Builder;
+use Symfony\Component\Debug\Exception\FatalErrorException;
+use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\HttpKernel\TerminableInterface;
 class Application extends Container implements HttpKernelInterface, TerminableInterface, ResponsePreparerInterface
 {
     const VERSION = '4.2.12';
@@ -836,8 +851,7 @@ class Application extends Container implements HttpKernelInterface, TerminableIn
 }
 namespace Illuminate\Foundation;
 
-use Illuminate\Filesystem\Filesystem;
-
+use Closure;
 class EnvironmentDetector
 {
     public function detect($environments, $consoleArgs = null)
@@ -881,10 +895,9 @@ class EnvironmentDetector
 }
 namespace Illuminate\Http;
 
-use ArrayObject;
-use Illuminate\Support\Contracts\JsonableInterface;
-use Illuminate\Support\Contracts\RenderableInterface;
-
+use SplFileInfo;
+use Symfony\Component\HttpFoundation\ParameterBag;
+use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 class Request extends SymfonyRequest
 {
     protected $json;
@@ -1137,10 +1150,8 @@ class Request extends SymfonyRequest
 }
 namespace Illuminate\Http;
 
-use ArrayObject;
-use Illuminate\Support\Contracts\JsonableInterface;
-use Illuminate\Support\Contracts\RenderableInterface;
-
+use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 class FrameGuard implements HttpKernelInterface
 {
     protected $app;
@@ -1157,8 +1168,7 @@ class FrameGuard implements HttpKernelInterface
 }
 namespace Symfony\Component\HttpFoundation;
 
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class Request
 {
     const HEADER_CLIENT_IP = 'client_ip';
@@ -2079,7 +2089,6 @@ class ParameterBag implements \IteratorAggregate, \Countable
 namespace Symfony\Component\HttpFoundation;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-
 class FileBag extends ParameterBag
 {
     private static $fileKeys = array('error', 'name', 'size', 'tmp_name', 'type');
@@ -2345,6 +2354,7 @@ class HeaderBag implements \IteratorAggregate, \Countable
 }
 namespace Symfony\Component\HttpFoundation\Session;
 
+use Symfony\Component\HttpFoundation\Session\Storage\MetadataBag;
 interface SessionInterface
 {
     public function start();
@@ -2379,7 +2389,6 @@ interface SessionBagInterface
 namespace Symfony\Component\HttpFoundation\Session\Attribute;
 
 use Symfony\Component\HttpFoundation\Session\SessionBagInterface;
-
 interface AttributeBagInterface extends SessionBagInterface
 {
     public function has($name);
@@ -2466,7 +2475,6 @@ class AttributeBag implements AttributeBagInterface, \IteratorAggregate, \Counta
 namespace Symfony\Component\HttpFoundation\Session\Storage;
 
 use Symfony\Component\HttpFoundation\Session\SessionBagInterface;
-
 class MetadataBag implements SessionBagInterface
 {
     const CREATED = 'c';
@@ -2699,15 +2707,9 @@ class AcceptHeader
 }
 namespace Symfony\Component\Debug;
 
-use Psr\Log\LoggerInterface;
-use Psr\Log\LogLevel;
-use Symfony\Component\Debug\Exception\ContextErrorException;
-use Symfony\Component\Debug\Exception\FatalErrorException;
+use Symfony\Component\Debug\Exception\FlattenException;
 use Symfony\Component\Debug\Exception\OutOfMemoryException;
-use Symfony\Component\Debug\FatalErrorHandler\ClassNotFoundFatalErrorHandler;
-use Symfony\Component\Debug\FatalErrorHandler\UndefinedFunctionFatalErrorHandler;
-use Symfony\Component\Debug\FatalErrorHandler\UndefinedMethodFatalErrorHandler;
-
+use Symfony\Component\HttpFoundation\Response;
 class ExceptionHandler
 {
     private $debug;
@@ -2954,12 +2956,7 @@ class ExceptionHandler
 }
 namespace Illuminate\Support;
 
-use Countable;
-use Illuminate\Support\Contracts\ArrayableInterface;
-use Illuminate\Support\Contracts\JsonableInterface;
-use Illuminate\Support\Contracts\MessageProviderInterface;
-use JsonSerializable;
-
+use ReflectionClass;
 abstract class ServiceProvider
 {
     protected $app;
@@ -3033,13 +3030,10 @@ abstract class ServiceProvider
 }
 namespace Illuminate\Exception;
 
-use Closure;
-use ErrorException;
-use Illuminate\Support\Contracts\ResponsePreparerInterface;
-use ReflectionFunction;
-use Symfony\Component\Debug\Exception\FatalErrorException as FatalError;
-use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
-
+use Illuminate\Support\ServiceProvider;
+use Whoops\Handler\JsonResponseHandler;
+use Whoops\Handler\PrettyPageHandler;
+use Whoops\Run;
 class ExceptionServiceProvider extends ServiceProvider
 {
     public function register()
@@ -3112,9 +3106,7 @@ class ExceptionServiceProvider extends ServiceProvider
 }
 namespace Illuminate\Routing;
 
-use Illuminate\Http\Request;
-use InvalidArgumentException;
-
+use Illuminate\Support\ServiceProvider;
 class RoutingServiceProvider extends ServiceProvider
 {
     public function register()
@@ -3155,8 +3147,7 @@ class RoutingServiceProvider extends ServiceProvider
 }
 namespace Illuminate\Events;
 
-use Illuminate\Container\Container;
-
+use Illuminate\Support\ServiceProvider;
 class EventServiceProvider extends ServiceProvider
 {
     public function register()
@@ -3169,7 +3160,6 @@ class EventServiceProvider extends ServiceProvider
 namespace Illuminate\Support\Facades;
 
 use Mockery\MockInterface;
-
 abstract class Facade
 {
     protected static $app;
@@ -3293,12 +3283,8 @@ trait MacroableTrait
 }
 namespace Illuminate\Support;
 
-use Countable;
-use Illuminate\Support\Contracts\ArrayableInterface;
-use Illuminate\Support\Contracts\JsonableInterface;
-use Illuminate\Support\Contracts\MessageProviderInterface;
-use JsonSerializable;
-
+use Closure;
+use Illuminate\Support\Traits\MacroableTrait;
 class Arr
 {
     use MacroableTrait;
@@ -3459,12 +3445,8 @@ class Arr
 }
 namespace Illuminate\Support;
 
-use Countable;
-use Illuminate\Support\Contracts\ArrayableInterface;
-use Illuminate\Support\Contracts\JsonableInterface;
-use Illuminate\Support\Contracts\MessageProviderInterface;
-use JsonSerializable;
-
+use Illuminate\Support\Traits\MacroableTrait;
+use Patchwork\Utf8;
 class Str
 {
     use MacroableTrait;
@@ -3607,9 +3589,9 @@ use Symfony\Component\Debug\Exception\ContextErrorException;
 use Symfony\Component\Debug\Exception\FatalErrorException;
 use Symfony\Component\Debug\Exception\OutOfMemoryException;
 use Symfony\Component\Debug\FatalErrorHandler\ClassNotFoundFatalErrorHandler;
+use Symfony\Component\Debug\FatalErrorHandler\FatalErrorHandlerInterface;
 use Symfony\Component\Debug\FatalErrorHandler\UndefinedFunctionFatalErrorHandler;
 use Symfony\Component\Debug\FatalErrorHandler\UndefinedMethodFatalErrorHandler;
-
 class ErrorHandler
 {
     const TYPE_DEPRECATION = -100;
@@ -3806,15 +3788,15 @@ class ErrorHandlerCanary
 namespace Symfony\Component\HttpKernel\Debug;
 
 use Symfony\Component\Debug\ErrorHandler as DebugErrorHandler;
-
 class ErrorHandler extends DebugErrorHandler
 {
     
 }
 namespace Illuminate\Config;
 
-use Illuminate\Filesystem\Filesystem;
-
+use ArrayAccess;
+use Closure;
+use Illuminate\Support\NamespacedItemResolver;
 class Repository extends NamespacedItemResolver implements ArrayAccess
 {
     protected $loader;
@@ -4003,7 +3985,6 @@ class NamespacedItemResolver
 namespace Illuminate\Config;
 
 use Illuminate\Filesystem\Filesystem;
-
 class FileLoader implements LoaderInterface
 {
     protected $files;
@@ -4111,7 +4092,6 @@ interface EnvironmentVariablesLoaderInterface
 namespace Illuminate\Config;
 
 use Illuminate\Filesystem\Filesystem;
-
 class FileEnvironmentVariablesLoader implements EnvironmentVariablesLoaderInterface
 {
     protected $files;
@@ -4159,8 +4139,8 @@ class EnvironmentVariables
 }
 namespace Illuminate\Filesystem;
 
-use Illuminate\Support\ServiceProvider;
-
+use FilesystemIterator;
+use Symfony\Component\Finder\Finder;
 class Filesystem
 {
     public function exists($path)
@@ -4393,7 +4373,6 @@ class AliasLoader
 namespace Illuminate\Foundation;
 
 use Illuminate\Filesystem\Filesystem;
-
 class ProviderRepository
 {
     protected $files;
@@ -4480,9 +4459,7 @@ class ProviderRepository
 }
 namespace Illuminate\Cookie;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
-
+use Illuminate\Support\ServiceProvider;
 class CookieServiceProvider extends ServiceProvider
 {
     public function register()
@@ -4496,8 +4473,8 @@ class CookieServiceProvider extends ServiceProvider
 namespace Illuminate\Database;
 
 use Illuminate\Database\Connectors\ConnectionFactory;
-use Illuminate\Support\Str;
-
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\ServiceProvider;
 class DatabaseServiceProvider extends ServiceProvider
 {
     public function boot()
@@ -4517,9 +4494,7 @@ class DatabaseServiceProvider extends ServiceProvider
 }
 namespace Illuminate\Encryption;
 
-use Symfony\Component\Security\Core\Util\SecureRandom;
-use Symfony\Component\Security\Core\Util\StringUtils;
-
+use Illuminate\Support\ServiceProvider;
 class EncryptionServiceProvider extends ServiceProvider
 {
     public function register()
@@ -4536,7 +4511,6 @@ class EncryptionServiceProvider extends ServiceProvider
 namespace Illuminate\Filesystem;
 
 use Illuminate\Support\ServiceProvider;
-
 class FilesystemServiceProvider extends ServiceProvider
 {
     public function register()
@@ -4548,9 +4522,7 @@ class FilesystemServiceProvider extends ServiceProvider
 }
 namespace Illuminate\Session;
 
-use Illuminate\Support\Manager;
-use Symfony\Component\HttpFoundation\Session\Storage\Handler\NullSessionHandler;
-
+use Illuminate\Support\ServiceProvider;
 class SessionServiceProvider extends ServiceProvider
 {
     public function register()
@@ -4581,14 +4553,12 @@ class SessionServiceProvider extends ServiceProvider
 }
 namespace Illuminate\View;
 
-use ArrayAccess;
-use Closure;
-use Illuminate\Support\Contracts\ArrayableInterface as Arrayable;
-use Illuminate\Support\Contracts\MessageProviderInterface;
-use Illuminate\Support\Contracts\RenderableInterface as Renderable;
-use Illuminate\Support\MessageBag;
-use Illuminate\View\Engines\EngineInterface;
-
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\ViewErrorBag;
+use Illuminate\View\Compilers\BladeCompiler;
+use Illuminate\View\Engines\CompilerEngine;
+use Illuminate\View\Engines\EngineResolver;
+use Illuminate\View\Engines\PhpEngine;
 class ViewServiceProvider extends ServiceProvider
 {
     public function register()
@@ -4672,9 +4642,15 @@ interface RouteFiltererInterface
 }
 namespace Illuminate\Routing;
 
+use Closure;
+use Illuminate\Container\Container;
+use Illuminate\Events\Dispatcher;
 use Illuminate\Http\Request;
-use InvalidArgumentException;
-
+use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 class Router implements HttpKernelInterface, RouteFiltererInterface
 {
     protected $events;
@@ -5328,8 +5304,11 @@ class Router implements HttpKernelInterface, RouteFiltererInterface
 namespace Illuminate\Routing;
 
 use Illuminate\Http\Request;
-use InvalidArgumentException;
-
+use Illuminate\Routing\Matching\HostValidator;
+use Illuminate\Routing\Matching\MethodValidator;
+use Illuminate\Routing\Matching\SchemeValidator;
+use Illuminate\Routing\Matching\UriValidator;
+use Symfony\Component\Routing\Route as SymfonyRoute;
 class Route
 {
     protected $uri;
@@ -5657,9 +5636,13 @@ class Route
 }
 namespace Illuminate\Routing;
 
+use ArrayIterator;
+use Countable;
 use Illuminate\Http\Request;
-use InvalidArgumentException;
-
+use Illuminate\Http\Response;
+use IteratorAggregate;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class RouteCollection implements Countable, IteratorAggregate
 {
     protected $routes = array();
@@ -5773,9 +5756,9 @@ class RouteCollection implements Countable, IteratorAggregate
 }
 namespace Illuminate\Routing;
 
+use Closure;
+use Illuminate\Container\Container;
 use Illuminate\Http\Request;
-use InvalidArgumentException;
-
 class ControllerDispatcher
 {
     protected $filterer;
@@ -5872,7 +5855,6 @@ namespace Illuminate\Routing;
 
 use Illuminate\Http\Request;
 use InvalidArgumentException;
-
 class UrlGenerator
 {
     protected $routes;
@@ -6066,7 +6048,6 @@ namespace Illuminate\Routing\Matching;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
-
 interface ValidatorInterface
 {
     public function matches(Route $route, Request $request);
@@ -6075,7 +6056,6 @@ namespace Illuminate\Routing\Matching;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
-
 class HostValidator implements ValidatorInterface
 {
     public function matches(Route $route, Request $request)
@@ -6090,7 +6070,6 @@ namespace Illuminate\Routing\Matching;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
-
 class MethodValidator implements ValidatorInterface
 {
     public function matches(Route $route, Request $request)
@@ -6102,7 +6081,6 @@ namespace Illuminate\Routing\Matching;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
-
 class SchemeValidator implements ValidatorInterface
 {
     public function matches(Route $route, Request $request)
@@ -6119,7 +6097,6 @@ namespace Illuminate\Routing\Matching;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
-
 class UriValidator implements ValidatorInterface
 {
     public function matches(Route $route, Request $request)
@@ -6132,7 +6109,6 @@ namespace Illuminate\Workbench;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Workbench\Console\WorkbenchMakeCommand;
-
 class WorkbenchServiceProvider extends ServiceProvider
 {
     protected $defer = false;
@@ -6154,7 +6130,6 @@ class WorkbenchServiceProvider extends ServiceProvider
 namespace Illuminate\Events;
 
 use Illuminate\Container\Container;
-
 class Dispatcher
 {
     protected $container;
@@ -6316,7 +6291,6 @@ use Illuminate\Support\Contracts\ArrayableInterface;
 use Illuminate\Support\Contracts\JsonableInterface;
 use JsonSerializable;
 use LogicException;
-
 abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterface, JsonSerializable
 {
     protected $connection;
@@ -7517,7 +7491,6 @@ namespace Illuminate\Database;
 
 use Illuminate\Database\Connectors\ConnectionFactory;
 use Illuminate\Support\Str;
-
 class DatabaseManager implements ConnectionResolverInterface
 {
     protected $app;
@@ -7653,7 +7626,6 @@ use Illuminate\Database\PostgresConnection;
 use Illuminate\Database\SQLiteConnection;
 use Illuminate\Database\SqlServerConnection;
 use PDO;
-
 class ConnectionFactory
 {
     protected $container;
@@ -7749,9 +7721,8 @@ class ConnectionFactory
 }
 namespace Illuminate\Session;
 
-use Illuminate\Support\Manager;
-use Symfony\Component\HttpFoundation\Session\Storage\Handler\NullSessionHandler;
-
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface as BaseSessionInterface;
 interface SessionInterface extends BaseSessionInterface
 {
     public function getHandler();
@@ -7760,9 +7731,12 @@ interface SessionInterface extends BaseSessionInterface
 }
 namespace Illuminate\Session;
 
-use Illuminate\Support\Manager;
-use Symfony\Component\HttpFoundation\Session\Storage\Handler\NullSessionHandler;
-
+use Carbon\Carbon;
+use Closure;
+use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 class Middleware implements HttpKernelInterface
 {
     protected $app;
@@ -7859,9 +7833,10 @@ class Middleware implements HttpKernelInterface
 }
 namespace Illuminate\Session;
 
-use Illuminate\Support\Manager;
-use Symfony\Component\HttpFoundation\Session\Storage\Handler\NullSessionHandler;
-
+use SessionHandlerInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionBagInterface;
+use Symfony\Component\HttpFoundation\Session\Storage\MetadataBag;
 class Store implements SessionInterface
 {
     protected $id;
@@ -8130,7 +8105,6 @@ namespace Illuminate\Session;
 
 use Illuminate\Support\Manager;
 use Symfony\Component\HttpFoundation\Session\Storage\Handler\NullSessionHandler;
-
 class SessionManager extends Manager
 {
     protected function callCustomCreator($driver)
@@ -8212,12 +8186,7 @@ class SessionManager extends Manager
 }
 namespace Illuminate\Support;
 
-use Countable;
-use Illuminate\Support\Contracts\ArrayableInterface;
-use Illuminate\Support\Contracts\JsonableInterface;
-use Illuminate\Support\Contracts\MessageProviderInterface;
-use JsonSerializable;
-
+use Closure;
 abstract class Manager
 {
     protected $app;
@@ -8266,9 +8235,7 @@ abstract class Manager
 }
 namespace Illuminate\Cookie;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
-
+use Symfony\Component\HttpFoundation\Cookie;
 class CookieJar
 {
     protected $path = '/';
@@ -8325,9 +8292,12 @@ class CookieJar
 }
 namespace Illuminate\Cookie;
 
+use Illuminate\Encryption\DecryptException;
+use Illuminate\Encryption\Encrypter;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
-
 class Guard implements HttpKernelInterface
 {
     protected $app;
@@ -8381,7 +8351,6 @@ namespace Illuminate\Cookie;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
-
 class Queue implements HttpKernelInterface
 {
     protected $app;
@@ -8404,7 +8373,6 @@ namespace Illuminate\Encryption;
 
 use Symfony\Component\Security\Core\Util\SecureRandom;
 use Symfony\Component\Security\Core\Util\StringUtils;
-
 class Encrypter
 {
     protected $key;
@@ -8530,16 +8498,8 @@ class Log extends Facade
 }
 namespace Illuminate\Log;
 
-use Closure;
-use Illuminate\Events\Dispatcher;
-use Illuminate\Support\Contracts\ArrayableInterface;
-use Illuminate\Support\Contracts\JsonableInterface;
-use Monolog\Formatter\LineFormatter;
-use Monolog\Handler\ErrorLogHandler;
-use Monolog\Handler\RotatingFileHandler;
-use Monolog\Handler\StreamHandler;
-use Monolog\Logger as MonologLogger;
-
+use Illuminate\Support\ServiceProvider;
+use Monolog\Logger;
 class LogServiceProvider extends ServiceProvider
 {
     protected $defer = true;
@@ -8570,7 +8530,6 @@ use Monolog\Handler\ErrorLogHandler;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger as MonologLogger;
-
 class Writer
 {
     protected $monolog;
@@ -8694,7 +8653,6 @@ use Monolog\Handler\HandlerInterface;
 use Monolog\Handler\StreamHandler;
 use Psr\Log\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
-
 class Logger implements LoggerInterface
 {
     const DEBUG = 100;
@@ -8914,7 +8872,8 @@ interface LoggerInterface
 namespace Monolog\Handler;
 
 use Monolog\Formatter\FormatterInterface;
-
+use Monolog\Formatter\LineFormatter;
+use Monolog\Logger;
 abstract class AbstractHandler implements HandlerInterface
 {
     protected $level = Logger::DEBUG;
@@ -9025,8 +8984,7 @@ abstract class AbstractProcessingHandler extends AbstractHandler
 }
 namespace Monolog\Handler;
 
-use Monolog\Formatter\FormatterInterface;
-
+use Monolog\Logger;
 class StreamHandler extends AbstractProcessingHandler
 {
     protected $stream;
@@ -9087,8 +9045,7 @@ class StreamHandler extends AbstractProcessingHandler
 }
 namespace Monolog\Handler;
 
-use Monolog\Formatter\FormatterInterface;
-
+use Monolog\Logger;
 class RotatingFileHandler extends StreamHandler
 {
     protected $filename;
@@ -9173,7 +9130,6 @@ class RotatingFileHandler extends StreamHandler
 namespace Monolog\Handler;
 
 use Monolog\Formatter\FormatterInterface;
-
 interface HandlerInterface
 {
     public function isHandling(array $record);
@@ -9195,26 +9151,16 @@ class App extends Facade
 }
 namespace Illuminate\Exception;
 
-use Closure;
-use ErrorException;
-use Illuminate\Support\Contracts\ResponsePreparerInterface;
-use ReflectionFunction;
-use Symfony\Component\Debug\Exception\FatalErrorException as FatalError;
-use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
-
+use Exception;
 interface ExceptionDisplayerInterface
 {
     public function display(Exception $exception);
 }
 namespace Illuminate\Exception;
 
-use Closure;
-use ErrorException;
-use Illuminate\Support\Contracts\ResponsePreparerInterface;
-use ReflectionFunction;
-use Symfony\Component\Debug\Exception\FatalErrorException as FatalError;
-use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
-
+use Exception;
+use Symfony\Component\Debug\ExceptionHandler;
+use Symfony\Component\HttpFoundation\JsonResponse;
 class SymfonyDisplayer implements ExceptionDisplayerInterface
 {
     protected $symfony;
@@ -9234,13 +9180,10 @@ class SymfonyDisplayer implements ExceptionDisplayerInterface
 }
 namespace Illuminate\Exception;
 
-use Closure;
-use ErrorException;
-use Illuminate\Support\Contracts\ResponsePreparerInterface;
-use ReflectionFunction;
-use Symfony\Component\Debug\Exception\FatalErrorException as FatalError;
+use Exception;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
-
+use Whoops\Run;
 class WhoopsDisplayer implements ExceptionDisplayerInterface
 {
     protected $whoops;
@@ -9265,7 +9208,6 @@ use Illuminate\Support\Contracts\ResponsePreparerInterface;
 use ReflectionFunction;
 use Symfony\Component\Debug\Exception\FatalErrorException as FatalError;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
-
 class Handler
 {
     protected $responsePreparer;
@@ -9415,7 +9357,6 @@ class Route extends Facade
 namespace Illuminate\View\Engines;
 
 use Closure;
-
 class EngineResolver
 {
     protected $resolvers = array();
@@ -9447,14 +9388,7 @@ interface ViewFinderInterface
 }
 namespace Illuminate\View;
 
-use ArrayAccess;
-use Closure;
-use Illuminate\Support\Contracts\ArrayableInterface as Arrayable;
-use Illuminate\Support\Contracts\MessageProviderInterface;
-use Illuminate\Support\Contracts\RenderableInterface as Renderable;
-use Illuminate\Support\MessageBag;
-use Illuminate\View\Engines\EngineInterface;
-
+use Illuminate\Filesystem\Filesystem;
 class FileViewFinder implements ViewFinderInterface
 {
     protected $files;
@@ -9575,7 +9509,6 @@ use Illuminate\Support\Contracts\ArrayableInterface;
 use Illuminate\Support\Contracts\JsonableInterface;
 use Illuminate\Support\Contracts\MessageProviderInterface;
 use JsonSerializable;
-
 class MessageBag implements ArrayableInterface, Countable, JsonableInterface, MessageProviderInterface, JsonSerializable
 {
     protected $messages = array();
@@ -9715,7 +9648,6 @@ use Illuminate\Support\Contracts\MessageProviderInterface;
 use Illuminate\Support\Contracts\RenderableInterface as Renderable;
 use Illuminate\Support\MessageBag;
 use Illuminate\View\Engines\EngineInterface;
-
 class View implements ArrayAccess, Renderable
 {
     protected $factory;
@@ -10405,10 +10337,7 @@ class Response
 }
 namespace Illuminate\Http;
 
-use ArrayObject;
-use Illuminate\Support\Contracts\JsonableInterface;
-use Illuminate\Support\Contracts\RenderableInterface;
-
+use Symfony\Component\HttpFoundation\Cookie;
 trait ResponseTrait
 {
     public function header($key, $value, $replace = true)
@@ -10427,7 +10356,6 @@ namespace Illuminate\Http;
 use ArrayObject;
 use Illuminate\Support\Contracts\JsonableInterface;
 use Illuminate\Support\Contracts\RenderableInterface;
-
 class Response extends \Symfony\Component\HttpFoundation\Response
 {
     use ResponseTrait;
@@ -10711,7 +10639,6 @@ use Whoops\Exception\Inspector;
 use Whoops\Handler\CallbackHandler;
 use Whoops\Handler\Handler;
 use Whoops\Handler\HandlerInterface;
-
 class Run
 {
     const EXCEPTION_HANDLER = 'handleException';
@@ -10893,8 +10820,9 @@ class Run
 }
 namespace Whoops\Handler;
 
-use Whoops\Exception\Formatter;
-
+use Exception;
+use Whoops\Exception\Inspector;
+use Whoops\Run;
 interface HandlerInterface
 {
     public function handle();
@@ -10904,8 +10832,9 @@ interface HandlerInterface
 }
 namespace Whoops\Handler;
 
-use Whoops\Exception\Formatter;
-
+use Exception;
+use Whoops\Exception\Inspector;
+use Whoops\Run;
 abstract class Handler implements HandlerInterface
 {
     const DONE = 16;
@@ -10942,7 +10871,6 @@ abstract class Handler implements HandlerInterface
 namespace Whoops\Handler;
 
 use Whoops\Exception\Formatter;
-
 class JsonResponseHandler extends Handler
 {
     private $returnFrames = false;
@@ -10981,11 +10909,7 @@ class JsonResponseHandler extends Handler
 }
 namespace Stack;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
-use Symfony\Component\HttpKernel\TerminableInterface;
-
 class Builder
 {
     private $specs;
@@ -11036,7 +10960,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\TerminableInterface;
-
 class StackedHttpKernel implements HttpKernelInterface, TerminableInterface
 {
     private $app;

@@ -26,7 +26,7 @@
 	@yield('text-style')
 </head>
 <body id="{{ \App\Util\SiteHelpers::bodyId() }}" class="signin" ng-app="trackingCorreos">
-	{{--@include('layouts.preloader')--}}
+	@include('layouts.preloader')
     <div class="container">
 	    @yield('content')
     </div>
