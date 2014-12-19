@@ -17,17 +17,68 @@ trackingCorreos.controller('homeController', ['$scope', '$http', '$window', 'roo
                     $http.post('login', response.data)
                         .success(function (data, status, headers, config) {
                             if (data.ok) {
+                                $scope.message = data.message;
+                                if (!$.cookie('firstTime')) {
+                                    $.cookie('firstTime', true, {expires: 20, path: '/'});
+                                }
+                                $(function () {
+                                    var notice = (new PNotify({
+                                        type: 'notice',
+                                        title: 'Tracking de Correos',
+                                        text: $scope.message + '\nIniciando aplicación...',
+                                        desktop: {
+                                            desktop: true
+                                        }
+                                    }));
+                                });
                                 $window.location.href = rootFactory.root + '/dashboard';
+                                loginButton.stop();
                             }
+
+                            $scope.message = data.message;
+                            $(function () {
+                                var notice = (new PNotify({
+                                    type: 'notice',
+                                    title: 'Tracking de Correos',
+                                    text: $scope.message,
+                                    desktop: {
+                                        desktop: true
+                                    }
+                                }));
+                            });
+                            loginButton.stop();
                         })
                         .error(function (data, status, headers, config) {
-                            loginButton.start();
+                            loginButton.stop();
+                            console.log(data);
+                            $(function () {
+                                var notice = (new PNotify({
+                                    type: 'notice',
+                                    title: 'Tracking de Correos',
+                                    text: data,
+                                    desktop: {
+                                        desktop: true
+                                    }
+                                }));
+                            });
                             $window.location.href = rootFactory.root + '/';
+                            loginButton.stop();
                         });
                 } else {
                     $scope.message = response.messsage;
+                    new PNotify({
+                        type: 'notice',
+                        title: 'Atención!',
+                        text: $scope.message,
+                        desktop: {
+                            desktop: true
+                        }
+                    });
                     loginButton.stop();
                 }
+            })
+            .catch(function (errorMsg) {
+                console.log(errorMsg);
             });
     };
 }]);

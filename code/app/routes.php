@@ -17,5 +17,18 @@ Route::group(array('after' => 'auth'), function () {
 
 Route::group(array('before' => 'auth'), function () {
 	Route::get('logout', 'HomeController@logout');
-	Route::get('dashboard', 'DashboardController@index');
+	Route::group(array('prefix' => 'dashboard'), function () {
+		Route::get('/', 'DashboardController@index');
+		Route::group(array('prefix' => 'consultas'), function () {
+			Route::get('historica', 'ConsultaController@historica');
+			Route::get('individual', 'ConsultaController@individual');
+		});
+		Route::group(array('prefix' => 'reportes'), function () {
+			Route::get('electronico', 'ReporteController@electronico');
+			Route::get('fisico', 'ReporteController@fisico');
+		});
+		Route::get('tracking', 'TrackingController@index');
+		Route::group(array('prefix' => 'administracion'), function () {
+		});
+	});
 });

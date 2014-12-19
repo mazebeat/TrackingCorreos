@@ -27,229 +27,241 @@ namespace Doctrine\Common\Annotations;
  */
 class FileCacheReader implements Reader
 {
-	/**
-	 * @var Reader
-	 */
-	private $reader;
+    /**
+     * @var Reader
+     */
+    private $reader;
 
-	/**
-	 * @var string
-	 */
-	private $dir;
+    /**
+     * @var string
+     */
+    private $dir;
 
-	/**
-	 * @var bool
-	 */
-	private $debug;
+    /**
+     * @var bool
+     */
+    private $debug;
 
-	/**
-	 * @var array
-	 */
-	private $loadedAnnotations = array();
+    /**
+     * @var array
+     */
+    private $loadedAnnotations = array();
 
-	/**
-	 * @var array
-	 */
-	private $classNameHashes = array();
+    /**
+     * @var array
+     */
+    private $classNameHashes = array();
 
-	/**
-	 * Constructor.
-	 *
-	 * @param Reader  $reader
-	 * @param string  $cacheDir
-	 * @param boolean $debug
-	 *
-	 * @throws \InvalidArgumentException
-	 */
-	public function __construct(Reader $reader, $cacheDir, $debug = false)
-	{
-		$this->reader = $reader;
-		if (!is_dir($cacheDir) && !@mkdir($cacheDir, 0777, true)) {
-			throw new \InvalidArgumentException(sprintf('The directory "%s" does not exist and could not be created.', $cacheDir));
-		}
+    /**
+     * Constructor.
+     *
+     * @param Reader  $reader
+     * @param string  $cacheDir
+     * @param boolean $debug
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function __construct(Reader $reader, $cacheDir, $debug = false)
+    {
+        $this->reader = $reader;
+        if (!is_dir($cacheDir) && !@mkdir($cacheDir, 0777, true)) {
+            throw new \InvalidArgumentException(sprintf('The directory "%s" does not exist and could not be created.', $cacheDir));
+        }
 
-		$this->dir   = rtrim($cacheDir, '\\/');
-		$this->debug = $debug;
-	}
+        $this->dir   = rtrim($cacheDir, '\\/');
+        $this->debug = $debug;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getClassAnnotation(\ReflectionClass $class, $annotationName)
-	{
-		$annotations = $this->getClassAnnotations($class);
+    /**
+     * {@inheritDoc}
+     */
+    public function getClassAnnotations(\ReflectionClass $class)
+    {
+        if ( ! isset($this->classNameHashes[$class->name])) {
+            $this->classNameHashes[$class->name] = sha1($class->name);
+        }
+        $key = $this->classNameHashes[$class->name];
 
-		foreach ($annotations as $annotation) {
-			if ($annotation instanceof $annotationName) {
-				return $annotation;
-			}
-		}
+        if (isset($this->loadedAnnotations[$key])) {
+            return $this->loadedAnnotations[$key];
+        }
 
-		return null;
-	}
+        $path = $this->dir.'/'.strtr($key, '\\', '-').'.cache.php';
+        if (!is_file($path)) {
+            $annot = $this->reader->getClassAnnotations($class);
+            $this->saveCacheFile($path, $annot);
+            return $this->loadedAnnotations[$key] = $annot;
+        }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getClassAnnotations(\ReflectionClass $class)
-	{
-		if (!isset($this->classNameHashes[$class->name])) {
-			$this->classNameHashes[$class->name] = sha1($class->name);
-		}
-		$key = $this->classNameHashes[$class->name];
+        if ($this->debug
+            && (false !== $filename = $class->getFilename())
+            && filemtime($path) < filemtime($filename)) {
+            @unlink($path);
 
-		if (isset($this->loadedAnnotations[$key])) {
-			return $this->loadedAnnotations[$key];
-		}
+            $annot = $this->reader->getClassAnnotations($class);
+            $this->saveCacheFile($path, $annot);
+            return $this->loadedAnnotations[$key] = $annot;
+        }
 
-		$path = $this->dir . '/' . strtr($key, '\\', '-') . '.cache.php';
-		if (!is_file($path)) {
-			$annot = $this->reader->getClassAnnotations($class);
-			$this->saveCacheFile($path, $annot);
+        return $this->loadedAnnotations[$key] = include $path;
+    }
 
-			return $this->loadedAnnotations[$key] = $annot;
-		}
+    /**
+     * {@inheritDoc}
+     */
+    public function getPropertyAnnotations(\ReflectionProperty $property)
+    {
+        $class = $property->getDeclaringClass();
+        if ( ! isset($this->classNameHashes[$class->name])) {
+            $this->classNameHashes[$class->name] = sha1($class->name);
+        }
+        $key = $this->classNameHashes[$class->name].'$'.$property->getName();
 
-		if ($this->debug && (false !== $filename = $class->getFilename()) && filemtime($path) < filemtime($filename)
-		) {
-			@unlink($path);
+        if (isset($this->loadedAnnotations[$key])) {
+            return $this->loadedAnnotations[$key];
+        }
 
-			$annot = $this->reader->getClassAnnotations($class);
-			$this->saveCacheFile($path, $annot);
+        $path = $this->dir.'/'.strtr($key, '\\', '-').'.cache.php';
+        if (!is_file($path)) {
+            $annot = $this->reader->getPropertyAnnotations($property);
+            $this->saveCacheFile($path, $annot);
+            return $this->loadedAnnotations[$key] = $annot;
+        }
 
-			return $this->loadedAnnotations[$key] = $annot;
-		}
+        if ($this->debug
+            && (false !== $filename = $class->getFilename())
+            && filemtime($path) < filemtime($filename)) {
+            @unlink($path);
 
-		return $this->loadedAnnotations[$key] = include $path;
-	}
+            $annot = $this->reader->getPropertyAnnotations($property);
+            $this->saveCacheFile($path, $annot);
+            return $this->loadedAnnotations[$key] = $annot;
+        }
 
-	/**
-	 * Saves the cache file.
-	 *
-	 * @param string $path
-	 * @param mixed  $data
-	 *
-	 * @return void
-	 */
-	private function saveCacheFile($path, $data)
-	{
-		if (!is_writable($this->dir)) {
-			throw new \InvalidArgumentException(sprintf('The directory "%s" is not writable. Both, the webserver and the console user need access. You can manage access rights for multiple users with "chmod +a". If your system does not support this, check out the acl package.', $this->dir));
-		}
-		file_put_contents($path, '<?php return unserialize(' . var_export(serialize($data), true) . ');');
-	}
+        return $this->loadedAnnotations[$key] = include $path;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getMethodAnnotation(\ReflectionMethod $method, $annotationName)
-	{
-		$annotations = $this->getMethodAnnotations($method);
+    /**
+     * {@inheritDoc}
+     */
+    public function getMethodAnnotations(\ReflectionMethod $method)
+    {
+        $class = $method->getDeclaringClass();
+        if ( ! isset($this->classNameHashes[$class->name])) {
+            $this->classNameHashes[$class->name] = sha1($class->name);
+        }
+        $key = $this->classNameHashes[$class->name].'#'.$method->getName();
 
-		foreach ($annotations as $annotation) {
-			if ($annotation instanceof $annotationName) {
-				return $annotation;
-			}
-		}
+        if (isset($this->loadedAnnotations[$key])) {
+            return $this->loadedAnnotations[$key];
+        }
 
-		return null;
-	}
+        $path = $this->dir.'/'.strtr($key, '\\', '-').'.cache.php';
+        if (!is_file($path)) {
+            $annot = $this->reader->getMethodAnnotations($method);
+            $this->saveCacheFile($path, $annot);
+            return $this->loadedAnnotations[$key] = $annot;
+        }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getMethodAnnotations(\ReflectionMethod $method)
-	{
-		$class = $method->getDeclaringClass();
-		if (!isset($this->classNameHashes[$class->name])) {
-			$this->classNameHashes[$class->name] = sha1($class->name);
-		}
-		$key = $this->classNameHashes[$class->name] . '#' . $method->getName();
+        if ($this->debug
+            && (false !== $filename = $class->getFilename())
+            && filemtime($path) < filemtime($filename)) {
+            @unlink($path);
 
-		if (isset($this->loadedAnnotations[$key])) {
-			return $this->loadedAnnotations[$key];
-		}
+            $annot = $this->reader->getMethodAnnotations($method);
+            $this->saveCacheFile($path, $annot);
+            return $this->loadedAnnotations[$key] = $annot;
+        }
 
-		$path = $this->dir . '/' . strtr($key, '\\', '-') . '.cache.php';
-		if (!is_file($path)) {
-			$annot = $this->reader->getMethodAnnotations($method);
-			$this->saveCacheFile($path, $annot);
+        return $this->loadedAnnotations[$key] = include $path;
+    }
 
-			return $this->loadedAnnotations[$key] = $annot;
-		}
+    /**
+     * Saves the cache file.
+     *
+     * @param string $path
+     * @param mixed  $data
+     *
+     * @return void
+     */
+    private function saveCacheFile($path, $data)
+    {
+        if (!is_writable($this->dir)) {
+            throw new \InvalidArgumentException(sprintf('The directory "%s" is not writable. Both, the webserver and the console user need access. You can manage access rights for multiple users with "chmod +a". If your system does not support this, check out the acl package.', $this->dir));
+        }
 
-		if ($this->debug && (false !== $filename = $class->getFilename()) && filemtime($path) < filemtime($filename)
-		) {
-			@unlink($path);
+        $tempfile = tempnam($this->dir, uniqid('', true));
+        if (false === $tempfile) {
+            throw new \RuntimeException(sprintf('Unable to create tempfile in directory: %s', $this->dir));
+        }
 
-			$annot = $this->reader->getMethodAnnotations($method);
-			$this->saveCacheFile($path, $annot);
+        $written = file_put_contents($tempfile, '<?php return unserialize('.var_export(serialize($data), true).');');
+        if (false === $written) {
+            throw new \RuntimeException(sprintf('Unable to write cached file to: %s', $tempfile));
+        }
 
-			return $this->loadedAnnotations[$key] = $annot;
-		}
+        if (false === rename($tempfile, $path)) {
+            throw new \RuntimeException(sprintf('Unable to rename %s to %s', $tempfile, $path));
+        }
 
-		return $this->loadedAnnotations[$key] = include $path;
-	}
+        @unlink($tempfile);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getPropertyAnnotation(\ReflectionProperty $property, $annotationName)
-	{
-		$annotations = $this->getPropertyAnnotations($property);
+    /**
+     * {@inheritDoc}
+     */
+    public function getClassAnnotation(\ReflectionClass $class, $annotationName)
+    {
+        $annotations = $this->getClassAnnotations($class);
 
-		foreach ($annotations as $annotation) {
-			if ($annotation instanceof $annotationName) {
-				return $annotation;
-			}
-		}
+        foreach ($annotations as $annotation) {
+            if ($annotation instanceof $annotationName) {
+                return $annotation;
+            }
+        }
 
-		return null;
-	}
+        return null;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getPropertyAnnotations(\ReflectionProperty $property)
-	{
-		$class = $property->getDeclaringClass();
-		if (!isset($this->classNameHashes[$class->name])) {
-			$this->classNameHashes[$class->name] = sha1($class->name);
-		}
-		$key = $this->classNameHashes[$class->name] . '$' . $property->getName();
+    /**
+     * {@inheritDoc}
+     */
+    public function getMethodAnnotation(\ReflectionMethod $method, $annotationName)
+    {
+        $annotations = $this->getMethodAnnotations($method);
 
-		if (isset($this->loadedAnnotations[$key])) {
-			return $this->loadedAnnotations[$key];
-		}
+        foreach ($annotations as $annotation) {
+            if ($annotation instanceof $annotationName) {
+                return $annotation;
+            }
+        }
 
-		$path = $this->dir . '/' . strtr($key, '\\', '-') . '.cache.php';
-		if (!is_file($path)) {
-			$annot = $this->reader->getPropertyAnnotations($property);
-			$this->saveCacheFile($path, $annot);
+        return null;
+    }
 
-			return $this->loadedAnnotations[$key] = $annot;
-		}
+    /**
+     * {@inheritDoc}
+     */
+    public function getPropertyAnnotation(\ReflectionProperty $property, $annotationName)
+    {
+        $annotations = $this->getPropertyAnnotations($property);
 
-		if ($this->debug && (false !== $filename = $class->getFilename()) && filemtime($path) < filemtime($filename)
-		) {
-			@unlink($path);
+        foreach ($annotations as $annotation) {
+            if ($annotation instanceof $annotationName) {
+                return $annotation;
+            }
+        }
 
-			$annot = $this->reader->getPropertyAnnotations($property);
-			$this->saveCacheFile($path, $annot);
+        return null;
+    }
 
-			return $this->loadedAnnotations[$key] = $annot;
-		}
-
-		return $this->loadedAnnotations[$key] = include $path;
-	}
-
-	/**
-	 * Clears loaded annotations.
-	 *
-	 * @return void
-	 */
-	public function clearLoadedAnnotations()
-	{
-		$this->loadedAnnotations = array();
-	}
+    /**
+     * Clears loaded annotations.
+     *
+     * @return void
+     */
+    public function clearLoadedAnnotations()
+    {
+        $this->loadedAnnotations = array();
+    }
 }

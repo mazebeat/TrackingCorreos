@@ -1,7 +1,7 @@
 'use strict';
 
 trackingCorreos.service('apiService', ['$http', '$q', function ($http, $q) {
-    this.restApi = 'http://192.168.1.99:9800/';
+    this.restApi = 'http://192.168.4.121:9800/';
     this.urlWS = '';
     this.deferred = '';
 
@@ -33,7 +33,11 @@ trackingCorreos.service('apiService', ['$http', '$q', function ($http, $q) {
         $http(configs)
             .success(function (data, status, headers, config) {
                 self.deferred.resolve(data);
-            }).error(function (data, status, headers, config) {
+            })
+            .error(function (data, status, headers, config) {
+                self.deferred.resolve(data);
+            })
+            .catch(function (errorMsg) {
                 self.deferred.resolve(data);
             });
 

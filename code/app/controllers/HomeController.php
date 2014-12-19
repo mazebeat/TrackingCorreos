@@ -10,8 +10,14 @@ use Illuminate\Support\Facades\View;
  */
 class HomeController extends ApiController
 {
+	/**
+	 * @var
+	 */
 	private $credentials;
 
+	/**
+	 *
+	 */
 	public function __construct()
 	{
 		parent::__construct();
@@ -19,6 +25,9 @@ class HomeController extends ApiController
 	}
 
 
+	/**
+	 * @return mixed
+	 */
 	public function index()
 	{
 		if (Auth::check()) {
@@ -28,18 +37,26 @@ class HomeController extends ApiController
 		return View::make('index');
 	}
 
+	/**
+	 * @return \Illuminate\Http\JsonResponse
+	 */
 	public function login()
 	{
 		$this->credentials = Input::all();
 
-		if (Auth::attempt($this->credentials)) {
-			$this->setData(array('message' => array('Autentificación correcta'),
-			                     'ok'      => true));
+		try {
+			if (Auth::attempt($this->credentials)) {
+				$this->setData(array('message' => array('Autentificación correcta'),
+				                     'ok'      => true));
+			} else {
+				$this->setData(array('message' => array('Autentificación fallida'),
+				                     'ok'      => false));
+			}
+		} catch (Exception $e) {
+			$this->setData(array('message' => array($e->getMessage()),
+			                     'ok'      => false));
 
-			return Response::json($this->getData(), $this->getStatus(), $this->getHeaders());
 		}
-		$this->setData(array('message' => array('Autentificación fallida'),
-		                     'ok'      => false));
 
 		return Response::json($this->getData(), $this->getStatus(), $this->getHeaders());
 	}

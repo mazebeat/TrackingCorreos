@@ -35,15 +35,20 @@ class DummyAuthProvider implements UserProviderInterface
 	{
 		$this->credentials = Session::get('credentials');
 
-		$attributes = array(        
-			'type'     => $this->credentials['type'],
-			'id'       => $this->credentials['idUsuario'],
-			'mail'     => $this->credentials['mail'],
-			'nombre'   => $this->credentials['nombre'],
-			'password' => $this->credentials['password'],
-			'perfil'   => $this->credentials['perfil'],
-			'usuario'  => $this->credentials['usuario']
-			);
+		$attributes = array('type'                  => $this->credentials['type'],
+		                    'id'                    => $this->credentials['idUsuario'],
+		                    'rut'                   => $this->credentials['rut'],
+		                    'usuario'               => $this->credentials['usuario'],
+		                    'tipoUsuario'           => $this->credentials['tipoUsuario'],
+		                    'password'              => Hash::make($this->credentials['password']),
+		                    'mail'                  => $this->credentials['mail'],
+		                    'nombre'                => $this->credentials['nombre'],
+		                    'apellido'              => $this->credentials['apellido'],
+		                    'descripcion'           => $this->credentials['descripcion'],
+		                    'perfil'                => $this->credentials['codigoprivilegio'],
+		                    'descripcionprivilegio' => $this->credentials['descripcionprivilegio'],
+		                    'empresa'               => $this->credentials['empresa'],
+		                    'negocio'               => $this->credentials['negocio'],);
 
 		return new GenericUser($attributes);
 	}
