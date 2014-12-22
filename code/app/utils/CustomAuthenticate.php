@@ -40,7 +40,7 @@ class DummyAuthProvider implements UserProviderInterface
 		                    'rut'                   => $this->credentials['rut'],
 		                    'usuario'               => $this->credentials['usuario'],
 		                    'tipoUsuario'           => $this->credentials['tipoUsuario'],
-		                    'password'              => Hash::make($this->credentials['password']),
+		                    'password'              => \Hash::make($this->credentials['password']),
 		                    'mail'                  => $this->credentials['mail'],
 		                    'nombre'                => $this->credentials['nombre'],
 		                    'apellido'              => $this->credentials['apellido'],

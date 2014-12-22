@@ -1233,6 +1233,7 @@ license GPL/LGPL/MPL
 	};
 	PNotify.desktop = {
 		permission: function(){
+			console.log(Notification);
 			if (typeof Notification !== "undefined" && "requestPermission" in Notification) {
 				Notification.requestPermission();
 			} else if ("webkitNotifications" in window) {
@@ -1446,7 +1447,7 @@ license GPL/LGPL/MPL
 			// You should try to keep elements inside the notice container.
 			this.thingElem = $('<button style="float:right;" class="btn btn-default" type="button" disabled><i class="'+notice.styles.athing+'" />&nbsp;'+options.labels.text+'</button>').appendTo(notice.container);
 			// Since our button is floated, we have to add a clearing div.
-			notice.container.append('<div style="clear: right; line-height: 0;" />')
+			notice.container.append('<div style="clear: right; line-height: 0;" />');
 
 			// Now we're going to enable the button on mouseenter.
 			notice.elem.on({
