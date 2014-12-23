@@ -1,5 +1,5 @@
 <?php
-
+//var_dump(Auth::user());
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -19,6 +19,7 @@ Route::group(array('before' => 'auth'), function () {
 	Route::get('logout', 'HomeController@logout');
 	Route::group(array('prefix' => 'dashboard'), function () {
 		Route::get('/', 'DashboardController@index');
+		Route::get('authUser', 'DashboardController@authUser');
 		Route::group(array('prefix' => 'consultas'), function () {
 			Route::get('historica', 'ConsultaController@historica');
 			Route::get('individual', 'ConsultaController@individual');
@@ -32,3 +33,5 @@ Route::group(array('before' => 'auth'), function () {
 		});
 	});
 });
+
+

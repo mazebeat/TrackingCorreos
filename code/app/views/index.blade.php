@@ -15,12 +15,12 @@
 @section('content')
     <div ng-controller="homeController">
         <form class="form-signin" name="loginForm" ng-submit="submit()">
-            <div class="alert alert-warning alert-dismissible" role="alert" ng-show="message">
-                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span
-                            class="sr-only">Close</span></button>
-                <strong>Atención!</strong> @{{ message }}
+            {{--<div class="alert alert-warning alert-dismissible" role="alert" ng-show="message">--}}
+                {{--<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span--}}
+                            {{--class="sr-only">Close</span></button>--}}
+                {{--<strong>Atención!</strong> @{{ message }}--}}
                 {{--<span class="text-uppercase"><strong>Atención!</strong> @{{ message }}</span>--}}
-            </div>
+            {{--</div>--}}
             <div class="form-signin-heading text-center">
                 {{ HTML::image('images/login-logo.png', 'Intelidata', array()) }}
             </div>
@@ -33,8 +33,9 @@
                 <small class="help-block "
                        style="color: #000000;">{{ \Str::upper($errors->first('contraseña')) }}</small>
                 <button type="submit" ng-disabled="loginForm.$invalid" id="loginFormButton"
-                        class="btn btn-lg btn-login btn-block ladda-button" data-style="zoom-in" data-size="s"><i
-                            class="fa fa-check"></i></button>
+                        class="btn btn-lg btn-login btn-block ladda-button" data-style="zoom-in" data-size="s">
+                    <span class="ladda-label"><i class="fa fa-check"></i></span>
+                </button>
                 <div class="registration">
                     <label class="text-center">
                         <a data-toggle="modal" href="#forgotPasswordModal">Olvidaste tu contraseña?</a>

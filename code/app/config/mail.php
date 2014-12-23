@@ -87,7 +87,7 @@ return array(
 	|
 	*/
 
-	'password'   => null,
+	'password'   => '',
 	/*
 	|--------------------------------------------------------------------------
 	| Sendmail System Path

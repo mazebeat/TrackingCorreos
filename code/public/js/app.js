@@ -1,7 +1,7 @@
 'use strict';
 
 // Init app
-var trackingCorreos = angular.module('trackingCorreos', []);
+var trackingCorreos = angular.module('trackingCorreos', ['ngCookies', 'smart-table']);
 
 trackingCorreos.config(['$httpProvider', function ($httpProvider) {
 	$httpProvider.defaults.useXDomain = true;

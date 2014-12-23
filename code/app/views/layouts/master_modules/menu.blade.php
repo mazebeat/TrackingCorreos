@@ -38,7 +38,7 @@
                                 Físico</a></li>
                     </ul>
                 </li>
-                <li><a href="{{ URL::to('dashboard/tracking/index') }}"><i class="fa fa-envelope fa-fw"></i>
+                <li><a href="{{ URL::to('dashboard/tracking') }}"><i class="fa fa-envelope fa-fw"></i>
                         Tracking</a></li>
                 @if(Auth::check() && Auth::user()->perfil == 'ADM')
                     <li class="dropdown">
