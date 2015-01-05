@@ -24,8 +24,9 @@ error_reporting(-1);
 |
 */
 
-if (!extension_loaded('mcrypt')) {
-	echo 'Mcrypt PHP extension required.' . PHP_EOL;
+if ( ! extension_loaded('mcrypt'))
+{
+	echo 'Mcrypt PHP extension required.'.PHP_EOL;
 
 	exit(1);
 }
@@ -41,11 +42,11 @@ if (!extension_loaded('mcrypt')) {
 |
 */
 
-use Illuminate\Config\EnvironmentVariables;
-use Illuminate\Config\Repository as Config;
-use Illuminate\Foundation\AliasLoader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Facade;
+use Illuminate\Foundation\AliasLoader;
+use Illuminate\Config\EnvironmentVariables;
+use Illuminate\Config\Repository as Config;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,7 +72,8 @@ $app->instance('app', $app);
 |
 */
 
-if (isset($unitTesting)) {
+if (isset($unitTesting))
+{
 	$app['env'] = $env = $testEnvironment;
 }
 
@@ -114,7 +116,8 @@ $app->registerCoreContainerAliases();
 |
 */
 
-with($envVariables = new EnvironmentVariables($app->getEnvironmentVariablesLoader()))->load($env);
+with($envVariables = new EnvironmentVariables(
+	$app->getEnvironmentVariablesLoader()))->load($env);
 
 /*
 |--------------------------------------------------------------------------
@@ -146,8 +149,7 @@ $app->instance('config', $config = new Config(
 
 $app->startExceptionHandling();
 
-if ($env != 'testing')
-	ini_set('display_errors', 'Off');
+if ($env != 'testing') ini_set('display_errors', 'Off');
 
 /*
 |--------------------------------------------------------------------------
@@ -218,7 +220,8 @@ $app->getProviderRepository()->load($app, $providers);
 |
 */
 
-$app->booted(function () use ($app, $env) {
+$app->booted(function() use ($app, $env)
+{
 
 	/*
 	|--------------------------------------------------------------------------
@@ -231,10 +234,9 @@ $app->booted(function () use ($app, $env) {
 	|
 	*/
 
-	$path = $app['path'] . '/start/global.php';
+	$path = $app['path'].'/start/global.php';
 
-	if (file_exists($path))
-		require $path;
+	if (file_exists($path)) require $path;
 
 	/*
 	|--------------------------------------------------------------------------
@@ -247,10 +249,9 @@ $app->booted(function () use ($app, $env) {
 	|
 	*/
 
-	$path = $app['path'] . "/start/{$env}.php";
+	$path = $app['path']."/start/{$env}.php";
 
-	if (file_exists($path))
-		require $path;
+	if (file_exists($path)) require $path;
 
 	/*
 	|--------------------------------------------------------------------------
@@ -263,9 +264,8 @@ $app->booted(function () use ($app, $env) {
 	|
 	*/
 
-	$routes = $app['path'] . '/routes.php';
+	$routes = $app['path'].'/routes.php';
 
-	if (file_exists($routes))
-		require $routes;
+	if (file_exists($routes)) require $routes;
 
 });

@@ -1,7 +1,6 @@
 <?php namespace Illuminate\Database;
 
-class ConnectionResolver implements ConnectionResolverInterface
-{
+class ConnectionResolver implements ConnectionResolverInterface {
 
 	/**
 	 * All of the registered connections.
@@ -20,13 +19,13 @@ class ConnectionResolver implements ConnectionResolverInterface
 	/**
 	 * Create a new connection resolver instance.
 	 *
-	 * @param  array $connections
-	 *
+	 * @param  array  $connections
 	 * @return void
 	 */
 	public function __construct(array $connections = array())
 	{
-		foreach ($connections as $name => $connection) {
+		foreach ($connections as $name => $connection)
+		{
 			$this->addConnection($name, $connection);
 		}
 	}
@@ -34,14 +33,12 @@ class ConnectionResolver implements ConnectionResolverInterface
 	/**
 	 * Get a database connection instance.
 	 *
-	 * @param  string $name
-	 *
+	 * @param  string  $name
 	 * @return \Illuminate\Database\Connection
 	 */
 	public function connection($name = null)
 	{
-		if (is_null($name))
-			$name = $this->getDefaultConnection();
+		if (is_null($name)) $name = $this->getDefaultConnection();
 
 		return $this->connections[$name];
 	}
@@ -49,9 +46,8 @@ class ConnectionResolver implements ConnectionResolverInterface
 	/**
 	 * Add a connection to the resolver.
 	 *
-	 * @param  string                          $name
-	 * @param  \Illuminate\Database\Connection $connection
-	 *
+	 * @param  string  $name
+	 * @param  \Illuminate\Database\Connection  $connection
 	 * @return void
 	 */
 	public function addConnection($name, Connection $connection)
@@ -62,8 +58,7 @@ class ConnectionResolver implements ConnectionResolverInterface
 	/**
 	 * Check if a connection has been registered.
 	 *
-	 * @param  string $name
-	 *
+	 * @param  string  $name
 	 * @return bool
 	 */
 	public function hasConnection($name)
@@ -84,8 +79,7 @@ class ConnectionResolver implements ConnectionResolverInterface
 	/**
 	 * Set the default connection name.
 	 *
-	 * @param  string $name
-	 *
+	 * @param  string  $name
 	 * @return void
 	 */
 	public function setDefaultConnection($name)

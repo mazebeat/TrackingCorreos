@@ -364,7 +364,9 @@
                     "where": "($column, $operator = null, $value = null, $boolean = 'and')",
                     "orWhere": "($column, $operator = null, $value = null)",
                     "has": "($relation, $operator = '>=', $count = 1, $boolean = 'and', $callback = null)",
+                    "doesntHave": "($relation, $boolean = 'and', $callback = null)",
                     "whereHas": "($relation, $callback, $operator = '>=', $count = 1)",
+                    "whereDoesntHave": "($relation, $callback = null)",
                     "orHas": "($relation, $operator = '>=', $count = 1)",
                     "orWhereHas": "($relation, $callback, $operator = '>=', $count = 1)",
                     "getQuery": "()",
@@ -459,7 +461,8 @@
                     "addBinding": "($value, $type = 'where')",
                     "mergeBindings": "($query)",
                     "getProcessor": "()",
-                    "getGrammar": "()"
+                    "getGrammar": "()",
+                    "useWritePdo": "()"
                 }
             },
             "Event": {
@@ -491,6 +494,7 @@
                     "delete": "($paths)",
                     "move": "($path, $target)",
                     "copy": "($path, $target)",
+                    "name": "($path)",
                     "extension": "($path)",
                     "type": "($path)",
                     "size": "($path)",
@@ -550,7 +554,8 @@
                 "functions": {
                     "make": "($value, $options = array())",
                     "check": "($value, $hashedValue, $options = array())",
-                    "needsRehash": "($hashedValue, $options = array())"
+                    "needsRehash": "($hashedValue, $options = array())",
+                    "setRounds": "($rounds)"
                 }
             },
             "HTML": {

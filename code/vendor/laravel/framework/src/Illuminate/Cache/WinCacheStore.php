@@ -1,7 +1,6 @@
 <?php namespace Illuminate\Cache;
 
-class WinCacheStore extends TaggableStore implements StoreInterface
-{
+class WinCacheStore extends TaggableStore implements StoreInterface {
 
 	/**
 	 * A string that should be prepended to keys.
@@ -13,8 +12,7 @@ class WinCacheStore extends TaggableStore implements StoreInterface
 	/**
 	 * Create a new WinCache store.
 	 *
-	 * @param  string $prefix
-	 *
+	 * @param  string  $prefix
 	 * @return void
 	 */
 	public function __construct($prefix = '')
@@ -25,15 +23,15 @@ class WinCacheStore extends TaggableStore implements StoreInterface
 	/**
 	 * Retrieve an item from the cache by key.
 	 *
-	 * @param  string $key
-	 *
+	 * @param  string  $key
 	 * @return mixed
 	 */
 	public function get($key)
 	{
-		$value = wincache_ucache_get($this->prefix . $key);
+		$value = wincache_ucache_get($this->prefix.$key);
 
-		if ($value !== false) {
+		if ($value !== false)
+		{
 			return $value;
 		}
 	}
@@ -41,49 +39,45 @@ class WinCacheStore extends TaggableStore implements StoreInterface
 	/**
 	 * Store an item in the cache for a given number of minutes.
 	 *
-	 * @param  string $key
-	 * @param  mixed  $value
-	 * @param  int    $minutes
-	 *
+	 * @param  string  $key
+	 * @param  mixed   $value
+	 * @param  int     $minutes
 	 * @return void
 	 */
 	public function put($key, $value, $minutes)
 	{
-		wincache_ucache_set($this->prefix . $key, $value, $minutes * 60);
+		wincache_ucache_set($this->prefix.$key, $value, $minutes * 60);
 	}
 
 	/**
 	 * Increment the value of an item in the cache.
 	 *
-	 * @param  string $key
-	 * @param  mixed  $value
-	 *
+	 * @param  string  $key
+	 * @param  mixed   $value
 	 * @return int|bool
 	 */
 	public function increment($key, $value = 1)
 	{
-		return wincache_ucache_inc($this->prefix . $key, $value);
+		return wincache_ucache_inc($this->prefix.$key, $value);
 	}
 
 	/**
 	 * Increment the value of an item in the cache.
 	 *
-	 * @param  string $key
-	 * @param  mixed  $value
-	 *
+	 * @param  string  $key
+	 * @param  mixed   $value
 	 * @return int|bool
 	 */
 	public function decrement($key, $value = 1)
 	{
-		return wincache_ucache_dec($this->prefix . $key, $value);
+		return wincache_ucache_dec($this->prefix.$key, $value);
 	}
 
 	/**
 	 * Store an item in the cache indefinitely.
 	 *
-	 * @param  string $key
-	 * @param  mixed  $value
-	 *
+	 * @param  string  $key
+	 * @param  mixed   $value
 	 * @return void
 	 */
 	public function forever($key, $value)
@@ -94,13 +88,12 @@ class WinCacheStore extends TaggableStore implements StoreInterface
 	/**
 	 * Remove an item from the cache.
 	 *
-	 * @param  string $key
-	 *
+	 * @param  string  $key
 	 * @return void
 	 */
 	public function forget($key)
 	{
-		wincache_ucache_delete($this->prefix . $key);
+		wincache_ucache_delete($this->prefix.$key);
 	}
 
 	/**

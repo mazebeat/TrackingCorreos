@@ -18,90 +18,88 @@ namespace Monolog\Processor;
  */
 class WebProcessor
 {
-	/**
-	 * @var array|\ArrayAccess
-	 */
-	protected $serverData;
+    /**
+     * @var array|\ArrayAccess
+     */
+    protected $serverData;
 
-	/**
-	 * @var array
-	 */
-	protected $extraFields = array('url'         => 'REQUEST_URI',
-	                               'ip'          => 'REMOTE_ADDR',
-	                               'http_method' => 'REQUEST_METHOD',
-	                               'server'      => 'SERVER_NAME',
-	                               'referrer'    => 'HTTP_REFERER',);
+    /**
+     * @var array
+     */
+    protected $extraFields = array(
+        'url'         => 'REQUEST_URI',
+        'ip'          => 'REMOTE_ADDR',
+        'http_method' => 'REQUEST_METHOD',
+        'server'      => 'SERVER_NAME',
+        'referrer'    => 'HTTP_REFERER',
+    );
 
-	/**
-	 * @param array|\ArrayAccess $serverData  Array or object w/ ArrayAccess that provides access to the $_SERVER
-	 *                                        data
-	 * @param array|null         $extraFields Extra field names to be added (all available by default)
-	 */
-	public function __construct($serverData = null, array $extraFields = null)
-	{
-		if (null === $serverData) {
-			$this->serverData =& $_SERVER;
-		} elseif (is_array($serverData) || $serverData instanceof \ArrayAccess) {
-			$this->serverData = $serverData;
-		} else {
-			throw new \UnexpectedValueException('$serverData must be an array or object implementing ArrayAccess.');
-		}
+    /**
+     * @param array|\ArrayAccess $serverData  Array or object w/ ArrayAccess that provides access to the $_SERVER data
+     * @param array|null         $extraFields Extra field names to be added (all available by default)
+     */
+    public function __construct($serverData = null, array $extraFields = null)
+    {
+        if (null === $serverData) {
+            $this->serverData = &$_SERVER;
+        } elseif (is_array($serverData) || $serverData instanceof \ArrayAccess) {
+            $this->serverData = $serverData;
+        } else {
+            throw new \UnexpectedValueException('$serverData must be an array or object implementing ArrayAccess.');
+        }
 
-		if (null !== $extraFields) {
-			foreach (array_keys($this->extraFields) as $fieldName) {
-				if (!in_array($fieldName, $extraFields)) {
-					unset($this->extraFields[$fieldName]);
-				}
-			}
-		}
-	}
+        if (null !== $extraFields) {
+            foreach (array_keys($this->extraFields) as $fieldName) {
+                if (!in_array($fieldName, $extraFields)) {
+                    unset($this->extraFields[$fieldName]);
+                }
+            }
+        }
+    }
 
-	/**
-	 * @param  array $record
-	 *
-	 * @return array
-	 */
-	public function __invoke(array $record)
-	{
-		// skip processing if for some reason request data
-		// is not present (CLI or wonky SAPIs)
-		if (!isset($this->serverData['REQUEST_URI'])) {
-			return $record;
-		}
+    /**
+     * @param  array $record
+     * @return array
+     */
+    public function __invoke(array $record)
+    {
+        // skip processing if for some reason request data
+        // is not present (CLI or wonky SAPIs)
+        if (!isset($this->serverData['REQUEST_URI'])) {
+            return $record;
+        }
 
-		$record['extra'] = $this->appendExtraFields($record['extra']);
+        $record['extra'] = $this->appendExtraFields($record['extra']);
 
-		return $record;
-	}
+        return $record;
+    }
 
-	/**
-	 * @param  array $extra
-	 *
-	 * @return array
-	 */
-	private function appendExtraFields(array $extra)
-	{
-		foreach ($this->extraFields as $extraName => $serverName) {
-			$extra[$extraName] = isset($this->serverData[$serverName]) ? $this->serverData[$serverName] : null;
-		}
+    /**
+     * @param  string $extraName
+     * @param  string $serverName
+     * @return $this
+     */
+    public function addExtraField($extraName, $serverName)
+    {
+        $this->extraFields[$extraName] = $serverName;
 
-		if (isset($this->serverData['UNIQUE_ID'])) {
-			$extra['unique_id'] = $this->serverData['UNIQUE_ID'];
-		}
+        return $this;
+    }
 
-		return $extra;
-	}
+    /**
+     * @param  array $extra
+     * @return array
+     */
+    private function appendExtraFields(array $extra)
+    {
+        foreach ($this->extraFields as $extraName => $serverName) {
+            $extra[$extraName] = isset($this->serverData[$serverName]) ? $this->serverData[$serverName] : null;
+        }
 
-	/**
-	 * @param  string $extraName
-	 * @param  string $serverName
-	 *
-	 * @return $this
-	 */
-	public function addExtraField($extraName, $serverName)
-	{
-		$this->extraFields[$extraName] = $serverName;
+        if (isset($this->serverData['UNIQUE_ID'])) {
+            $extra['unique_id'] = $this->serverData['UNIQUE_ID'];
+        }
 
-		return $this;
-	}
+        return $extra;
+    }
 }

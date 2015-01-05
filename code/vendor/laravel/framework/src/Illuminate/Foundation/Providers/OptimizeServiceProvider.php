@@ -1,8 +1,8 @@
 <?php namespace Illuminate\Foundation\Providers;
 
-use Illuminate\Foundation\Console\ClearCompiledCommand;
-use Illuminate\Foundation\Console\OptimizeCommand;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\Console\OptimizeCommand;
+use Illuminate\Foundation\Console\ClearCompiledCommand;
 
 class OptimizeServiceProvider extends ServiceProvider {
 

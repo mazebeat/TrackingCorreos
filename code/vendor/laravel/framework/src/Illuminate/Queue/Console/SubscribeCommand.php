@@ -1,13 +1,12 @@
 <?php namespace Illuminate\Queue\Console;
 
-use Illuminate\Console\Command;
-use Illuminate\Queue\IronQueue;
 use RuntimeException;
-use Symfony\Component\Console\Input\InputArgument;
+use Illuminate\Queue\IronQueue;
+use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
 
-class SubscribeCommand extends Command
-{
+class SubscribeCommand extends Command {
 
 	/**
 	 * The console command name.
@@ -41,13 +40,14 @@ class SubscribeCommand extends Command
 	{
 		$iron = $this->laravel['queue']->connection();
 
-		if (!$iron instanceof IronQueue) {
+		if ( ! $iron instanceof IronQueue)
+		{
 			throw new RuntimeException("Iron.io based queue must be default.");
 		}
 
 		$iron->getIron()->updateQueue($this->argument('queue'), $this->getQueueOptions());
 
-		$this->line('<info>Queue subscriber added:</info> <comment>' . $this->argument('url') . '</comment>');
+		$this->line('<info>Queue subscriber added:</info> <comment>'.$this->argument('url').'</comment>');
 	}
 
 	/**
@@ -57,8 +57,9 @@ class SubscribeCommand extends Command
 	 */
 	protected function getQueueOptions()
 	{
-		return array('push_type'   => $this->getPushType(),
-		             'subscribers' => $this->getSubscriberList());
+		return array(
+			'push_type' => $this->getPushType(), 'subscribers' => $this->getSubscriberList()
+		);
 	}
 
 	/**
@@ -68,12 +69,14 @@ class SubscribeCommand extends Command
 	 */
 	protected function getPushType()
 	{
-		if ($this->option('type'))
-			return $this->option('type');
+		if ($this->option('type')) return $this->option('type');
 
-		try {
+		try
+		{
 			return $this->getQueue()->push_type;
-		} catch (\Exception $e) {
+		}
+		catch (\Exception $e)
+		{
 			return 'multicast';
 		}
 	}
@@ -99,9 +102,12 @@ class SubscribeCommand extends Command
 	 */
 	protected function getCurrentSubscribers()
 	{
-		try {
+		try
+		{
 			return $this->getQueue()->subscribers;
-		} catch (\Exception $e) {
+		}
+		catch (\Exception $e)
+		{
 			return array();
 		}
 	}
@@ -113,8 +119,7 @@ class SubscribeCommand extends Command
 	 */
 	protected function getQueue()
 	{
-		if (isset($this->meta))
-			return $this->meta;
+		if (isset($this->meta)) return $this->meta;
 
 		return $this->meta = $this->laravel['queue']->getIron()->getQueue($this->argument('queue'));
 	}
@@ -126,8 +131,11 @@ class SubscribeCommand extends Command
 	 */
 	protected function getArguments()
 	{
-		return array(array('queue', InputArgument::REQUIRED, 'The name of Iron.io queue.'),
-			array('url', InputArgument::REQUIRED, 'The URL to be subscribed.'),);
+		return array(
+			array('queue', InputArgument::REQUIRED, 'The name of Iron.io queue.'),
+
+			array('url', InputArgument::REQUIRED, 'The URL to be subscribed.'),
+		);
 	}
 
 	/**
@@ -137,7 +145,9 @@ class SubscribeCommand extends Command
 	 */
 	protected function getOptions()
 	{
-		return array(array('type', null, InputOption::VALUE_OPTIONAL, 'The push type for the queue.'),);
+		return array(
+			array('type', null, InputOption::VALUE_OPTIONAL, 'The push type for the queue.'),
+		);
 	}
 
 }

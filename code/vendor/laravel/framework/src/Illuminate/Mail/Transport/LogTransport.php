@@ -1,10 +1,10 @@
 <?php namespace Illuminate\Mail\Transport;
 
-use Psr\Log\LoggerInterface;
-use Swift_Events_EventListener;
+use Swift_Transport;
 use Swift_Mime_Message;
 use Swift_Mime_MimeEntity;
-use Swift_Transport;
+use Psr\Log\LoggerInterface;
+use Swift_Events_EventListener;
 
 class LogTransport implements Swift_Transport {
 

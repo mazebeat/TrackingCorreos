@@ -2,8 +2,7 @@
 
 use Illuminate\View\View;
 
-trait AssertionsTrait
-{
+trait AssertionsTrait {
 
 	/**
 	 * Assert that the client response has an OK status code.
@@ -16,14 +15,13 @@ trait AssertionsTrait
 
 		$actual = $response->getStatusCode();
 
-		return $this->assertTrue($response->isOk(), 'Expected status code 200, got ' . $actual);
+		return $this->assertTrue($response->isOk(), 'Expected status code 200, got ' .$actual);
 	}
 
 	/**
 	 * Assert that the client response has a given code.
 	 *
-	 * @param  int $code
-	 *
+	 * @param  int  $code
 	 * @return void
 	 */
 	public function assertResponseStatus($code)
@@ -34,25 +32,27 @@ trait AssertionsTrait
 	/**
 	 * Assert that the response view has a given piece of bound data.
 	 *
-	 * @param  string|array $key
-	 * @param  mixed        $value
-	 *
+	 * @param  string|array  $key
+	 * @param  mixed  $value
 	 * @return void
 	 */
 	public function assertViewHas($key, $value = null)
 	{
-		if (is_array($key))
-			return $this->assertViewHasAll($key);
+		if (is_array($key)) return $this->assertViewHasAll($key);
 
 		$response = $this->client->getResponse();
 
-		if (!isset($response->original) || !$response->original instanceof View) {
+		if ( ! isset($response->original) || ! $response->original instanceof View)
+		{
 			return $this->assertTrue(false, 'The response was not a view.');
 		}
 
-		if (is_null($value)) {
+		if (is_null($value))
+		{
 			$this->assertArrayHasKey($key, $response->original->getData());
-		} else {
+		}
+		else
+		{
 			$this->assertEquals($value, $response->original->$key);
 		}
 	}
@@ -60,16 +60,19 @@ trait AssertionsTrait
 	/**
 	 * Assert that the view has a given list of bound data.
 	 *
-	 * @param  array $bindings
-	 *
+	 * @param  array  $bindings
 	 * @return void
 	 */
 	public function assertViewHasAll(array $bindings)
 	{
-		foreach ($bindings as $key => $value) {
-			if (is_int($key)) {
+		foreach ($bindings as $key => $value)
+		{
+			if (is_int($key))
+			{
 				$this->assertViewHas($value);
-			} else {
+			}
+			else
+			{
 				$this->assertViewHas($key, $value);
 			}
 		}
@@ -78,15 +81,15 @@ trait AssertionsTrait
 	/**
 	 * Assert that the response view is missing a piece of bound data.
 	 *
-	 * @param  string $key
-	 *
+	 * @param  string  $key
 	 * @return void
 	 */
 	public function assertViewMissing($key)
 	{
 		$response = $this->client->getResponse();
 
-		if (!isset($response->original) || !$response->original instanceof View) {
+		if ( ! isset($response->original) || ! $response->original instanceof View)
+		{
 			return $this->assertTrue(false, 'The response was not a view.');
 		}
 
@@ -96,9 +99,8 @@ trait AssertionsTrait
 	/**
 	 * Assert whether the client was redirected to a given URI.
 	 *
-	 * @param  string $uri
-	 * @param  array  $with
-	 *
+	 * @param  string  $uri
+	 * @param  array   $with
 	 * @return void
 	 */
 	public function assertRedirectedTo($uri, $with = array())
@@ -115,10 +117,9 @@ trait AssertionsTrait
 	/**
 	 * Assert whether the client was redirected to a given route.
 	 *
-	 * @param  string $name
-	 * @param  array  $parameters
-	 * @param  array  $with
-	 *
+	 * @param  string  $name
+	 * @param  array   $parameters
+	 * @param  array   $with
 	 * @return void
 	 */
 	public function assertRedirectedToRoute($name, $parameters = array(), $with = array())
@@ -129,10 +130,9 @@ trait AssertionsTrait
 	/**
 	 * Assert whether the client was redirected to a given action.
 	 *
-	 * @param  string $name
-	 * @param  array  $parameters
-	 * @param  array  $with
-	 *
+	 * @param  string  $name
+	 * @param  array   $parameters
+	 * @param  array   $with
 	 * @return void
 	 */
 	public function assertRedirectedToAction($name, $parameters = array(), $with = array())
@@ -143,19 +143,20 @@ trait AssertionsTrait
 	/**
 	 * Assert that the session has a given list of values.
 	 *
-	 * @param  string|array $key
-	 * @param  mixed        $value
-	 *
+	 * @param  string|array  $key
+	 * @param  mixed  $value
 	 * @return void
 	 */
 	public function assertSessionHas($key, $value = null)
 	{
-		if (is_array($key))
-			return $this->assertSessionHasAll($key);
+		if (is_array($key)) return $this->assertSessionHasAll($key);
 
-		if (is_null($value)) {
+		if (is_null($value))
+		{
 			$this->assertTrue($this->app['session.store']->has($key), "Session missing key: $key");
-		} else {
+		}
+		else
+		{
 			$this->assertEquals($value, $this->app['session.store']->get($key));
 		}
 	}
@@ -163,16 +164,19 @@ trait AssertionsTrait
 	/**
 	 * Assert that the session has a given list of values.
 	 *
-	 * @param  array $bindings
-	 *
+	 * @param  array  $bindings
 	 * @return void
 	 */
 	public function assertSessionHasAll(array $bindings)
 	{
-		foreach ($bindings as $key => $value) {
-			if (is_int($key)) {
+		foreach ($bindings as $key => $value)
+		{
+			if (is_int($key))
+			{
 				$this->assertSessionHas($value);
-			} else {
+			}
+			else
+			{
 				$this->assertSessionHas($key, $value);
 			}
 		}
@@ -181,23 +185,26 @@ trait AssertionsTrait
 	/**
 	 * Assert that the session has errors bound.
 	 *
-	 * @param  string|array $bindings
-	 * @param  mixed        $format
-	 *
+	 * @param  string|array  $bindings
+	 * @param  mixed  $format
 	 * @return void
 	 */
 	public function assertSessionHasErrors($bindings = array(), $format = null)
 	{
 		$this->assertSessionHas('errors');
 
-		$bindings = (array)$bindings;
+		$bindings = (array) $bindings;
 
 		$errors = $this->app['session.store']->get('errors');
 
-		foreach ($bindings as $key => $value) {
-			if (is_int($key)) {
+		foreach ($bindings as $key => $value)
+		{
+			if (is_int($key))
+			{
 				$this->assertTrue($errors->has($value), "Session missing error: $value");
-			} else {
+			}
+			else
+			{
 				$this->assertContains($value, $errors->get($key, $format));
 			}
 		}

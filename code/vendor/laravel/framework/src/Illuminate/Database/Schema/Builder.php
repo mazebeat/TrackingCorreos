@@ -3,8 +3,7 @@
 use Closure;
 use Illuminate\Database\Connection;
 
-class Builder
-{
+class Builder {
 
 	/**
 	 * The database connection instance.
@@ -30,28 +29,26 @@ class Builder
 	/**
 	 * Create a new database Schema manager.
 	 *
-	 * @param  \Illuminate\Database\Connection $connection
-	 *
+	 * @param  \Illuminate\Database\Connection  $connection
 	 * @return void
 	 */
 	public function __construct(Connection $connection)
 	{
 		$this->connection = $connection;
-		$this->grammar    = $connection->getSchemaGrammar();
+		$this->grammar = $connection->getSchemaGrammar();
 	}
 
 	/**
 	 * Determine if the given table exists.
 	 *
-	 * @param  string $table
-	 *
+	 * @param  string  $table
 	 * @return bool
 	 */
 	public function hasTable($table)
 	{
 		$sql = $this->grammar->compileTableExists();
 
-		$table = $this->connection->getTablePrefix() . $table;
+		$table = $this->connection->getTablePrefix().$table;
 
 		return count($this->connection->select($sql, array($table))) > 0;
 	}
@@ -59,9 +56,8 @@ class Builder
 	/**
 	 * Determine if the given table has a given column.
 	 *
-	 * @param  string $table
-	 * @param  string $column
-	 *
+	 * @param  string  $table
+	 * @param  string  $column
 	 * @return bool
 	 */
 	public function hasColumn($table, $column)
@@ -74,13 +70,12 @@ class Builder
 	/**
 	 * Get the column listing for a given table.
 	 *
-	 * @param  string $table
-	 *
+	 * @param  string  $table
 	 * @return array
 	 */
 	public function getColumnListing($table)
 	{
-		$table = $this->connection->getTablePrefix() . $table;
+		$table = $this->connection->getTablePrefix().$table;
 
 		$results = $this->connection->select($this->grammar->compileColumnExists($table));
 
@@ -90,9 +85,8 @@ class Builder
 	/**
 	 * Modify a table on the schema.
 	 *
-	 * @param  string   $table
-	 * @param  \Closure $callback
-	 *
+	 * @param  string    $table
+	 * @param  \Closure  $callback
 	 * @return \Illuminate\Database\Schema\Blueprint
 	 */
 	public function table($table, Closure $callback)
@@ -103,9 +97,8 @@ class Builder
 	/**
 	 * Create a new table on the schema.
 	 *
-	 * @param  string   $table
-	 * @param  \Closure $callback
-	 *
+	 * @param  string    $table
+	 * @param  \Closure  $callback
 	 * @return \Illuminate\Database\Schema\Blueprint
 	 */
 	public function create($table, Closure $callback)
@@ -122,8 +115,7 @@ class Builder
 	/**
 	 * Drop a table from the schema.
 	 *
-	 * @param  string $table
-	 *
+	 * @param  string  $table
 	 * @return \Illuminate\Database\Schema\Blueprint
 	 */
 	public function drop($table)
@@ -138,8 +130,7 @@ class Builder
 	/**
 	 * Drop a table from the schema if it exists.
 	 *
-	 * @param  string $table
-	 *
+	 * @param  string  $table
 	 * @return \Illuminate\Database\Schema\Blueprint
 	 */
 	public function dropIfExists($table)
@@ -154,9 +145,8 @@ class Builder
 	/**
 	 * Rename a table on the schema.
 	 *
-	 * @param  string $from
-	 * @param  string $to
-	 *
+	 * @param  string  $from
+	 * @param  string  $to
 	 * @return \Illuminate\Database\Schema\Blueprint
 	 */
 	public function rename($from, $to)
@@ -171,8 +161,7 @@ class Builder
 	/**
 	 * Execute the blueprint to build / modify the table.
 	 *
-	 * @param  \Illuminate\Database\Schema\Blueprint $blueprint
-	 *
+	 * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
 	 * @return void
 	 */
 	protected function build(Blueprint $blueprint)
@@ -183,14 +172,14 @@ class Builder
 	/**
 	 * Create a new command set with a Closure.
 	 *
-	 * @param  string   $table
-	 * @param  \Closure $callback
-	 *
+	 * @param  string    $table
+	 * @param  \Closure  $callback
 	 * @return \Illuminate\Database\Schema\Blueprint
 	 */
 	protected function createBlueprint($table, Closure $callback = null)
 	{
-		if (isset($this->resolver)) {
+		if (isset($this->resolver))
+		{
 			return call_user_func($this->resolver, $table, $callback);
 		}
 
@@ -211,7 +200,6 @@ class Builder
 	 * Set the database connection instance.
 	 *
 	 * @param  \Illuminate\Database\Connection
-	 *
 	 * @return $this
 	 */
 	public function setConnection(Connection $connection)
@@ -224,8 +212,7 @@ class Builder
 	/**
 	 * Set the Schema Blueprint resolver callback.
 	 *
-	 * @param  \Closure $resolver
-	 *
+	 * @param  \Closure  $resolver
 	 * @return void
 	 */
 	public function blueprintResolver(Closure $resolver)

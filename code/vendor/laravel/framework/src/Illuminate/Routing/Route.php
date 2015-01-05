@@ -1,14 +1,13 @@
 <?php namespace Illuminate\Routing;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Matching\UriValidator;
 use Illuminate\Routing\Matching\HostValidator;
 use Illuminate\Routing\Matching\MethodValidator;
 use Illuminate\Routing\Matching\SchemeValidator;
-use Illuminate\Routing\Matching\UriValidator;
 use Symfony\Component\Routing\Route as SymfonyRoute;
 
-class Route
-{
+class Route {
 
 	/**
 	 * The URI pattern the route responds to.
@@ -76,23 +75,24 @@ class Route
 	/**
 	 * Create a new Route instance.
 	 *
-	 * @param  array          $methods
-	 * @param  string         $uri
-	 * @param  \Closure|array $action
-	 *
+	 * @param  array   $methods
+	 * @param  string  $uri
+	 * @param  \Closure|array  $action
 	 * @return void
 	 */
 	public function __construct($methods, $uri, $action)
 	{
-		$this->uri     = $uri;
-		$this->methods = (array)$methods;
-		$this->action  = $this->parseAction($action);
+		$this->uri = $uri;
+		$this->methods = (array) $methods;
+		$this->action = $this->parseAction($action);
 
-		if (in_array('GET', $this->methods) && !in_array('HEAD', $this->methods)) {
+		if (in_array('GET', $this->methods) && ! in_array('HEAD', $this->methods))
+		{
 			$this->methods[] = 'HEAD';
 		}
 
-		if (isset($this->action['prefix'])) {
+		if (isset($this->action['prefix']))
+		{
 			$this->prefix($this->action['prefix']);
 		}
 	}
@@ -104,9 +104,7 @@ class Route
 	 */
 	public function run()
 	{
-		$parameters = array_filter($this->parameters(), function ($p) {
-				return isset($p);
-			});
+		$parameters = array_filter($this->parameters(), function($p) { return isset($p); });
 
 		return call_user_func_array($this->action['uses'], $parameters);
 	}
@@ -114,21 +112,19 @@ class Route
 	/**
 	 * Determine if the route matches given request.
 	 *
-	 * @param  \Illuminate\Http\Request $request
-	 * @param  bool                     $includingMethod
-	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  bool  $includingMethod
 	 * @return bool
 	 */
 	public function matches(Request $request, $includingMethod = true)
 	{
 		$this->compileRoute();
 
-		foreach ($this->getValidators() as $validator) {
-			if (!$includingMethod && $validator instanceof MethodValidator)
-				continue;
+		foreach ($this->getValidators() as $validator)
+		{
+			if ( ! $includingMethod && $validator instanceof MethodValidator) continue;
 
-			if (!$validator->matches($this, $request))
-				return false;
+			if ( ! $validator->matches($this, $request)) return false;
 		}
 
 		return true;
@@ -171,8 +167,7 @@ class Route
 	 */
 	public function beforeFilters()
 	{
-		if (!isset($this->action['before']))
-			return array();
+		if ( ! isset($this->action['before'])) return array();
 
 		return $this->parseFilters($this->action['before']);
 	}
@@ -184,8 +179,7 @@ class Route
 	 */
 	public function afterFilters()
 	{
-		if (!isset($this->action['after']))
-			return array();
+		if ( ! isset($this->action['after'])) return array();
 
 		return $this->parseFilters($this->action['after']);
 	}
@@ -193,13 +187,13 @@ class Route
 	/**
 	 * Parse the given filter string.
 	 *
-	 * @param  string $filters
-	 *
+	 * @param  string  $filters
 	 * @return array
 	 */
 	public static function parseFilters($filters)
 	{
-		return array_build(static::explodeFilters($filters), function ($key, $value) {
+		return array_build(static::explodeFilters($filters), function($key, $value)
+		{
 			return Route::parseFilter($value);
 		});
 	}
@@ -207,14 +201,12 @@ class Route
 	/**
 	 * Turn the filters into an array if they aren't already.
 	 *
-	 * @param  array|string $filters
-	 *
+	 * @param  array|string  $filters
 	 * @return array
 	 */
 	protected static function explodeFilters($filters)
 	{
-		if (is_array($filters))
-			return static::explodeArrayFilters($filters);
+		if (is_array($filters)) return static::explodeArrayFilters($filters);
 
 		return array_map('trim', explode('|', $filters));
 	}
@@ -222,15 +214,15 @@ class Route
 	/**
 	 * Flatten out an array of filter declarations.
 	 *
-	 * @param  array $filters
-	 *
+	 * @param  array  $filters
 	 * @return array
 	 */
 	protected static function explodeArrayFilters(array $filters)
 	{
 		$results = array();
 
-		foreach ($filters as $filter) {
+		foreach ($filters as $filter)
+		{
 			$results = array_merge($results, array_map('trim', explode('|', $filter)));
 		}
 
@@ -240,14 +232,12 @@ class Route
 	/**
 	 * Parse the given filter into name and parameters.
 	 *
-	 * @param  string $filter
-	 *
+	 * @param  string  $filter
 	 * @return array
 	 */
 	public static function parseFilter($filter)
 	{
-		if (!str_contains($filter, ':'))
-			return array($filter, array());
+		if ( ! str_contains($filter, ':')) return array($filter, array());
 
 		return static::parseParameterFilter($filter);
 	}
@@ -255,8 +245,7 @@ class Route
 	/**
 	 * Parse a filter with parameters.
 	 *
-	 * @param  string $filter
-	 *
+	 * @param  string  $filter
 	 * @return array
 	 */
 	protected static function parseParameterFilter($filter)
@@ -269,9 +258,8 @@ class Route
 	/**
 	 * Get a given parameter from the route.
 	 *
-	 * @param  string $name
-	 * @param  mixed  $default
-	 *
+	 * @param  string  $name
+	 * @param  mixed   $default
 	 * @return string
 	 */
 	public function getParameter($name, $default = null)
@@ -282,9 +270,8 @@ class Route
 	/**
 	 * Get a given parameter from the route.
 	 *
-	 * @param  string $name
-	 * @param  mixed  $default
-	 *
+	 * @param  string  $name
+	 * @param  mixed   $default
 	 * @return string
 	 */
 	public function parameter($name, $default = null)
@@ -295,9 +282,8 @@ class Route
 	/**
 	 * Set a parameter to the given value.
 	 *
-	 * @param  string $name
-	 * @param  mixed  $value
-	 *
+	 * @param  string  $name
+	 * @param  mixed   $value
 	 * @return void
 	 */
 	public function setParameter($name, $value)
@@ -310,8 +296,7 @@ class Route
 	/**
 	 * Unset a parameter on the route if it is set.
 	 *
-	 * @param  string $name
-	 *
+	 * @param  string  $name
 	 * @return void
 	 */
 	public function forgetParameter($name)
@@ -330,8 +315,10 @@ class Route
 	 */
 	public function parameters()
 	{
-		if (isset($this->parameters)) {
-			return array_map(function ($value) {
+		if (isset($this->parameters))
+		{
+			return array_map(function($value)
+			{
 				return is_string($value) ? rawurldecode($value) : $value;
 
 			}, $this->parameters);
@@ -347,9 +334,7 @@ class Route
 	 */
 	public function parametersWithoutNulls()
 	{
-		return array_filter($this->parameters(), function ($p) {
-				return !is_null($p);
-			});
+		return array_filter($this->parameters(), function($p) { return ! is_null($p); });
 	}
 
 	/**
@@ -359,8 +344,7 @@ class Route
 	 */
 	public function parameterNames()
 	{
-		if (isset($this->parameterNames))
-			return $this->parameterNames;
+		if (isset($this->parameterNames)) return $this->parameterNames;
 
 		return $this->parameterNames = $this->compileParameterNames();
 	}
@@ -372,18 +356,15 @@ class Route
 	 */
 	protected function compileParameterNames()
 	{
-		preg_match_all('/\{(.*?)\}/', $this->domain() . $this->uri, $matches);
+		preg_match_all('/\{(.*?)\}/', $this->domain().$this->uri, $matches);
 
-		return array_map(function ($m) {
-				return trim($m, '?');
-			}, $matches[1]);
+		return array_map(function($m) { return trim($m, '?'); }, $matches[1]);
 	}
 
 	/**
 	 * Bind the route to a given request for execution.
 	 *
-	 * @param  \Illuminate\Http\Request $request
-	 *
+	 * @param  \Illuminate\Http\Request  $request
 	 * @return $this
 	 */
 	public function bind(Request $request)
@@ -398,8 +379,7 @@ class Route
 	/**
 	 * Extract the parameter list from the request.
 	 *
-	 * @param  \Illuminate\Http\Request $request
-	 *
+	 * @param  \Illuminate\Http\Request  $request
 	 * @return array
 	 */
 	public function bindParameters(Request $request)
@@ -416,8 +396,11 @@ class Route
 		// If the route has a regular expression for the host part of the URI, we will
 		// compile that and get the parameter matches for this domain. We will then
 		// merge them into this parameters array so that this array is completed.
-		if (!is_null($this->compiled->getHostRegex())) {
-			$params = $this->bindHostParameters($request, $params);
+		if ( ! is_null($this->compiled->getHostRegex()))
+		{
+			$params = $this->bindHostParameters(
+				$request, $params
+			);
 		}
 
 		return $this->parameters = $this->replaceDefaults($params);
@@ -426,13 +409,12 @@ class Route
 	/**
 	 * Get the parameter matches for the path portion of the URI.
 	 *
-	 * @param  \Illuminate\Http\Request $request
-	 *
+	 * @param  \Illuminate\Http\Request  $request
 	 * @return array
 	 */
 	protected function bindPathParameters(Request $request)
 	{
-		preg_match($this->compiled->getRegex(), '/' . $request->decodedPath(), $matches);
+		preg_match($this->compiled->getRegex(), '/'.$request->decodedPath(), $matches);
 
 		return $matches;
 	}
@@ -440,9 +422,8 @@ class Route
 	/**
 	 * Extract the parameter list from the host part of the request.
 	 *
-	 * @param  \Illuminate\Http\Request $request
-	 * @param  array                    $parameters
-	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  array  $parameters
 	 * @return array
 	 */
 	protected function bindHostParameters(Request $request, $parameters)
@@ -455,18 +436,17 @@ class Route
 	/**
 	 * Combine a set of parameter matches with the route's keys.
 	 *
-	 * @param  array $matches
-	 *
+	 * @param  array  $matches
 	 * @return array
 	 */
 	protected function matchToKeys(array $matches)
 	{
-		if (count($this->parameterNames()) == 0)
-			return array();
+		if (count($this->parameterNames()) == 0) return array();
 
 		$parameters = array_intersect_key($matches, array_flip($this->parameterNames()));
 
-		return array_filter($parameters, function ($value) {
+		return array_filter($parameters, function($value)
+		{
 			return is_string($value) && strlen($value) > 0;
 		});
 	}
@@ -474,13 +454,13 @@ class Route
 	/**
 	 * Replace null parameters with their defaults.
 	 *
-	 * @param  array $parameters
-	 *
+	 * @param  array  $parameters
 	 * @return array
 	 */
 	protected function replaceDefaults(array $parameters)
 	{
-		foreach ($parameters as $key => &$value) {
+		foreach ($parameters as $key => &$value)
+		{
 			$value = isset($value) ? $value : array_get($this->defaults, $key);
 		}
 
@@ -490,8 +470,7 @@ class Route
 	/**
 	 * Parse the route action into a standard array.
 	 *
-	 * @param  callable|array $action
-	 *
+	 * @param  callable|array  $action
 	 * @return array
 	 */
 	protected function parseAction($action)
@@ -499,14 +478,16 @@ class Route
 		// If the action is already a Closure instance, we will just set that instance
 		// as the "uses" property, because there is nothing else we need to do when
 		// it is available. Otherwise we will need to find it in the action list.
-		if (is_callable($action)) {
+		if (is_callable($action))
+		{
 			return array('uses' => $action);
 		}
 
 		// If no "uses" property has been set, we will dig through the array to find a
 		// Closure instance within this list. We will set the first Closure we come
 		// across into the "uses" property that will get fired off by this route.
-		elseif (!isset($action['uses'])) {
+		elseif ( ! isset($action['uses']))
+		{
 			$action['uses'] = $this->findClosure($action);
 		}
 
@@ -516,13 +497,13 @@ class Route
 	/**
 	 * Find the Closure in an action array.
 	 *
-	 * @param  array $action
-	 *
+	 * @param  array  $action
 	 * @return \Closure
 	 */
 	protected function findClosure(array $action)
 	{
-		return array_first($action, function ($key, $value) {
+		return array_first($action, function($key, $value)
+		{
 			return is_callable($value);
 		});
 	}
@@ -534,23 +515,21 @@ class Route
 	 */
 	public static function getValidators()
 	{
-		if (isset(static::$validators))
-			return static::$validators;
+		if (isset(static::$validators)) return static::$validators;
 
 		// To match the route, we will use a chain of responsibility pattern with the
 		// validator implementations. We will spin through each one making sure it
 		// passes and then we will know if the route as a whole matches request.
-		return static::$validators = array(new MethodValidator,
-			new SchemeValidator,
-			new HostValidator,
-			new UriValidator,);
+		return static::$validators = array(
+			new MethodValidator, new SchemeValidator,
+			new HostValidator, new UriValidator,
+		);
 	}
 
 	/**
 	 * Add before filters to the route.
 	 *
-	 * @param  string $filters
-	 *
+	 * @param  string  $filters
 	 * @return $this
 	 */
 	public function before($filters)
@@ -561,8 +540,7 @@ class Route
 	/**
 	 * Add after filters to the route.
 	 *
-	 * @param  string $filters
-	 *
+	 * @param  string  $filters
 	 * @return $this
 	 */
 	public function after($filters)
@@ -573,20 +551,22 @@ class Route
 	/**
 	 * Add the given filters to the route by type.
 	 *
-	 * @param  string $type
-	 * @param  string $filters
-	 *
+	 * @param  string  $type
+	 * @param  string  $filters
 	 * @return $this
 	 */
 	protected function addFilters($type, $filters)
 	{
 		$filters = static::explodeFilters($filters);
 
-		if (isset($this->action[$type])) {
+		if (isset($this->action[$type]))
+		{
 			$existing = static::explodeFilters($this->action[$type]);
 
 			$this->action[$type] = array_merge($existing, $filters);
-		} else {
+		}
+		else
+		{
 			$this->action[$type] = $filters;
 		}
 
@@ -596,9 +576,8 @@ class Route
 	/**
 	 * Set a default value for the route.
 	 *
-	 * @param  string $key
+	 * @param  string  $key
 	 * @param  mixed  $value
-	 *
 	 * @return $this
 	 */
 	public function defaults($key, $value)
@@ -611,14 +590,14 @@ class Route
 	/**
 	 * Set a regular expression requirement on the route.
 	 *
-	 * @param  array|string $name
-	 * @param  string       $expression
-	 *
+	 * @param  array|string  $name
+	 * @param  string  $expression
 	 * @return $this
 	 */
 	public function where($name, $expression = null)
 	{
-		foreach ($this->parseWhere($name, $expression) as $name => $expression) {
+		foreach ($this->parseWhere($name, $expression) as $name => $expression)
+		{
 			$this->wheres[$name] = $expression;
 		}
 
@@ -628,9 +607,8 @@ class Route
 	/**
 	 * Parse arguments to the where method into an array.
 	 *
-	 * @param  array|string $name
-	 * @param  string       $expression
-	 *
+	 * @param  array|string  $name
+	 * @param  string  $expression
 	 * @return array
 	 */
 	protected function parseWhere($name, $expression)
@@ -641,13 +619,13 @@ class Route
 	/**
 	 * Set a list of regular expression requirements on the route.
 	 *
-	 * @param  array $wheres
-	 *
+	 * @param  array  $wheres
 	 * @return $this
 	 */
 	protected function whereArray(array $wheres)
 	{
-		foreach ($wheres as $name => $expression) {
+		foreach ($wheres as $name => $expression)
+		{
 			$this->where($name, $expression);
 		}
 
@@ -657,13 +635,12 @@ class Route
 	/**
 	 * Add a prefix to the route URI.
 	 *
-	 * @param  string $prefix
-	 *
+	 * @param  string  $prefix
 	 * @return $this
 	 */
 	public function prefix($prefix)
 	{
-		$this->uri = trim($prefix, '/') . '/' . trim($this->uri, '/');
+		$this->uri = trim($prefix, '/').'/'.trim($this->uri, '/');
 
 		return $this;
 	}
@@ -761,8 +738,7 @@ class Route
 	/**
 	 * Set the URI that the route responds to.
 	 *
-	 * @param  string $uri
-	 *
+	 * @param  string  $uri
 	 * @return \Illuminate\Routing\Route
 	 */
 	public function setUri($uri)
@@ -815,8 +791,7 @@ class Route
 	/**
 	 * Set the action array for the route.
 	 *
-	 * @param  array $action
-	 *
+	 * @param  array  $action
 	 * @return $this
 	 */
 	public function setAction(array $action)

@@ -3,11 +3,10 @@
 use Illuminate\Console\Command;
 use Illuminate\Console\ConfirmableTrait;
 use Illuminate\Foundation\ConfigPublisher;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
 
-class ConfigPublishCommand extends Command
-{
+class ConfigPublishCommand extends Command {
 
 	use ConfirmableTrait;
 
@@ -35,8 +34,7 @@ class ConfigPublishCommand extends Command
 	/**
 	 * Create a new configuration publish command instance.
 	 *
-	 * @param  \Illuminate\Foundation\ConfigPublisher $config
-	 *
+	 * @param  \Illuminate\Foundation\ConfigPublisher  $config
 	 * @return void
 	 */
 	public function __construct(ConfigPublisher $config)
@@ -55,20 +53,23 @@ class ConfigPublishCommand extends Command
 	{
 		$package = $this->input->getArgument('package');
 
-		$proceed = $this->confirmToProceed('Config Already Published!', function () use ($package) {
+		$proceed = $this->confirmToProceed('Config Already Published!', function() use ($package)
+		{
 			return $this->config->alreadyPublished($package);
 		});
 
-		if (!$proceed)
-			return;
+		if ( ! $proceed) return;
 
-		if (!is_null($path = $this->getPath())) {
+		if ( ! is_null($path = $this->getPath()))
+		{
 			$this->config->publish($package, $path);
-		} else {
+		}
+		else
+		{
 			$this->config->publishPackage($package);
 		}
 
-		$this->output->writeln('<info>Configuration published for package:</info> ' . $package);
+		$this->output->writeln('<info>Configuration published for package:</info> '.$package);
 	}
 
 	/**
@@ -80,8 +81,9 @@ class ConfigPublishCommand extends Command
 	{
 		$path = $this->input->getOption('path');
 
-		if (!is_null($path)) {
-			return $this->laravel['path.base'] . '/' . $path;
+		if ( ! is_null($path))
+		{
+			return $this->laravel['path.base'].'/'.$path;
 		}
 	}
 
@@ -92,7 +94,9 @@ class ConfigPublishCommand extends Command
 	 */
 	protected function getArguments()
 	{
-		return array(array('package', InputArgument::REQUIRED, 'The name of the package being published.'),);
+		return array(
+			array('package', InputArgument::REQUIRED, 'The name of the package being published.'),
+		);
 	}
 
 	/**
@@ -102,8 +106,11 @@ class ConfigPublishCommand extends Command
 	 */
 	protected function getOptions()
 	{
-		return array(array('path', null, InputOption::VALUE_OPTIONAL, 'The path to the configuration files.', null),
-			array('force', null, InputOption::VALUE_NONE, 'Force the operation to run when the file already exists.'),);
+		return array(
+			array('path', null, InputOption::VALUE_OPTIONAL, 'The path to the configuration files.', null),
+
+			array('force', null, InputOption::VALUE_NONE, 'Force the operation to run when the file already exists.'),
+		);
 	}
 
 }

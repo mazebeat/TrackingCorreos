@@ -1,7 +1,6 @@
 <?php namespace Illuminate\Auth;
 
-trait UserTrait
-{
+trait UserTrait {
 
 	/**
 	 * Get the unique identifier for the user.
@@ -36,8 +35,7 @@ trait UserTrait
 	/**
 	 * Set the token value for the "remember me" session.
 	 *
-	 * @param  string $value
-	 *
+	 * @param  string  $value
 	 * @return void
 	 */
 	public function setRememberToken($value)

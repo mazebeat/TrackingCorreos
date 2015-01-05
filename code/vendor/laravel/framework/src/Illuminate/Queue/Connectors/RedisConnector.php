@@ -1,7 +1,7 @@
 <?php namespace Illuminate\Queue\Connectors;
 
-use Illuminate\Queue\RedisQueue;
 use Illuminate\Redis\Database;
+use Illuminate\Queue\RedisQueue;
 
 class RedisConnector implements ConnectorInterface {
 
@@ -40,7 +40,13 @@ class RedisConnector implements ConnectorInterface {
 	 */
 	public function connect(array $config)
 	{
-		return new RedisQueue($this->redis, $config['queue'], $this->connection);
+		$queue = new RedisQueue(
+			$this->redis, $config['queue'], array_get($config, 'connection', $this->connection)
+		);
+
+		$queue->setExpire(array_get($config, 'expire', 60));
+
+		return $queue;
 	}
 
 }

@@ -1,13 +1,12 @@
 <?php namespace Illuminate\Queue\Console;
 
-use Illuminate\Console\Command;
-use Illuminate\Queue\Jobs\Job;
 use Illuminate\Queue\Worker;
-use Symfony\Component\Console\Input\InputArgument;
+use Illuminate\Queue\Jobs\Job;
+use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
 
-class WorkCommand extends Command
-{
+class WorkCommand extends Command {
 
 	/**
 	 * The console command name.
@@ -33,8 +32,7 @@ class WorkCommand extends Command
 	/**
 	 * Create a new queue listen command.
 	 *
-	 * @param  \Illuminate\Queue\Worker $worker
-	 *
+	 * @param  \Illuminate\Queue\Worker  $worker
 	 * @return void
 	 */
 	public function __construct(Worker $worker)
@@ -51,8 +49,7 @@ class WorkCommand extends Command
 	 */
 	public function fire()
 	{
-		if ($this->downForMaintenance() && !$this->option('daemon'))
-			return;
+		if ($this->downForMaintenance() && ! $this->option('daemon')) return;
 
 		$queue = $this->option('queue');
 
@@ -65,12 +62,15 @@ class WorkCommand extends Command
 
 		$connection = $this->argument('connection');
 
-		$response = $this->runWorker($connection, $queue, $delay, $memory, $this->option('daemon'));
+		$response = $this->runWorker(
+			$connection, $queue, $delay, $memory, $this->option('daemon')
+		);
 
 		// If a job was fired by the worker, we'll write the output out to the console
 		// so that the developer can watch live while the queue runs in the console
 		// window, which will also of get logged if stdout is logged out to disk.
-		if (!is_null($response['job'])) {
+		if ( ! is_null($response['job']))
+		{
 			$this->writeOutput($response['job'], $response['failed']);
 		}
 	}
@@ -78,41 +78,49 @@ class WorkCommand extends Command
 	/**
 	 * Run the worker instance.
 	 *
-	 * @param  string $connection
-	 * @param  string $queue
-	 * @param  int    $delay
-	 * @param  int    $memory
-	 * @param  bool   $daemon
-	 *
+	 * @param  string  $connection
+	 * @param  string  $queue
+	 * @param  int  $delay
+	 * @param  int  $memory
+	 * @param  bool  $daemon
 	 * @return array
 	 */
 	protected function runWorker($connection, $queue, $delay, $memory, $daemon = false)
 	{
-		if ($daemon) {
+		if ($daemon)
+		{
 			$this->worker->setCache($this->laravel['cache']->driver());
 
 			$this->worker->setDaemonExceptionHandler($this->laravel['exception']);
 
-			return $this->worker->daemon($connection, $queue, $delay, $memory, $this->option('sleep'), $this->option('tries'));
+			return $this->worker->daemon(
+				$connection, $queue, $delay, $memory,
+				$this->option('sleep'), $this->option('tries')
+			);
 		}
 
-		return $this->worker->pop($connection, $queue, $delay, $this->option('sleep'), $this->option('tries'));
+		return $this->worker->pop(
+			$connection, $queue, $delay,
+			$this->option('sleep'), $this->option('tries')
+		);
 	}
 
 	/**
 	 * Write the status output for the queue worker.
 	 *
-	 * @param  \Illuminate\Queue\Jobs\Job $job
-	 * @param  bool                       $failed
-	 *
+	 * @param  \Illuminate\Queue\Jobs\Job  $job
+	 * @param  bool  $failed
 	 * @return void
 	 */
 	protected function writeOutput(Job $job, $failed)
 	{
-		if ($failed) {
-			$this->output->writeln('<error>Failed:</error> ' . $job->getName());
-		} else {
-			$this->output->writeln('<info>Processed:</info> ' . $job->getName());
+		if ($failed)
+		{
+			$this->output->writeln('<error>Failed:</error> '.$job->getName());
+		}
+		else
+		{
+			$this->output->writeln('<info>Processed:</info> '.$job->getName());
 		}
 	}
 
@@ -123,8 +131,7 @@ class WorkCommand extends Command
 	 */
 	protected function downForMaintenance()
 	{
-		if ($this->option('force'))
-			return false;
+		if ($this->option('force')) return false;
 
 		return $this->laravel->isDownForMaintenance();
 	}
@@ -136,7 +143,9 @@ class WorkCommand extends Command
 	 */
 	protected function getArguments()
 	{
-		return array(array('connection', InputArgument::OPTIONAL, 'The name of connection', null),);
+		return array(
+			array('connection', InputArgument::OPTIONAL, 'The name of connection', null),
+		);
 	}
 
 	/**
@@ -146,17 +155,21 @@ class WorkCommand extends Command
 	 */
 	protected function getOptions()
 	{
-		return array(array('queue', null, InputOption::VALUE_OPTIONAL, 'The queue to listen on'),
+		return array(
+			array('queue', null, InputOption::VALUE_OPTIONAL, 'The queue to listen on'),
+
 			array('daemon', null, InputOption::VALUE_NONE, 'Run the worker in daemon mode'),
+
 			array('delay', null, InputOption::VALUE_OPTIONAL, 'Amount of time to delay failed jobs', 0),
+
 			array('force', null, InputOption::VALUE_NONE, 'Force the worker to run even in maintenance mode'),
+
 			array('memory', null, InputOption::VALUE_OPTIONAL, 'The memory limit in megabytes', 128),
+
 			array('sleep', null, InputOption::VALUE_OPTIONAL, 'Number of seconds to sleep when no job is available', 3),
-			array('tries',
-				null,
-				InputOption::VALUE_OPTIONAL,
-				'Number of times to attempt a job before logging it failed',
-				0),);
+
+			array('tries', null, InputOption::VALUE_OPTIONAL, 'Number of times to attempt a job before logging it failed', 0),
+		);
 	}
 
 }

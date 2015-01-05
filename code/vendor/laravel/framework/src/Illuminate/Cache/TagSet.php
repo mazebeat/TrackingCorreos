@@ -1,7 +1,6 @@
 <?php namespace Illuminate\Cache;
 
-class TagSet
-{
+class TagSet {
 
 	/**
 	 * The cache store implementation.
@@ -20,9 +19,8 @@ class TagSet
 	/**
 	 * Create a new TagSet instance.
 	 *
-	 * @param  \Illuminate\Cache\StoreInterface $store
-	 * @param  array                            $names
-	 *
+	 * @param  \Illuminate\Cache\StoreInterface  $store
+	 * @param  array  $names
 	 * @return void
 	 */
 	public function __construct(StoreInterface $store, array $names = array())
@@ -44,8 +42,7 @@ class TagSet
 	/**
 	 * Get the unique tag identifier for a given tag.
 	 *
-	 * @param  string $name
-	 *
+	 * @param  string  $name
 	 * @return string
 	 */
 	public function tagId($name)
@@ -76,8 +73,7 @@ class TagSet
 	/**
 	 * Reset the tag and return the new tag identifier
 	 *
-	 * @param  string $name
-	 *
+	 * @param  string  $name
 	 * @return string
 	 */
 	public function resetTag($name)
@@ -90,13 +86,12 @@ class TagSet
 	/**
 	 * Get the tag identifier key for a given tag.
 	 *
-	 * @param  string $name
-	 *
+	 * @param  string  $name
 	 * @return string
 	 */
 	public function tagKey($name)
 	{
-		return 'tag:' . $name . ':key';
+		return 'tag:'.$name.':key';
 	}
 
 }

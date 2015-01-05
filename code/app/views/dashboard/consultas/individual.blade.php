@@ -10,7 +10,10 @@
             <div class="col-md-12">
                 <div class="panel panel-danger">
                     <div class="panel-heading">
-                        <h3>Consulta Individual</h3>
+                        Consulta Individual
+                        <span class="tools pull-right">
+                            <a class="fa fa-chevron-down" href="javascript:"></a>
+				        </span>
                     </div>
                     <div class="panel-body">
                         <form role="form" ng-submit="submit()">

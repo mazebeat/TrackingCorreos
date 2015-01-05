@@ -1,7 +1,6 @@
 <?php namespace Illuminate\Workbench;
 
-class Package
-{
+class Package {
 
 	/**
 	 * The vendor name of the package.
@@ -48,20 +47,19 @@ class Package
 	/**
 	 * Create a new package instance.
 	 *
-	 * @param  string $vendor
-	 * @param  string $name
-	 * @param  string $author
-	 * @param  string $email
-	 *
+	 * @param  string  $vendor
+	 * @param  string  $name
+	 * @param  string  $author
+	 * @param  string  $email
 	 * @return void
 	 */
 	public function __construct($vendor, $name, $author, $email)
 	{
-		$this->name        = $name;
-		$this->email       = $email;
-		$this->vendor      = $vendor;
-		$this->author      = $author;
-		$this->lowerName   = snake_case($name, '-');
+		$this->name = $name;
+		$this->email = $email;
+		$this->vendor = $vendor;
+		$this->author = $author;
+		$this->lowerName = snake_case($name, '-');
 		$this->lowerVendor = snake_case($vendor, '-');
 	}
 
@@ -72,7 +70,7 @@ class Package
 	 */
 	public function getFullName()
 	{
-		return $this->lowerVendor . '/' . $this->lowerName;
+		return $this->lowerVendor.'/'.$this->lowerName;
 	}
 
 }

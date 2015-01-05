@@ -16,10 +16,10 @@
     <div ng-controller="homeController">
         <form class="form-signin" name="loginForm" ng-submit="submit()">
             {{--<div class="alert alert-warning alert-dismissible" role="alert" ng-show="message">--}}
-                {{--<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span--}}
-                            {{--class="sr-only">Close</span></button>--}}
-                {{--<strong>Atención!</strong> @{{ message }}--}}
-                {{--<span class="text-uppercase"><strong>Atención!</strong> @{{ message }}</span>--}}
+            {{--<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span--}}
+            {{--class="sr-only">Close</span></button>--}}
+            {{--<strong>Atención!</strong> @{{ message }}--}}
+            {{--<span class="text-uppercase"><strong>Atención!</strong> @{{ message }}</span>--}}
             {{--</div>--}}
             <div class="form-signin-heading text-center">
                 {{ HTML::image('images/login-logo.png', 'Intelidata', array()) }}

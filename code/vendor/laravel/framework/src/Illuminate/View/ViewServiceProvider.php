@@ -1,14 +1,13 @@
 <?php namespace Illuminate\View;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\ViewErrorBag;
-use Illuminate\View\Compilers\BladeCompiler;
+use Illuminate\View\Engines\PhpEngine;
+use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Engines\CompilerEngine;
 use Illuminate\View\Engines\EngineResolver;
-use Illuminate\View\Engines\PhpEngine;
+use Illuminate\View\Compilers\BladeCompiler;
 
-class ViewServiceProvider extends ServiceProvider
-{
+class ViewServiceProvider extends ServiceProvider {
 
 	/**
 	 * Register the service provider.
@@ -36,14 +35,16 @@ class ViewServiceProvider extends ServiceProvider
 	 */
 	public function registerEngineResolver()
 	{
-		$this->app->bindShared('view.engine.resolver', function () {
+		$this->app->bindShared('view.engine.resolver', function()
+		{
 			$resolver = new EngineResolver;
 
 			// Next we will register the various engines with the resolver so that the
 			// environment can resolve the engines it needs for various views based
 			// on the extension of view files. We call a method for each engines.
-			foreach (array('php', 'blade') as $engine) {
-				$this->{'register' . ucfirst($engine) . 'Engine'}($resolver);
+			foreach (array('php', 'blade') as $engine)
+			{
+				$this->{'register'.ucfirst($engine).'Engine'}($resolver);
 			}
 
 			return $resolver;
@@ -53,22 +54,18 @@ class ViewServiceProvider extends ServiceProvider
 	/**
 	 * Register the PHP engine implementation.
 	 *
-	 * @param  \Illuminate\View\Engines\EngineResolver $resolver
-	 *
+	 * @param  \Illuminate\View\Engines\EngineResolver  $resolver
 	 * @return void
 	 */
 	public function registerPhpEngine($resolver)
 	{
-		$resolver->register('php', function () {
-				return new PhpEngine;
-			});
+		$resolver->register('php', function() { return new PhpEngine; });
 	}
 
 	/**
 	 * Register the Blade engine implementation.
 	 *
-	 * @param  \Illuminate\View\Engines\EngineResolver $resolver
-	 *
+	 * @param  \Illuminate\View\Engines\EngineResolver  $resolver
 	 * @return void
 	 */
 	public function registerBladeEngine($resolver)
@@ -78,13 +75,15 @@ class ViewServiceProvider extends ServiceProvider
 		// The Compiler engine requires an instance of the CompilerInterface, which in
 		// this case will be the Blade compiler, so we'll first create the compiler
 		// instance to pass into the engine so it can compile the views properly.
-		$app->bindShared('blade.compiler', function ($app) {
-			$cache = $app['path.storage'] . '/views';
+		$app->bindShared('blade.compiler', function($app)
+		{
+			$cache = $app['path.storage'].'/views';
 
 			return new BladeCompiler($app['files'], $cache);
 		});
 
-		$resolver->register('blade', function () use ($app) {
+		$resolver->register('blade', function() use ($app)
+		{
 			return new CompilerEngine($app['blade.compiler'], $app['files']);
 		});
 	}
@@ -96,7 +95,8 @@ class ViewServiceProvider extends ServiceProvider
 	 */
 	public function registerViewFinder()
 	{
-		$this->app->bindShared('view.finder', function ($app) {
+		$this->app->bindShared('view.finder', function($app)
+		{
 			$paths = $app['config']['view.paths'];
 
 			return new FileViewFinder($app['files'], $paths);
@@ -110,7 +110,8 @@ class ViewServiceProvider extends ServiceProvider
 	 */
 	public function registerFactory()
 	{
-		$this->app->bindShared('view', function ($app) {
+		$this->app->bindShared('view', function($app)
+		{
 			// Next we need to grab the engine resolver instance that will be used by the
 			// environment. The resolver will be used by an environment to get each of
 			// the various engine implementations such as plain PHP or Blade engine.
@@ -140,11 +141,13 @@ class ViewServiceProvider extends ServiceProvider
 	{
 		list($app, $me) = array($this->app, $this);
 
-		$app->booted(function () use ($app, $me) {
+		$app->booted(function() use ($app, $me)
+		{
 			// If the current session has an "errors" variable bound to it, we will share
 			// its value with all view instances so the views can easily access errors
 			// without having to bind. An empty bag is set when there aren't errors.
-			if ($me->sessionHasErrors($app)) {
+			if ($me->sessionHasErrors($app))
+			{
 				$errors = $app['session.store']->get('errors');
 
 				$app['view']->share('errors', $errors);
@@ -153,7 +156,8 @@ class ViewServiceProvider extends ServiceProvider
 			// Putting the errors in the view for every view allows the developer to just
 			// assume that some errors are always available, which is convenient since
 			// they don't have to continually run checks for the presence of errors.
-			else {
+			else
+			{
 				$app['view']->share('errors', new ViewErrorBag);
 			}
 		});
@@ -162,15 +166,15 @@ class ViewServiceProvider extends ServiceProvider
 	/**
 	 * Determine if the application session has errors.
 	 *
-	 * @param  \Illuminate\Foundation\Application $app
-	 *
+	 * @param  \Illuminate\Foundation\Application  $app
 	 * @return bool
 	 */
 	public function sessionHasErrors($app)
 	{
 		$config = $app['config']['session'];
 
-		if (isset($app['session.store']) && !is_null($config['driver'])) {
+		if (isset($app['session.store']) && ! is_null($config['driver']))
+		{
 			return $app['session.store']->has('errors');
 		}
 	}

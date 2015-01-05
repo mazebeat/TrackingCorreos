@@ -1,15 +1,13 @@
 <?php namespace Illuminate\Config;
 
-interface LoaderInterface
-{
+interface LoaderInterface {
 
 	/**
 	 * Load the given configuration group.
 	 *
-	 * @param  string $environment
-	 * @param  string $group
-	 * @param  string $namespace
-	 *
+	 * @param  string  $environment
+	 * @param  string  $group
+	 * @param  string  $namespace
 	 * @return array
 	 */
 	public function load($environment, $group, $namespace = null);
@@ -17,9 +15,8 @@ interface LoaderInterface
 	/**
 	 * Determine if the given configuration group exists.
 	 *
-	 * @param  string $group
-	 * @param  string $namespace
-	 *
+	 * @param  string  $group
+	 * @param  string  $namespace
 	 * @return bool
 	 */
 	public function exists($group, $namespace = null);
@@ -27,9 +24,8 @@ interface LoaderInterface
 	/**
 	 * Add a new namespace to the loader.
 	 *
-	 * @param  string $namespace
-	 * @param  string $hint
-	 *
+	 * @param  string  $namespace
+	 * @param  string  $hint
 	 * @return void
 	 */
 	public function addNamespace($namespace, $hint);
@@ -45,11 +41,10 @@ interface LoaderInterface
 	/**
 	 * Apply any cascades to an array of package options.
 	 *
-	 * @param  string $environment
-	 * @param  string $package
-	 * @param  string $group
-	 * @param  array  $items
-	 *
+	 * @param  string  $environment
+	 * @param  string  $package
+	 * @param  string  $group
+	 * @param  array   $items
 	 * @return array
 	 */
 	public function cascadePackage($environment, $package, $group, $items);

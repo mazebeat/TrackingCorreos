@@ -1,12 +1,11 @@
 <?php namespace Illuminate\Routing\Console;
 
 use Illuminate\Console\Command;
-use Illuminate\Routing\Generators\ControllerGenerator;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
+use Illuminate\Routing\Generators\ControllerGenerator;
 
-class MakeControllerCommand extends Command
-{
+class MakeControllerCommand extends Command {
 
 	/**
 	 * The console command name.
@@ -39,16 +38,15 @@ class MakeControllerCommand extends Command
 	/**
 	 * Create a new make controller command instance.
 	 *
-	 * @param  \Illuminate\Routing\Generators\ControllerGenerator $generator
-	 * @param  string                                             $path
-	 *
+	 * @param  \Illuminate\Routing\Generators\ControllerGenerator  $generator
+	 * @param  string  $path
 	 * @return void
 	 */
 	public function __construct(ControllerGenerator $generator, $path)
 	{
 		parent::__construct();
 
-		$this->path      = $path;
+		$this->path = $path;
 		$this->generator = $generator;
 	}
 
@@ -93,9 +91,12 @@ class MakeControllerCommand extends Command
 	 */
 	protected function getPath()
 	{
-		if (!is_null($this->input->getOption('path'))) {
-			return $this->laravel['path.base'] . '/' . $this->input->getOption('path');
-		} elseif ($bench = $this->input->getOption('bench')) {
+		if ( ! is_null($this->input->getOption('path')))
+		{
+			return $this->laravel['path.base'].'/'.$this->input->getOption('path');
+		}
+		elseif ($bench = $this->input->getOption('bench'))
+		{
 			return $this->getWorkbenchPath($bench);
 		}
 
@@ -105,15 +106,15 @@ class MakeControllerCommand extends Command
 	/**
 	 * Get the workbench path for the controller.
 	 *
-	 * @param  string $bench
-	 *
+	 * @param  string  $bench
 	 * @return string
 	 */
 	protected function getWorkbenchPath($bench)
 	{
-		$path = $this->laravel['path.base'] . '/workbench/' . $bench . '/src/controllers';
+		$path = $this->laravel['path.base'].'/workbench/'.$bench.'/src/controllers';
 
-		if (!$this->laravel['files']->isDirectory($path)) {
+		if ( ! $this->laravel['files']->isDirectory($path))
+		{
 			$this->laravel['files']->makeDirectory($path);
 		}
 
@@ -137,8 +138,7 @@ class MakeControllerCommand extends Command
 	/**
 	 * Get and explode a given input option.
 	 *
-	 * @param  string $name
-	 *
+	 * @param  string  $name
 	 * @return array
 	 */
 	protected function explodeOption($name)
@@ -155,7 +155,9 @@ class MakeControllerCommand extends Command
 	 */
 	protected function getArguments()
 	{
-		return array(array('name', InputArgument::REQUIRED, 'The name of the controller class'),);
+		return array(
+			array('name', InputArgument::REQUIRED, 'The name of the controller class'),
+		);
 	}
 
 	/**
@@ -165,10 +167,15 @@ class MakeControllerCommand extends Command
 	 */
 	protected function getOptions()
 	{
-		return array(array('bench', null, InputOption::VALUE_OPTIONAL, 'The workbench the controller belongs to'),
+		return array(
+			array('bench', null, InputOption::VALUE_OPTIONAL, 'The workbench the controller belongs to'),
+
 			array('only', null, InputOption::VALUE_OPTIONAL, 'The methods that should be included'),
+
 			array('except', null, InputOption::VALUE_OPTIONAL, 'The methods that should be excluded'),
-			array('path', null, InputOption::VALUE_OPTIONAL, 'Where to place the controller'),);
+
+			array('path', null, InputOption::VALUE_OPTIONAL, 'Where to place the controller'),
+		);
 	}
 
 }

@@ -1,10 +1,10 @@
 <?php namespace Illuminate\Foundation\Providers;
 
 use Illuminate\Foundation\Artisan;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\Console\TailCommand;
 use Illuminate\Foundation\Console\ChangesCommand;
 use Illuminate\Foundation\Console\EnvironmentCommand;
-use Illuminate\Foundation\Console\TailCommand;
-use Illuminate\Support\ServiceProvider;
 
 class ArtisanServiceProvider extends ServiceProvider {
 

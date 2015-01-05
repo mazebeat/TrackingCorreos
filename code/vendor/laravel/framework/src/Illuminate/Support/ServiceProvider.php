@@ -2,8 +2,7 @@
 
 use ReflectionClass;
 
-abstract class ServiceProvider
-{
+abstract class ServiceProvider {
 
 	/**
 	 * The application instance.
@@ -22,8 +21,7 @@ abstract class ServiceProvider
 	/**
 	 * Create a new service provider instance.
 	 *
-	 * @param  \Illuminate\Foundation\Application $app
-	 *
+	 * @param  \Illuminate\Foundation\Application  $app
 	 * @return void
 	 */
 	public function __construct($app)
@@ -36,9 +34,7 @@ abstract class ServiceProvider
 	 *
 	 * @return void
 	 */
-	public function boot()
-	{
-	}
+	public function boot() {}
 
 	/**
 	 * Register the service provider.
@@ -50,10 +46,9 @@ abstract class ServiceProvider
 	/**
 	 * Register the package's component namespaces.
 	 *
-	 * @param  string $package
-	 * @param  string $namespace
-	 * @param  string $path
-	 *
+	 * @param  string  $package
+	 * @param  string  $namespace
+	 * @param  string  $path
 	 * @return void
 	 */
 	public function package($package, $namespace = null, $path = null)
@@ -65,18 +60,20 @@ abstract class ServiceProvider
 		// folder to make the developers lives much easier in maintaining them.
 		$path = $path ?: $this->guessPackagePath();
 
-		$config = $path . '/config';
+		$config = $path.'/config';
 
-		if ($this->app['files']->isDirectory($config)) {
+		if ($this->app['files']->isDirectory($config))
+		{
 			$this->app['config']->package($package, $config, $namespace);
 		}
 
 		// Next we will check for any "language" components. If language files exist
 		// we will register them with this given package's namespace so that they
 		// may be accessed using the translation facilities of the application.
-		$lang = $path . '/lang';
+		$lang = $path.'/lang';
 
-		if ($this->app['files']->isDirectory($lang)) {
+		if ($this->app['files']->isDirectory($lang))
+		{
 			$this->app['translator']->addNamespace($namespace, $lang);
 		}
 
@@ -85,16 +82,18 @@ abstract class ServiceProvider
 		// the loader list for the views so the package views can be overridden.
 		$appView = $this->getAppViewPath($package);
 
-		if ($this->app['files']->isDirectory($appView)) {
+		if ($this->app['files']->isDirectory($appView))
+		{
 			$this->app['view']->addNamespace($namespace, $appView);
 		}
 
 		// Finally we will register the view namespace so that we can access each of
 		// the views available in this package. We use a standard convention when
 		// registering the paths to every package's views and other components.
-		$view = $path . '/views';
+		$view = $path.'/views';
 
-		if ($this->app['files']->isDirectory($view)) {
+		if ($this->app['files']->isDirectory($view))
+		{
 			$this->app['view']->addNamespace($namespace, $view);
 		}
 	}
@@ -108,20 +107,20 @@ abstract class ServiceProvider
 	{
 		$path = (new ReflectionClass($this))->getFileName();
 
-		return realpath(dirname($path) . '/../../');
+		return realpath(dirname($path).'/../../');
 	}
 
 	/**
 	 * Determine the namespace for a package.
 	 *
-	 * @param  string $package
-	 * @param  string $namespace
-	 *
+	 * @param  string  $package
+	 * @param  string  $namespace
 	 * @return string
 	 */
 	protected function getPackageNamespace($package, $namespace)
 	{
-		if (is_null($namespace)) {
+		if (is_null($namespace))
+		{
 			list($vendor, $namespace) = explode('/', $package);
 		}
 
@@ -131,8 +130,7 @@ abstract class ServiceProvider
 	/**
 	 * Register the package's custom Artisan commands.
 	 *
-	 * @param  array $commands
-	 *
+	 * @param  array  $commands
 	 * @return void
 	 */
 	public function commands($commands)
@@ -144,7 +142,8 @@ abstract class ServiceProvider
 		// give us the Artisan console instance which we will give commands to.
 		$events = $this->app['events'];
 
-		$events->listen('artisan.start', function ($artisan) use ($commands) {
+		$events->listen('artisan.start', function($artisan) use ($commands)
+		{
 			$artisan->resolveCommands($commands);
 		});
 	}
@@ -152,13 +151,12 @@ abstract class ServiceProvider
 	/**
 	 * Get the application package view path.
 	 *
-	 * @param  string $package
-	 *
+	 * @param  string  $package
 	 * @return string
 	 */
 	protected function getAppViewPath($package)
 	{
-		return $this->app['path'] . "/views/packages/{$package}";
+		return $this->app['path']."/views/packages/{$package}";
 	}
 
 	/**

@@ -1,7 +1,7 @@
 <?php namespace Illuminate\Config;
 
-use ArrayAccess;
 use Closure;
+use ArrayAccess;
 use Illuminate\Support\NamespacedItemResolver;
 
 class Repository extends NamespacedItemResolver implements ArrayAccess {

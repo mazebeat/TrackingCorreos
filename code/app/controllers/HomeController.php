@@ -71,8 +71,10 @@ class HomeController extends ApiController
     {
         Auth::logout();
         Session::forget('credentials');
+        Session::forget('user');
 
         return Redirect::to('/');
     }
+
 
 }

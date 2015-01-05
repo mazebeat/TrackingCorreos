@@ -1,8 +1,8 @@
 <?php namespace Illuminate\Foundation\Providers;
 
-use Illuminate\Foundation\Console\DownCommand;
-use Illuminate\Foundation\Console\UpCommand;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\Console\UpCommand;
+use Illuminate\Foundation\Console\DownCommand;
 
 class MaintenanceServiceProvider extends ServiceProvider {
 

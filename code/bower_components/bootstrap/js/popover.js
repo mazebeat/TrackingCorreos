@@ -1,118 +1,116 @@
 /* ========================================================================
- * Bootstrap: popover.js v3.3.1
+ * Bootstrap: popover.js v3.0.3
  * http://getbootstrap.com/javascript/#popovers
  * ========================================================================
- * Copyright 2011-2014 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * Copyright 2013 Twitter, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  * ======================================================================== */
 
 
-+function ($) {
-  'use strict';
++function ($) { "use strict";
 
   // POPOVER PUBLIC CLASS DEFINITION
   // ===============================
 
   var Popover = function (element, options) {
     this.init('popover', element, options)
-  };;
+  }
 
-  if (!$.fn.tooltip) throw new Error('Popover requires tooltip.js');;
+  if (!$.fn.tooltip) throw new Error('Popover requires tooltip.js')
 
-  Popover.VERSION  = '3.3.1';;
-
-  Popover.DEFAULTS = $.extend({}, $.fn.tooltip.Constructor.DEFAULTS, {
-    placement: 'right',
-    trigger: 'click',
-    content: '',
-    template: '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
-  });;
+  Popover.DEFAULTS = $.extend({} , $.fn.tooltip.Constructor.DEFAULTS, {
+    placement: 'right'
+  , trigger: 'click'
+  , content: ''
+  , template: '<div class="popover"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+  })
 
 
   // NOTE: POPOVER EXTENDS tooltip.js
   // ================================
 
-  Popover.prototype = $.extend({}, $.fn.tooltip.Constructor.prototype);;
+  Popover.prototype = $.extend({}, $.fn.tooltip.Constructor.prototype)
 
-  Popover.prototype.constructor = Popover;;
+  Popover.prototype.constructor = Popover
 
   Popover.prototype.getDefaults = function () {
     return Popover.DEFAULTS
-  };;
+  }
 
   Popover.prototype.setContent = function () {
-    var $tip    = this.tip();;
-    var title   = this.getTitle();;
-    var content = this.getContent();;
+    var $tip    = this.tip()
+    var title   = this.getTitle()
+    var content = this.getContent()
 
-    $tip.find('.popover-title')[this.options.html ? 'html' : 'text'](title);;
-    $tip.find('.popover-content').children().detach().end()[ // we use append for html objects to maintain js events
-      this.options.html ? (typeof content == 'string' ? 'html' : 'append') : 'text'
-    ](content);;
+    $tip.find('.popover-title')[this.options.html ? 'html' : 'text'](title)
+    $tip.find('.popover-content')[this.options.html ? 'html' : 'text'](content)
 
-    $tip.removeClass('fade top bottom left right in');;
+    $tip.removeClass('fade top bottom left right in')
 
     // IE8 doesn't accept hiding via the `:empty` pseudo selector, we have to do
     // this manually by checking the contents.
     if (!$tip.find('.popover-title').html()) $tip.find('.popover-title').hide()
-  };;
+  }
 
   Popover.prototype.hasContent = function () {
     return this.getTitle() || this.getContent()
-  };;
+  }
 
   Popover.prototype.getContent = function () {
-    var $e = this.$element;;
-    var o  = this.options;;
+    var $e = this.$element
+    var o  = this.options
 
     return $e.attr('data-content')
       || (typeof o.content == 'function' ?
             o.content.call($e[0]) :
             o.content)
-  };;
+  }
 
   Popover.prototype.arrow = function () {
-    return (this.$arrow = this.$arrow || this.tip().find('.arrow'))
-  };;
+    return this.$arrow = this.$arrow || this.tip().find('.arrow')
+  }
 
   Popover.prototype.tip = function () {
-    if (!this.$tip) this.$tip = $(this.options.template);;
+    if (!this.$tip) this.$tip = $(this.options.template)
     return this.$tip
-  };;
+  }
 
 
   // POPOVER PLUGIN DEFINITION
   // =========================
 
-  function Plugin(option) {
-    return this.each(function () {
-      var $this    = $(this);;
-      var data     = $this.data('bs.popover');;
-      var options  = typeof option == 'object' && option;;
-      var selector = options && options.selector;;
+  var old = $.fn.popover
 
-      if (!data && option == 'destroy') return;;
-      if (selector) {
-        if (!data) $this.data('bs.popover', (data = {}));;
-        if (!data[selector]) data[selector] = new Popover(this, options)
-      } else {
-        if (!data) $this.data('bs.popover', (data = new Popover(this, options)))
-      }
+  $.fn.popover = function (option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.popover')
+      var options = typeof option == 'object' && option
+
+      if (!data) $this.data('bs.popover', (data = new Popover(this, options)))
       if (typeof option == 'string') data[option]()
     })
   }
 
-  var old = $.fn.popover;;
-
-  $.fn.popover             = Plugin;;
-  $.fn.popover.Constructor = Popover;;
+  $.fn.popover.Constructor = Popover
 
 
   // POPOVER NO CONFLICT
   // ===================
 
   $.fn.popover.noConflict = function () {
-    $.fn.popover = old;;
+    $.fn.popover = old
     return this
   }
 

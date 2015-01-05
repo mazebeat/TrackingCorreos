@@ -1,12 +1,11 @@
 <?php namespace Illuminate\Exception;
 
 use Exception;
+use Whoops\Run;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
-use Whoops\Run;
 
-class WhoopsDisplayer implements ExceptionDisplayerInterface
-{
+class WhoopsDisplayer implements ExceptionDisplayerInterface {
 
 	/**
 	 * The Whoops run instance.
@@ -25,22 +24,20 @@ class WhoopsDisplayer implements ExceptionDisplayerInterface
 	/**
 	 * Create a new Whoops exception displayer.
 	 *
-	 * @param  \Whoops\Run $whoops
-	 * @param  bool        $runningInConsole
-	 *
+	 * @param  \Whoops\Run  $whoops
+	 * @param  bool  $runningInConsole
 	 * @return void
 	 */
 	public function __construct(Run $whoops, $runningInConsole)
 	{
-		$this->whoops           = $whoops;
+		$this->whoops = $whoops;
 		$this->runningInConsole = $runningInConsole;
 	}
 
 	/**
 	 * Display the given exception to the user.
 	 *
-	 * @param  \Exception $exception
-	 *
+	 * @param  \Exception  $exception
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
 	public function display(Exception $exception)

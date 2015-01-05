@@ -1,9 +1,9 @@
 <?php namespace Illuminate\Foundation\Console;
 
-use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Routing\Router;
+use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 
 class RoutesCommand extends Command {

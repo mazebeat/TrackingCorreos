@@ -1,10 +1,9 @@
 <?php namespace Illuminate\Database\Migrations;
 
-use Illuminate\Database\ConnectionResolverInterface as Resolver;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Database\ConnectionResolverInterface as Resolver;
 
-class Migrator
-{
+class Migrator {
 
 	/**
 	 * The migration repository implementation.
@@ -44,25 +43,25 @@ class Migrator
 	/**
 	 * Create a new migrator instance.
 	 *
-	 * @param  \Illuminate\Database\Migrations\MigrationRepositoryInterface $repository
-	 * @param  \Illuminate\Database\ConnectionResolverInterface             $resolver
-	 * @param  \Illuminate\Filesystem\Filesystem                            $files
-	 *
+	 * @param  \Illuminate\Database\Migrations\MigrationRepositoryInterface  $repository
+	 * @param  \Illuminate\Database\ConnectionResolverInterface  $resolver
+	 * @param  \Illuminate\Filesystem\Filesystem  $files
 	 * @return void
 	 */
-	public function __construct(MigrationRepositoryInterface $repository, Resolver $resolver, Filesystem $files)
+	public function __construct(MigrationRepositoryInterface $repository,
+								Resolver $resolver,
+                                Filesystem $files)
 	{
-		$this->files      = $files;
-		$this->resolver   = $resolver;
+		$this->files = $files;
+		$this->resolver = $resolver;
 		$this->repository = $repository;
 	}
 
 	/**
 	 * Run the outstanding migrations at a given path.
 	 *
-	 * @param  string $path
-	 * @param  bool   $pretend
-	 *
+	 * @param  string  $path
+	 * @param  bool    $pretend
 	 * @return void
 	 */
 	public function run($path, $pretend = false)
@@ -86,9 +85,8 @@ class Migrator
 	/**
 	 * Run an array of migrations.
 	 *
-	 * @param  array $migrations
-	 * @param  bool  $pretend
-	 *
+	 * @param  array  $migrations
+	 * @param  bool   $pretend
 	 * @return void
 	 */
 	public function runMigrationList($migrations, $pretend = false)
@@ -96,7 +94,8 @@ class Migrator
 		// First we will just make sure that there are any migrations to run. If there
 		// aren't, we will just make a note of it to the developer so they're aware
 		// that all of the migrations have been run against this database system.
-		if (count($migrations) == 0) {
+		if (count($migrations) == 0)
+		{
 			$this->note('<info>Nothing to migrate.</info>');
 
 			return;
@@ -107,7 +106,8 @@ class Migrator
 		// Once we have the array of migrations, we will spin through them and run the
 		// migrations "up" so the changes are made to the databases. We'll then log
 		// that the migration was run so we don't repeat it next time we execute.
-		foreach ($migrations as $file) {
+		foreach ($migrations as $file)
+		{
 			$this->runUp($file, $batch, $pretend);
 		}
 	}
@@ -115,10 +115,9 @@ class Migrator
 	/**
 	 * Run "up" a migration instance.
 	 *
-	 * @param  string $file
-	 * @param  int    $batch
-	 * @param  bool   $pretend
-	 *
+	 * @param  string  $file
+	 * @param  int     $batch
+	 * @param  bool    $pretend
 	 * @return void
 	 */
 	protected function runUp($file, $batch, $pretend)
@@ -128,7 +127,8 @@ class Migrator
 		// command such as "up" or "down", or we can just simulate the action.
 		$migration = $this->resolve($file);
 
-		if ($pretend) {
+		if ($pretend)
+		{
 			return $this->pretendToRun($migration, 'up');
 		}
 
@@ -145,8 +145,7 @@ class Migrator
 	/**
 	 * Rollback the last migration operation.
 	 *
-	 * @param  bool $pretend
-	 *
+	 * @param  bool  $pretend
 	 * @return int
 	 */
 	public function rollback($pretend = false)
@@ -158,7 +157,8 @@ class Migrator
 		// of them "down" to reverse the last migration "operation" which ran.
 		$migrations = $this->repository->getLast();
 
-		if (count($migrations) == 0) {
+		if (count($migrations) == 0)
+		{
 			$this->note('<info>Nothing to rollback.</info>');
 
 			return count($migrations);
@@ -167,8 +167,9 @@ class Migrator
 		// We need to reverse these migrations so that they are "downed" in reverse
 		// to what they run on "up". It lets us backtrack through the migrations
 		// and properly reverse the entire database schema operation that ran.
-		foreach ($migrations as $migration) {
-			$this->runDown((object)$migration, $pretend);
+		foreach ($migrations as $migration)
+		{
+			$this->runDown((object) $migration, $pretend);
 		}
 
 		return count($migrations);
@@ -177,9 +178,8 @@ class Migrator
 	/**
 	 * Run "down" a migration instance.
 	 *
-	 * @param  object $migration
-	 * @param  bool   $pretend
-	 *
+	 * @param  object  $migration
+	 * @param  bool    $pretend
 	 * @return void
 	 */
 	protected function runDown($migration, $pretend)
@@ -191,7 +191,8 @@ class Migrator
 		// pretend execution of the migration or we can run the real migration.
 		$instance = $this->resolve($file);
 
-		if ($pretend) {
+		if ($pretend)
+		{
 			return $this->pretendToRun($instance, 'down');
 		}
 
@@ -208,21 +209,20 @@ class Migrator
 	/**
 	 * Get all of the migration files in a given path.
 	 *
-	 * @param  string $path
-	 *
+	 * @param  string  $path
 	 * @return array
 	 */
 	public function getMigrationFiles($path)
 	{
-		$files = $this->files->glob($path . '/*_*.php');
+		$files = $this->files->glob($path.'/*_*.php');
 
 		// Once we have the array of files in the directory we will just remove the
 		// extension and take the basename of the file which is all we need when
 		// finding the migrations that haven't been run against the databases.
-		if ($files === false)
-			return array();
+		if ($files === false) return array();
 
-		$files = array_map(function ($file) {
+		$files = array_map(function($file)
+		{
 			return str_replace('.php', '', basename($file));
 
 		}, $files);
@@ -238,28 +238,26 @@ class Migrator
 	/**
 	 * Require in all the migration files in a given path.
 	 *
-	 * @param  string $path
-	 * @param  array  $files
-	 *
+	 * @param  string  $path
+	 * @param  array   $files
 	 * @return void
 	 */
 	public function requireFiles($path, array $files)
 	{
-		foreach ($files as $file)
-			$this->files->requireOnce($path . '/' . $file . '.php');
+		foreach ($files as $file) $this->files->requireOnce($path.'/'.$file.'.php');
 	}
 
 	/**
 	 * Pretend to run the migrations.
 	 *
-	 * @param  object $migration
-	 * @param  string $method
-	 *
+	 * @param  object  $migration
+	 * @param  string  $method
 	 * @return void
 	 */
 	protected function pretendToRun($migration, $method)
 	{
-		foreach ($this->getQueries($migration, $method) as $query) {
+		foreach ($this->getQueries($migration, $method) as $query)
+		{
 			$name = get_class($migration);
 
 			$this->note("<info>{$name}:</info> {$query['query']}");
@@ -269,9 +267,8 @@ class Migrator
 	/**
 	 * Get all of the queries that would be run for a migration.
 	 *
-	 * @param  object $migration
-	 * @param  string $method
-	 *
+	 * @param  object  $migration
+	 * @param  string  $method
 	 * @return array
 	 */
 	protected function getQueries($migration, $method)
@@ -283,7 +280,8 @@ class Migrator
 		// that would get fired against the database system for this migration.
 		$db = $this->resolveConnection($connection);
 
-		return $db->pretend(function () use ($migration, $method) {
+		return $db->pretend(function() use ($migration, $method)
+		{
 			$migration->$method();
 		});
 	}
@@ -291,8 +289,7 @@ class Migrator
 	/**
 	 * Resolve a migration instance from a file.
 	 *
-	 * @param  string $file
-	 *
+	 * @param  string  $file
 	 * @return object
 	 */
 	public function resolve($file)
@@ -307,8 +304,7 @@ class Migrator
 	/**
 	 * Raise a note event for the migrator.
 	 *
-	 * @param  string $message
-	 *
+	 * @param  string  $message
 	 * @return void
 	 */
 	protected function note($message)
@@ -329,8 +325,7 @@ class Migrator
 	/**
 	 * Resolve the database connection instance.
 	 *
-	 * @param  string $connection
-	 *
+	 * @param  string  $connection
 	 * @return \Illuminate\Database\Connection
 	 */
 	public function resolveConnection($connection)
@@ -341,13 +336,13 @@ class Migrator
 	/**
 	 * Set the default connection name.
 	 *
-	 * @param  string $name
-	 *
+	 * @param  string  $name
 	 * @return void
 	 */
 	public function setConnection($name)
 	{
-		if (!is_null($name)) {
+		if ( ! is_null($name))
+		{
 			$this->resolver->setDefaultConnection($name);
 		}
 

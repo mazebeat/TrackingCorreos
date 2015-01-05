@@ -1,10 +1,10 @@
 <?php namespace Illuminate\View;
 
 use Closure;
-use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher;
-use Illuminate\Support\Contracts\ArrayableInterface as Arrayable;
+use Illuminate\Container\Container;
 use Illuminate\View\Engines\EngineResolver;
+use Illuminate\Support\Contracts\ArrayableInterface as Arrayable;
 
 class Factory {
 

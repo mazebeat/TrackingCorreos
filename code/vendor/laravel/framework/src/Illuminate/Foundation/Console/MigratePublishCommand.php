@@ -3,8 +3,7 @@
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 
-class MigratePublishCommand extends Command
-{
+class MigratePublishCommand extends Command {
 
 	/**
 	 * The console command name.
@@ -27,10 +26,13 @@ class MigratePublishCommand extends Command
 	 */
 	public function fire()
 	{
-		$published = $this->laravel['migration.publisher']->publish($this->getSourcePath(), $this->laravel['path'] . '/database/migrations');
+		$published = $this->laravel['migration.publisher']->publish(
+			$this->getSourcePath(), $this->laravel['path'].'/database/migrations'
+		);
 
-		foreach ($published as $migration) {
-			$this->line('<info>Published:</info> ' . basename($migration));
+		foreach ($published as $migration)
+		{
+			$this->line('<info>Published:</info> '.basename($migration));
 		}
 	}
 
@@ -41,9 +43,9 @@ class MigratePublishCommand extends Command
 	 */
 	protected function getSourcePath()
 	{
-		$vendor = $this->laravel['path.base'] . '/vendor';
+		$vendor = $this->laravel['path.base'].'/vendor';
 
-		return $vendor . '/' . $this->argument('package') . '/src/migrations';
+		return $vendor.'/'.$this->argument('package').'/src/migrations';
 	}
 
 	/**
@@ -53,7 +55,9 @@ class MigratePublishCommand extends Command
 	 */
 	protected function getArguments()
 	{
-		return array(array('package', InputArgument::REQUIRED, 'The name of the package being published.'),);
+		return array(
+			array('package', InputArgument::REQUIRED, 'The name of the package being published.'),
+		);
 	}
 
 }

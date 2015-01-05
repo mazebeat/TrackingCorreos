@@ -14,6 +14,8 @@
     {{ HTML::style('css/style_responsive.css') }}
     {{ HTML::style('js/ladda/dist/ladda.min.css') }}
     {{ HTML::style('js/pNotify/css/pnotify.custom.min.css') }}
+    {{ HTML::style('js/bootstrap-tour/build/css/bootstrap-tour-standalone.min.css') }}
+    {{--{{ HTML::style('js/bootstrap-tour/build/css/bootstrap-tour.min.css') }}--}}
     {{ HTML::script('js/modernizr.min.js') }}
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -33,9 +35,9 @@
             <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
                 <h2 class="text-center">Tracking de correos</h2>
             </div>
-            <div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
-                {{ HTML::image('http://madrynsite.com.ar/wp-content/uploads/2013/04/Logo_Telefonica_Movistar1.jpg', 'Intelidata', array('class' => 'img-responsive pull-right', 'style' => 'height: 81px;')) }}
-            </div>
+            {{--<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">--}}
+            {{--{{ HTML::image('http://madrynsite.com.ar/wp-content/uploads/2013/04/Logo_Telefonica_Movistar1.jpg', 'Intelidata', array('class' => 'img-responsive pull-right', 'style' => 'height: 81px;')) }}--}}
+            {{--</div> --}}
         </div>
     </div>
     @include('layouts.master_modules.menu')
@@ -51,12 +53,23 @@
 {{ HTML::script('js/jquery-migrate-1.2.1.min.js') }}
 {{ HTML::script('js/jquery.cookies.js') }}
 {{ HTML::script('js/bootstrap.min.js') }}
+{{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>--}}
 {{ HTML::script('js/ladda/dist/spin.min.js') }}
 {{ HTML::script('js/ladda/dist/ladda.min.js') }}
 {{ HTML::script('js/pNotify/js/pnotify.custom.min.js') }}
+{{ HTML::script('js/bootstrap-tour/build/js/bootstrap-tour-standalone.min.js') }}
+{{ HTML::script('https://rawgithub.com/eligrey/FileSaver.js/master/FileSaver.js') }}
+{{--{{ HTML::script('js/bootstrap-tour/build/js/bootstrap-tour.min.js') }}--}}
+
+{{-- AmCharts JS --}}
+{{ HTML::script('js/amcharts/amcharts.js') }}
+{{ HTML::script('js/amcharts/pie.js') }}
+{{ HTML::script('js/amcharts/serial.js') }}
+{{ HTML::script('http://www.amcharts.com/lib/3/exporting/amexport_combined.js') }}
+{{ HTML::script('js/amcharts/lang/es.js') }}
 @yield('file-script')
-@include('layouts.angularjs')
 {{ HTML::script('js/scripts.js') }}
+@include('layouts.angularjs')
 @yield('text-script')
 </body>
 </html>

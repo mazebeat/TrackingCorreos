@@ -1,0 +1,62 @@
+[
+  {
+    "data": {
+      "type": "resumenCorp",
+      "ano": 2014,
+      "campana": {
+        "ciclo": "Ciclo1",
+        "fecha": "1969-12-31T21:00:01.234",
+        "id": 7,
+        "negocio": {
+          "descripcion": "NegocioPruebaDescripcion",
+          "id": 6,
+          "idEmpresa": 4,
+          "nombre": "NegocioPruebaNombre",
+          "rut": "1-1"
+        },
+        "nombre": "CampanaPrueba",
+        "procesoAno": 1,
+        "procesoMes": 1,
+        "qenvios": 1,
+        "qleidos": 1,
+        "qrebotes": 1,
+        "qretenidos": 1
+      },
+      "ciclo": "1",
+      "fechaEnvio": "1969-12-31T21:00:01.234",
+      "id": 3,
+      "mes": 1,
+      "qclick": 1,
+      "qdesinscritos": 1,
+      "qelectronicos": 1,
+      "qemitidos": 1,
+      "qenviosfallidos": 1,
+      "qfisicos": 1,
+      "qleidos": 1,
+      "qnoleidos": 1,
+      "qrebotes": 1,
+      "qretenidos": 1
+    },
+    "ok": true
+  },
+  {
+    "data": "{\"id\" : 5 , \"campana\" : \"CONSUMO EXCEDIDO\"},",
+    "ok": true
+  },
+  {
+    "type": "eUsuario",
+    "apellido": "Pinto",
+    "codigoprivilegio": "ADM",
+    "descripcion": "ADM",
+    "descripcionprivilegio": "Administrador",
+    "empresa": "ENTEL",
+    "idUsuario": 2,
+    "mail": "dpinto@intelidata.cl",
+    "negocio": "CORPORACIONES",
+    "nombre": "Diego",
+    "password": "1234",
+    "rut": "1-1",
+    "tipoUsuario": "0",
+    "usuario": "dpinto"
+  }
+]

@@ -1,7 +1,6 @@
 <?php namespace Illuminate\Foundation\Testing;
 
-abstract class TestCase extends \PHPUnit_Framework_TestCase
-{
+abstract class TestCase extends \PHPUnit_Framework_TestCase {
 
 	use ApplicationTrait, AssertionsTrait;
 
@@ -12,7 +11,8 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
 	 */
 	public function setUp()
 	{
-		if (!$this->app) {
+		if ( ! $this->app)
+		{
 			$this->refreshApplication();
 		}
 	}

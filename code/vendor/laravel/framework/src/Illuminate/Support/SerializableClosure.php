@@ -5,8 +5,7 @@ use Jeremeamia\SuperClosure\SerializableClosure as SuperClosure;
 /**
  * Extends SuperClosure for backwards compatibility.
  */
-class SerializableClosure extends SuperClosure
-{
+class SerializableClosure extends SuperClosure {
 
 	/**
 	 * The code for the closure
@@ -51,7 +50,8 @@ class SerializableClosure extends SuperClosure
 	 */
 	protected function determineCodeAndVariables()
 	{
-		if (!$this->code) {
+		if ( ! $this->code)
+		{
 			list($this->code, $this->variables) = unserialize($this->serialize());
 		}
 	}

@@ -11,6 +11,20 @@
 	return '<button ' . \HTML::attributes($options) . '>' . $name . '</button>' ;
 });
 
+\HTML::macro('activeLink', function($url) {
+	return \Request::is($url) ? 'active current' : '';
+});
+
+\HTML::macro('activeState', function($urls = array()) {
+	if (count($urls) > 0) {
+		for($i=0;$i<count($urls);$i++){
+			if(\Request::path() == $urls[$i]) {
+				echo "active current";
+			}
+		}
+	}
+});
+
 	//<div class="menu">
 	//    <ul>
 	//        {{ \HTML::menu_active('/','Home') }}

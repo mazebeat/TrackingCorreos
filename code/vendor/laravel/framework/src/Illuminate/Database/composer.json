@@ -1,12 +1,7 @@
 {
     "name": "illuminate/database",
     "license": "MIT",
-    "keywords": [
-        "laravel",
-        "database",
-        "sql",
-        "orm"
-    ],
+    "keywords": ["laravel", "database", "sql", "orm"],
     "authors": [
         {
             "name": "Taylor Otwell",

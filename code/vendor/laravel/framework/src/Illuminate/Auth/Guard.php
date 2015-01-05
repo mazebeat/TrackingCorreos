@@ -2,8 +2,8 @@
 
 use Illuminate\Cookie\CookieJar;
 use Illuminate\Events\Dispatcher;
-use Illuminate\Session\Store as SessionStore;
 use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Session\Store as SessionStore;
 use Symfony\Component\HttpFoundation\Response;
 
 class Guard {
@@ -166,7 +166,14 @@ class Guard {
 	{
 		if ($this->loggedOut) return;
 
-		return $this->session->get($this->getName(), $this->getRecallerId());
+		$id = $this->session->get($this->getName(), $this->getRecallerId());
+
+		if (is_null($id) && $this->user())
+		{
+			$id = $this->user()->getAuthIdentifier();
+		}
+
+		return $id;
 	}
 
 	/**

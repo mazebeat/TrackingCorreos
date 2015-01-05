@@ -1,10 +1,9 @@
 <?php namespace Illuminate\Foundation\Providers;
 
-use Illuminate\Foundation\Console\RoutesCommand;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\Console\RoutesCommand;
 
-class RouteListServiceProvider extends ServiceProvider
-{
+class RouteListServiceProvider extends ServiceProvider {
 
 	/**
 	 * Indicates if loading of the provider is deferred.
@@ -20,7 +19,8 @@ class RouteListServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
-		$this->app->bindShared('command.routes', function ($app) {
+		$this->app->bindShared('command.routes', function($app)
+		{
 			return new RoutesCommand($app['router']);
 		});
 

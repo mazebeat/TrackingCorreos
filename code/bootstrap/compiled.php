@@ -48,8 +48,8 @@ class ClassLoader
 }
 namespace Illuminate\Container;
 
-use ArrayAccess;
 use Closure;
+use ArrayAccess;
 use ReflectionClass;
 use ReflectionParameter;
 class Container implements ArrayAccess
@@ -402,28 +402,28 @@ interface ResponsePreparerInterface
 namespace Illuminate\Foundation;
 
 use Closure;
-use Illuminate\Config\FileEnvironmentVariablesLoader;
-use Illuminate\Config\FileLoader;
-use Illuminate\Container\Container;
-use Illuminate\Events\EventServiceProvider;
-use Illuminate\Exception\ExceptionServiceProvider;
-use Illuminate\Filesystem\Filesystem;
+use Stack\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\RoutingServiceProvider;
-use Illuminate\Support\Contracts\ResponsePreparerInterface;
+use Illuminate\Config\FileLoader;
+use Illuminate\Container\Container;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Facade;
-use Stack\Builder;
-use Symfony\Component\Debug\Exception\FatalErrorException;
-use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
-use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
-use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Events\EventServiceProvider;
+use Illuminate\Routing\RoutingServiceProvider;
+use Illuminate\Exception\ExceptionServiceProvider;
+use Illuminate\Config\FileEnvironmentVariablesLoader;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\TerminableInterface;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Debug\Exception\FatalErrorException;
+use Illuminate\Support\Contracts\ResponsePreparerInterface;
+use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class Application extends Container implements HttpKernelInterface, TerminableInterface, ResponsePreparerInterface
 {
-    const VERSION = '4.2.12';
+    const VERSION = '4.2.16';
     protected $booted = false;
     protected $bootingCallbacks = array();
     protected $bootedCallbacks = array();
@@ -695,7 +695,7 @@ class Application extends Container implements HttpKernelInterface, TerminableIn
             $this->boot();
             return $this->dispatch($request);
         } catch (\Exception $e) {
-            if ($this->runningUnitTests()) {
+            if (!$catch || $this->runningUnitTests()) {
                 throw $e;
             }
             return $this['exception']->handleException($e);
@@ -1150,8 +1150,8 @@ class Request extends SymfonyRequest
 }
 namespace Illuminate\Http;
 
-use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 class FrameGuard implements HttpKernelInterface
 {
     protected $app;
@@ -3030,10 +3030,10 @@ abstract class ServiceProvider
 }
 namespace Illuminate\Exception;
 
-use Illuminate\Support\ServiceProvider;
-use Whoops\Handler\JsonResponseHandler;
-use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run;
+use Whoops\Handler\PrettyPageHandler;
+use Whoops\Handler\JsonResponseHandler;
+use Illuminate\Support\ServiceProvider;
 class ExceptionServiceProvider extends ServiceProvider
 {
     public function register()
@@ -3329,8 +3329,9 @@ class Arr
         foreach (explode('.', $key) as $segment) {
             $results = array();
             foreach ($array as $value) {
-                $value = (array) $value;
-                $results[] = $value[$segment];
+                if (array_key_exists($segment, $value = (array) $value)) {
+                    $results[] = $value[$segment];
+                }
             }
             $array = array_values($results);
         }
@@ -3387,6 +3388,22 @@ class Arr
             $array = $array[$segment];
         }
         return $array;
+    }
+    public static function has($array, $key)
+    {
+        if (empty($array) || is_null($key)) {
+            return false;
+        }
+        if (array_key_exists($key, $array)) {
+            return true;
+        }
+        foreach (explode('.', $key) as $segment) {
+            if (!is_array($array) || !array_key_exists($segment, $array)) {
+                return false;
+            }
+            $array = $array[$segment];
+        }
+        return true;
     }
     public static function only($array, $keys)
     {
@@ -3445,18 +3462,24 @@ class Arr
 }
 namespace Illuminate\Support;
 
-use Illuminate\Support\Traits\MacroableTrait;
 use Patchwork\Utf8;
+use Illuminate\Support\Traits\MacroableTrait;
 class Str
 {
     use MacroableTrait;
+    protected static $snakeCache = array();
+    protected static $camelCache = array();
+    protected static $studlyCache = array();
     public static function ascii($value)
     {
         return Utf8::toAscii($value);
     }
     public static function camel($value)
     {
-        return lcfirst(static::studly($value));
+        if (isset(static::$camelCache[$value])) {
+            return static::$camelCache[$value];
+        }
+        return static::$camelCache[$value] = lcfirst(static::studly($value));
     }
     public static function contains($haystack, $needles)
     {
@@ -3535,7 +3558,7 @@ class Str
     public static function quickRandom($length = 16)
     {
         $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        return substr(str_shuffle(str_repeat($pool, 5)), 0, $length);
+        return substr(str_shuffle(str_repeat($pool, $length)), 0, $length);
     }
     public static function upper($value)
     {
@@ -3560,11 +3583,14 @@ class Str
     }
     public static function snake($value, $delimiter = '_')
     {
-        if (ctype_lower($value)) {
-            return $value;
+        if (isset(static::$snakeCache[$value . $delimiter])) {
+            return static::$snakeCache[$value . $delimiter];
         }
-        $replace = '$1' . $delimiter . '$2';
-        return strtolower(preg_replace('/(.)([A-Z])/', $replace, $value));
+        if (!ctype_lower($value)) {
+            $replace = '$1' . $delimiter . '$2';
+            $value = strtolower(preg_replace('/(.)([A-Z])/', $replace, $value));
+        }
+        return static::$snakeCache[$value . $delimiter] = $value;
     }
     public static function startsWith($haystack, $needles)
     {
@@ -3577,8 +3603,11 @@ class Str
     }
     public static function studly($value)
     {
+        if (isset(static::$studlyCache[$value])) {
+            return static::$studlyCache[$value];
+        }
         $value = ucwords(str_replace(array('-', '_'), ' ', $value));
-        return str_replace(' ', '', $value);
+        return static::$studlyCache[$value] = str_replace(' ', '', $value);
     }
 }
 namespace Symfony\Component\Debug;
@@ -3794,8 +3823,8 @@ class ErrorHandler extends DebugErrorHandler
 }
 namespace Illuminate\Config;
 
-use ArrayAccess;
 use Closure;
+use ArrayAccess;
 use Illuminate\Support\NamespacedItemResolver;
 class Repository extends NamespacedItemResolver implements ArrayAccess
 {
@@ -4199,6 +4228,10 @@ class Filesystem
     {
         return copy($path, $target);
     }
+    public function name($path)
+    {
+        return pathinfo($path, PATHINFO_FILENAME);
+    }
     public function extension($path)
     {
         return pathinfo($path, PATHINFO_EXTENSION);
@@ -4472,9 +4505,9 @@ class CookieServiceProvider extends ServiceProvider
 }
 namespace Illuminate\Database;
 
-use Illuminate\Database\Connectors\ConnectionFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Connectors\ConnectionFactory;
 class DatabaseServiceProvider extends ServiceProvider
 {
     public function boot()
@@ -4553,12 +4586,12 @@ class SessionServiceProvider extends ServiceProvider
 }
 namespace Illuminate\View;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\ViewErrorBag;
-use Illuminate\View\Compilers\BladeCompiler;
+use Illuminate\View\Engines\PhpEngine;
+use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Engines\CompilerEngine;
 use Illuminate\View\Engines\EngineResolver;
-use Illuminate\View\Engines\PhpEngine;
+use Illuminate\View\Compilers\BladeCompiler;
 class ViewServiceProvider extends ServiceProvider
 {
     public function register()
@@ -4643,14 +4676,14 @@ interface RouteFiltererInterface
 namespace Illuminate\Routing;
 
 use Closure;
-use Illuminate\Container\Container;
-use Illuminate\Events\Dispatcher;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Events\Dispatcher;
+use Illuminate\Container\Container;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
 class Router implements HttpKernelInterface, RouteFiltererInterface
 {
     protected $events;
@@ -5304,10 +5337,10 @@ class Router implements HttpKernelInterface, RouteFiltererInterface
 namespace Illuminate\Routing;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Matching\UriValidator;
 use Illuminate\Routing\Matching\HostValidator;
 use Illuminate\Routing\Matching\MethodValidator;
 use Illuminate\Routing\Matching\SchemeValidator;
-use Illuminate\Routing\Matching\UriValidator;
 use Symfony\Component\Routing\Route as SymfonyRoute;
 class Route
 {
@@ -5636,13 +5669,13 @@ class Route
 }
 namespace Illuminate\Routing;
 
-use ArrayIterator;
 use Countable;
+use ArrayIterator;
+use IteratorAggregate;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use IteratorAggregate;
-use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 class RouteCollection implements Countable, IteratorAggregate
 {
     protected $routes = array();
@@ -5757,8 +5790,8 @@ class RouteCollection implements Countable, IteratorAggregate
 namespace Illuminate\Routing;
 
 use Closure;
-use Illuminate\Container\Container;
 use Illuminate\Http\Request;
+use Illuminate\Container\Container;
 class ControllerDispatcher
 {
     protected $filterer;
@@ -6026,7 +6059,7 @@ class UrlGenerator
     }
     public function isValidUrl($path)
     {
-        if (starts_with($path, array('#', '//', 'mailto:', 'tel:'))) {
+        if (starts_with($path, array('#', '//', 'mailto:', 'tel:', 'http://', 'https://'))) {
             return true;
         }
         return filter_var($path, FILTER_VALIDATE_URL) !== false;
@@ -6270,27 +6303,27 @@ class Dispatcher
 }
 namespace Illuminate\Database\Eloquent;
 
+use DateTime;
 use ArrayAccess;
 use Carbon\Carbon;
-use DateTime;
-use Illuminate\Database\ConnectionResolverInterface as Resolver;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Illuminate\Database\Eloquent\Relations\Pivot;
-use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Database\Query\Builder as QueryBuilder;
-use Illuminate\Events\Dispatcher;
-use Illuminate\Support\Contracts\ArrayableInterface;
-use Illuminate\Support\Contracts\JsonableInterface;
-use JsonSerializable;
 use LogicException;
+use JsonSerializable;
+use Illuminate\Events\Dispatcher;
+use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Support\Contracts\JsonableInterface;
+use Illuminate\Support\Contracts\ArrayableInterface;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Query\Builder as QueryBuilder;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\ConnectionResolverInterface as Resolver;
 abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterface, JsonSerializable
 {
     protected $connection;
@@ -6482,6 +6515,11 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
         $instance->setConnection($connection);
         return $instance->newQuery();
     }
+    public static function onWriteConnection()
+    {
+        $instance = new static();
+        return $instance->newQuery()->useWritePdo();
+    }
     public static function all($columns = array('*'))
     {
         $instance = new static();
@@ -6544,7 +6582,7 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
     public function belongsTo($related, $foreignKey = null, $otherKey = null, $relation = null)
     {
         if (is_null($relation)) {
-            list(, $caller) = debug_backtrace(false);
+            list(, $caller) = debug_backtrace(false, 2);
             $relation = $caller['function'];
         }
         if (is_null($foreignKey)) {
@@ -6558,7 +6596,7 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
     public function morphTo($name = null, $type = null, $id = null)
     {
         if (is_null($name)) {
-            list(, $caller) = debug_backtrace(false);
+            list(, $caller) = debug_backtrace(false, 2);
             $name = snake_case($caller['function']);
         }
         list($type, $id) = $this->getMorphs($name, $type, $id);
@@ -6809,7 +6847,7 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
             $this->touchOwners();
         }
     }
-    protected function performUpdate(Builder $query, array $options)
+    protected function performUpdate(Builder $query, array $options = array())
     {
         $dirty = $this->getDirty();
         if (count($dirty) > 0) {
@@ -6827,7 +6865,7 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
         }
         return true;
     }
-    protected function performInsert(Builder $query, array $options)
+    protected function performInsert(Builder $query, array $options = array())
     {
         if ($this->fireModelEvent('creating') === false) {
             return false;
@@ -7047,6 +7085,10 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
     {
         $this->fillable = $fillable;
         return $this;
+    }
+    public function getGuarded()
+    {
+        return $this->guarded;
     }
     public function guard(array $guarded)
     {
@@ -7489,8 +7531,8 @@ interface JsonableInterface
 }
 namespace Illuminate\Database;
 
-use Illuminate\Database\Connectors\ConnectionFactory;
 use Illuminate\Support\Str;
+use Illuminate\Database\Connectors\ConnectionFactory;
 class DatabaseManager implements ConnectionResolverInterface
 {
     protected $app;
@@ -7620,12 +7662,12 @@ interface ConnectionResolverInterface
 }
 namespace Illuminate\Database\Connectors;
 
+use PDO;
 use Illuminate\Container\Container;
 use Illuminate\Database\MySqlConnection;
-use Illuminate\Database\PostgresConnection;
 use Illuminate\Database\SQLiteConnection;
+use Illuminate\Database\PostgresConnection;
 use Illuminate\Database\SqlServerConnection;
-use PDO;
 class ConnectionFactory
 {
     protected $container;
@@ -7731,8 +7773,8 @@ interface SessionInterface extends BaseSessionInterface
 }
 namespace Illuminate\Session;
 
-use Carbon\Carbon;
 use Closure;
+use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -8292,8 +8334,8 @@ class CookieJar
 }
 namespace Illuminate\Cookie;
 
-use Illuminate\Encryption\DecryptException;
 use Illuminate\Encryption\Encrypter;
+use Illuminate\Encryption\DecryptException;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -8371,8 +8413,8 @@ class Queue implements HttpKernelInterface
 }
 namespace Illuminate\Encryption;
 
-use Symfony\Component\Security\Core\Util\SecureRandom;
 use Symfony\Component\Security\Core\Util\StringUtils;
+use Symfony\Component\Security\Core\Util\SecureRandom;
 class Encrypter
 {
     protected $key;
@@ -8381,7 +8423,7 @@ class Encrypter
     protected $block = 16;
     public function __construct($key)
     {
-        $this->key = $key;
+        $this->key = (string) $key;
     }
     public function encrypt($value)
     {
@@ -8470,7 +8512,7 @@ class Encrypter
     }
     public function setKey($key)
     {
-        $this->key = $key;
+        $this->key = (string) $key;
     }
     public function setCipher($cipher)
     {
@@ -8498,8 +8540,8 @@ class Log extends Facade
 }
 namespace Illuminate\Log;
 
-use Illuminate\Support\ServiceProvider;
 use Monolog\Logger;
+use Illuminate\Support\ServiceProvider;
 class LogServiceProvider extends ServiceProvider
 {
     protected $defer = true;
@@ -8523,13 +8565,13 @@ namespace Illuminate\Log;
 
 use Closure;
 use Illuminate\Events\Dispatcher;
-use Illuminate\Support\Contracts\ArrayableInterface;
-use Illuminate\Support\Contracts\JsonableInterface;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger as MonologLogger;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\ErrorLogHandler;
 use Monolog\Handler\RotatingFileHandler;
-use Monolog\Handler\StreamHandler;
-use Monolog\Logger as MonologLogger;
+use Illuminate\Support\Contracts\JsonableInterface;
+use Illuminate\Support\Contracts\ArrayableInterface;
 class Writer
 {
     protected $monolog;
@@ -8651,8 +8693,8 @@ namespace Monolog;
 
 use Monolog\Handler\HandlerInterface;
 use Monolog\Handler\StreamHandler;
-use Psr\Log\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
+use Psr\Log\InvalidArgumentException;
 class Logger implements LoggerInterface
 {
     const DEBUG = 100;
@@ -8675,20 +8717,13 @@ class Logger implements LoggerInterface
         $this->handlers = $handlers;
         $this->processors = $processors;
     }
-    public static function getLevels()
-    {
-        return array_flip(static::$levels);
-    }
-    public static function toMonologLevel($level)
-    {
-        if (is_string($level) && defined(__CLASS__ . '::' . strtoupper($level))) {
-            return constant(__CLASS__ . '::' . strtoupper($level));
-        }
-        return $level;
-    }
     public function getName()
     {
         return $this->name;
+    }
+    public function pushHandler(HandlerInterface $handler)
+    {
+        array_unshift($this->handlers, $handler);
     }
     public function popHandler()
     {
@@ -8719,22 +8754,15 @@ class Logger implements LoggerInterface
     {
         return $this->processors;
     }
-    public function addDebug($message, array $context = array())
-    {
-        return $this->addRecord(static::DEBUG, $message, $context);
-    }
     public function addRecord($level, $message, array $context = array())
     {
         if (!$this->handlers) {
             $this->pushHandler(new StreamHandler('php://stderr', static::DEBUG));
         }
-        if (!static::$timezone) {
-            static::$timezone = new \DateTimeZone(date_default_timezone_get() ?: 'UTC');
-        }
-        $record = array('message' => (string) $message, 'context' => $context, 'level' => $level, 'level_name' => static::getLevelName($level), 'channel' => $this->name, 'datetime' => \DateTime::createFromFormat('U.u', sprintf('%.6F', microtime(true)), static::$timezone)->setTimezone(static::$timezone), 'extra' => array());
+        $levelName = static::getLevelName($level);
         $handlerKey = null;
         foreach ($this->handlers as $key => $handler) {
-            if ($handler->isHandling($record)) {
+            if ($handler->isHandling(array('level' => $level))) {
                 $handlerKey = $key;
                 break;
             }
@@ -8742,6 +8770,10 @@ class Logger implements LoggerInterface
         if (null === $handlerKey) {
             return false;
         }
+        if (!static::$timezone) {
+            static::$timezone = new \DateTimeZone(date_default_timezone_get() ?: 'UTC');
+        }
+        $record = array('message' => (string) $message, 'context' => $context, 'level' => $level, 'level_name' => $levelName, 'channel' => $this->name, 'datetime' => \DateTime::createFromFormat('U.u', sprintf('%.6F', microtime(true)), static::$timezone)->setTimezone(static::$timezone), 'extra' => array());
         foreach ($this->processors as $processor) {
             $record = call_user_func($processor, $record);
         }
@@ -8750,16 +8782,9 @@ class Logger implements LoggerInterface
         }
         return true;
     }
-    public function pushHandler(HandlerInterface $handler)
+    public function addDebug($message, array $context = array())
     {
-        array_unshift($this->handlers, $handler);
-    }
-    public static function getLevelName($level)
-    {
-        if (!isset(static::$levels[$level])) {
-            throw new InvalidArgumentException('Level "' . $level . '" is not defined, use one of: ' . implode(', ', array_keys(static::$levels)));
-        }
-        return static::$levels[$level];
+        return $this->addRecord(static::DEBUG, $message, $context);
     }
     public function addInfo($message, array $context = array())
     {
@@ -8788,6 +8813,24 @@ class Logger implements LoggerInterface
     public function addEmergency($message, array $context = array())
     {
         return $this->addRecord(static::EMERGENCY, $message, $context);
+    }
+    public static function getLevels()
+    {
+        return array_flip(static::$levels);
+    }
+    public static function getLevelName($level)
+    {
+        if (!isset(static::$levels[$level])) {
+            throw new InvalidArgumentException('Level "' . $level . '" is not defined, use one of: ' . implode(', ', array_keys(static::$levels)));
+        }
+        return static::$levels[$level];
+    }
+    public static function toMonologLevel($level)
+    {
+        if (is_string($level) && defined(__CLASS__ . '::' . strtoupper($level))) {
+            return constant(__CLASS__ . '::' . strtoupper($level));
+        }
+        return $level;
     }
     public function isHandling($level)
     {
@@ -8871,9 +8914,9 @@ interface LoggerInterface
 }
 namespace Monolog\Handler;
 
+use Monolog\Logger;
 use Monolog\Formatter\FormatterInterface;
 use Monolog\Formatter\LineFormatter;
-use Monolog\Logger;
 abstract class AbstractHandler implements HandlerInterface
 {
     protected $level = Logger::DEBUG;
@@ -8895,6 +8938,10 @@ abstract class AbstractHandler implements HandlerInterface
             $this->handle($record);
         }
     }
+    public function close()
+    {
+        
+    }
     public function pushProcessor($callback)
     {
         if (!is_callable($callback)) {
@@ -8910,6 +8957,11 @@ abstract class AbstractHandler implements HandlerInterface
         }
         return array_shift($this->processors);
     }
+    public function setFormatter(FormatterInterface $formatter)
+    {
+        $this->formatter = $formatter;
+        return $this;
+    }
     public function getFormatter()
     {
         if (!$this->formatter) {
@@ -8917,32 +8969,23 @@ abstract class AbstractHandler implements HandlerInterface
         }
         return $this->formatter;
     }
-    public function setFormatter(FormatterInterface $formatter)
-    {
-        $this->formatter = $formatter;
-        return $this;
-    }
-    protected function getDefaultFormatter()
-    {
-        return new LineFormatter();
-    }
-    public function getLevel()
-    {
-        return $this->level;
-    }
     public function setLevel($level)
     {
         $this->level = Logger::toMonologLevel($level);
         return $this;
     }
-    public function getBubble()
+    public function getLevel()
     {
-        return $this->bubble;
+        return $this->level;
     }
     public function setBubble($bubble)
     {
         $this->bubble = $bubble;
         return $this;
+    }
+    public function getBubble()
+    {
+        return $this->bubble;
     }
     public function __destruct()
     {
@@ -8952,9 +8995,9 @@ abstract class AbstractHandler implements HandlerInterface
             
         }
     }
-    public function close()
+    protected function getDefaultFormatter()
     {
-        
+        return new LineFormatter();
     }
 }
 namespace Monolog\Handler;
@@ -8971,6 +9014,7 @@ abstract class AbstractProcessingHandler extends AbstractHandler
         $this->write($record);
         return false === $this->bubble;
     }
+    protected abstract function write(array $record);
     protected function processRecord(array $record)
     {
         if ($this->processors) {
@@ -8980,7 +9024,6 @@ abstract class AbstractProcessingHandler extends AbstractHandler
         }
         return $record;
     }
-    protected abstract function write(array $record);
 }
 namespace Monolog\Handler;
 
@@ -8989,9 +9032,9 @@ class StreamHandler extends AbstractProcessingHandler
 {
     protected $stream;
     protected $url;
+    private $errorMessage;
     protected $filePermission;
     protected $useLocking;
-    private $errorMessage;
     public function __construct($stream, $level = Logger::DEBUG, $bubble = true, $filePermission = null, $useLocking = false)
     {
         parent::__construct($level, $bubble);
@@ -9063,14 +9106,12 @@ class RotatingFileHandler extends StreamHandler
         $this->dateFormat = 'Y-m-d';
         parent::__construct($this->getTimedFilename(), $level, $bubble, $filePermission, $useLocking);
     }
-    protected function getTimedFilename()
+    public function close()
     {
-        $fileInfo = pathinfo($this->filename);
-        $timedFilename = str_replace(array('{filename}', '{date}'), array($fileInfo['filename'], date($this->dateFormat)), $fileInfo['dirname'] . '/' . $this->filenameFormat);
-        if (!empty($fileInfo['extension'])) {
-            $timedFilename .= '.' . $fileInfo['extension'];
+        parent::close();
+        if (true === $this->mustRotate) {
+            $this->rotate();
         }
-        return $timedFilename;
     }
     public function setFilenameFormat($filenameFormat, $dateFormat)
     {
@@ -9079,12 +9120,16 @@ class RotatingFileHandler extends StreamHandler
         $this->url = $this->getTimedFilename();
         $this->close();
     }
-    public function close()
+    protected function write(array $record)
     {
-        parent::close();
-        if (true === $this->mustRotate) {
-            $this->rotate();
+        if (null === $this->mustRotate) {
+            $this->mustRotate = !file_exists($this->url);
         }
+        if ($this->nextRotation < $record['datetime']) {
+            $this->mustRotate = true;
+            $this->close();
+        }
+        parent::write($record);
     }
     protected function rotate()
     {
@@ -9106,6 +9151,15 @@ class RotatingFileHandler extends StreamHandler
             }
         }
     }
+    protected function getTimedFilename()
+    {
+        $fileInfo = pathinfo($this->filename);
+        $timedFilename = str_replace(array('{filename}', '{date}'), array($fileInfo['filename'], date($this->dateFormat)), $fileInfo['dirname'] . '/' . $this->filenameFormat);
+        if (!empty($fileInfo['extension'])) {
+            $timedFilename .= '.' . $fileInfo['extension'];
+        }
+        return $timedFilename;
+    }
     protected function getGlobPattern()
     {
         $fileInfo = pathinfo($this->filename);
@@ -9114,17 +9168,6 @@ class RotatingFileHandler extends StreamHandler
             $glob .= '.' . $fileInfo['extension'];
         }
         return $glob;
-    }
-    protected function write(array $record)
-    {
-        if (null === $this->mustRotate) {
-            $this->mustRotate = !file_exists($this->url);
-        }
-        if ($this->nextRotation < $record['datetime']) {
-            $this->mustRotate = true;
-            $this->close();
-        }
-        parent::write($record);
     }
 }
 namespace Monolog\Handler;
@@ -9181,9 +9224,9 @@ class SymfonyDisplayer implements ExceptionDisplayerInterface
 namespace Illuminate\Exception;
 
 use Exception;
+use Whoops\Run;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
-use Whoops\Run;
 class WhoopsDisplayer implements ExceptionDisplayerInterface
 {
     protected $whoops;
@@ -9204,10 +9247,10 @@ namespace Illuminate\Exception;
 
 use Closure;
 use ErrorException;
-use Illuminate\Support\Contracts\ResponsePreparerInterface;
 use ReflectionFunction;
-use Symfony\Component\Debug\Exception\FatalErrorException as FatalError;
+use Illuminate\Support\Contracts\ResponsePreparerInterface;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use Symfony\Component\Debug\Exception\FatalErrorException as FatalError;
 class Handler
 {
     protected $responsePreparer;
@@ -9505,10 +9548,10 @@ interface MessageProviderInterface
 namespace Illuminate\Support;
 
 use Countable;
-use Illuminate\Support\Contracts\ArrayableInterface;
-use Illuminate\Support\Contracts\JsonableInterface;
-use Illuminate\Support\Contracts\MessageProviderInterface;
 use JsonSerializable;
+use Illuminate\Support\Contracts\JsonableInterface;
+use Illuminate\Support\Contracts\ArrayableInterface;
+use Illuminate\Support\Contracts\MessageProviderInterface;
 class MessageBag implements ArrayableInterface, Countable, JsonableInterface, MessageProviderInterface, JsonSerializable
 {
     protected $messages = array();
@@ -9643,11 +9686,11 @@ namespace Illuminate\View;
 
 use ArrayAccess;
 use Closure;
-use Illuminate\Support\Contracts\ArrayableInterface as Arrayable;
-use Illuminate\Support\Contracts\MessageProviderInterface;
-use Illuminate\Support\Contracts\RenderableInterface as Renderable;
 use Illuminate\Support\MessageBag;
 use Illuminate\View\Engines\EngineInterface;
+use Illuminate\Support\Contracts\MessageProviderInterface;
+use Illuminate\Support\Contracts\ArrayableInterface as Arrayable;
+use Illuminate\Support\Contracts\RenderableInterface as Renderable;
 class View implements ArrayAccess, Renderable
 {
     protected $factory;

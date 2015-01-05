@@ -1,7 +1,7 @@
 <?php namespace Illuminate\Cache\Console;
 
-use Illuminate\Cache\CacheManager;
 use Illuminate\Console\Command;
+use Illuminate\Cache\CacheManager;
 use Illuminate\Filesystem\Filesystem;
 
 class ClearCommand extends Command {
@@ -56,6 +56,8 @@ class ClearCommand extends Command {
 	 */
 	public function fire()
 	{
+		$this->laravel['events']->fire('cache:clearing');
+
 		$this->cache->flush();
 
 		$this->files->delete($this->laravel['config']['app.manifest'].'/services.json');

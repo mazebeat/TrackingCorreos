@@ -1,11 +1,10 @@
 <?php namespace Illuminate\Foundation\Console;
 
+use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Str;
 
-class KeyGenerateCommand extends Command
-{
+class KeyGenerateCommand extends Command {
 
 	/**
 	 * The console command name.
@@ -24,8 +23,7 @@ class KeyGenerateCommand extends Command
 	/**
 	 * Create a new key generator command.
 	 *
-	 * @param  \Illuminate\Filesystem\Filesystem $files
-	 *
+	 * @param  \Illuminate\Filesystem\Filesystem  $files
 	 * @return void
 	 */
 	public function __construct(Filesystem $files)
@@ -62,9 +60,9 @@ class KeyGenerateCommand extends Command
 	 */
 	protected function getKeyFile()
 	{
-		$env = $this->option('env') ? $this->option('env') . '/' : '';
+		$env = $this->option('env') ? $this->option('env').'/' : '';
 
-		$contents = $this->files->get($path = $this->laravel['path'] . "/config/{$env}app.php");
+		$contents = $this->files->get($path = $this->laravel['path']."/config/{$env}app.php");
 
 		return array($path, $contents);
 	}

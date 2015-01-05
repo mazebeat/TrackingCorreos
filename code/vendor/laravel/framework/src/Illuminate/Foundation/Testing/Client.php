@@ -1,8 +1,8 @@
 <?php namespace Illuminate\Foundation\Testing;
 
 use Illuminate\Foundation\Application;
-use Symfony\Component\BrowserKit\Request as DomRequest;
 use Symfony\Component\HttpKernel\Client as BaseClient;
+use Symfony\Component\BrowserKit\Request as DomRequest;
 
 class Client extends BaseClient {
 

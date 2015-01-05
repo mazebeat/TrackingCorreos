@@ -2,33 +2,32 @@
 
 use Closure;
 
-trait ConfirmableTrait
-{
+trait ConfirmableTrait {
 
 	/**
 	 * Confirm before proceeding with the action
 	 *
-	 * @param  string   $warning
-	 * @param  \Closure $callback
-	 *
+	 * @param  string    $warning
+	 * @param  \Closure  $callback
 	 * @return bool
 	 */
 	public function confirmToProceed($warning = 'Application In Production!', Closure $callback = null)
 	{
 		$shouldConfirm = $callback ?: $this->getDefaultConfirmCallback();
 
-		if (call_user_func($shouldConfirm)) {
-			if ($this->option('force'))
-				return true;
+		if (call_user_func($shouldConfirm))
+		{
+			if ($this->option('force')) return true;
 
 			$this->comment(str_repeat('*', strlen($warning) + 12));
-			$this->comment('*     ' . $warning . '     *');
+			$this->comment('*     '.$warning.'     *');
 			$this->comment(str_repeat('*', strlen($warning) + 12));
 			$this->output->writeln('');
 
 			$confirmed = $this->confirm('Do you really wish to run this command?');
 
-			if (!$confirmed) {
+			if ( ! $confirmed)
+			{
 				$this->comment('Command Cancelled!');
 
 				return false;
@@ -45,9 +44,7 @@ trait ConfirmableTrait
 	 */
 	protected function getDefaultConfirmCallback()
 	{
-		return function () {
-			return $this->getLaravel()->environment() == 'production';
-		};
+		return function() { return $this->getLaravel()->environment() == 'production'; };
 	}
 
 }

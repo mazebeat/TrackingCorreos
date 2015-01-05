@@ -3,8 +3,7 @@
 /**
  * @see \Illuminate\Auth\Reminders\PasswordBroker
  */
-class Password extends Facade
-{
+class Password extends Facade {
 
 	/**
 	 * Constant representing a successfully sent reminder.
@@ -46,9 +45,6 @@ class Password extends Facade
 	 *
 	 * @return string
 	 */
-	protected static function getFacadeAccessor()
-	{
-		return 'auth.reminder';
-	}
+	protected static function getFacadeAccessor() { return 'auth.reminder'; }
 
 }

@@ -1,9 +1,9 @@
 <?php namespace Illuminate\Mail\Transport;
 
-use GuzzleHttp\Client;
-use Swift_Events_EventListener;
-use Swift_Mime_Message;
 use Swift_Transport;
+use GuzzleHttp\Client;
+use Swift_Mime_Message;
+use Swift_Events_EventListener;
 
 class MandrillTransport implements Swift_Transport {
 

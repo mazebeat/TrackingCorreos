@@ -3,8 +3,7 @@
 use Closure;
 use Illuminate\Container\Container;
 
-class SyncJob extends Job
-{
+class SyncJob extends Job {
 
 	/**
 	 * The class name of the job.
@@ -23,16 +22,15 @@ class SyncJob extends Job
 	/**
 	 * Create a new job instance.
 	 *
-	 * @param  \Illuminate\Container\Container $container
-	 * @param  string                          $job
-	 * @param  string                          $data
-	 *
+	 * @param  \Illuminate\Container\Container  $container
+	 * @param  string  $job
+	 * @param  string  $data
 	 * @return void
 	 */
 	public function __construct(Container $container, $job, $data = '')
 	{
-		$this->job       = $job;
-		$this->data      = $data;
+		$this->job = $job;
+		$this->data = $data;
 		$this->container = $container;
 	}
 
@@ -45,9 +43,12 @@ class SyncJob extends Job
 	{
 		$data = json_decode($this->data, true);
 
-		if ($this->job instanceof Closure) {
+		if ($this->job instanceof Closure)
+		{
 			call_user_func($this->job, $this, $data);
-		} else {
+		}
+		else
+		{
 			$this->resolveAndFire(array('job' => $this->job, 'data' => $data));
 		}
 	}
@@ -65,8 +66,7 @@ class SyncJob extends Job
 	/**
 	 * Release the job back into the queue.
 	 *
-	 * @param  int $delay
-	 *
+	 * @param  int   $delay
 	 * @return void
 	 */
 	public function release($delay = 0)

@@ -1,8 +1,8 @@
 <?php namespace Illuminate\Auth\Reminders;
 
 use Closure;
-use Illuminate\Auth\UserProviderInterface;
 use Illuminate\Mail\Mailer;
+use Illuminate\Auth\UserProviderInterface;
 
 class PasswordBroker {
 

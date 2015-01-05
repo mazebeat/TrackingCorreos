@@ -3,8 +3,7 @@
 use Boris\Boris;
 use Illuminate\Console\Command;
 
-class TinkerCommand extends Command
-{
+class TinkerCommand extends Command {
 
 	/**
 	 * The console command name.
@@ -27,9 +26,12 @@ class TinkerCommand extends Command
 	 */
 	public function fire()
 	{
-		if ($this->supportsBoris()) {
+		if ($this->supportsBoris())
+		{
 			$this->runBorisShell();
-		} else {
+		}
+		else
+		{
 			$this->comment('Full REPL not supported. Falling back to simple shell.');
 
 			$this->runPlainShell();
@@ -55,14 +57,11 @@ class TinkerCommand extends Command
 	 */
 	protected function setupBorisErrorHandling()
 	{
-		restore_error_handler();
-		restore_exception_handler();
+		restore_error_handler(); restore_exception_handler();
 
 		$this->laravel->make('artisan')->setCatchExceptions(false);
 
-		$this->laravel->error(function () {
-				return '';
-			});
+		$this->laravel->error(function() { return ''; });
 	}
 
 	/**
@@ -74,22 +73,26 @@ class TinkerCommand extends Command
 	{
 		$input = $this->prompt();
 
-		while ($input != 'quit') {
+		while ($input != 'quit')
+		{
 			// We will wrap the execution of the command in a try / catch block so we
 			// can easily display the errors in a convenient way instead of having
 			// them bubble back out to the CLI and stop the entire command loop.
-			try {
-				if (starts_with($input, 'dump ')) {
-					$input = 'var_dump(' . substr($input, 5) . ');';
+			try
+			{
+				if (starts_with($input, 'dump '))
+				{
+					$input = 'var_dump('.substr($input, 5).');';
 				}
 
 				eval($input);
 			}
 
-				// If an exception occurs, we will just display the message and keep this
-				// loop going so we can keep executing commands. However, when a fatal
-				// error occurs, we have no choice but to bail out of this routines.
-			catch (\Exception $e) {
+			// If an exception occurs, we will just display the message and keep this
+			// loop going so we can keep executing commands. However, when a fatal
+			// error occurs, we have no choice but to bail out of this routines.
+			catch (\Exception $e)
+			{
 				$this->error($e->getMessage());
 			}
 

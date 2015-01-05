@@ -1,10 +1,9 @@
 <?php namespace Illuminate\Foundation\Providers;
 
-use Illuminate\Foundation\Console\CommandMakeCommand;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\Console\CommandMakeCommand;
 
-class CommandCreatorServiceProvider extends ServiceProvider
-{
+class CommandCreatorServiceProvider extends ServiceProvider {
 
 	/**
 	 * Indicates if loading of the provider is deferred.
@@ -20,7 +19,8 @@ class CommandCreatorServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
-		$this->app->bindShared('command.command.make', function ($app) {
+		$this->app->bindShared('command.command.make', function($app)
+		{
 			return new CommandMakeCommand($app['files']);
 		});
 
@@ -34,7 +34,9 @@ class CommandCreatorServiceProvider extends ServiceProvider
 	 */
 	public function provides()
 	{
-		return array('command.command.make',);
+		return array(
+			'command.command.make',
+		);
 	}
 
 }

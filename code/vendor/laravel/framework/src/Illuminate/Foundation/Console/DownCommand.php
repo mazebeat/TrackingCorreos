@@ -2,8 +2,7 @@
 
 use Illuminate\Console\Command;
 
-class DownCommand extends Command
-{
+class DownCommand extends Command {
 
 	/**
 	 * The console command name.
@@ -26,7 +25,7 @@ class DownCommand extends Command
 	 */
 	public function fire()
 	{
-		touch($this->laravel['config']['app.manifest'] . '/down');
+		touch($this->laravel['config']['app.manifest'].'/down');
 
 		$this->comment('Application is now in maintenance mode.');
 	}

@@ -23,120 +23,118 @@ use Monolog\Logger;
  */
 class FilterHandler extends AbstractHandler
 {
-	/**
-	 * Handler or factory callable($record, $this)
-	 *
-	 * @var callable|\Monolog\Handler\HandlerInterface
-	 */
-	protected $handler;
+    /**
+     * Handler or factory callable($record, $this)
+     *
+     * @var callable|\Monolog\Handler\HandlerInterface
+     */
+    protected $handler;
 
-	/**
-	 * Minimum level for logs that are passes to handler
-	 *
-	 * @var int[]
-	 */
-	protected $acceptedLevels;
+    /**
+     * Minimum level for logs that are passes to handler
+     *
+     * @var int[]
+     */
+    protected $acceptedLevels;
 
-	/**
-	 * Whether the messages that are handled can bubble up the stack or not
-	 *
-	 * @var Boolean
-	 */
-	protected $bubble;
+    /**
+     * Whether the messages that are handled can bubble up the stack or not
+     *
+     * @var Boolean
+     */
+    protected $bubble;
 
-	/**
-	 * @param callable|HandlerInterface $handler        Handler or factory callable($record, $this).
-	 * @param int|array                 $minLevelOrList A list of levels to accept or a minimum level if maxLevel
-	 *                                                  is provided
-	 * @param int                       $maxLevel       Maximum level to accept, only used if $minLevelOrList is
-	 *                                                  not an array
-	 * @param Boolean                   $bubble         Whether the messages that are handled can bubble up the
-	 *                                                  stack or not
-	 */
-	public function __construct($handler, $minLevelOrList = Logger::DEBUG, $maxLevel = Logger::EMERGENCY, $bubble = true)
-	{
-		$this->handler = $handler;
-		$this->bubble  = $bubble;
-		$this->setAcceptedLevels($minLevelOrList, $maxLevel);
-	}
+    /**
+     * @param callable|HandlerInterface $handler        Handler or factory callable($record, $this).
+     * @param int|array                 $minLevelOrList A list of levels to accept or a minimum level if maxLevel is provided
+     * @param int                       $maxLevel       Maximum level to accept, only used if $minLevelOrList is not an array
+     * @param Boolean                   $bubble         Whether the messages that are handled can bubble up the stack or not
+     */
+    public function __construct($handler, $minLevelOrList = Logger::DEBUG, $maxLevel = Logger::EMERGENCY, $bubble = true)
+    {
+        $this->handler  = $handler;
+        $this->bubble   = $bubble;
+        $this->setAcceptedLevels($minLevelOrList, $maxLevel);
 
-	/**
-	 * @return array
-	 */
-	public function getAcceptedLevels()
-	{
-		return array_flip($this->acceptedLevels);
-	}
+        if (!$this->handler instanceof HandlerInterface && !is_callable($this->handler)) {
+            throw new \RuntimeException("The given handler (".json_encode($this->handler).") is not a callable nor a Monolog\Handler\HandlerInterface object");
+        }
+    }
 
-	/**
-	 * @param int|array $minLevelOrList A list of levels to accept or a minimum level if maxLevel is provided
-	 * @param int       $maxLevel       Maximum level to accept, only used if $minLevelOrList is not an array
-	 */
-	public function setAcceptedLevels($minLevelOrList = Logger::DEBUG, $maxLevel = Logger::EMERGENCY)
-	{
-		if (is_array($minLevelOrList)) {
-			$acceptedLevels = array_map('Monolog\Logger::toMonologLevel', $minLevelOrList);
-		} else {
-			$minLevelOrList = Logger::toMonologLevel($minLevelOrList);
-			$maxLevel       = Logger::toMonologLevel($maxLevel);
-			$acceptedLevels = array_values(array_filter(Logger::getLevels(), function ($level) use ($minLevelOrList, $maxLevel) {
-				return $level >= $minLevelOrList && $level <= $maxLevel;
-			}));
-		}
-		$this->acceptedLevels = array_flip($acceptedLevels);
-	}
+    /**
+     * @return array
+     */
+    public function getAcceptedLevels()
+    {
+        return array_flip($this->acceptedLevels);
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function handle(array $record)
-	{
-		if (!$this->isHandling($record)) {
-			return false;
-		}
+    /**
+     * @param int|array $minLevelOrList A list of levels to accept or a minimum level if maxLevel is provided
+     * @param int       $maxLevel       Maximum level to accept, only used if $minLevelOrList is not an array
+     */
+    public function setAcceptedLevels($minLevelOrList = Logger::DEBUG, $maxLevel = Logger::EMERGENCY)
+    {
+        if (is_array($minLevelOrList)) {
+            $acceptedLevels = array_map('Monolog\Logger::toMonologLevel', $minLevelOrList);
+        } else {
+            $minLevelOrList = Logger::toMonologLevel($minLevelOrList);
+            $maxLevel = Logger::toMonologLevel($maxLevel);
+            $acceptedLevels = array_values(array_filter(Logger::getLevels(), function ($level) use ($minLevelOrList, $maxLevel) {
+                return $level >= $minLevelOrList && $level <= $maxLevel;
+            }));
+        }
+        $this->acceptedLevels = array_flip($acceptedLevels);
+    }
 
-		// The same logic as in FingersCrossedHandler
-		if (!$this->handler instanceof HandlerInterface) {
-			if (!is_callable($this->handler)) {
-				throw new \RuntimeException("The given handler (" . json_encode($this->handler) . ") is not a callable nor a Monolog\\Handler\\HandlerInterface object");
-			}
-			$this->handler = call_user_func($this->handler, $record, $this);
-			if (!$this->handler instanceof HandlerInterface) {
-				throw new \RuntimeException("The factory callable should return a HandlerInterface");
-			}
-		}
+    /**
+     * {@inheritdoc}
+     */
+    public function isHandling(array $record)
+    {
+        return isset($this->acceptedLevels[$record['level']]);
+    }
 
-		if ($this->processors) {
-			foreach ($this->processors as $processor) {
-				$record = call_user_func($processor, $record);
-			}
-		}
+    /**
+     * {@inheritdoc}
+     */
+    public function handle(array $record)
+    {
+        if (!$this->isHandling($record)) {
+            return false;
+        }
 
-		$this->handler->handle($record);
+        // The same logic as in FingersCrossedHandler
+        if (!$this->handler instanceof HandlerInterface) {
+            $this->handler = call_user_func($this->handler, $record, $this);
+            if (!$this->handler instanceof HandlerInterface) {
+                throw new \RuntimeException("The factory callable should return a HandlerInterface");
+            }
+        }
 
-		return false === $this->bubble;
-	}
+        if ($this->processors) {
+            foreach ($this->processors as $processor) {
+                $record = call_user_func($processor, $record);
+            }
+        }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function isHandling(array $record)
-	{
-		return isset($this->acceptedLevels[$record['level']]);
-	}
+        $this->handler->handle($record);
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function handleBatch(array $records)
-	{
-		$filtered = array();
-		foreach ($records as $record) {
-			if ($this->isHandling($record)) {
-				$filtered[] = $record;
-			}
-		}
+        return false === $this->bubble;
+    }
 
-		$this->handler->handleBatch($filtered);
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function handleBatch(array $records)
+    {
+        $filtered = array();
+        foreach ($records as $record) {
+            if ($this->isHandling($record)) {
+                $filtered[] = $record;
+            }
+        }
+
+        $this->handler->handleBatch($filtered);
+    }
 }

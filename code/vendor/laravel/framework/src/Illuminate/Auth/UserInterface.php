@@ -1,7 +1,6 @@
 <?php namespace Illuminate\Auth;
 
-interface UserInterface
-{
+interface UserInterface {
 
 	/**
 	 * Get the unique identifier for the user.
@@ -27,8 +26,7 @@ interface UserInterface
 	/**
 	 * Set the token value for the "remember me" session.
 	 *
-	 * @param  string $value
-	 *
+	 * @param  string  $value
 	 * @return void
 	 */
 	public function setRememberToken($value);

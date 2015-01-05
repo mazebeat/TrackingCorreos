@@ -17,6 +17,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="AngularJS" level="project" />
+    <orderEntry type="library" name="jQuery-2.0.0" level="application" />
   </component>
 </module>
-

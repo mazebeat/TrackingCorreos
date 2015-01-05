@@ -3,11 +3,10 @@
 use Illuminate\Console\Command;
 use Illuminate\Workbench\Package;
 use Illuminate\Workbench\PackageCreator;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
 
-class WorkbenchMakeCommand extends Command
-{
+class WorkbenchMakeCommand extends Command {
 
 	/**
 	 * The console command name.
@@ -33,8 +32,7 @@ class WorkbenchMakeCommand extends Command
 	/**
 	 * Create a new make workbench command instance.
 	 *
-	 * @param  \Illuminate\Workbench\PackageCreator $creator
-	 *
+	 * @param  \Illuminate\Workbench\PackageCreator  $creator
 	 * @return void
 	 */
 	public function __construct(PackageCreator $creator)
@@ -61,15 +59,14 @@ class WorkbenchMakeCommand extends Command
 	/**
 	 * Run the package creator class for a given Package.
 	 *
-	 * @param  \Illuminate\Workbench\Package $package
-	 *
+	 * @param  \Illuminate\Workbench\Package  $package
 	 * @return string
 	 */
 	protected function runCreator($package)
 	{
-		$path = $this->laravel['path.base'] . '/workbench';
+		$path = $this->laravel['path.base'].'/workbench';
 
-		$plain = !$this->option('resources');
+		$plain = ! $this->option('resources');
 
 		return $this->creator->create($package, $path, $plain);
 	}
@@ -77,8 +74,7 @@ class WorkbenchMakeCommand extends Command
 	/**
 	 * Call the composer update routine on the path.
 	 *
-	 * @param  string $path
-	 *
+	 * @param  string  $path
 	 * @return void
 	 */
 	protected function callComposerUpdate($path)
@@ -101,7 +97,8 @@ class WorkbenchMakeCommand extends Command
 
 		$config = $this->laravel['config']['workbench'];
 
-		if (is_null($config['email'])) {
+		if (is_null($config['email']))
+		{
 			throw new \UnexpectedValueException("Please set the author's email in the workbench configuration file.");
 		}
 
@@ -127,7 +124,9 @@ class WorkbenchMakeCommand extends Command
 	 */
 	protected function getArguments()
 	{
-		return array(array('package', InputArgument::REQUIRED, 'The name (vendor/name) of the package.'),);
+		return array(
+			array('package', InputArgument::REQUIRED, 'The name (vendor/name) of the package.'),
+		);
 	}
 
 	/**
@@ -137,7 +136,9 @@ class WorkbenchMakeCommand extends Command
 	 */
 	protected function getOptions()
 	{
-		return array(array('resources', null, InputOption::VALUE_NONE, 'Create Laravel specific directories.'),);
+		return array(
+			array('resources', null, InputOption::VALUE_NONE, 'Create Laravel specific directories.'),
+		);
 	}
 
 }

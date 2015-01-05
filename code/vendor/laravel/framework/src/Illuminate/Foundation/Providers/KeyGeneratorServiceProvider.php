@@ -1,10 +1,9 @@
 <?php namespace Illuminate\Foundation\Providers;
 
-use Illuminate\Foundation\Console\KeyGenerateCommand;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\Console\KeyGenerateCommand;
 
-class KeyGeneratorServiceProvider extends ServiceProvider
-{
+class KeyGeneratorServiceProvider extends ServiceProvider {
 
 	/**
 	 * Indicates if loading of the provider is deferred.
@@ -20,7 +19,8 @@ class KeyGeneratorServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
-		$this->app->bindShared('command.key.generate', function ($app) {
+		$this->app->bindShared('command.key.generate', function($app)
+		{
 			return new KeyGenerateCommand($app['files']);
 		});
 

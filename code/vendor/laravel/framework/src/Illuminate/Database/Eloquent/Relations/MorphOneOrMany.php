@@ -1,10 +1,9 @@
 <?php namespace Illuminate\Database\Eloquent\Relations;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
-abstract class MorphOneOrMany extends HasOneOrMany
-{
+abstract class MorphOneOrMany extends HasOneOrMany {
 
 	/**
 	 * The foreign key type for the relationship.
@@ -23,12 +22,11 @@ abstract class MorphOneOrMany extends HasOneOrMany
 	/**
 	 * Create a new has many relationship instance.
 	 *
-	 * @param  \Illuminate\Database\Eloquent\Builder $query
-	 * @param  \Illuminate\Database\Eloquent\Model   $parent
-	 * @param  string                                $type
-	 * @param  string                                $id
-	 * @param  string                                $localKey
-	 *
+	 * @param  \Illuminate\Database\Eloquent\Builder  $query
+	 * @param  \Illuminate\Database\Eloquent\Model  $parent
+	 * @param  string  $type
+	 * @param  string  $id
+	 * @param  string  $localKey
 	 * @return void
 	 */
 	public function __construct(Builder $query, Model $parent, $type, $id, $localKey)
@@ -47,7 +45,8 @@ abstract class MorphOneOrMany extends HasOneOrMany
 	 */
 	public function addConstraints()
 	{
-		if (static::$constraints) {
+		if (static::$constraints)
+		{
 			parent::addConstraints();
 
 			$this->query->where($this->morphType, $this->morphClass);
@@ -57,9 +56,8 @@ abstract class MorphOneOrMany extends HasOneOrMany
 	/**
 	 * Get the relationship count query.
 	 *
-	 * @param  \Illuminate\Database\Eloquent\Builder $query
-	 * @param  \Illuminate\Database\Eloquent\Builder $parent
-	 *
+	 * @param  \Illuminate\Database\Eloquent\Builder  $query
+	 * @param  \Illuminate\Database\Eloquent\Builder  $parent
 	 * @return \Illuminate\Database\Eloquent\Builder
 	 */
 	public function getRelationCountQuery(Builder $query, Builder $parent)
@@ -72,8 +70,7 @@ abstract class MorphOneOrMany extends HasOneOrMany
 	/**
 	 * Set the constraints for an eager load of the relation.
 	 *
-	 * @param  array $models
-	 *
+	 * @param  array  $models
 	 * @return void
 	 */
 	public function addEagerConstraints(array $models)
@@ -86,8 +83,7 @@ abstract class MorphOneOrMany extends HasOneOrMany
 	/**
 	 * Attach a model instance to the parent model.
 	 *
-	 * @param  \Illuminate\Database\Eloquent\Model $model
-	 *
+	 * @param  \Illuminate\Database\Eloquent\Model  $model
 	 * @return \Illuminate\Database\Eloquent\Model
 	 */
 	public function save(Model $model)
@@ -100,8 +96,7 @@ abstract class MorphOneOrMany extends HasOneOrMany
 	/**
 	 * Create a new instance of the related model.
 	 *
-	 * @param  array $attributes
-	 *
+	 * @param  array  $attributes
 	 * @return \Illuminate\Database\Eloquent\Model
 	 */
 	public function create(array $attributes)
@@ -121,8 +116,7 @@ abstract class MorphOneOrMany extends HasOneOrMany
 	/**
 	 * Set the foreign ID and type for creating a related model.
 	 *
-	 * @param  \Illuminate\Database\Eloquent\Model $model
-	 *
+	 * @param  \Illuminate\Database\Eloquent\Model  $model
 	 * @return void
 	 */
 	protected function setForeignAttributesForCreate(Model $model)

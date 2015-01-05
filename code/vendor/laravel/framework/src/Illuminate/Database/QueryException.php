@@ -2,8 +2,7 @@
 
 use PDOException;
 
-class QueryException extends PDOException
-{
+class QueryException extends PDOException {
 
 	/**
 	 * The SQL for the query.
@@ -22,23 +21,23 @@ class QueryException extends PDOException
 	/**
 	 * Create a new query exception instance.
 	 *
-	 * @param  string     $sql
-	 * @param  array      $bindings
+	 * @param  string  $sql
+	 * @param  array  $bindings
 	 * @param  \Exception $previous
-	 *
 	 * @return void
 	 */
 	public function __construct($sql, array $bindings, $previous)
 	{
 		parent::__construct('', 0, $previous);
 
-		$this->sql      = $sql;
+		$this->sql = $sql;
 		$this->bindings = $bindings;
 		$this->previous = $previous;
-		$this->code     = $previous->getCode();
-		$this->message  = $this->formatMessage($sql, $bindings, $previous);
+		$this->code = $previous->getCode();
+		$this->message = $this->formatMessage($sql, $bindings, $previous);
 
-		if ($previous instanceof PDOException) {
+		if ($previous instanceof PDOException)
+		{
 			$this->errorInfo = $previous->errorInfo;
 		}
 	}
@@ -46,15 +45,14 @@ class QueryException extends PDOException
 	/**
 	 * Format the SQL error message.
 	 *
-	 * @param  string     $sql
-	 * @param  array      $bindings
+	 * @param  string  $sql
+	 * @param  array  $bindings
 	 * @param  \Exception $previous
-	 *
 	 * @return string
 	 */
 	protected function formatMessage($sql, $bindings, $previous)
 	{
-		return $previous->getMessage() . ' (SQL: ' . str_replace_array('\?', $bindings, $sql) . ')';
+		return $previous->getMessage().' (SQL: '.str_replace_array('\?', $bindings, $sql).')';
 	}
 
 	/**

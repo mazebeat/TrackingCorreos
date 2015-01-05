@@ -18,78 +18,87 @@ namespace Monolog\Formatter;
  */
 class FlowdockFormatter implements FormatterInterface
 {
-	/**
-	 * @var string
-	 */
-	private $source;
+    /**
+     * @var string
+     */
+    private $source;
 
-	/**
-	 * @var string
-	 */
-	private $sourceEmail;
+    /**
+     * @var string
+     */
+    private $sourceEmail;
 
-	/**
-	 * @param string $source
-	 * @param string $sourceEmail
-	 */
-	public function __construct($source, $sourceEmail)
-	{
-		$this->source      = $source;
-		$this->sourceEmail = $sourceEmail;
-	}
+    /**
+     * @param string $source
+     * @param string $sourceEmail
+     */
+    public function __construct($source, $sourceEmail)
+    {
+        $this->source = $source;
+        $this->sourceEmail = $sourceEmail;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function formatBatch(array $records)
-	{
-		$formatted = array();
+    /**
+     * {@inheritdoc}
+     */
+    public function format(array $record)
+    {
+        $tags = array(
+            '#logs',
+            '#' . strtolower($record['level_name']),
+            '#' . $record['channel'],
+        );
 
-		foreach ($records as $record) {
-			$formatted[] = $this->format($record);
-		}
+        foreach ($record['extra'] as $value) {
+            $tags[] = '#' . $value;
+        }
 
-		return $formatted;
-	}
+        $subject = sprintf(
+            'in %s: %s - %s',
+            $this->source,
+            $record['level_name'],
+            $this->getShortMessage($record['message'])
+        );
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function format(array $record)
-	{
-		$tags = array('#logs',
-			'#' . strtolower($record['level_name']),
-			'#' . $record['channel'],);
+        $record['flowdock'] = array(
+            'source' => $this->source,
+            'from_address' => $this->sourceEmail,
+            'subject' => $subject,
+            'content' => $record['message'],
+            'tags' => $tags,
+            'project' => $this->source,
+        );
 
-		foreach ($record['extra'] as $value) {
-			$tags[] = '#' . $value;
-		}
+        return $record;
+    }
 
-		$subject = sprintf('in %s: %s - %s', $this->source, $record['level_name'], $this->getShortMessage($record['message']));
+    /**
+     * {@inheritdoc}
+     */
+    public function formatBatch(array $records)
+    {
+        $formatted = array();
 
-		$record['flowdock'] = array('source'       => $this->source,
-		                            'from_address' => $this->sourceEmail,
-		                            'subject'      => $subject,
-		                            'content'      => $record['message'],
-		                            'tags'         => $tags,
-		                            'project'      => $this->source,);
+        foreach ($records as $record) {
+            $formatted[] = $this->format($record);
+        }
 
-		return $record;
-	}
+        return $formatted;
+    }
 
-	/**
-	 * @param string $message
-	 *
-	 * @return string
-	 */
-	public function getShortMessage($message)
-	{
-		$maxLength = 45;
+    /**
+     * @param string $message
+     *
+     * @return string
+     */
+    public function getShortMessage($message)
+    {
+        $maxLength = 45;
 
-		if (strlen($message) > $maxLength) {
-			$message = substr($message, 0, $maxLength - 4) . ' ...';
-		}
+        if (strlen($message) > $maxLength) {
+            $message = substr($message, 0, $maxLength - 4) . ' ...';
+        }
 
-		return $message;
-	}
+        return $message;
+    }
 }

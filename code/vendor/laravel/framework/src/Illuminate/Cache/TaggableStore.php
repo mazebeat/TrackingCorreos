@@ -1,13 +1,11 @@
 <?php namespace Illuminate\Cache;
 
-abstract class TaggableStore
-{
+abstract class TaggableStore {
 
 	/**
 	 * Begin executing a new tags operation.
 	 *
-	 * @param  string $name
-	 *
+	 * @param  string  $name
 	 * @return \Illuminate\Cache\TaggedCache
 	 */
 	public function section($name)
@@ -18,8 +16,7 @@ abstract class TaggableStore
 	/**
 	 * Begin executing a new tags operation.
 	 *
-	 * @param  array|mixed $names
-	 *
+	 * @param  array|mixed  $names
 	 * @return \Illuminate\Cache\TaggedCache
 	 */
 	public function tags($names)

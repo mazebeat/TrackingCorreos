@@ -1,7 +1,6 @@
 <?php namespace Illuminate\Support\Contracts;
 
-interface RenderableInterface
-{
+interface RenderableInterface {
 
 	/**
 	 * Get the evaluated contents of the object.

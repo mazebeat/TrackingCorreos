@@ -2,11 +2,10 @@
 
 use Illuminate\Console\Command;
 use Illuminate\Foundation\ViewPublisher;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
 
-class ViewPublishCommand extends Command
-{
+class ViewPublishCommand extends Command {
 
 	/**
 	 * The console command name.
@@ -32,8 +31,7 @@ class ViewPublishCommand extends Command
 	/**
 	 * Create a new view publish command instance.
 	 *
-	 * @param  \Illuminate\Foundation\ViewPublisher $view
-	 *
+	 * @param  \Illuminate\Foundation\ViewPublisher  $view
 	 * @return void
 	 */
 	public function __construct(ViewPublisher $view)
@@ -52,13 +50,16 @@ class ViewPublishCommand extends Command
 	{
 		$package = $this->input->getArgument('package');
 
-		if (!is_null($path = $this->getPath())) {
+		if ( ! is_null($path = $this->getPath()))
+		{
 			$this->view->publish($package, $path);
-		} else {
+		}
+		else
+		{
 			$this->view->publishPackage($package);
 		}
 
-		$this->output->writeln('<info>Views published for package:</info> ' . $package);
+		$this->output->writeln('<info>Views published for package:</info> '.$package);
 	}
 
 	/**
@@ -70,8 +71,9 @@ class ViewPublishCommand extends Command
 	{
 		$path = $this->input->getOption('path');
 
-		if (!is_null($path)) {
-			return $this->laravel['path.base'] . '/' . $path;
+		if ( ! is_null($path))
+		{
+			return $this->laravel['path.base'].'/'.$path;
 		}
 	}
 
@@ -82,7 +84,9 @@ class ViewPublishCommand extends Command
 	 */
 	protected function getArguments()
 	{
-		return array(array('package', InputArgument::REQUIRED, 'The name of the package being published.'),);
+		return array(
+			array('package', InputArgument::REQUIRED, 'The name of the package being published.'),
+		);
 	}
 
 	/**
@@ -92,7 +96,9 @@ class ViewPublishCommand extends Command
 	 */
 	protected function getOptions()
 	{
-		return array(array('path', null, InputOption::VALUE_OPTIONAL, 'The path to the source view files.', null),);
+		return array(
+			array('path', null, InputOption::VALUE_OPTIONAL, 'The path to the source view files.', null),
+		);
 	}
 
 }

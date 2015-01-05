@@ -2,8 +2,7 @@
 
 use Illuminate\Filesystem\Filesystem;
 
-class ConfigPublisher
-{
+class ConfigPublisher {
 
 	/**
 	 * The filesystem instance.
@@ -29,23 +28,21 @@ class ConfigPublisher
 	/**
 	 * Create a new configuration publisher instance.
 	 *
-	 * @param  \Illuminate\Filesystem\Filesystem $files
-	 * @param  string                            $publishPath
-	 *
+	 * @param  \Illuminate\Filesystem\Filesystem  $files
+	 * @param  string  $publishPath
 	 * @return void
 	 */
 	public function __construct(Filesystem $files, $publishPath)
 	{
-		$this->files       = $files;
+		$this->files = $files;
 		$this->publishPath = $publishPath;
 	}
 
 	/**
 	 * Publish configuration files from a given path.
 	 *
-	 * @param  string $package
-	 * @param  string $source
-	 *
+	 * @param  string  $package
+	 * @param  string  $source
 	 * @return bool
 	 */
 	public function publish($package, $source)
@@ -60,9 +57,8 @@ class ConfigPublisher
 	/**
 	 * Publish the configuration files for a package.
 	 *
-	 * @param  string $package
-	 * @param  string $packagePath
-	 *
+	 * @param  string  $package
+	 * @param  string  $packagePath
 	 * @return bool
 	 */
 	public function publishPackage($package, $packagePath = null)
@@ -80,18 +76,18 @@ class ConfigPublisher
 	/**
 	 * Get the source configuration directory to publish.
 	 *
-	 * @param  string $package
-	 * @param  string $packagePath
-	 *
+	 * @param  string  $package
+	 * @param  string  $packagePath
 	 * @return string
 	 *
 	 * @throws \InvalidArgumentException
 	 */
 	protected function getSource($package, $packagePath)
 	{
-		$source = $packagePath . "/{$package}/src/config";
+		$source = $packagePath."/{$package}/src/config";
 
-		if (!$this->files->isDirectory($source)) {
+		if ( ! $this->files->isDirectory($source))
+		{
 			throw new \InvalidArgumentException("Configuration not found.");
 		}
 
@@ -101,13 +97,13 @@ class ConfigPublisher
 	/**
 	 * Create the destination directory if it doesn't exist.
 	 *
-	 * @param  string $destination
-	 *
+	 * @param  string  $destination
 	 * @return void
 	 */
 	protected function makeDestination($destination)
 	{
-		if (!$this->files->isDirectory($destination)) {
+		if ( ! $this->files->isDirectory($destination))
+		{
 			$this->files->makeDirectory($destination, 0777, true);
 		}
 	}
@@ -115,8 +111,7 @@ class ConfigPublisher
 	/**
 	 * Determine if a given package has already been published.
 	 *
-	 * @param  string $package
-	 *
+	 * @param  string  $package
 	 * @return bool
 	 */
 	public function alreadyPublished($package)
@@ -127,20 +122,18 @@ class ConfigPublisher
 	/**
 	 * Get the target destination path for the configuration files.
 	 *
-	 * @param  string $package
-	 *
+	 * @param  string  $package
 	 * @return string
 	 */
 	public function getDestinationPath($package)
 	{
-		return $this->publishPath . "/packages/{$package}";
+		return $this->publishPath."/packages/{$package}";
 	}
 
 	/**
 	 * Set the default package path.
 	 *
-	 * @param  string $packagePath
-	 *
+	 * @param  string  $packagePath
 	 * @return void
 	 */
 	public function setPackagePath($packagePath)

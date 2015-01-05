@@ -1,10 +1,9 @@
 <?php namespace Illuminate\Session;
 
-use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
+use Illuminate\Filesystem\Filesystem;
 
-class FileSessionHandler implements \SessionHandlerInterface
-{
+class FileSessionHandler implements \SessionHandlerInterface {
 
 	/**
 	 * The filesystem instance.
@@ -23,14 +22,13 @@ class FileSessionHandler implements \SessionHandlerInterface
 	/**
 	 * Create a new file driven handler instance.
 	 *
-	 * @param  \Illuminate\Filesystem\Filesystem $files
-	 * @param  string                            $path
-	 *
+	 * @param  \Illuminate\Filesystem\Filesystem  $files
+	 * @param  string  $path
 	 * @return void
 	 */
 	public function __construct(Filesystem $files, $path)
 	{
-		$this->path  = $path;
+		$this->path = $path;
 		$this->files = $files;
 	}
 
@@ -55,7 +53,8 @@ class FileSessionHandler implements \SessionHandlerInterface
 	 */
 	public function read($sessionId)
 	{
-		if ($this->files->exists($path = $this->path . '/' . $sessionId)) {
+		if ($this->files->exists($path = $this->path.'/'.$sessionId))
+		{
 			return $this->files->get($path);
 		}
 
@@ -67,7 +66,7 @@ class FileSessionHandler implements \SessionHandlerInterface
 	 */
 	public function write($sessionId, $data)
 	{
-		$this->files->put($this->path . '/' . $sessionId, $data);
+		$this->files->put($this->path.'/'.$sessionId, $data);
 	}
 
 	/**
@@ -75,7 +74,7 @@ class FileSessionHandler implements \SessionHandlerInterface
 	 */
 	public function destroy($sessionId)
 	{
-		$this->files->delete($this->path . '/' . $sessionId);
+		$this->files->delete($this->path.'/'.$sessionId);
 	}
 
 	/**
@@ -83,9 +82,14 @@ class FileSessionHandler implements \SessionHandlerInterface
 	 */
 	public function gc($lifetime)
 	{
-		$files = Finder::create()->in($this->path)->files()->ignoreDotFiles(true)->date('<= now - ' . $lifetime . ' seconds');
+		$files = Finder::create()
+					->in($this->path)
+					->files()
+					->ignoreDotFiles(true)
+					->date('<= now - '.$lifetime.' seconds');
 
-		foreach ($files as $file) {
+		foreach ($files as $file)
+		{
 			$this->files->delete($file->getRealPath());
 		}
 	}

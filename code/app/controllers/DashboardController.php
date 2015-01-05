@@ -23,7 +23,9 @@ class DashboardController extends ApiController
 		return View::make('dashboard.index');
 	}
 
-	public function authUser () {
-		return Session::get('user', false);
+	public function authUser() {
+		return Session::get('user', array());
 	}
-} 
+
+
+}

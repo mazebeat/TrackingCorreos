@@ -20,71 +20,68 @@ use Elastica\Document;
  */
 class ElasticaFormatter extends NormalizerFormatter
 {
-	/**
-	 * @var string Elastic search index name
-	 */
-	protected $index;
+    /**
+     * @var string Elastic search index name
+     */
+    protected $index;
 
-	/**
-	 * @var string Elastic search document type
-	 */
-	protected $type;
+    /**
+     * @var string Elastic search document type
+     */
+    protected $type;
 
-	/**
-	 * @param string $index Elastic Search index name
-	 * @param string $type  Elastic Search document type
-	 */
-	public function __construct($index, $type)
-	{
-		parent::__construct(\DateTime::ISO8601);
-		$this->index = $index;
-		$this->type  = $type;
-	}
+    /**
+     * @param string $index Elastic Search index name
+     * @param string $type  Elastic Search document type
+     */
+    public function __construct($index, $type)
+    {
+        parent::__construct(\DateTime::ISO8601);
+        $this->index = $index;
+        $this->type = $type;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function format(array $record)
-	{
-		$record = parent::format($record);
+    /**
+     * {@inheritdoc}
+     */
+    public function format(array $record)
+    {
+        $record = parent::format($record);
 
-		return $this->getDocument($record);
-	}
+        return $this->getDocument($record);
+    }
 
-	/**
-	 * Convert a log message into an Elastica Document
-	 *
-	 * @param  array $record Log message
-	 *
-	 * @return Document
-	 */
-	protected function getDocument($record)
-	{
-		$document = new Document();
-		$document->setData($record);
-		$document->setType($this->type);
-		$document->setIndex($this->index);
+    /**
+     * Getter index
+     * @return string
+     */
+    public function getIndex()
+    {
+        return $this->index;
+    }
 
-		return $document;
-	}
+    /**
+     * Getter type
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
 
-	/**
-	 * Getter index
-	 *
-	 * @return string
-	 */
-	public function getIndex()
-	{
-		return $this->index;
-	}
+    /**
+     * Convert a log message into an Elastica Document
+     *
+     * @param  array    $record Log message
+     * @return Document
+     */
+    protected function getDocument($record)
+    {
+        $document = new Document();
+        $document->setData($record);
+        $document->setType($this->type);
+        $document->setIndex($this->index);
 
-	/**
-	 * Getter type
-	 *
-	 * @return string
-	 */
-	public function getType()
-	{
-		return $this->type;
-	}
+        return $document;
+    }
 }

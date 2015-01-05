@@ -2,8 +2,7 @@
 
 use Illuminate\Support\ServiceProvider;
 
-class RemoteServiceProvider extends ServiceProvider
-{
+class RemoteServiceProvider extends ServiceProvider {
 
 	/**
 	 * Indicates if loading of the provider is deferred.
@@ -19,7 +18,8 @@ class RemoteServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
-		$this->app->bindShared('remote', function ($app) {
+		$this->app->bindShared('remote', function($app)
+		{
 			return new RemoteManager($app);
 		});
 	}

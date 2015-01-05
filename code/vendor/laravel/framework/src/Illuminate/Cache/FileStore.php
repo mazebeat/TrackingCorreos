@@ -2,8 +2,7 @@
 
 use Illuminate\Filesystem\Filesystem;
 
-class FileStore implements StoreInterface
-{
+class FileStore implements StoreInterface {
 
 	/**
 	 * The Illuminate Filesystem instance.
@@ -22,22 +21,20 @@ class FileStore implements StoreInterface
 	/**
 	 * Create a new file cache store instance.
 	 *
-	 * @param  \Illuminate\Filesystem\Filesystem $files
-	 * @param  string                            $directory
-	 *
+	 * @param  \Illuminate\Filesystem\Filesystem  $files
+	 * @param  string  $directory
 	 * @return void
 	 */
 	public function __construct(Filesystem $files, $directory)
 	{
-		$this->files     = $files;
+		$this->files = $files;
 		$this->directory = $directory;
 	}
 
 	/**
 	 * Retrieve an item from the cache by key.
 	 *
-	 * @param  string $key
-	 *
+	 * @param  string  $key
 	 * @return mixed
 	 */
 	public function get($key)
@@ -48,8 +45,7 @@ class FileStore implements StoreInterface
 	/**
 	 * Retrieve an item and expiry time from the cache by key.
 	 *
-	 * @param  string $key
-	 *
+	 * @param  string  $key
 	 * @return array
 	 */
 	protected function getPayload($key)
@@ -59,20 +55,25 @@ class FileStore implements StoreInterface
 		// If the file doesn't exists, we obviously can't return the cache so we will
 		// just return null. Otherwise, we'll get the contents of the file and get
 		// the expiration UNIX timestamps from the start of the file's contents.
-		if (!$this->files->exists($path)) {
+		if ( ! $this->files->exists($path))
+		{
 			return array('data' => null, 'time' => null);
 		}
 
-		try {
+		try
+		{
 			$expire = substr($contents = $this->files->get($path), 0, 10);
-		} catch (\Exception $e) {
+		}
+		catch (\Exception $e)
+		{
 			return array('data' => null, 'time' => null);
 		}
 
 		// If the current time is greater than expiration timestamps we will delete
 		// the file and return null. This helps clean up the old files and keeps
 		// this directory much cleaner for us as old files aren't hanging out.
-		if (time() >= $expire) {
+		if (time() >= $expire)
+		{
 			$this->forget($key);
 
 			return array('data' => null, 'time' => null);
@@ -91,15 +92,14 @@ class FileStore implements StoreInterface
 	/**
 	 * Store an item in the cache for a given number of minutes.
 	 *
-	 * @param  string $key
-	 * @param  mixed  $value
-	 * @param  int    $minutes
-	 *
+	 * @param  string  $key
+	 * @param  mixed   $value
+	 * @param  int     $minutes
 	 * @return void
 	 */
 	public function put($key, $value, $minutes)
 	{
-		$value = $this->expiration($minutes) . serialize($value);
+		$value = $this->expiration($minutes).serialize($value);
 
 		$this->createCacheDirectory($path = $this->path($key));
 
@@ -109,15 +109,17 @@ class FileStore implements StoreInterface
 	/**
 	 * Create the file cache directory if necessary.
 	 *
-	 * @param  string $path
-	 *
+	 * @param  string  $path
 	 * @return void
 	 */
 	protected function createCacheDirectory($path)
 	{
-		try {
+		try
+		{
 			$this->files->makeDirectory(dirname($path), 0777, true, true);
-		} catch (\Exception $e) {
+		}
+		catch (\Exception $e)
+		{
 			//
 		}
 	}
@@ -125,18 +127,17 @@ class FileStore implements StoreInterface
 	/**
 	 * Increment the value of an item in the cache.
 	 *
-	 * @param  string $key
-	 * @param  mixed  $value
-	 *
+	 * @param  string  $key
+	 * @param  mixed   $value
 	 * @return int
 	 */
 	public function increment($key, $value = 1)
 	{
 		$raw = $this->getPayload($key);
 
-		$int = ((int)$raw['data']) + $value;
+		$int = ((int) $raw['data']) + $value;
 
-		$this->put($key, $int, (int)$raw['time']);
+		$this->put($key, $int, (int) $raw['time']);
 
 		return $int;
 	}
@@ -144,9 +145,8 @@ class FileStore implements StoreInterface
 	/**
 	 * Decrement the value of an item in the cache.
 	 *
-	 * @param  string $key
-	 * @param  mixed  $value
-	 *
+	 * @param  string  $key
+	 * @param  mixed   $value
 	 * @return int
 	 */
 	public function decrement($key, $value = 1)
@@ -157,9 +157,8 @@ class FileStore implements StoreInterface
 	/**
 	 * Store an item in the cache indefinitely.
 	 *
-	 * @param  string $key
-	 * @param  mixed  $value
-	 *
+	 * @param  string  $key
+	 * @param  mixed   $value
 	 * @return void
 	 */
 	public function forever($key, $value)
@@ -170,15 +169,15 @@ class FileStore implements StoreInterface
 	/**
 	 * Remove an item from the cache.
 	 *
-	 * @param  string $key
-	 *
+	 * @param  string  $key
 	 * @return void
 	 */
 	public function forget($key)
 	{
 		$file = $this->path($key);
 
-		if ($this->files->exists($file)) {
+		if ($this->files->exists($file))
+		{
 			$this->files->delete($file);
 		}
 	}
@@ -190,36 +189,37 @@ class FileStore implements StoreInterface
 	 */
 	public function flush()
 	{
-		foreach ($this->files->directories($this->directory) as $directory) {
-			$this->files->deleteDirectory($directory);
+		if ($this->files->isDirectory($this->directory))
+		{
+			foreach ($this->files->directories($this->directory) as $directory)
+			{
+				$this->files->deleteDirectory($directory);
+			}
 		}
 	}
 
 	/**
 	 * Get the full path for the given cache key.
 	 *
-	 * @param  string $key
-	 *
+	 * @param  string  $key
 	 * @return string
 	 */
 	protected function path($key)
 	{
 		$parts = array_slice(str_split($hash = md5($key), 2), 0, 2);
 
-		return $this->directory . '/' . join('/', $parts) . '/' . $hash;
+		return $this->directory.'/'.join('/', $parts).'/'.$hash;
 	}
 
 	/**
 	 * Get the expiration time based on the given minutes.
 	 *
-	 * @param  int $minutes
-	 *
+	 * @param  int  $minutes
 	 * @return int
 	 */
 	protected function expiration($minutes)
 	{
-		if ($minutes === 0)
-			return 9999999999;
+		if ($minutes === 0) return 9999999999;
 
 		return time() + ($minutes * 60);
 	}

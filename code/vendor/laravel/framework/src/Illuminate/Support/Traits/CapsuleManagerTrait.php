@@ -1,7 +1,7 @@
 <?php namespace Illuminate\Support\Traits;
 
-use Illuminate\Container\Container;
 use Illuminate\Support\Fluent;
+use Illuminate\Container\Container;
 
 trait CapsuleManagerTrait {
 

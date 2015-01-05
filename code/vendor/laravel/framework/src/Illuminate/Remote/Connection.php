@@ -5,8 +5,7 @@ use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class Connection implements ConnectionInterface
-{
+class Connection implements ConnectionInterface {
 
 	/**
 	 * The SSH gateway implementation.
@@ -53,27 +52,26 @@ class Connection implements ConnectionInterface
 	/**
 	 * Create a new SSH connection instance.
 	 *
-	 * @param  string $name
-	 * @param  string $host
-	 * @param  string $username
-	 * @param  array  $auth
+	 * @param  string  $name
+	 * @param  string  $host
+	 * @param  string  $username
+	 * @param  array   $auth
 	 * @param  \Illuminate\Remote\GatewayInterface
 	 * @param
 	 */
 	public function __construct($name, $host, $username, array $auth, GatewayInterface $gateway = null)
 	{
-		$this->name     = $name;
-		$this->host     = $host;
+		$this->name = $name;
+		$this->host = $host;
 		$this->username = $username;
-		$this->gateway  = $gateway ?: new SecLibGateway($host, $auth, new Filesystem);
+		$this->gateway = $gateway ?: new SecLibGateway($host, $auth, new Filesystem);
 	}
 
 	/**
 	 * Define a set of commands as a task.
 	 *
-	 * @param  string       $task
-	 * @param  string|array $commands
-	 *
+	 * @param  string  $task
+	 * @param  string|array  $commands
 	 * @return void
 	 */
 	public function define($task, $commands)
@@ -84,14 +82,14 @@ class Connection implements ConnectionInterface
 	/**
 	 * Run a task against the connection.
 	 *
-	 * @param  string   $task
-	 * @param  \Closure $callback
-	 *
+	 * @param  string  $task
+	 * @param  \Closure  $callback
 	 * @return void
 	 */
 	public function task($task, Closure $callback = null)
 	{
-		if (isset($this->tasks[$task])) {
+		if (isset($this->tasks[$task]))
+		{
 			return $this->run($this->tasks[$task], $callback);
 		}
 	}
@@ -99,9 +97,8 @@ class Connection implements ConnectionInterface
 	/**
 	 * Run a set of commands against the connection.
 	 *
-	 * @param  string|array $commands
-	 * @param  \Closure     $callback
-	 *
+	 * @param  string|array  $commands
+	 * @param  \Closure  $callback
 	 * @return void
 	 */
 	public function run($commands, Closure $callback = null)
@@ -118,9 +115,9 @@ class Connection implements ConnectionInterface
 		// After running the commands against the server, we will continue to ask for
 		// the next line of output that is available, and write it them out using
 		// our callback. Once we hit the end of output, we'll bail out of here.
-		while (true) {
-			if (is_null($line = $gateway->nextLine()))
-				break;
+		while (true)
+		{
+			if (is_null($line = $gateway->nextLine())) break;
 
 			call_user_func($callback, $line, $this);
 		}
@@ -129,9 +126,8 @@ class Connection implements ConnectionInterface
 	/**
 	 * Download the contents of a remote file.
 	 *
-	 * @param  string $remote
-	 * @param  string $local
-	 *
+	 * @param  string  $remote
+	 * @param  string  $local
 	 * @return void
 	 */
 	public function get($remote, $local)
@@ -142,8 +138,7 @@ class Connection implements ConnectionInterface
 	/**
 	 * Get the contents of a remote file.
 	 *
-	 * @param  string $remote
-	 *
+	 * @param  string  $remote
 	 * @return string
 	 */
 	public function getString($remote)
@@ -154,9 +149,8 @@ class Connection implements ConnectionInterface
 	/**
 	 * Upload a local file to the server.
 	 *
-	 * @param  string $local
-	 * @param  string $remote
-	 *
+	 * @param  string  $local
+	 * @param  string  $remote
 	 * @return void
 	 */
 	public function put($local, $remote)
@@ -167,9 +161,8 @@ class Connection implements ConnectionInterface
 	/**
 	 * Upload a string to to the given file on the server.
 	 *
-	 * @param  string $remote
-	 * @param  string $contents
-	 *
+	 * @param  string  $remote
+	 * @param  string  $contents
 	 * @return void
 	 */
 	public function putString($remote, $contents)
@@ -180,24 +173,22 @@ class Connection implements ConnectionInterface
 	/**
 	 * Display the given line using the default output.
 	 *
-	 * @param  string $line
-	 *
+	 * @param  string  $line
 	 * @return void
 	 */
 	public function display($line)
 	{
-		$server = $this->username . '@' . $this->host;
+		$server = $this->username.'@'.$this->host;
 
-		$lead = '<comment>[' . $server . ']</comment> <info>(' . $this->name . ')</info>';
+		$lead = '<comment>['.$server.']</comment> <info>('.$this->name.')</info>';
 
-		$this->getOutput()->writeln($lead . ' ' . $line);
+		$this->getOutput()->writeln($lead.' '.$line);
 	}
 
 	/**
 	 * Format the given command set.
 	 *
-	 * @param  string|array $commands
-	 *
+	 * @param  string|array  $commands
 	 * @return string
 	 */
 	protected function formatCommands($commands)
@@ -208,18 +199,14 @@ class Connection implements ConnectionInterface
 	/**
 	 * Get the display callback for the connection.
 	 *
-	 * @param  \Closure|null $callback
-	 *
+	 * @param  \Closure|null  $callback
 	 * @return \Closure
 	 */
 	protected function getCallback($callback)
 	{
-		if (!is_null($callback))
-			return $callback;
+		if ( ! is_null($callback)) return $callback;
 
-		return function ($line) {
-			$this->display($line);
-		};
+		return function($line) { $this->display($line); };
 	}
 
 	/**
@@ -241,7 +228,8 @@ class Connection implements ConnectionInterface
 	 */
 	public function getGateway()
 	{
-		if (!$this->gateway->connected() && !$this->gateway->connect($this->username)) {
+		if ( ! $this->gateway->connected() && ! $this->gateway->connect($this->username))
+		{
 			throw new \RuntimeException("Unable to connect to remote server.");
 		}
 
@@ -255,8 +243,7 @@ class Connection implements ConnectionInterface
 	 */
 	public function getOutput()
 	{
-		if (is_null($this->output))
-			$this->output = new NullOutput;
+		if (is_null($this->output)) $this->output = new NullOutput;
 
 		return $this->output;
 	}
@@ -264,8 +251,7 @@ class Connection implements ConnectionInterface
 	/**
 	 * Set the output implementation.
 	 *
-	 * @param  \Symfony\Component\Console\Output\OutputInterface $output
-	 *
+	 * @param  \Symfony\Component\Console\Output\OutputInterface  $output
 	 * @return void
 	 */
 	public function setOutput(OutputInterface $output)

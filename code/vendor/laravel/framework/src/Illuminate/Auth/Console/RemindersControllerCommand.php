@@ -4,8 +4,7 @@ use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Console\Input\InputOption;
 
-class RemindersControllerCommand extends Command
-{
+class RemindersControllerCommand extends Command {
 
 	/**
 	 * The console command name.
@@ -31,8 +30,7 @@ class RemindersControllerCommand extends Command
 	/**
 	 * Create a new reminder table command instance.
 	 *
-	 * @param  \Illuminate\Filesystem\Filesystem $files
-	 *
+	 * @param  \Illuminate\Filesystem\Filesystem  $files
 	 * @return void
 	 */
 	public function __construct(Filesystem $files)
@@ -51,13 +49,16 @@ class RemindersControllerCommand extends Command
 	{
 		$destination = $this->getPath() . '/RemindersController.php';
 
-		if (!$this->files->exists($destination)) {
-			$this->files->copy(__DIR__ . '/stubs/controller.stub', $destination);
+		if ( ! $this->files->exists($destination))
+		{
+			$this->files->copy(__DIR__.'/stubs/controller.stub', $destination);
 
 			$this->info('Password reminders controller created successfully!');
 
 			$this->comment("Route: Route::controller('password', 'RemindersController');");
-		} else {
+		}
+		else
+		{
 			$this->error('Password reminders controller already exists!');
 		}
 	}
@@ -69,8 +70,9 @@ class RemindersControllerCommand extends Command
 	 */
 	private function getPath()
 	{
-		if (!$path = $this->input->getOption('path')) {
-			$path = $this->laravel['path'] . '/controllers';
+		if ( ! $path = $this->input->getOption('path'))
+		{
+			$path = $this->laravel['path'].'/controllers';
 		}
 
 		return rtrim($path, '/');
@@ -83,11 +85,9 @@ class RemindersControllerCommand extends Command
 	 */
 	protected function getOptions()
 	{
-		return array(array('path',
-			null,
-			InputOption::VALUE_OPTIONAL,
-			'The directory where the controller should be placed.',
-			null),);
+		return array(
+			array('path', null, InputOption::VALUE_OPTIONAL, 'The directory where the controller should be placed.', null),
+		);
 	}
 
 }

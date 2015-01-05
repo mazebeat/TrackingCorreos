@@ -1,10 +1,9 @@
 <?php namespace Illuminate\Queue\Jobs;
 
-use Illuminate\Container\Container;
 use Illuminate\Queue\RedisQueue;
+use Illuminate\Container\Container;
 
-class RedisJob extends Job
-{
+class RedisJob extends Job {
 
 	/**
 	 * The Redis queue instance.
@@ -23,18 +22,17 @@ class RedisJob extends Job
 	/**
 	 * Create a new job instance.
 	 *
-	 * @param  \Illuminate\Container\Container $container
-	 * @param  \Illuminate\Queue\RedisQueue    $redis
-	 * @param  string                          $job
-	 * @param  string                          $queue
-	 *
+	 * @param  \Illuminate\Container\Container  $container
+	 * @param  \Illuminate\Queue\RedisQueue  $redis
+	 * @param  string  $job
+	 * @param  string  $queue
 	 * @return void
 	 */
 	public function __construct(Container $container, RedisQueue $redis, $job, $queue)
 	{
-		$this->job       = $job;
-		$this->redis     = $redis;
-		$this->queue     = $queue;
+		$this->job = $job;
+		$this->redis = $redis;
+		$this->queue = $queue;
 		$this->container = $container;
 	}
 
@@ -73,8 +71,7 @@ class RedisJob extends Job
 	/**
 	 * Release the job back into the queue.
 	 *
-	 * @param  int $delay
-	 *
+	 * @param  int   $delay
 	 * @return void
 	 */
 	public function release($delay = 0)

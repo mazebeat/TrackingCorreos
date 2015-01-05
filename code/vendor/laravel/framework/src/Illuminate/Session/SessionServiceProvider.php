@@ -2,8 +2,7 @@
 
 use Illuminate\Support\ServiceProvider;
 
-class SessionServiceProvider extends ServiceProvider
-{
+class SessionServiceProvider extends ServiceProvider {
 
 	/**
 	 * Register the service provider.
@@ -26,7 +25,8 @@ class SessionServiceProvider extends ServiceProvider
 	 */
 	protected function setupDefaultDriver()
 	{
-		if ($this->app->runningInConsole()) {
+		if ($this->app->runningInConsole())
+		{
 			$this->app['config']['session.driver'] = 'array';
 		}
 	}
@@ -38,7 +38,8 @@ class SessionServiceProvider extends ServiceProvider
 	 */
 	protected function registerSessionManager()
 	{
-		$this->app->bindShared('session', function ($app) {
+		$this->app->bindShared('session', function($app)
+		{
 			return new SessionManager($app);
 		});
 	}
@@ -50,7 +51,8 @@ class SessionServiceProvider extends ServiceProvider
 	 */
 	protected function registerSessionDriver()
 	{
-		$this->app->bindShared('session.store', function ($app) {
+		$this->app->bindShared('session.store', function($app)
+		{
 			// First, we will create the session manager which is responsible for the
 			// creation of the various session drivers when they are needed by the
 			// application instance, and will resolve them on a lazy load basis.

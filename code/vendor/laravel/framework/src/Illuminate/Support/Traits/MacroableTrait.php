@@ -1,7 +1,6 @@
 <?php namespace Illuminate\Support\Traits;
 
-trait MacroableTrait
-{
+trait MacroableTrait {
 
 	/**
 	 * The registered string macros.
@@ -13,9 +12,8 @@ trait MacroableTrait
 	/**
 	 * Register a custom macro.
 	 *
-	 * @param  string   $name
-	 * @param  callable $macro
-	 *
+	 * @param  string    $name
+	 * @param  callable  $macro
 	 * @return void
 	 */
 	public static function macro($name, callable $macro)
@@ -26,8 +24,7 @@ trait MacroableTrait
 	/**
 	 * Checks if macro is registered
 	 *
-	 * @param  string $name
-	 *
+	 * @param  string    $name
 	 * @return boolean
 	 */
 	public static function hasMacro($name)
@@ -38,16 +35,16 @@ trait MacroableTrait
 	/**
 	 * Dynamically handle calls to the class.
 	 *
-	 * @param  string $method
-	 * @param  array  $parameters
-	 *
+	 * @param  string  $method
+	 * @param  array   $parameters
 	 * @return mixed
 	 *
 	 * @throws \BadMethodCallException
 	 */
 	public static function __callStatic($method, $parameters)
 	{
-		if (static::hasMacro($method)) {
+		if (static::hasMacro($method))
+		{
 			return call_user_func_array(static::$macros[$method], $parameters);
 		}
 
@@ -57,9 +54,8 @@ trait MacroableTrait
 	/**
 	 * Dynamically handle calls to the class.
 	 *
-	 * @param  string $method
-	 * @param  array  $parameters
-	 *
+	 * @param  string  $method
+	 * @param  array   $parameters
 	 * @return mixed
 	 *
 	 * @throws \BadMethodCallException

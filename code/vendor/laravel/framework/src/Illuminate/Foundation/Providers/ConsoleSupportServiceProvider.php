@@ -2,15 +2,15 @@
 
 use Illuminate\Support\ServiceProvider;
 
-class ConsoleSupportServiceProvider extends ServiceProvider
-{
+class ConsoleSupportServiceProvider extends ServiceProvider {
 
 	/**
 	 * The provider class names.
 	 *
 	 * @var array
 	 */
-	protected $providers = array('Illuminate\Foundation\Providers\CommandCreatorServiceProvider',
+	protected $providers = array(
+		'Illuminate\Foundation\Providers\CommandCreatorServiceProvider',
 		'Illuminate\Foundation\Providers\ComposerServiceProvider',
 		'Illuminate\Foundation\Providers\KeyGeneratorServiceProvider',
 		'Illuminate\Foundation\Providers\MaintenanceServiceProvider',
@@ -19,7 +19,8 @@ class ConsoleSupportServiceProvider extends ServiceProvider
 		'Illuminate\Foundation\Providers\RouteListServiceProvider',
 		'Illuminate\Foundation\Providers\ServerServiceProvider',
 		'Illuminate\Foundation\Providers\TinkerServiceProvider',
-		'Illuminate\Queue\FailConsoleServiceProvider',);
+		'Illuminate\Queue\FailConsoleServiceProvider',
+	);
 
 	/**
 	 * An array of the service provider instances.
@@ -44,7 +45,8 @@ class ConsoleSupportServiceProvider extends ServiceProvider
 	{
 		$this->instances = array();
 
-		foreach ($this->providers as $provider) {
+		foreach ($this->providers as $provider)
+		{
 			$this->instances[] = $this->app->register($provider);
 		}
 	}
@@ -58,7 +60,8 @@ class ConsoleSupportServiceProvider extends ServiceProvider
 	{
 		$provides = array();
 
-		foreach ($this->providers as $provider) {
+		foreach ($this->providers as $provider)
+		{
 			$instance = $this->app->resolveProviderClass($provider);
 
 			$provides = array_merge($provides, $instance->provides());

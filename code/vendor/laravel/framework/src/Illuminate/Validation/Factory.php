@@ -4,8 +4,7 @@ use Closure;
 use Illuminate\Container\Container;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class Factory
-{
+class Factory {
 
 	/**
 	 * The Translator implementation.
@@ -66,25 +65,23 @@ class Factory
 	/**
 	 * Create a new Validator factory instance.
 	 *
-	 * @param  \Symfony\Component\Translation\TranslatorInterface $translator
-	 * @param  \Illuminate\Container\Container                    $container
-	 *
+	 * @param  \Symfony\Component\Translation\TranslatorInterface  $translator
+	 * @param  \Illuminate\Container\Container  $container
 	 * @return void
 	 */
 	public function __construct(TranslatorInterface $translator, Container $container = null)
 	{
-		$this->container  = $container;
+		$this->container = $container;
 		$this->translator = $translator;
 	}
 
 	/**
 	 * Create a new Validator instance.
 	 *
-	 * @param  array $data
-	 * @param  array $rules
-	 * @param  array $messages
-	 * @param  array $customAttributes
-	 *
+	 * @param  array  $data
+	 * @param  array  $rules
+	 * @param  array  $messages
+	 * @param  array  $customAttributes
 	 * @return \Illuminate\Validation\Validator
 	 */
 	public function make(array $data, array $rules, array $messages = array(), array $customAttributes = array())
@@ -94,14 +91,16 @@ class Factory
 		// it may be written besides database. We'll inject it into the validator.
 		$validator = $this->resolve($data, $rules, $messages, $customAttributes);
 
-		if (!is_null($this->verifier)) {
+		if ( ! is_null($this->verifier))
+		{
 			$validator->setPresenceVerifier($this->verifier);
 		}
 
 		// Next we'll set the IoC container instance of the validator, which is used to
 		// resolve out class based validator extensions. If it is not set then these
 		// types of extensions will not be possible on these validation instances.
-		if (!is_null($this->container)) {
+		if ( ! is_null($this->container))
+		{
 			$validator->setContainer($this->container);
 		}
 
@@ -113,8 +112,7 @@ class Factory
 	/**
 	 * Add the extensions to a validator instance.
 	 *
-	 * @param  \Illuminate\Validation\Validator $validator
-	 *
+	 * @param  \Illuminate\Validation\Validator  $validator
 	 * @return void
 	 */
 	protected function addExtensions(Validator $validator)
@@ -136,16 +134,16 @@ class Factory
 	/**
 	 * Resolve a new Validator instance.
 	 *
-	 * @param  array $data
-	 * @param  array $rules
-	 * @param  array $messages
-	 * @param  array $customAttributes
-	 *
+	 * @param  array  $data
+	 * @param  array  $rules
+	 * @param  array  $messages
+	 * @param  array  $customAttributes
 	 * @return \Illuminate\Validation\Validator
 	 */
 	protected function resolve(array $data, array $rules, array $messages, array $customAttributes)
 	{
-		if (is_null($this->resolver)) {
+		if (is_null($this->resolver))
+		{
 			return new Validator($this->translator, $data, $rules, $messages, $customAttributes);
 		}
 
@@ -155,43 +153,38 @@ class Factory
 	/**
 	 * Register a custom validator extension.
 	 *
-	 * @param  string          $rule
-	 * @param  \Closure|string $extension
-	 * @param  string          $message
-	 *
+	 * @param  string  $rule
+	 * @param  \Closure|string  $extension
+	 * @param  string  $message
 	 * @return void
 	 */
 	public function extend($rule, $extension, $message = null)
 	{
 		$this->extensions[$rule] = $extension;
 
-		if ($message)
-			$this->fallbackMessages[snake_case($rule)] = $message;
+		if ($message) $this->fallbackMessages[snake_case($rule)] = $message;
 	}
 
 	/**
 	 * Register a custom implicit validator extension.
 	 *
-	 * @param  string          $rule
-	 * @param  \Closure|string $extension
-	 * @param  string          $message
-	 *
+	 * @param  string   $rule
+	 * @param  \Closure|string  $extension
+	 * @param  string  $message
 	 * @return void
 	 */
 	public function extendImplicit($rule, $extension, $message = null)
 	{
 		$this->implicitExtensions[$rule] = $extension;
 
-		if ($message)
-			$this->fallbackMessages[snake_case($rule)] = $message;
+		if ($message) $this->fallbackMessages[snake_case($rule)] = $message;
 	}
 
 	/**
 	 * Register a custom implicit validator message replacer.
 	 *
-	 * @param  string          $rule
-	 * @param  \Closure|string $replacer
-	 *
+	 * @param  string   $rule
+	 * @param  \Closure|string  $replacer
 	 * @return void
 	 */
 	public function replacer($rule, $replacer)
@@ -202,8 +195,7 @@ class Factory
 	/**
 	 * Set the Validator instance resolver.
 	 *
-	 * @param  \Closure $resolver
-	 *
+	 * @param  \Closure  $resolver
 	 * @return void
 	 */
 	public function resolver(Closure $resolver)
@@ -234,8 +226,7 @@ class Factory
 	/**
 	 * Set the Presence Verifier implementation.
 	 *
-	 * @param  \Illuminate\Validation\PresenceVerifierInterface $presenceVerifier
-	 *
+	 * @param  \Illuminate\Validation\PresenceVerifierInterface  $presenceVerifier
 	 * @return void
 	 */
 	public function setPresenceVerifier(PresenceVerifierInterface $presenceVerifier)

@@ -1,7 +1,7 @@
 <?php namespace Illuminate\Database;
 
-use Illuminate\Database\Console\SeedCommand;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Console\SeedCommand;
 
 class SeedServiceProvider extends ServiceProvider {
 

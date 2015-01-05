@@ -2,14 +2,13 @@
 
 use ArrayAccess;
 use Closure;
-use Illuminate\Support\Contracts\ArrayableInterface as Arrayable;
-use Illuminate\Support\Contracts\MessageProviderInterface;
-use Illuminate\Support\Contracts\RenderableInterface as Renderable;
 use Illuminate\Support\MessageBag;
 use Illuminate\View\Engines\EngineInterface;
+use Illuminate\Support\Contracts\MessageProviderInterface;
+use Illuminate\Support\Contracts\ArrayableInterface as Arrayable;
+use Illuminate\Support\Contracts\RenderableInterface as Renderable;
 
-class View implements ArrayAccess, Renderable
-{
+class View implements ArrayAccess, Renderable {
 
 	/**
 	 * The view factory instance.
@@ -49,29 +48,27 @@ class View implements ArrayAccess, Renderable
 	/**
 	 * Create a new view instance.
 	 *
-	 * @param  \Illuminate\View\Factory                 $factory
-	 * @param  \Illuminate\View\Engines\EngineInterface $engine
-	 * @param  string                                   $view
-	 * @param  string                                   $path
-	 * @param  array                                    $data
-	 *
+	 * @param  \Illuminate\View\Factory  $factory
+	 * @param  \Illuminate\View\Engines\EngineInterface  $engine
+	 * @param  string  $view
+	 * @param  string  $path
+	 * @param  array   $data
 	 * @return void
 	 */
 	public function __construct(Factory $factory, EngineInterface $engine, $view, $path, $data = array())
 	{
-		$this->view    = $view;
-		$this->path    = $path;
-		$this->engine  = $engine;
+		$this->view = $view;
+		$this->path = $path;
+		$this->engine = $engine;
 		$this->factory = $factory;
 
-		$this->data = $data instanceof Arrayable ? $data->toArray() : (array)$data;
+		$this->data = $data instanceof Arrayable ? $data->toArray() : (array) $data;
 	}
 
 	/**
 	 * Get the string contents of the view.
 	 *
-	 * @param  \Closure $callback
-	 *
+	 * @param  \Closure  $callback
 	 * @return string
 	 */
 	public function render(Closure $callback = null)
@@ -121,7 +118,8 @@ class View implements ArrayAccess, Renderable
 	{
 		$env = $this->factory;
 
-		return $this->render(function ($view) use ($env) {
+		return $this->render(function($view) use ($env)
+		{
 			return $env->getSections();
 		});
 	}
@@ -145,8 +143,10 @@ class View implements ArrayAccess, Renderable
 	{
 		$data = array_merge($this->factory->getShared(), $this->data);
 
-		foreach ($data as $key => $value) {
-			if ($value instanceof Renderable) {
+		foreach ($data as $key => $value)
+		{
+			if ($value instanceof Renderable)
+			{
 				$data[$key] = $value->render();
 			}
 		}
@@ -157,16 +157,18 @@ class View implements ArrayAccess, Renderable
 	/**
 	 * Add a piece of data to the view.
 	 *
-	 * @param  string|array $key
-	 * @param  mixed        $value
-	 *
+	 * @param  string|array  $key
+	 * @param  mixed   $value
 	 * @return $this
 	 */
 	public function with($key, $value = null)
 	{
-		if (is_array($key)) {
+		if (is_array($key))
+		{
 			$this->data = array_merge($this->data, $key);
-		} else {
+		}
+		else
+		{
 			$this->data[$key] = $value;
 		}
 
@@ -176,10 +178,9 @@ class View implements ArrayAccess, Renderable
 	/**
 	 * Add a view instance to the view data.
 	 *
-	 * @param  string $key
-	 * @param  string $view
-	 * @param  array  $data
-	 *
+	 * @param  string  $key
+	 * @param  string  $view
+	 * @param  array   $data
 	 * @return $this
 	 */
 	public function nest($key, $view, array $data = array())
@@ -190,16 +191,18 @@ class View implements ArrayAccess, Renderable
 	/**
 	 * Add validation errors to the view.
 	 *
-	 * @param  \Illuminate\Support\Contracts\MessageProviderInterface|array $provider
-	 *
+	 * @param  \Illuminate\Support\Contracts\MessageProviderInterface|array  $provider
 	 * @return $this
 	 */
 	public function withErrors($provider)
 	{
-		if ($provider instanceof MessageProviderInterface) {
+		if ($provider instanceof MessageProviderInterface)
+		{
 			$this->with('errors', $provider->getMessageBag());
-		} else {
-			$this->with('errors', new MessageBag((array)$provider));
+		}
+		else
+		{
+			$this->with('errors', new MessageBag((array) $provider));
 		}
 
 		return $this;
@@ -258,8 +261,7 @@ class View implements ArrayAccess, Renderable
 	/**
 	 * Set the path to the view.
 	 *
-	 * @param  string $path
-	 *
+	 * @param  string  $path
 	 * @return void
 	 */
 	public function setPath($path)
@@ -270,8 +272,7 @@ class View implements ArrayAccess, Renderable
 	/**
 	 * Determine if a piece of data is bound.
 	 *
-	 * @param  string $key
-	 *
+	 * @param  string  $key
 	 * @return bool
 	 */
 	public function offsetExists($key)
@@ -282,8 +283,7 @@ class View implements ArrayAccess, Renderable
 	/**
 	 * Get a piece of bound data to the view.
 	 *
-	 * @param  string $key
-	 *
+	 * @param  string  $key
 	 * @return mixed
 	 */
 	public function offsetGet($key)
@@ -294,9 +294,8 @@ class View implements ArrayAccess, Renderable
 	/**
 	 * Set a piece of data on the view.
 	 *
-	 * @param  string $key
-	 * @param  mixed  $value
-	 *
+	 * @param  string  $key
+	 * @param  mixed   $value
 	 * @return void
 	 */
 	public function offsetSet($key, $value)
@@ -307,8 +306,7 @@ class View implements ArrayAccess, Renderable
 	/**
 	 * Unset a piece of data from the view.
 	 *
-	 * @param  string $key
-	 *
+	 * @param  string  $key
 	 * @return void
 	 */
 	public function offsetUnset($key)
@@ -319,8 +317,7 @@ class View implements ArrayAccess, Renderable
 	/**
 	 * Get a piece of data from the view.
 	 *
-	 * @param  string $key
-	 *
+	 * @param  string  $key
 	 * @return mixed
 	 */
 	public function &__get($key)
@@ -331,9 +328,8 @@ class View implements ArrayAccess, Renderable
 	/**
 	 * Set a piece of data on the view.
 	 *
-	 * @param  string $key
-	 * @param  mixed  $value
-	 *
+	 * @param  string  $key
+	 * @param  mixed   $value
 	 * @return void
 	 */
 	public function __set($key, $value)
@@ -344,8 +340,7 @@ class View implements ArrayAccess, Renderable
 	/**
 	 * Check if a piece of data is bound to the view.
 	 *
-	 * @param  string $key
-	 *
+	 * @param  string  $key
 	 * @return bool
 	 */
 	public function __isset($key)
@@ -356,8 +351,7 @@ class View implements ArrayAccess, Renderable
 	/**
 	 * Remove a piece of bound data from the view.
 	 *
-	 * @param  string $key
-	 *
+	 * @param  string  $key
 	 * @return bool
 	 */
 	public function __unset($key)
@@ -368,16 +362,16 @@ class View implements ArrayAccess, Renderable
 	/**
 	 * Dynamically bind parameters to the view.
 	 *
-	 * @param  string $method
-	 * @param  array  $parameters
-	 *
+	 * @param  string  $method
+	 * @param  array   $parameters
 	 * @return \Illuminate\View\View
 	 *
 	 * @throws \BadMethodCallException
 	 */
 	public function __call($method, $parameters)
 	{
-		if (starts_with($method, 'with')) {
+		if (starts_with($method, 'with'))
+		{
 			return $this->with(snake_case(substr($method, 4)), $parameters[0]);
 		}
 

@@ -3,8 +3,7 @@
 use Carbon\Carbon;
 use Illuminate\Filesystem\Filesystem;
 
-class MigrationPublisher
-{
+class MigrationPublisher {
 
 	/**
 	 * A cache of migrations at a given destination.
@@ -16,8 +15,7 @@ class MigrationPublisher
 	/**
 	 * Create a new migration publisher instance.
 	 *
-	 * @param  \Illuminate\Filesystem\Filesystem $files
-	 *
+	 * @param  \Illuminate\Filesystem\Filesystem  $files
 	 * @return void
 	 */
 	public function __construct(Filesystem $files)
@@ -28,9 +26,8 @@ class MigrationPublisher
 	/**
 	 * Publish the given package's migrations.
 	 *
-	 * @param  string $source
-	 * @param  string $destination
-	 *
+	 * @param  string  $source
+	 * @param  string  $destination
 	 * @return array
 	 */
 	public function publish($source, $destination)
@@ -39,12 +36,15 @@ class MigrationPublisher
 
 		$published = array();
 
-		foreach ($this->getFreshMigrations($source, $destination) as $file) {
+		foreach ($this->getFreshMigrations($source, $destination) as $file)
+		{
 			$add++;
 
 			$newName = $this->getNewMigrationName($file, $add);
 
-			$this->files->copy($file, $newName = $destination . '/' . $newName);
+			$this->files->copy(
+				$file, $newName = $destination.'/'.$newName
+			);
 
 			$published[] = $newName;
 		}
@@ -55,24 +55,23 @@ class MigrationPublisher
 	/**
 	 * Get the fresh migrations for the source.
 	 *
-	 * @param  string $source
-	 * @param  string $destination
-	 *
+	 * @param  string  $source
+	 * @param  string  $destination
 	 * @return array
 	 */
 	protected function getFreshMigrations($source, $destination)
 	{
-		return array_filter($this->getPackageMigrations($source), function ($file) use ($destination) {
-			return !$this->migrationExists($file, $destination);
+		return array_filter($this->getPackageMigrations($source), function($file) use ($destination)
+		{
+			return ! $this->migrationExists($file, $destination);
 		});
 	}
 
 	/**
 	 * Determine if the migration is already published.
 	 *
-	 * @param  string $migration
-	 * @param  string $destination
-	 *
+	 * @param  string  $migration
+	 * @param  string  $destination
 	 * @return bool
 	 */
 	public function migrationExists($migration, $destination)
@@ -85,16 +84,15 @@ class MigrationPublisher
 	/**
 	 * Get the existing migration names from the destination.
 	 *
-	 * @param  string $destination
-	 *
+	 * @param  string  $destination
 	 * @return array
 	 */
 	public function getExistingMigrationNames($destination)
 	{
-		if (isset($this->existing[$destination]))
-			return $this->existing[$destination];
+		if (isset($this->existing[$destination])) return $this->existing[$destination];
 
-		return $this->existing[$destination] = array_map(function ($file) {
+		return $this->existing[$destination] = array_map(function($file)
+		{
 			return substr(basename($file), 18);
 
 		}, $this->files->files($destination));
@@ -103,14 +101,14 @@ class MigrationPublisher
 	/**
 	 * Get the file list from the source directory.
 	 *
-	 * @param  string $source
-	 *
+	 * @param  string  $source
 	 * @return array
 	 */
 	protected function getPackageMigrations($source)
 	{
-		$files = array_filter($this->files->files($source), function ($file) {
-			return !starts_with($file, '.');
+		$files = array_filter($this->files->files($source), function($file)
+		{
+			return ! starts_with($file, '.');
 		});
 
 		sort($files);
@@ -121,14 +119,13 @@ class MigrationPublisher
 	/**
 	 * Get the new migration name.
 	 *
-	 * @param  string $file
-	 * @param  int    $add
-	 *
+	 * @param  string  $file
+	 * @param  int  $add
 	 * @return string
 	 */
 	protected function getNewMigrationName($file, $add)
 	{
-		return Carbon::now()->addSeconds($add)->format('Y_m_d_His') . substr(basename($file), 17);
+		return Carbon::now()->addSeconds($add)->format('Y_m_d_His').substr(basename($file), 17);
 	}
 
 }

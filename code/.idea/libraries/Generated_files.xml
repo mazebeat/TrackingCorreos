@@ -1,0 +1,51 @@
+<component name="libraryTable">
+  <library name="Generated files" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/public/js/bootstrap-tour/docs/assets/js/docs.min.js" />
+        <item url="file://$PROJECT_DIR$/public/js/bootstrap-tour/docs/assets/vendor/md5.min.js" />
+        <item url="file://$PROJECT_DIR$/public/js/angular-bootstrap-tour.min.js" />
+        <item url="file://$PROJECT_DIR$/public/js/bootstrap-tour/docs/assets/js/bootstrap-tour.min.js" />
+        <item url="file://$PROJECT_DIR$/public/js/bootstrap-tour/docs/assets/vendor/jquery.smoothscroll.min.js" />
+        <item url="file://$PROJECT_DIR$/public/js/scripts.min.js" />
+        <item url="file://$PROJECT_DIR$/public/js/spinner-init.min.js" />
+        <item url="file://$PROJECT_DIR$/public/js/app.min.js" />
+        <item url="file://$PROJECT_DIR$/public/js/fuelux/js/tree.min.min.js" />
+        <item url="file://$PROJECT_DIR$/public/js/fuelux/js/spinner.min.min.js" />
+        <item url="file://$PROJECT_DIR$/public/js/bootstrap-tour/build/js/bootstrap-tour-standalone.min.min.js" />
+        <item url="file://$PROJECT_DIR$/public/js/bootstrap-tour/build/js/bootstrap-tour.min.min.js" />
+        <item url="file://$PROJECT_DIR$/public/js/bootstrap-tour/build/js/bootstrap-tour.min.js" />
+        <item url="file://$PROJECT_DIR$/public/js/fuelux/js/spinner.min.js" />
+        <item url="file://$PROJECT_DIR$/public/js/bootstrap-tour/docs/assets/vendor/jquery.smoothscroll.min.min.js" />
+        <item url="file://$PROJECT_DIR$/public/js/fuelux/js/tree.min.js" />
+        <item url="file://$PROJECT_DIR$/public/js/bootstrap-tour/docs/assets/vendor/jquery.min.js" />
+        <item url="file://$PROJECT_DIR$/public/js/bootstrap-tour/build/js/bootstrap-tour-standalone.min.js" />
+        <item url="file://$PROJECT_DIR$/public/js/bootstrap-tour/docs/assets/vendor/html5shiv.min.js" />
+        <item url="file://$PROJECT_DIR$/public/js/bootstrap-tour/docs/assets/vendor/bootstrap.min.min.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/public/js/bootstrap-tour/docs/assets/js/docs.min.js" />
+      <root url="file://$PROJECT_DIR$/public/js/bootstrap-tour/docs/assets/vendor/md5.min.js" />
+      <root url="file://$PROJECT_DIR$/public/js/angular-bootstrap-tour.min.js" />
+      <root url="file://$PROJECT_DIR$/public/js/bootstrap-tour/docs/assets/js/bootstrap-tour.min.js" />
+      <root url="file://$PROJECT_DIR$/public/js/scripts.min.js" />
+      <root url="file://$PROJECT_DIR$/public/js/bootstrap-tour/docs/assets/vendor/jquery.smoothscroll.min.js" />
+      <root url="file://$PROJECT_DIR$/public/js/spinner-init.min.js" />
+      <root url="file://$PROJECT_DIR$/public/js/app.min.js" />
+      <root url="file://$PROJECT_DIR$/public/js/fuelux/js/tree.min.min.js" />
+      <root url="file://$PROJECT_DIR$/public/js/fuelux/js/spinner.min.min.js" />
+      <root url="file://$PROJECT_DIR$/public/js/bootstrap-tour/build/js/bootstrap-tour-standalone.min.min.js" />
+      <root url="file://$PROJECT_DIR$/public/js/bootstrap-tour/build/js/bootstrap-tour.min.min.js" />
+      <root url="file://$PROJECT_DIR$/public/js/bootstrap-tour/docs/assets/vendor/jquery.smoothscroll.min.min.js" />
+      <root url="file://$PROJECT_DIR$/public/js/fuelux/js/spinner.min.js" />
+      <root url="file://$PROJECT_DIR$/public/js/bootstrap-tour/build/js/bootstrap-tour.min.js" />
+      <root url="file://$PROJECT_DIR$/public/js/bootstrap-tour/docs/assets/vendor/jquery.min.js" />
+      <root url="file://$PROJECT_DIR$/public/js/fuelux/js/tree.min.js" />
+      <root url="file://$PROJECT_DIR$/public/js/bootstrap-tour/docs/assets/vendor/html5shiv.min.js" />
+      <root url="file://$PROJECT_DIR$/public/js/bootstrap-tour/build/js/bootstrap-tour-standalone.min.js" />
+      <root url="file://$PROJECT_DIR$/public/js/bootstrap-tour/docs/assets/vendor/bootstrap.min.min.js" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>

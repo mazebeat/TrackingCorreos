@@ -1,11 +1,10 @@
 <?php namespace Illuminate\Cache;
 
-use Carbon\Carbon;
 use Closure;
 use DateTime;
+use Carbon\Carbon;
 
-class TaggedCache implements StoreInterface
-{
+class TaggedCache implements StoreInterface {
 
 	/**
 	 * The cache store implementation.
@@ -24,58 +23,55 @@ class TaggedCache implements StoreInterface
 	/**
 	 * Create a new tagged cache instance.
 	 *
-	 * @param  \Illuminate\Cache\StoreInterface $store
-	 * @param  \Illuminate\Cache\TagSet         $tags
-	 *
+	 * @param  \Illuminate\Cache\StoreInterface  $store
+	 * @param  \Illuminate\Cache\TagSet  $tags
 	 * @return void
 	 */
 	public function __construct(StoreInterface $store, TagSet $tags)
 	{
-		$this->tags  = $tags;
+		$this->tags = $tags;
 		$this->store = $store;
 	}
 
 	/**
 	 * Determine if an item exists in the cache.
 	 *
-	 * @param  string $key
-	 *
+	 * @param  string  $key
 	 * @return bool
 	 */
 	public function has($key)
 	{
-		return !is_null($this->get($key));
+		return ! is_null($this->get($key));
 	}
 
 	/**
 	 * Retrieve an item from the cache by key.
 	 *
-	 * @param  string $key
-	 * @param  mixed  $default
-	 *
+	 * @param  string  $key
+	 * @param  mixed   $default
 	 * @return mixed
 	 */
 	public function get($key, $default = null)
 	{
 		$value = $this->store->get($this->taggedItemKey($key));
 
-		return !is_null($value) ? $value : value($default);
+		return ! is_null($value) ? $value : value($default);
 	}
 
 	/**
 	 * Store an item in the cache for a given number of minutes.
 	 *
-	 * @param  string        $key
-	 * @param  mixed         $value
-	 * @param  \DateTime|int $minutes
-	 *
+	 * @param  string  $key
+	 * @param  mixed   $value
+	 * @param  \DateTime|int  $minutes
 	 * @return void
 	 */
 	public function put($key, $value, $minutes)
 	{
 		$minutes = $this->getMinutes($minutes);
 
-		if (!is_null($minutes)) {
+		if ( ! is_null($minutes))
+		{
 			$this->store->put($this->taggedItemKey($key), $value, $minutes);
 		}
 	}
@@ -83,18 +79,16 @@ class TaggedCache implements StoreInterface
 	/**
 	 * Store an item in the cache if the key does not exist.
 	 *
-	 * @param  string        $key
-	 * @param  mixed         $value
-	 * @param  \DateTime|int $minutes
-	 *
+	 * @param  string  $key
+	 * @param  mixed   $value
+	 * @param  \DateTime|int  $minutes
 	 * @return bool
 	 */
 	public function add($key, $value, $minutes)
 	{
-		if (is_null($this->get($key))) {
-			$this->put($key, $value, $minutes);
-
-			return true;
+		if (is_null($this->get($key)))
+		{
+			$this->put($key, $value, $minutes); return true;
 		}
 
 		return false;
@@ -103,9 +97,8 @@ class TaggedCache implements StoreInterface
 	/**
 	 * Increment the value of an item in the cache.
 	 *
-	 * @param  string $key
-	 * @param  mixed  $value
-	 *
+	 * @param  string  $key
+	 * @param  mixed   $value
 	 * @return void
 	 */
 	public function increment($key, $value = 1)
@@ -116,9 +109,8 @@ class TaggedCache implements StoreInterface
 	/**
 	 * Increment the value of an item in the cache.
 	 *
-	 * @param  string $key
-	 * @param  mixed  $value
-	 *
+	 * @param  string  $key
+	 * @param  mixed   $value
 	 * @return void
 	 */
 	public function decrement($key, $value = 1)
@@ -129,9 +121,8 @@ class TaggedCache implements StoreInterface
 	/**
 	 * Store an item in the cache indefinitely.
 	 *
-	 * @param  string $key
-	 * @param  mixed  $value
-	 *
+	 * @param  string  $key
+	 * @param  mixed   $value
 	 * @return void
 	 */
 	public function forever($key, $value)
@@ -142,8 +133,7 @@ class TaggedCache implements StoreInterface
 	/**
 	 * Remove an item from the cache.
 	 *
-	 * @param  string $key
-	 *
+	 * @param  string  $key
 	 * @return bool
 	 */
 	public function forget($key)
@@ -164,10 +154,9 @@ class TaggedCache implements StoreInterface
 	/**
 	 * Get an item from the cache, or store the default value.
 	 *
-	 * @param  string        $key
-	 * @param  \DateTime|int $minutes
-	 * @param  \Closure      $callback
-	 *
+	 * @param  string  $key
+	 * @param  \DateTime|int  $minutes
+	 * @param  \Closure  $callback
 	 * @return mixed
 	 */
 	public function remember($key, $minutes, Closure $callback)
@@ -175,8 +164,7 @@ class TaggedCache implements StoreInterface
 		// If the item exists in the cache we will just return this immediately
 		// otherwise we will execute the given Closure and cache the result
 		// of that execution for the given number of minutes in storage.
-		if ($this->has($key))
-			return $this->get($key);
+		if ($this->has($key)) return $this->get($key);
 
 		$this->put($key, $value = $callback(), $minutes);
 
@@ -186,9 +174,8 @@ class TaggedCache implements StoreInterface
 	/**
 	 * Get an item from the cache, or store the default value forever.
 	 *
-	 * @param  string   $key
-	 * @param  \Closure $callback
-	 *
+	 * @param  string    $key
+	 * @param  \Closure  $callback
 	 * @return mixed
 	 */
 	public function sear($key, Closure $callback)
@@ -199,9 +186,8 @@ class TaggedCache implements StoreInterface
 	/**
 	 * Get an item from the cache, or store the default value forever.
 	 *
-	 * @param  string   $key
-	 * @param  \Closure $callback
-	 *
+	 * @param  string    $key
+	 * @param  \Closure  $callback
 	 * @return mixed
 	 */
 	public function rememberForever($key, Closure $callback)
@@ -209,8 +195,7 @@ class TaggedCache implements StoreInterface
 		// If the item exists in the cache we will just return this immediately
 		// otherwise we will execute the given Closure and cache the result
 		// of that execution for the given number of minutes. It's easy.
-		if ($this->has($key))
-			return $this->get($key);
+		if ($this->has($key)) return $this->get($key);
 
 		$this->forever($key, $value = $callback());
 
@@ -220,13 +205,12 @@ class TaggedCache implements StoreInterface
 	/**
 	 * Get a fully qualified key for a tagged item.
 	 *
-	 * @param  string $key
-	 *
+	 * @param  string  $key
 	 * @return string
 	 */
 	public function taggedItemKey($key)
 	{
-		return sha1($this->tags->getNamespace()) . ':' . $key;
+		return sha1($this->tags->getNamespace()).':'.$key;
 	}
 
 	/**
@@ -242,19 +226,19 @@ class TaggedCache implements StoreInterface
 	/**
 	 * Calculate the number of minutes with the given duration.
 	 *
-	 * @param  \DateTime|int $duration
-	 *
+	 * @param  \DateTime|int  $duration
 	 * @return int|null
 	 */
 	protected function getMinutes($duration)
 	{
-		if ($duration instanceof DateTime) {
+		if ($duration instanceof DateTime)
+		{
 			$fromNow = Carbon::instance($duration)->diffInMinutes();
 
 			return $fromNow > 0 ? $fromNow : null;
 		}
 
-		return is_string($duration) ? (int)$duration : $duration;
+		return is_string($duration) ? (int) $duration : $duration;
 	}
 
 }

@@ -2,8 +2,7 @@
 
 use Illuminate\Database\ConnectionResolverInterface as Resolver;
 
-class DatabaseMigrationRepository implements MigrationRepositoryInterface
-{
+class DatabaseMigrationRepository implements MigrationRepositoryInterface {
 
 	/**
 	 * The database connection resolver instance.
@@ -29,14 +28,13 @@ class DatabaseMigrationRepository implements MigrationRepositoryInterface
 	/**
 	 * Create a new database migration repository instance.
 	 *
-	 * @param  \Illuminate\Database\ConnectionResolverInterface $resolver
-	 * @param  string                                           $table
-	 *
+	 * @param  \Illuminate\Database\ConnectionResolverInterface  $resolver
+	 * @param  string  $table
 	 * @return void
 	 */
 	public function __construct(Resolver $resolver, $table)
 	{
-		$this->table    = $table;
+		$this->table = $table;
 		$this->resolver = $resolver;
 	}
 
@@ -65,9 +63,8 @@ class DatabaseMigrationRepository implements MigrationRepositoryInterface
 	/**
 	 * Log that a migration was run.
 	 *
-	 * @param  string $file
-	 * @param  int    $batch
-	 *
+	 * @param  string  $file
+	 * @param  int     $batch
 	 * @return void
 	 */
 	public function log($file, $batch)
@@ -80,8 +77,7 @@ class DatabaseMigrationRepository implements MigrationRepositoryInterface
 	/**
 	 * Remove a migration from the log.
 	 *
-	 * @param  object $migration
-	 *
+	 * @param  object  $migration
 	 * @return void
 	 */
 	public function delete($migration)
@@ -118,7 +114,8 @@ class DatabaseMigrationRepository implements MigrationRepositoryInterface
 	{
 		$schema = $this->getConnection()->getSchemaBuilder();
 
-		$schema->create($this->table, function ($table) {
+		$schema->create($this->table, function($table)
+		{
 			// The migrations table is responsible for keeping track of which of the
 			// migrations have actually run for the application. We'll create the
 			// table to hold the migration file's path as well as the batch ID.
@@ -173,8 +170,7 @@ class DatabaseMigrationRepository implements MigrationRepositoryInterface
 	/**
 	 * Set the information source to gather data.
 	 *
-	 * @param  string $name
-	 *
+	 * @param  string  $name
 	 * @return void
 	 */
 	public function setSource($name)

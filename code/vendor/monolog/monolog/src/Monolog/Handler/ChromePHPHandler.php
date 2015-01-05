@@ -21,181 +21,184 @@ use Monolog\Logger;
  */
 class ChromePHPHandler extends AbstractProcessingHandler
 {
-	/**
-	 * Version of the extension
-	 */
-	const VERSION = '4.0';
+    /**
+     * Version of the extension
+     */
+    const VERSION = '4.0';
 
-	/**
-	 * Header name
-	 */
-	const HEADER_NAME = 'X-ChromeLogger-Data';
+    /**
+     * Header name
+     */
+    const HEADER_NAME = 'X-ChromeLogger-Data';
 
-	protected static $initialized = false;
+    protected static $initialized = false;
 
-	/**
-	 * Tracks whether we sent too much data
-	 *
-	 * Chrome limits the headers to 256KB, so when we sent 240KB we stop sending
-	 *
-	 * @var Boolean
-	 */
-	protected static $overflowed = false;
+    /**
+     * Tracks whether we sent too much data
+     *
+     * Chrome limits the headers to 256KB, so when we sent 240KB we stop sending
+     *
+     * @var Boolean
+     */
+    protected static $overflowed = false;
 
-	protected static $json = array('version' => self::VERSION,
-	                               'columns' => array('label', 'log', 'backtrace', 'type'),
-	                               'rows'    => array(),);
+    protected static $json = array(
+        'version' => self::VERSION,
+        'columns' => array('label', 'log', 'backtrace', 'type'),
+        'rows' => array(),
+    );
 
-	protected static $sendHeaders = true;
+    protected static $sendHeaders = true;
 
-	/**
-	 * @param integer $level  The minimum logging level at which this handler will be triggered
-	 * @param Boolean $bubble Whether the messages that are handled can bubble up the stack or not
-	 */
-	public function __construct($level = Logger::DEBUG, $bubble = true)
-	{
-		parent::__construct($level, $bubble);
-		if (!function_exists('json_encode')) {
-			throw new \RuntimeException('PHP\'s json extension is required to use Monolog\'s ChromePHPHandler');
-		}
-	}
+    /**
+     * @param integer $level  The minimum logging level at which this handler will be triggered
+     * @param Boolean $bubble Whether the messages that are handled can bubble up the stack or not
+     */
+    public function __construct($level = Logger::DEBUG, $bubble = true)
+    {
+        parent::__construct($level, $bubble);
+        if (!function_exists('json_encode')) {
+            throw new \RuntimeException('PHP\'s json extension is required to use Monolog\'s ChromePHPHandler');
+        }
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function handleBatch(array $records)
-	{
-		$messages = array();
+    /**
+     * {@inheritdoc}
+     */
+    public function handleBatch(array $records)
+    {
+        $messages = array();
 
-		foreach ($records as $record) {
-			if ($record['level'] < $this->level) {
-				continue;
-			}
-			$messages[] = $this->processRecord($record);
-		}
+        foreach ($records as $record) {
+            if ($record['level'] < $this->level) {
+                continue;
+            }
+            $messages[] = $this->processRecord($record);
+        }
 
-		if (!empty($messages)) {
-			$messages           = $this->getFormatter()->formatBatch($messages);
-			self::$json['rows'] = array_merge(self::$json['rows'], $messages);
-			$this->send();
-		}
-	}
+        if (!empty($messages)) {
+            $messages = $this->getFormatter()->formatBatch($messages);
+            self::$json['rows'] = array_merge(self::$json['rows'], $messages);
+            $this->send();
+        }
+    }
 
-	/**
-	 * Sends the log header
-	 *
-	 * @see sendHeader()
-	 */
-	protected function send()
-	{
-		if (self::$overflowed || !self::$sendHeaders) {
-			return;
-		}
+    /**
+     * {@inheritDoc}
+     */
+    protected function getDefaultFormatter()
+    {
+        return new ChromePHPFormatter();
+    }
 
-		if (!self::$initialized) {
-			self::$initialized = true;
+    /**
+     * Creates & sends header for a record
+     *
+     * @see sendHeader()
+     * @see send()
+     * @param array $record
+     */
+    protected function write(array $record)
+    {
+        self::$json['rows'][] = $record['formatted'];
 
-			self::$sendHeaders = $this->headersAccepted();
-			if (!self::$sendHeaders) {
-				return;
-			}
+        $this->send();
+    }
 
-			self::$json['request_uri'] = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
-		}
+    /**
+     * Sends the log header
+     *
+     * @see sendHeader()
+     */
+    protected function send()
+    {
+        if (self::$overflowed || !self::$sendHeaders) {
+            return;
+        }
 
-		$json = @json_encode(self::$json);
-		$data = base64_encode(utf8_encode($json));
-		if (strlen($data) > 240 * 1024) {
-			self::$overflowed = true;
+        if (!self::$initialized) {
+            self::$initialized = true;
 
-			$record                                             = array('message'    => 'Incomplete logs, chrome header size limit reached',
-			                                                            'context'    => array(),
-			                                                            'level'      => Logger::WARNING,
-			                                                            'level_name' => Logger::getLevelName(Logger::WARNING),
-			                                                            'channel'    => 'monolog',
-			                                                            'datetime'   => new \DateTime(),
-			                                                            'extra'      => array(),);
-			self::$json['rows'][count(self::$json['rows']) - 1] = $this->getFormatter()->format($record);
-			$json                                               = @json_encode(self::$json);
-			$data                                               = base64_encode(utf8_encode($json));
-		}
+            self::$sendHeaders = $this->headersAccepted();
+            if (!self::$sendHeaders) {
+                return;
+            }
 
-		if (trim($data) !== '') {
-			$this->sendHeader(self::HEADER_NAME, $data);
-		}
-	}
+            self::$json['request_uri'] = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
+        }
 
-	/**
-	 * Verifies if the headers are accepted by the current user agent
-	 *
-	 * @return Boolean
-	 */
-	protected function headersAccepted()
-	{
-		if (empty($_SERVER['HTTP_USER_AGENT'])) {
-			return false;
-		}
+        $json = @json_encode(self::$json);
+        $data = base64_encode(utf8_encode($json));
+        if (strlen($data) > 240*1024) {
+            self::$overflowed = true;
 
-		return preg_match('{\bChrome/\d+[\.\d+]*\b}', $_SERVER['HTTP_USER_AGENT']);
-	}
+            $record = array(
+                'message' => 'Incomplete logs, chrome header size limit reached',
+                'context' => array(),
+                'level' => Logger::WARNING,
+                'level_name' => Logger::getLevelName(Logger::WARNING),
+                'channel' => 'monolog',
+                'datetime' => new \DateTime(),
+                'extra' => array(),
+            );
+            self::$json['rows'][count(self::$json['rows']) - 1] = $this->getFormatter()->format($record);
+            $json = @json_encode(self::$json);
+            $data = base64_encode(utf8_encode($json));
+        }
 
-	/**
-	 * Send header string to the client
-	 *
-	 * @param string $header
-	 * @param string $content
-	 */
-	protected function sendHeader($header, $content)
-	{
-		if (!headers_sent() && self::$sendHeaders) {
-			header(sprintf('%s: %s', $header, $content));
-		}
-	}
+        if (trim($data) !== '') {
+            $this->sendHeader(self::HEADER_NAME, $data);
+        }
+    }
 
-	/**
-	 * BC getter for the sendHeaders property that has been made static
-	 */
-	public function __get($property)
-	{
-		if ('sendHeaders' !== $property) {
-			throw new \InvalidArgumentException('Undefined property ' . $property);
-		}
+    /**
+     * Send header string to the client
+     *
+     * @param string $header
+     * @param string $content
+     */
+    protected function sendHeader($header, $content)
+    {
+        if (!headers_sent() && self::$sendHeaders) {
+            header(sprintf('%s: %s', $header, $content));
+        }
+    }
 
-		return static::$sendHeaders;
-	}
+    /**
+     * Verifies if the headers are accepted by the current user agent
+     *
+     * @return Boolean
+     */
+    protected function headersAccepted()
+    {
+        if (empty($_SERVER['HTTP_USER_AGENT'])) {
+            return false;
+        }
 
-	/**
-	 * BC setter for the sendHeaders property that has been made static
-	 */
-	public function __set($property, $value)
-	{
-		if ('sendHeaders' !== $property) {
-			throw new \InvalidArgumentException('Undefined property ' . $property);
-		}
+        return preg_match('{\bChrome/\d+[\.\d+]*\b}', $_SERVER['HTTP_USER_AGENT']);
+    }
 
-		static::$sendHeaders = $value;
-	}
+    /**
+     * BC getter for the sendHeaders property that has been made static
+     */
+    public function __get($property)
+    {
+        if ('sendHeaders' !== $property) {
+            throw new \InvalidArgumentException('Undefined property '.$property);
+        }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	protected function getDefaultFormatter()
-	{
-		return new ChromePHPFormatter();
-	}
+        return static::$sendHeaders;
+    }
 
-	/**
-	 * Creates & sends header for a record
-	 *
-	 * @see sendHeader()
-	 * @see send()
-	 *
-	 * @param array $record
-	 */
-	protected function write(array $record)
-	{
-		self::$json['rows'][] = $record['formatted'];
+    /**
+     * BC setter for the sendHeaders property that has been made static
+     */
+    public function __set($property, $value)
+    {
+        if ('sendHeaders' !== $property) {
+            throw new \InvalidArgumentException('Undefined property '.$property);
+        }
 
-		$this->send();
-	}
+        static::$sendHeaders = $value;
+    }
 }

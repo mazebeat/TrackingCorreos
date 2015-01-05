@@ -20,98 +20,97 @@ namespace Monolog\Formatter;
  */
 class JsonFormatter implements FormatterInterface
 {
-	const BATCH_MODE_JSON     = 1;
-	const BATCH_MODE_NEWLINES = 2;
-	protected $batchMode;
-	protected $appendNewline;
+    const BATCH_MODE_JSON = 1;
+    const BATCH_MODE_NEWLINES = 2;
 
-	/**
-	 * @param int $batchMode
-	 */
-	public function __construct($batchMode = self::BATCH_MODE_JSON, $appendNewline = true)
-	{
-		$this->batchMode     = $batchMode;
-		$this->appendNewline = $appendNewline;
-	}
+    protected $batchMode;
+    protected $appendNewline;
 
-	/**
-	 * The batch mode option configures the formatting style for
-	 * multiple records. By default, multiple records will be
-	 * formatted as a JSON-encoded array. However, for
-	 * compatibility with some API endpoints, alternive styles
-	 * are available.
-	 *
-	 * @return int
-	 */
-	public function getBatchMode()
-	{
-		return $this->batchMode;
-	}
+    /**
+     * @param int $batchMode
+     */
+    public function __construct($batchMode = self::BATCH_MODE_JSON, $appendNewline = true)
+    {
+        $this->batchMode = $batchMode;
+        $this->appendNewline = $appendNewline;
+    }
 
-	/**
-	 * True if newlines are appended to every formatted record
-	 *
-	 * @return bool
-	 */
-	public function isAppendingNewlines()
-	{
-		return $this->appendNewline;
-	}
+    /**
+     * The batch mode option configures the formatting style for
+     * multiple records. By default, multiple records will be
+     * formatted as a JSON-encoded array. However, for
+     * compatibility with some API endpoints, alternive styles
+     * are available.
+     *
+     * @return int
+     */
+    public function getBatchMode()
+    {
+        return $this->batchMode;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function formatBatch(array $records)
-	{
-		switch ($this->batchMode) {
-			case static::BATCH_MODE_NEWLINES:
-				return $this->formatBatchNewlines($records);
+    /**
+     * True if newlines are appended to every formatted record
+     *
+     * @return bool
+     */
+    public function isAppendingNewlines()
+    {
+        return $this->appendNewline;
+    }
 
-			case static::BATCH_MODE_JSON:
-			default:
-				return $this->formatBatchJson($records);
-		}
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function format(array $record)
+    {
+        return json_encode($record) . ($this->appendNewline ? "\n" : '');
+    }
 
-	/**
-	 * Use new lines to separate records instead of a
-	 * JSON-encoded array.
-	 *
-	 * @param  array $records
-	 *
-	 * @return string
-	 */
-	protected function formatBatchNewlines(array $records)
-	{
-		$instance = $this;
+    /**
+     * {@inheritdoc}
+     */
+    public function formatBatch(array $records)
+    {
+        switch ($this->batchMode) {
+            case static::BATCH_MODE_NEWLINES:
+                return $this->formatBatchNewlines($records);
 
-		$oldNewline          = $this->appendNewline;
-		$this->appendNewline = false;
-		array_walk($records, function (&$value, $key) use ($instance) {
-			$value = $instance->format($value);
-		});
-		$this->appendNewline = $oldNewline;
+            case static::BATCH_MODE_JSON:
+            default:
+                return $this->formatBatchJson($records);
+        }
+    }
 
-		return implode("\n", $records);
-	}
+    /**
+     * Return a JSON-encoded array of records.
+     *
+     * @param  array  $records
+     * @return string
+     */
+    protected function formatBatchJson(array $records)
+    {
+        return json_encode($records);
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function format(array $record)
-	{
-		return json_encode($record) . ($this->appendNewline ? "\n" : '');
-	}
+    /**
+     * Use new lines to separate records instead of a
+     * JSON-encoded array.
+     *
+     * @param  array  $records
+     * @return string
+     */
+    protected function formatBatchNewlines(array $records)
+    {
+        $instance = $this;
 
-	/**
-	 * Return a JSON-encoded array of records.
-	 *
-	 * @param  array $records
-	 *
-	 * @return string
-	 */
-	protected function formatBatchJson(array $records)
-	{
-		return json_encode($records);
-	}
+        $oldNewline = $this->appendNewline;
+        $this->appendNewline = false;
+        array_walk($records, function (&$value, $key) use ($instance) {
+            $value = $instance->format($value);
+        });
+        $this->appendNewline = $oldNewline;
+
+        return implode("\n", $records);
+    }
 }

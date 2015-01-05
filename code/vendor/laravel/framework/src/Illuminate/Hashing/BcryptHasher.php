@@ -1,7 +1,6 @@
 <?php namespace Illuminate\Hashing;
 
-class BcryptHasher implements HasherInterface
-{
+class BcryptHasher implements HasherInterface {
 
 	/**
 	 * Default crypt cost factor.
@@ -13,9 +12,8 @@ class BcryptHasher implements HasherInterface
 	/**
 	 * Hash the given value.
 	 *
-	 * @param  string $value
-	 * @param  array  $options
-	 *
+	 * @param  string  $value
+	 * @param  array   $options
 	 * @return string
 	 *
 	 * @throws \RuntimeException
@@ -26,7 +24,8 @@ class BcryptHasher implements HasherInterface
 
 		$hash = password_hash($value, PASSWORD_BCRYPT, array('cost' => $cost));
 
-		if ($hash === false) {
+		if ($hash === false)
+		{
 			throw new \RuntimeException("Bcrypt hashing not supported.");
 		}
 
@@ -36,10 +35,9 @@ class BcryptHasher implements HasherInterface
 	/**
 	 * Check the given plain value against a hash.
 	 *
-	 * @param  string $value
-	 * @param  string $hashedValue
-	 * @param  array  $options
-	 *
+	 * @param  string  $value
+	 * @param  string  $hashedValue
+	 * @param  array   $options
 	 * @return bool
 	 */
 	public function check($value, $hashedValue, array $options = array())
@@ -50,9 +48,8 @@ class BcryptHasher implements HasherInterface
 	/**
 	 * Check if the given hash has been hashed using the given options.
 	 *
-	 * @param  string $hashedValue
-	 * @param  array  $options
-	 *
+	 * @param  string  $hashedValue
+	 * @param  array   $options
 	 * @return bool
 	 */
 	public function needsRehash($hashedValue, array $options = array())
@@ -60,6 +57,17 @@ class BcryptHasher implements HasherInterface
 		$cost = isset($options['rounds']) ? $options['rounds'] : $this->rounds;
 
 		return password_needs_rehash($hashedValue, PASSWORD_BCRYPT, array('cost' => $cost));
+	}
+
+	/**
+	 * Set the default crypt cost factor.
+	 *
+	 * @param  int  $rounds
+	 * @return void
+	 */
+	public function setRounds($rounds)
+	{
+		$this->rounds = (int) $rounds;
 	}
 
 }

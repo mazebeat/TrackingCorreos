@@ -1,7 +1,7 @@
 <?php namespace Illuminate\Queue\Jobs;
 
-use Illuminate\Container\Container;
 use Illuminate\Queue\IronQueue;
+use Illuminate\Container\Container;
 
 class IronJob extends Job {
 

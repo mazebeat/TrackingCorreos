@@ -2,8 +2,7 @@
 
 use Illuminate\Auth\UserInterface;
 
-trait ApplicationTrait
-{
+trait ApplicationTrait {
 
 	/**
 	 * The Illuminate application instance.
@@ -38,14 +37,13 @@ trait ApplicationTrait
 	/**
 	 * Call the given URI and return the Response.
 	 *
-	 * @param  string $method
-	 * @param  string $uri
-	 * @param  array  $parameters
-	 * @param  array  $files
-	 * @param  array  $server
-	 * @param  string $content
-	 * @param  bool   $changeHistory
-	 *
+	 * @param  string  $method
+	 * @param  string  $uri
+	 * @param  array   $parameters
+	 * @param  array   $files
+	 * @param  array   $server
+	 * @param  string  $content
+	 * @param  bool	$changeHistory
 	 * @return \Illuminate\Http\Response
 	 */
 	public function call($method, $uri, $parameters = [], $files = [], $server = [], $content = null, $changeHistory = true)
@@ -58,19 +56,18 @@ trait ApplicationTrait
 	/**
 	 * Call the given HTTPS URI and return the Response.
 	 *
-	 * @param  string $method
-	 * @param  string $uri
-	 * @param  array  $parameters
-	 * @param  array  $files
-	 * @param  array  $server
-	 * @param  string $content
-	 * @param  bool   $changeHistory
-	 *
+	 * @param  string  $method
+	 * @param  string  $uri
+	 * @param  array   $parameters
+	 * @param  array   $files
+	 * @param  array   $server
+	 * @param  string  $content
+	 * @param  bool	$changeHistory
 	 * @return \Illuminate\Http\Response
 	 */
 	public function callSecure($method, $uri, $parameters = [], $files = [], $server = [], $content = null, $changeHistory = true)
 	{
-		$uri = 'https://localhost/' . ltrim($uri, '/');
+		$uri = 'https://localhost/'.ltrim($uri, '/');
 
 		return $this->call($method, $uri, $parameters, $files, $server, $content, $changeHistory);
 	}
@@ -78,15 +75,14 @@ trait ApplicationTrait
 	/**
 	 * Call a controller action and return the Response.
 	 *
-	 * @param  string $method
-	 * @param  string $action
-	 * @param  array  $wildcards
-	 * @param  array  $parameters
-	 * @param  array  $files
-	 * @param  array  $server
-	 * @param  string $content
-	 * @param  bool   $changeHistory
-	 *
+	 * @param  string  $method
+	 * @param  string  $action
+	 * @param  array   $wildcards
+	 * @param  array   $parameters
+	 * @param  array   $files
+	 * @param  array   $server
+	 * @param  string  $content
+	 * @param  bool	$changeHistory
 	 * @return \Illuminate\Http\Response
 	 */
 	public function action($method, $action, $wildcards = array(), $parameters = array(), $files = array(), $server = array(), $content = null, $changeHistory = true)
@@ -99,15 +95,14 @@ trait ApplicationTrait
 	/**
 	 * Call a named route and return the Response.
 	 *
-	 * @param  string $method
-	 * @param  string $name
-	 * @param  array  $routeParameters
-	 * @param  array  $parameters
-	 * @param  array  $files
-	 * @param  array  $server
-	 * @param  string $content
-	 * @param  bool   $changeHistory
-	 *
+	 * @param  string  $method
+	 * @param  string  $name
+	 * @param  array   $routeParameters
+	 * @param  array   $parameters
+	 * @param  array   $files
+	 * @param  array   $server
+	 * @param  string  $content
+	 * @param  bool	$changeHistory
 	 * @return \Illuminate\Http\Response
 	 */
 	public function route($method, $name, $routeParameters = array(), $parameters = array(), $files = array(), $server = array(), $content = null, $changeHistory = true)
@@ -120,15 +115,15 @@ trait ApplicationTrait
 	/**
 	 * Set the session to the given array.
 	 *
-	 * @param  array $data
-	 *
+	 * @param  array  $data
 	 * @return void
 	 */
 	public function session(array $data)
 	{
 		$this->startSession();
 
-		foreach ($data as $key => $value) {
+		foreach ($data as $key => $value)
+		{
 			$this->app['session']->put($key, $value);
 		}
 	}
@@ -152,7 +147,8 @@ trait ApplicationTrait
 	 */
 	protected function startSession()
 	{
-		if (!$this->app['session']->isStarted()) {
+		if ( ! $this->app['session']->isStarted())
+		{
 			$this->app['session']->start();
 		}
 	}
@@ -160,9 +156,8 @@ trait ApplicationTrait
 	/**
 	 * Set the currently logged in user for the application.
 	 *
-	 * @param  \Illuminate\Auth\UserInterface $user
-	 * @param  string                         $driver
-	 *
+	 * @param  \Illuminate\Auth\UserInterface  $user
+	 * @param  string  $driver
 	 * @return void
 	 */
 	public function be(UserInterface $user, $driver = null)
@@ -173,8 +168,7 @@ trait ApplicationTrait
 	/**
 	 * Seed a given database connection.
 	 *
-	 * @param  string $class
-	 *
+	 * @param  string  $class
 	 * @return void
 	 */
 	public function seed($class = 'DatabaseSeeder')
@@ -185,8 +179,7 @@ trait ApplicationTrait
 	/**
 	 * Create a new HttpKernel client instance.
 	 *
-	 * @param  array $server
-	 *
+	 * @param  array  $server
 	 * @return \Symfony\Component\HttpKernel\Client
 	 */
 	protected function createClient(array $server = array())

@@ -12,6 +12,7 @@
                     <div class="panel-heading">
                         Tracking
                         <span class="tools pull-right">
+                            <a class="fa fa-question" href="#"></a>
 							<a class="fa fa-chevron-down" href="javascript:"></a>
 						</span>
                     </div>
@@ -35,15 +36,17 @@
                                     {{ Form::label('campana', 'Campaña (*)', array('class' => 'control-label')) }}
                                     <select name="campana" class="form-control ng-dirty ng-invalid"
                                             ng-model="tracking.campana"
-                                            ng-options="item.campana as item.campana for item in campanas" required>
+                                            ng-options="item.campana as item.campana for item in campanas"
+                                            required>
                                         <option value="" selected>Seleccione una Campaña</option>
+                                        {{--<option value="CampanaPrueba">Campaña de prueba</option>--}}
                                     </select>
                                     <small class="help-block">{{ $errors->first('campana') }}</small>
                                 </div>
                                 <div class="form-group col-xs-1 col-md-1" style="margin-top: 24px;">
                                     {{ Form::label('consultar', 'Consultar', array('class' => 'control-label sr-only' )) }}
                                     <button id="trackingFormButton" type="submit" class="ladda-button btn btn-success"
-                                            data-style="zoom-in" data-size="xs"
+                                            data-style="zoom-in"
                                             ng-disabled="trackingForm.$invalid">
                                         Consultar
                                     </button>
@@ -52,57 +55,71 @@
                         </form>
                     </div>
                 </div>
-                <div class="panel panel-default" ng-show="result">
-                    <div class="panel-heading">
-                        Resultado de busqueda
-                         <span class="tools pull-right">
-							<a class="fa fa-chevron-down" href="javascript:"></a>
-						</span>
-                    </div>
+                <section class="panel" ng-show="result">
+                    <header class="panel-heading custom-tab dark-tab">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a data-toggle="tab" href="#tabla">Detalle</a>
+                            </li>
+                            <li class="">
+                                <a data-toggle="tab" href="#grafico">Gráfico</a>
+                            </li>
+                            <li class="pull-right">
+                                <a ng-click="exportData()">
+                                    <i class="fa fa-download"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </header>
                     <div class="panel-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Año</th>
-                                    <th>Mes</th>
-                                    <th>Ciclo</th>
-                                    <th>Q doc. Emitidos</th>
-                                    <th>Q Físicos</th>
-                                    <th>Q Electrónicos</th>
-                                    <th>Visualizacion Mail</th>
-                                    <th>Visualizacion Portal</th>
-                                    <th>Lecturas Email</th>
-                                    <th>No Leídos</th>
-                                    <th>Retenidos</th>
-                                    <th>Env. Fallidos</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr ng-repeat="row in result">
-                                    <td>@{{$index}}</td>
-                                    <td>@{{row.ano}}</td>
-                                    <td>@{{row.mes}}</td>
-                                    <td>@{{row.ciclo}}</td>
-                                    <td>@{{row.qemitidos}}</td>
-                                    <td>@{{row.qfisicos}}</td>
-                                    <td>@{{row.qelectronicos}}</td>
-                                    <td>@{{row.ciclo}}</td>
-                                    <td>@{{row.ciclo}}</td>
-                                    <td>@{{row.qleidos}}</td>
-                                    <td>@{{row.qnoleidos}}</td>
-                                    <td>@{{row.qrebotes}}</td>
-                                    <td>@{{row.qenviosfallidos}}</td>
-                                </tr>
-                                </tbody>
-                            </table>
+                        <div class="tab-content">
+                            <div id="tabla" class="tab-pane active">
+                                <div id="tablaTracking" class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Fecha</th>
+                                            <th>Ciclo</th>
+                                            <th>Q doc. Emitidos</th>
+                                            <th>Q Físicos</th>
+                                            <th>Q Electrónicos</th>
+                                            <th>Visualizacion Mail</th>
+                                            <th>Visualizacion Portal</th>
+                                            <th>Lecturas Email</th>
+                                            <th>No Leídos</th>
+                                            <th>Retenidos</th>
+                                            <th>Env. Fallidos</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="row in result">
+                                            <td>@{{row.ano + '/' + row.mes | date:'yyyy/MM'}}</td>
+                                            <td>@{{row.ciclo}}</td>
+                                            <td>@{{row.qemitidos}}</td>
+                                            <td>@{{row.qfisicos}}</td>
+                                            <td>@{{row.qelectronicos}}</td>
+                                            <td>@{{row.ciclo}}</td>
+                                            <td>@{{row.ciclo}}</td>
+                                            <td>@{{row.qleidos}}</td>
+                                            <td>@{{row.qnoleidos}}</td>
+                                            <td>@{{row.qrebotes}}</td>
+                                            <td>@{{row.qenviosfallidos}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div id="grafico" class="tab-pane">
+                                <div id="resumenTracking"
+                                     style="width: 100%; height: 400px;  background-color: #FFFFFF;"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </section>
             </div>
         </div>
     </div>
+
 @endsection
 
 @section('file-style')
@@ -127,7 +144,17 @@
 
 @section('text-script')
     <script type="text/javascript">
+        var chart = new AmCharts.AmPieChart();
         var trackingButton = Ladda.create(document.querySelector('#trackingFormButton'));
         Ladda.bind('.ladda-button');
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            var news = $(e.target);
+            var olds = $(e.relatedTarget);
+
+            if (news.attr('href') == '#grafico') {
+                chart.validateNow();
+//                chart.animateAgain();
+            }
+        })
     </script>
 @endsection

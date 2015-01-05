@@ -5,8 +5,7 @@ use Illuminate\Console\ConfirmableTrait;
 use Illuminate\Database\Migrations\Migrator;
 use Symfony\Component\Console\Input\InputOption;
 
-class ResetCommand extends Command
-{
+class ResetCommand extends Command {
 
 	use ConfirmableTrait;
 
@@ -34,8 +33,7 @@ class ResetCommand extends Command
 	/**
 	 * Create a new migration rollback command instance.
 	 *
-	 * @param  \Illuminate\Database\Migrations\Migrator $migrator
-	 *
+	 * @param  \Illuminate\Database\Migrations\Migrator  $migrator
 	 * @return void
 	 */
 	public function __construct(Migrator $migrator)
@@ -52,25 +50,25 @@ class ResetCommand extends Command
 	 */
 	public function fire()
 	{
-		if (!$this->confirmToProceed())
-			return;
+		if ( ! $this->confirmToProceed()) return;
 
 		$this->migrator->setConnection($this->input->getOption('database'));
 
 		$pretend = $this->input->getOption('pretend');
 
-		while (true) {
+		while (true)
+		{
 			$count = $this->migrator->rollback($pretend);
 
 			// Once the migrator has run we will grab the note output and send it out to
 			// the console screen, since the migrator itself functions without having
 			// any instances of the OutputInterface contract passed into the class.
-			foreach ($this->migrator->getNotes() as $note) {
+			foreach ($this->migrator->getNotes() as $note)
+			{
 				$this->output->writeln($note);
 			}
 
-			if ($count == 0)
-				break;
+			if ($count == 0) break;
 		}
 	}
 
@@ -81,9 +79,13 @@ class ResetCommand extends Command
 	 */
 	protected function getOptions()
 	{
-		return array(array('database', null, InputOption::VALUE_OPTIONAL, 'The database connection to use.'),
+		return array(
+			array('database', null, InputOption::VALUE_OPTIONAL, 'The database connection to use.'),
+
 			array('force', null, InputOption::VALUE_NONE, 'Force the operation to run when in production.'),
-			array('pretend', null, InputOption::VALUE_NONE, 'Dump the SQL queries that would be run.'),);
+
+			array('pretend', null, InputOption::VALUE_NONE, 'Dump the SQL queries that would be run.'),
+		);
 	}
 
 }

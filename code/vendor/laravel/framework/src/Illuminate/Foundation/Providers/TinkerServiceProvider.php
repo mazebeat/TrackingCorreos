@@ -1,7 +1,7 @@
 <?php namespace Illuminate\Foundation\Providers;
 
-use Illuminate\Foundation\Console\TinkerCommand;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\Console\TinkerCommand;
 
 class TinkerServiceProvider extends ServiceProvider {
 

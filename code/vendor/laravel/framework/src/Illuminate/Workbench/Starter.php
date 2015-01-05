@@ -1,7 +1,7 @@
 <?php namespace Illuminate\Workbench;
 
-use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
+use Illuminate\Filesystem\Filesystem;
 
 class Starter {
 

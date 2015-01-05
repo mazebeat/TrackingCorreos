@@ -1,13 +1,12 @@
 <?php namespace Illuminate\Foundation\Console;
 
-use ClassPreloader\Command\PreCompileCommand;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Composer;
 use Illuminate\View\Engines\CompilerEngine;
+use ClassPreloader\Command\PreCompileCommand;
 use Symfony\Component\Console\Input\InputOption;
 
-class OptimizeCommand extends Command
-{
+class OptimizeCommand extends Command {
 
 	/**
 	 * The console command name.
@@ -33,8 +32,7 @@ class OptimizeCommand extends Command
 	/**
 	 * Create a new optimize command instance.
 	 *
-	 * @param  \Illuminate\Foundation\Composer $composer
-	 *
+	 * @param  \Illuminate\Foundation\Composer  $composer
 	 * @return void
 	 */
 	public function __construct(Composer $composer)
@@ -53,13 +51,17 @@ class OptimizeCommand extends Command
 	{
 		$this->info('Generating optimized class loader');
 
-		if ($this->option('psr')) {
+		if ($this->option('psr'))
+		{
 			$this->composer->dumpAutoloads();
-		} else {
+		}
+		else
+		{
 			$this->composer->dumpOptimized();
 		}
 
-		if ($this->option('force') || !$this->laravel['config']['app.debug']) {
+		if ($this->option('force') || ! $this->laravel['config']['app.debug'])
+		{
 			$this->info('Compiling common classes');
 
 			$this->compileClasses();
@@ -67,7 +69,9 @@ class OptimizeCommand extends Command
 			$this->info('Compiling views');
 
 			$this->compileViews();
-		} else {
+		}
+		else
+		{
 			$this->call('clear-compiled');
 		}
 	}
@@ -81,11 +85,13 @@ class OptimizeCommand extends Command
 	{
 		$this->registerClassPreloaderCommand();
 
-		$outputPath = $this->laravel['path.base'] . '/bootstrap/compiled.php';
+		$outputPath = $this->laravel['path.base'].'/bootstrap/compiled.php';
 
-		$this->callSilent('compile', array('--config'         => implode(',', $this->getClassFiles()),
-		                                   '--output'         => $outputPath,
-		                                   '--strip_comments' => 1,));
+		$this->callSilent('compile', array(
+			'--config' => implode(',', $this->getClassFiles()),
+			'--output' => $outputPath,
+			'--strip_comments' => 1,
+		));
 	}
 
 	/**
@@ -97,7 +103,7 @@ class OptimizeCommand extends Command
 	{
 		$app = $this->laravel;
 
-		$core = require __DIR__ . '/Optimize/config.php';
+		$core = require __DIR__.'/Optimize/config.php';
 
 		return array_merge($core, $this->laravel['config']['compile']);
 	}
@@ -119,15 +125,21 @@ class OptimizeCommand extends Command
 	 */
 	protected function compileViews()
 	{
-		foreach ($this->laravel['view']->getFinder()->getPaths() as $path) {
-			foreach ($this->laravel['files']->allFiles($path) as $file) {
-				try {
+		foreach ($this->laravel['view']->getFinder()->getPaths() as $path)
+		{
+			foreach ($this->laravel['files']->allFiles($path) as $file)
+			{
+				try
+				{
 					$engine = $this->laravel['view']->getEngineFromPath($file);
-				} catch (\InvalidArgumentException $e) {
+				}
+				catch (\InvalidArgumentException $e)
+				{
 					continue;
 				}
 
-				if ($engine instanceof CompilerEngine) {
+				if ($engine instanceof CompilerEngine)
+				{
 					$engine->getCompiler()->compile($file);
 				}
 			}
@@ -141,8 +153,11 @@ class OptimizeCommand extends Command
 	 */
 	protected function getOptions()
 	{
-		return array(array('force', null, InputOption::VALUE_NONE, 'Force the compiled class file to be written.'),
-			array('psr', null, InputOption::VALUE_NONE, 'Do not optimize Composer dump-autoload.'),);
+		return array(
+			array('force', null, InputOption::VALUE_NONE, 'Force the compiled class file to be written.'),
+
+			array('psr', null, InputOption::VALUE_NONE, 'Do not optimize Composer dump-autoload.'),
+		);
 	}
 
 }

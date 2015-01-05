@@ -27,6 +27,15 @@
 	{{ HTML::script('js/jquery-1.10.2.min.js') }}
 	{{ HTML::script('js/jquery-migrate-1.2.1.min.js') }}
 	{{ HTML::script('js/bootstrap.min.js') }}
+	{{ HTML::script('js/jquery.cookies.js') }}
+
+
+	{{-- AmCharts JS --}}
+	{{ HTML::script('js/amcharts/amcharts.js') }}
+	{{ HTML::script('js/amcharts/pie.js') }}
+	{{ HTML::script('js/amcharts/serial.js') }}
+	{{ HTML::script('http://www.amcharts.com/lib/3/exporting/amexport_combined.js') }}
+	{{ HTML::script('js/amcharts/lang/es.js') }}
 	@yield('file-script')
     @include('layouts.angularjs')
 	@yield('text-script')
