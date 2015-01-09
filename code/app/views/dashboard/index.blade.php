@@ -113,19 +113,19 @@
         var chartdiv1 = new AmCharts.AmPieChart();
         var chartdiv2 = new AmCharts.AmSerialChart();
 
-        //        if ($.cookie('firstTime')) {
-        //            $(function () {
-        //                var notice = (new PNotify({
-        //                    type: 'notice',
-        //                    title: 'Aplicación iniciada',
-        {{--text: 'Bienvenido {{ Auth::user()->nombre }}!',--}}
-        //                    desktop: {
-        //                        desktop: true
-        //                    }
-        //                }));
-        //
-        //                $.cookie('firstTime', false);
-        //            });
-        //        }
+        {{--if ($.cookie('firstTime')) {--}}
+            {{--$(function () {--}}
+                {{--var notice = (new PNotify({--}}
+                    {{--type: 'notice',--}}
+                    {{--title: 'Aplicación iniciada',--}}
+                    {{--text: 'Bienvenido {{ Auth::user()->nombre }}!',--}}
+                    {{--desktop: {--}}
+                        {{--desktop: true--}}
+                    {{--}--}}
+                {{--}));--}}
+
+                {{--$.cookie('firstTime', false);--}}
+            {{--});--}}
+        {{--}--}}
     </script>
 @endsection

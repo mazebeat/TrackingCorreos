@@ -302,7 +302,7 @@ trackingCorreos.controller('trackingController', ['$scope', '$http', '$q', 'stor
                             $scope.setCampañas(JSON.parse('[' + camps + ']'));
                             apiFactory.notify('Tracking de Correos', 'Campañas cargadas');
                         } else {
-                            $scope.message = response.messsage;
+                            $scope.message = response.message;
                             apiFactory.notify('Tracking de Correos', $scope.message);
                         }
                     });
@@ -324,7 +324,6 @@ trackingCorreos.controller('trackingController', ['$scope', '$http', '$q', 'stor
         };
         apiFactory.post(request)
             .then(function (response) {
-                /* console.log(response); */
                 if (response.ok) {
                     var deferred = $q.defer();
                     apiFactory.notify('Tracking de Correos', 'Listo!');
@@ -334,8 +333,8 @@ trackingCorreos.controller('trackingController', ['$scope', '$http', '$q', 'stor
                     $scope.result = json;
                     trackingButton.stop();
                 } else {
-                    /* Cambiar messsage por message */
-                    $scope.message = response.messsage;
+                    /* Cambiar message por message */
+                    $scope.message = response.message;
                     apiFactory.notify('Tracking de Correos', $scope.message);
                     trackingButton.stop();
                     $scope.result = [];
