@@ -104,6 +104,12 @@ trackingCorreos.service('apiFactory', ['$http', '$q', function ($http, $q) {
         console.log(name + ".xls");
         saveAs(blob, name + ".xls");
     };
+
+    this.splitString = function(string, nb) {
+        console.log(string);
+        var array = string.split(',');
+        return array[nb];
+    }
 }]);
 
 /* Chart Service */

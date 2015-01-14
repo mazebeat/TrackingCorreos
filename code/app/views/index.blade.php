@@ -22,7 +22,7 @@
             {{--<span class="text-uppercase"><strong>Atención!</strong> @{{ message }}</span>--}}
             {{--</div>--}}
             <div class="form-signin-heading text-center">
-                {{ HTML::image('images/login-logo.png', 'Intelidata', array()) }}
+                {{ HTML::image('images/loginLogo.png', 'Intelidata', array()) }}
             </div>
             <div class="login-wrap">
                 <input type="text" name="username" id="username" ng-model="user.user"

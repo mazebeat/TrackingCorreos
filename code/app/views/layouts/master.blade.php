@@ -30,10 +30,10 @@
     <div class="wrapper-top">
         <div class="row">
             <div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
-                {{ HTML::image('images/login-logo.png', 'Intelidata', array('class' => 'img-responsive')) }}
+                {{ HTML::image('images/negocios/' . Auth::user()->empresa . '.png', 'Intelidata', array('class' => 'img-responsive')) }}
             </div>
             <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-                <h2 class="text-center">Tracking de correos</h2>
+                <h2 class="text-center">Tracking de Correos</h2>
             </div>
             {{--<div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">--}}
             {{--{{ HTML::image('http://madrynsite.com.ar/wp-content/uploads/2013/04/Logo_Telefonica_Movistar1.jpg', 'Intelidata', array('class' => 'img-responsive pull-right', 'style' => 'height: 81px;')) }}--}}

@@ -48,7 +48,7 @@ class DummyAuthProvider implements UserProviderInterface
 		                    'perfil'                => $this->credentials['codigoprivilegio'],
 		                    'descripcionprivilegio' => $this->credentials['descripcionprivilegio'],
 		                    'empresa'               => $this->credentials['empresa'],
-		                    'negocio'               => $this->credentials['negocio'],);
+		                    'negocios'               => $this->credentials['negocios'],);
 
 		return new GenericUser($attributes);
 	}

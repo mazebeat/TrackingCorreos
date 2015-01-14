@@ -33,13 +33,25 @@
                                 </div>
                                 <div class="form-group col-xs-3 col-md-3"
                                      ng-class="{ 'has-error' : trackingForm.campana.$invalid && !trackingForm.campana.$pristine }">
+                                    {{ Form::label('negocio', 'Negocio (*)', array('class' => 'control-label')) }}
+                                    <select name="negocio" class="form-control ng-dirty ng-invalid"
+                                            ng-model="tracking.negocio"
+                                            ng-options="item as item for item in negocios"
+                                            ng-change="loadCamps()"
+                                            required>
+                                        <option value="" selected>Seleccione un Negocio</option>
+                                    </select>
+                                    <small class="help-block">{{ $errors->first('campana') }}</small>
+                                </div>
+                                <div class="form-group col-xs-3 col-md-3"
+                                     ng-class="{ 'has-error' : trackingForm.campana.$invalid && !trackingForm.campana.$pristine }"
+                                        ng-show="tracking.negocio">
                                     {{ Form::label('campana', 'Campaña (*)', array('class' => 'control-label')) }}
                                     <select name="campana" class="form-control ng-dirty ng-invalid"
                                             ng-model="tracking.campana"
                                             ng-options="item.campana as item.campana for item in campanas"
                                             required>
                                         <option value="" selected>Seleccione una Campaña</option>
-                                        {{--<option value="CampanaPrueba">Campaña de prueba</option>--}}
                                     </select>
                                     <small class="help-block">{{ $errors->first('campana') }}</small>
                                 </div>
@@ -75,6 +87,38 @@
                         <div class="tab-content">
                             <div id="tabla" class="tab-pane active">
                                 <div id="tablaTracking" class="table-responsive">
+                                    <table id="exportDetail" class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Fecha</th>
+                                            <th>Ciclo</th>
+                                            <th>Q doc. Emitidos</th>
+                                            <th>Q Físicos</th>
+                                            <th>Q Electrónicos</th>
+                                            <th>Visualizacion Mail</th>
+                                            <th>Visualizacion Portal</th>
+                                            <th>Lecturas Email</th>
+                                            <th>No Leídos</th>
+                                            <th>Retenidos</th>
+                                            <th>Env. Fallidos</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="row in result">
+                                            <td>@{{row.ano + '/' + row.mes | date:'yyyy/MM'}}</td>
+                                            <td>@{{row.ciclo}}</td>
+                                            <td>@{{row.qemitidos}}</td>
+                                            <td>@{{row.qfisicos}}</td>
+                                            <td>@{{row.qelectronicos}}</td>
+                                            <td>@{{row.ciclo}}</td>
+                                            <td>@{{row.ciclo}}</td>
+                                            <td>@{{row.qleidos}}</td>
+                                            <td>@{{row.qnoleidos}}</td>
+                                            <td>@{{row.qrebotes}}</td>
+                                            <td>@{{row.qenviosfallidos}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                     <table class="table">
                                         <thead>
                                         <tr>
