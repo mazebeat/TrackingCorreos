@@ -45,11 +45,11 @@
                                 </div>
                                 <div class="form-group col-xs-3 col-md-3"
                                      ng-class="{ 'has-error' : trackingForm.campana.$invalid && !trackingForm.campana.$pristine }"
-                                        ng-show="tracking.negocio">
+                                     ng-show="tracking.negocio">
                                     {{ Form::label('campana', 'Campaña (*)', array('class' => 'control-label')) }}
                                     <select name="campana" class="form-control ng-dirty ng-invalid"
                                             ng-model="tracking.campana"
-                                            ng-options="item.campana as item.campana for item in campanas"
+                                            ng-options="item.id as item.campana for item in campanas"
                                             required>
                                         <option value="" selected>Seleccione una Campaña</option>
                                     </select>
@@ -77,9 +77,9 @@
                                 <a data-toggle="tab" href="#grafico">Gráfico</a>
                             </li>
                             <li class="pull-right">
-                                <a ng-click="exportData()">
-                                    <i class="fa fa-download"></i>
-                                </a>
+                                {{--<a ng-click="exportData()">--}}
+                                {{--<i class="fa fa-download"></i>--}}
+                                {{--</a>--}}
                             </li>
                         </ul>
                     </header>
@@ -87,9 +87,10 @@
                         <div class="tab-content">
                             <div id="tabla" class="tab-pane active">
                                 <div id="tablaTracking" class="table-responsive">
-                                    <table id="exportDetail" class="table">
+                                    <table class="table">
                                         <thead>
                                         <tr>
+                                            <th></th>
                                             <th>Fecha</th>
                                             <th>Ciclo</th>
                                             <th>Q doc. Emitidos</th>
@@ -105,6 +106,11 @@
                                         </thead>
                                         <tbody>
                                         <tr ng-repeat="row in result">
+                                            <td>
+                                                <a class="btn btn-default" ng-click="exportData()">
+                                                    <i class="fa fa-download"></i>
+                                                </a>
+                                            </td>
                                             <td>@{{row.ano + '/' + row.mes | date:'yyyy/MM'}}</td>
                                             <td>@{{row.ciclo}}</td>
                                             <td>@{{row.qemitidos}}</td>
@@ -119,35 +125,31 @@
                                         </tr>
                                         </tbody>
                                     </table>
+                                </div>
+                                <div id="exportDetail" class="table-responsive" ng-show="false">
                                     <table class="table">
                                         <thead>
                                         <tr>
-                                            <th>Fecha</th>
-                                            <th>Ciclo</th>
-                                            <th>Q doc. Emitidos</th>
-                                            <th>Q Físicos</th>
-                                            <th>Q Electrónicos</th>
-                                            <th>Visualizacion Mail</th>
-                                            <th>Visualizacion Portal</th>
-                                            <th>Lecturas Email</th>
-                                            <th>No Leídos</th>
-                                            <th>Retenidos</th>
-                                            <th>Env. Fallidos</th>
+                                            {{--<th>ID</th>--}}
+                                            <th>Campana</th>
+                                            {{--<th>Id Documento</th>--}}
+                                            {{--<th>Id LogEnvio</th>--}}
+                                            <th>Negocio</th>
+                                            <th>Fecha Despacho</th>
+                                            <th>Fecha Retencion</th>
+                                            <th>Email</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr ng-repeat="row in result">
-                                            <td>@{{row.ano + '/' + row.mes | date:'yyyy/MM'}}</td>
-                                            <td>@{{row.ciclo}}</td>
-                                            <td>@{{row.qemitidos}}</td>
-                                            <td>@{{row.qfisicos}}</td>
-                                            <td>@{{row.qelectronicos}}</td>
-                                            <td>@{{row.ciclo}}</td>
-                                            <td>@{{row.ciclo}}</td>
-                                            <td>@{{row.qleidos}}</td>
-                                            <td>@{{row.qnoleidos}}</td>
-                                            <td>@{{row.qrebotes}}</td>
-                                            <td>@{{row.qenviosfallidos}}</td>
+                                        <tr ng-repeat="row in detail">
+                                            {{--<td>@{{row.id}}</td>--}}
+                                            <td>@{{row.idCampana}}</td>
+                                            {{--<td>@{{row.idDocumento}}</td>--}}
+                                            {{--<td>@{{row.idLogEnvio}}</td>--}}
+                                            <td>@{{row.idNegocio}}</td>
+                                            <td>@{{row.fechaDespacho | date:'yyyy/MM/dd'}}</td>
+                                            <td>@{{row.fechaRetencion | date:'yyyy/MM/dd'}}</td>
+                                            <td>@{{row.mail}}</td>
                                         </tr>
                                         </tbody>
                                     </table>

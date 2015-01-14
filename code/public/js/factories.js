@@ -95,18 +95,18 @@ trackingCorreos.service('apiFactory', ['$http', '$q', function ($http, $q) {
         var month = date.getMonth();
         return month < 10 ? '0' + month : month;
         /* ('' + month) for string result */
-    }
+    };
 
-    this.exportDataToTable = function (id, name) {
+    this.   exportDataToTable = function (id, name) {
         var blob = new Blob([document.getElementById(id).innerHTML], {
-            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8"
         });
-        console.log(name + ".xls");
+        //console.log(name + ".xls");
         saveAs(blob, name + ".xls");
     };
 
     this.splitString = function(string, nb) {
-        console.log(string);
+        //console.log(string);
         var array = string.split(',');
         return array[nb];
     }
@@ -410,8 +410,7 @@ trackingCorreos.service('chartService', ['rootFactory', '$http', '$window', 'sto
                     //console.log(data);
                 });
         }
-    };
-
+    }
     this.dots = function (chart, div, data, ejeX, ejey, title, labelTexto) {
         labelTexto = typeof labelTexto !== 'undefined' || labelTexto != null ? labelTexto : '';
         chart.pathToImages = this.urlImages;

@@ -380,14 +380,17 @@ trackingCorreos.controller('trackingController', ['$scope', '$http', '$q', 'stor
 
     $scope.submit = function () {
         trackingButton.start();
-        apiFactory.url('GestionMailWS/Resumen/ConsultaResumen');
+
         var fechas = $scope.tracking.fecha.split("-");
-        var request = {
+
+        var params = {
             ano: parseInt(fechas[0]),
             mes: parseInt(fechas[1]),
             campana: $scope.tracking.campana
         };
-        apiFactory.post(request)
+
+        apiFactory.url('GestionMailWS/Resumen/ConsultaResumen');
+        apiFactory.post(params)
             .then(function (response) {
                 if (response.ok) {
                     var deferred = $q.defer();
@@ -397,6 +400,19 @@ trackingCorreos.controller('trackingController', ['$scope', '$http', '$q', 'stor
                     chartService.donut(chart, 'resumenTracking', datos, 'value', 'title', 'title', '[[title]]<br>[[value]]</b>([[percents]])');
                     $scope.result = json;
                     trackingButton.stop();
+
+                    var params = {
+                        idcampana: $scope.tracking.campana
+                    };
+
+                    apiFactory.url('GestionMailWS/Despacho/ConsultaDespacho');
+                    apiFactory.post(params)
+                        .then(function (response) {
+                            if (response.ok) {
+                                var details = response.data.substr(0, response.data.length - 1);
+                                $scope.detail = JSON.parse('[' + details + ']');
+                            }
+                        });
                 } else {
                     /* Cambiar message por message */
                     $scope.message = response.message;
@@ -413,7 +429,7 @@ trackingCorreos.controller('trackingController', ['$scope', '$http', '$q', 'stor
     };
 
     $scope.exportData = function () {
-        apiFactory.exportDataToTable('exportDetail', 'Tracking');
+        apiFactory.exportDataToTable('exportDetail', 'Detalle Tracking');
     };
 
 }]);
