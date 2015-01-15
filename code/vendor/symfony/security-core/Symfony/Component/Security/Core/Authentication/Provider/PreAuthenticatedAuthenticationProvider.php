@@ -11,11 +11,11 @@
 
 namespace Symfony\Component\Security\Core\Authentication\Provider;
 
+use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Security\Core\User\UserCheckerInterface;
+use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Core\Authentication\Token\PreAuthenticatedToken;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Exception\BadCredentialsException;
-use Symfony\Component\Security\Core\User\UserCheckerInterface;
-use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 /**
  * Processes a pre-authenticated authentication request.
@@ -29,56 +29,56 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
  */
 class PreAuthenticatedAuthenticationProvider implements AuthenticationProviderInterface
 {
-	private $userProvider;
-	private $userChecker;
-	private $providerKey;
+    private $userProvider;
+    private $userChecker;
+    private $providerKey;
 
-	/**
-	 * Constructor.
-	 *
-	 * @param UserProviderInterface $userProvider An UserProviderInterface instance
-	 * @param UserCheckerInterface  $userChecker  An UserCheckerInterface instance
-	 * @param string                $providerKey  The provider key
-	 */
-	public function __construct(UserProviderInterface $userProvider, UserCheckerInterface $userChecker, $providerKey)
-	{
-		$this->userProvider = $userProvider;
-		$this->userChecker  = $userChecker;
-		$this->providerKey  = $providerKey;
-	}
+    /**
+     * Constructor.
+     *
+     * @param UserProviderInterface $userProvider An UserProviderInterface instance
+     * @param UserCheckerInterface  $userChecker  An UserCheckerInterface instance
+     * @param string                $providerKey  The provider key
+     */
+    public function __construct(UserProviderInterface $userProvider, UserCheckerInterface $userChecker, $providerKey)
+    {
+        $this->userProvider = $userProvider;
+        $this->userChecker  = $userChecker;
+        $this->providerKey  = $providerKey;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function authenticate(TokenInterface $token)
-	{
-		if (!$this->supports($token)) {
-			return;
-		}
+    /**
+     * {@inheritdoc}
+     */
+    public function authenticate(TokenInterface $token)
+    {
+        if (!$this->supports($token)) {
+            return;
+        }
 
-		if (!$user = $token->getUser()) {
-			throw new BadCredentialsException('No pre-authenticated principal found in request.');
-		}
-		/*
-		if (null === $token->getCredentials()) {
-			throw new BadCredentialsException('No pre-authenticated credentials found in request.');
-		}
-		*/
-		$user = $this->userProvider->loadUserByUsername($user);
+        if (!$user = $token->getUser()) {
+            throw new BadCredentialsException('No pre-authenticated principal found in request.');
+        }
+        /*
+        if (null === $token->getCredentials()) {
+            throw new BadCredentialsException('No pre-authenticated credentials found in request.');
+        }
+        */
+        $user = $this->userProvider->loadUserByUsername($user);
 
-		$this->userChecker->checkPostAuth($user);
+        $this->userChecker->checkPostAuth($user);
 
-		$authenticatedToken = new PreAuthenticatedToken($user, $token->getCredentials(), $this->providerKey, $user->getRoles());
-		$authenticatedToken->setAttributes($token->getAttributes());
+        $authenticatedToken = new PreAuthenticatedToken($user, $token->getCredentials(), $this->providerKey, $user->getRoles());
+        $authenticatedToken->setAttributes($token->getAttributes());
 
-		return $authenticatedToken;
-	}
+        return $authenticatedToken;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function supports(TokenInterface $token)
-	{
-		return $token instanceof PreAuthenticatedToken && $this->providerKey === $token->getProviderKey();
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function supports(TokenInterface $token)
+    {
+        return $token instanceof PreAuthenticatedToken && $this->providerKey === $token->getProviderKey();
+    }
 }

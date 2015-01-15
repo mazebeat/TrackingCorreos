@@ -16,13 +16,13 @@ namespace Symfony\Component\Security\Core\Encoder;
  */
 interface EncoderAwareInterface
 {
-	/**
-	 * Gets the name of the encoder used to encode the password.
-	 *
-	 * If the method returns null, the standard way to retrieve the encoder
-	 * will be used instead.
-	 *
-	 * @return string
-	 */
-	public function getEncoderName();
+    /**
+     * Gets the name of the encoder used to encode the password.
+     *
+     * If the method returns null, the standard way to retrieve the encoder
+     * will be used instead.
+     *
+     * @return string
+     */
+    public function getEncoderName();
 }

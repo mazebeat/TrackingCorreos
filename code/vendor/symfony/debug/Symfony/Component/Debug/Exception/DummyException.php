@@ -12,7 +12,7 @@
 namespace Symfony\Component\Debug\Exception;
 
 /**
- * @author     Fabien Potencier <fabien@symfony.com>
+ * @author Fabien Potencier <fabien@symfony.com>
  *
  * @deprecated since version 2.5, to be removed in 3.0.
  */

@@ -12,6 +12,7 @@
     "require": {
         "laravel/framework": "4.2.*",
         "twbs/bootstrap": "3.3.*@dev",
+        "maatwebsite/excel": "1.*",
         "barryvdh/laravel-debugbar": "~1.7",
         "barryvdh/laravel-ide-helper": "~1.11",
         "fitztrev/laravel-html-minify": "1.*",

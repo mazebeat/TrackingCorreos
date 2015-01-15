@@ -11,10 +11,10 @@
 
 namespace Symfony\Component\HttpKernel\DataCollector;
 
+use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Kernel;
-use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * ConfigDataCollector.
@@ -181,7 +181,7 @@ class ConfigDataCollector extends DataCollector
     }
 
     /**
-     * Returns true if Zend OPcache is enabled
+     * Returns true if Zend OPcache is enabled.
      *
      * @return bool true if Zend OPcache is enabled, false otherwise
      */

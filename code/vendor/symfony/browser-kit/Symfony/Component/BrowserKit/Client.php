@@ -12,8 +12,8 @@
 namespace Symfony\Component\BrowserKit;
 
 use Symfony\Component\DomCrawler\Crawler;
-use Symfony\Component\DomCrawler\Form;
 use Symfony\Component\DomCrawler\Link;
+use Symfony\Component\DomCrawler\Form;
 use Symfony\Component\Process\PhpProcess;
 
 /**
@@ -198,7 +198,7 @@ abstract class Client
      *
      * @return object|null A response instance
      *
-     * @see doRequest
+     * @see doRequest()
      *
      * @api
      */
@@ -227,7 +227,7 @@ abstract class Client
      *
      * @return object|null A Request instance
      *
-     * @see doRequest
+     * @see doRequest()
      *
      * @api
      */

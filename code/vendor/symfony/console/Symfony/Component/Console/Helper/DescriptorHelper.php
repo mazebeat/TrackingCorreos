@@ -35,11 +35,8 @@ class DescriptorHelper extends Helper
      */
     public function __construct()
     {
-        $this
-            ->register('txt',  new TextDescriptor())
-            ->register('xml',  new XmlDescriptor())
-            ->register('json', new JsonDescriptor())
-            ->register('md',   new MarkdownDescriptor())
+        $this->register('txt', new TextDescriptor())->register('xml', new XmlDescriptor())
+            ->register('json', new JsonDescriptor())->register('md', new MarkdownDescriptor())
         ;
     }
 

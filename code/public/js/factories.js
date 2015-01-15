@@ -91,6 +91,50 @@ trackingCorreos.service('apiFactory', ['$http', '$q', function ($http, $q) {
         }
     };
 
+    this.stackNotify = function (type, position) {
+        var stack_topleft = {"dir1": "down", "dir2": "right", "push": "top"};
+        var stack_bottomleft = {"dir1": "right", "dir2": "up", "push": "top"};
+        var stack_bar_top = {"dir1": "down", "dir2": "right", "push": "top", "spacing1": 0, "spacing2": 0};
+        var stack_bar_bottom = {"dir1": "up", "dir2": "right", "spacing1": 0, "spacing2": 0};
+
+        var opts = {
+            title: "Over Here",
+            text: "Check me out. I'm in a different stack.",
+            addclass: "stack_bottomleft",
+            cornerclass: "",
+            width: "60%"
+        };
+        switch (type) {
+            case 'error':
+                opts.title = "Oh No";
+                opts.text = "Watch out for that water tower!";
+                opts.type = "error";
+                break;
+            case 'info':
+                opts.title = "Atención!";
+                opts.text = "No se encontraron datos";
+                opts.type = "info";
+                break;
+            case 'success':
+                opts.title = "Good News Everyone";
+                opts.text = "I've invented a device that bites shiny metal asses.";
+                opts.type = "success";
+                break;
+        }
+        switch (position) {
+            case 'top':
+                opts.stack = stack_bar_top;
+                break;
+            case 'topleft':
+                opts.stack = stack_topleft;
+                break;
+            case 'bottom':
+                opts.stack = stack_bottomleft;
+                break;
+        }
+        new PNotify(opts);
+    };
+
     this.getMonth = function (date) {
         var month = date.getMonth();
         return month < 10 ? '0' + month : month;
@@ -151,11 +195,14 @@ trackingCorreos.service('chartService', ['rootFactory', '$http', '$window', 'sto
             }
 
             campañas.push(campana);
+
             if (arreglo.hasOwnProperty(id)) {
                 arreglo[id][campana] = v.qelectronicos;
+                arreglo[id]['idcampana'] = v.id_campana;
             } else {
                 arreglo[id] = {'fecha': fecha};
                 arreglo[id][campana] = v.qelectronicos;
+                arreglo[id]['idcampana'] = v.id_campana;
             }
         });
 
@@ -166,7 +213,7 @@ trackingCorreos.service('chartService', ['rootFactory', '$http', '$window', 'sto
         });
         config['data'] = temp;
         config['graphs'] = this.unique(campañas);
-
+        //console.log(config);
         return config;
     };
 
@@ -396,10 +443,9 @@ trackingCorreos.service('chartService', ['rootFactory', '$http', '$window', 'sto
 
     function eventClick(event) {
         var date = event.item.dataContext.fecha;
-        var campana = event.target.title;
+        var campana = event.item.dataContext.idcampana;
         var data = {date: date, campana: campana};
         if (storageService.isSupported) {
-            //console.log('supported');
             if (storageService.create('searchTracking', data)) {
                 $window.location.href = rootFactory.root + '/dashboard/tracking/';
             }

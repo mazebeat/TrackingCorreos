@@ -18,74 +18,74 @@ namespace Symfony\Component\HttpFoundation\Session\Storage\Handler;
  */
 class WriteCheckSessionHandler implements \SessionHandlerInterface
 {
-	/**
-	 * @var \SessionHandlerInterface
-	 */
-	private $wrappedSessionHandler;
+    /**
+     * @var \SessionHandlerInterface
+     */
+    private $wrappedSessionHandler;
 
-	/**
-	 * @var array sessionId => session
-	 */
-	private $readSessions;
+    /**
+     * @var array sessionId => session
+     */
+    private $readSessions;
 
-	public function __construct(\SessionHandlerInterface $wrappedSessionHandler)
-	{
-		$this->wrappedSessionHandler = $wrappedSessionHandler;
-	}
+    public function __construct(\SessionHandlerInterface $wrappedSessionHandler)
+    {
+        $this->wrappedSessionHandler = $wrappedSessionHandler;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function close()
-	{
-		return $this->wrappedSessionHandler->close();
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function close()
+    {
+        return $this->wrappedSessionHandler->close();
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function destroy($sessionId)
-	{
-		return $this->wrappedSessionHandler->destroy($sessionId);
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function destroy($sessionId)
+    {
+        return $this->wrappedSessionHandler->destroy($sessionId);
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function gc($maxlifetime)
-	{
-		return $this->wrappedSessionHandler->gc($maxlifetime);
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function gc($maxlifetime)
+    {
+        return $this->wrappedSessionHandler->gc($maxlifetime);
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function open($savePath, $sessionName)
-	{
-		return $this->wrappedSessionHandler->open($savePath, $sessionName);
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function open($savePath, $sessionName)
+    {
+        return $this->wrappedSessionHandler->open($savePath, $sessionName);
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function read($sessionId)
-	{
-		$session = $this->wrappedSessionHandler->read($sessionId);
+    /**
+     * {@inheritdoc}
+     */
+    public function read($sessionId)
+    {
+        $session = $this->wrappedSessionHandler->read($sessionId);
 
-		$this->readSessions[$sessionId] = $session;
+        $this->readSessions[$sessionId] = $session;
 
-		return $session;
-	}
+        return $session;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function write($sessionId, $data)
-	{
-		if (isset($this->readSessions[$sessionId]) && $data === $this->readSessions[$sessionId]) {
-			return true;
-		}
+    /**
+     * {@inheritdoc}
+     */
+    public function write($sessionId, $data)
+    {
+        if (isset($this->readSessions[$sessionId]) && $data === $this->readSessions[$sessionId]) {
+            return true;
+        }
 
-		return $this->wrappedSessionHandler->write($sessionId, $data);
-	}
+        return $this->wrappedSessionHandler->write($sessionId, $data);
+    }
 }

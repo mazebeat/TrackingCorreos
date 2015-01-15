@@ -20,90 +20,88 @@ use Symfony\Component\Security\Core\Role\RoleInterface;
  */
 class UsernamePasswordToken extends AbstractToken
 {
-	private $credentials;
-	private $providerKey;
+    private $credentials;
+    private $providerKey;
 
-	/**
-	 * Constructor.
-	 *
-	 * @param string|object            $user        The username (like a nickname, email address, etc.), or a
-	 *                                              UserInterface instance or an object implementing a __toString
-	 *                                              method.
-	 * @param string                   $credentials This usually is the password of the user
-	 * @param string                   $providerKey The provider key
-	 * @param RoleInterface[]|string[] $roles       An array of roles
-	 *
-	 * @throws \InvalidArgumentException
-	 */
-	public function __construct($user, $credentials, $providerKey, array $roles = array())
-	{
-		parent::__construct($roles);
+    /**
+     * Constructor.
+     *
+     * @param string|object            $user        The username (like a nickname, email address, etc.), or a UserInterface instance or an object implementing a __toString method.
+     * @param string                   $credentials This usually is the password of the user
+     * @param string                   $providerKey The provider key
+     * @param RoleInterface[]|string[] $roles       An array of roles
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function __construct($user, $credentials, $providerKey, array $roles = array())
+    {
+        parent::__construct($roles);
 
-		if (empty($providerKey)) {
-			throw new \InvalidArgumentException('$providerKey must not be empty.');
-		}
+        if (empty($providerKey)) {
+            throw new \InvalidArgumentException('$providerKey must not be empty.');
+        }
 
-		$this->setUser($user);
-		$this->credentials = $credentials;
-		$this->providerKey = $providerKey;
+        $this->setUser($user);
+        $this->credentials = $credentials;
+        $this->providerKey = $providerKey;
 
-		parent::setAuthenticated(count($roles) > 0);
-	}
+        parent::setAuthenticated(count($roles) > 0);
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function setAuthenticated($isAuthenticated)
-	{
-		if ($isAuthenticated) {
-			throw new \LogicException('Cannot set this token to trusted after instantiation.');
-		}
+    /**
+     * {@inheritdoc}
+     */
+    public function setAuthenticated($isAuthenticated)
+    {
+        if ($isAuthenticated) {
+            throw new \LogicException('Cannot set this token to trusted after instantiation.');
+        }
 
-		parent::setAuthenticated(false);
-	}
+        parent::setAuthenticated(false);
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function getCredentials()
-	{
-		return $this->credentials;
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function getCredentials()
+    {
+        return $this->credentials;
+    }
 
-	/**
-	 * Returns the provider key.
-	 *
-	 * @return string The provider key
-	 */
-	public function getProviderKey()
-	{
-		return $this->providerKey;
-	}
+    /**
+     * Returns the provider key.
+     *
+     * @return string The provider key
+     */
+    public function getProviderKey()
+    {
+        return $this->providerKey;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function eraseCredentials()
-	{
-		parent::eraseCredentials();
+    /**
+     * {@inheritdoc}
+     */
+    public function eraseCredentials()
+    {
+        parent::eraseCredentials();
 
-		$this->credentials = null;
-	}
+        $this->credentials = null;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function serialize()
-	{
-		return serialize(array($this->credentials, $this->providerKey, parent::serialize()));
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function serialize()
+    {
+        return serialize(array($this->credentials, $this->providerKey, parent::serialize()));
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function unserialize($serialized)
-	{
-		list($this->credentials, $this->providerKey, $parentStr) = unserialize($serialized);
-		parent::unserialize($parentStr);
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function unserialize($serialized)
+    {
+        list($this->credentials, $this->providerKey, $parentStr) = unserialize($serialized);
+        parent::unserialize($parentStr);
+    }
 }

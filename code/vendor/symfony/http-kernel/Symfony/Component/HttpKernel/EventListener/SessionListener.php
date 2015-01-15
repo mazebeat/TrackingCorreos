@@ -11,9 +11,9 @@
 
 namespace Symfony\Component\HttpKernel\EventListener;
 
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Sets the session in the request.
@@ -22,30 +22,30 @@ use Symfony\Component\HttpKernel\KernelEvents;
  */
 abstract class SessionListener implements EventSubscriberInterface
 {
-	public function onKernelRequest(GetResponseEvent $event)
-	{
-		if (!$event->isMasterRequest()) {
-			return;
-		}
+    public function onKernelRequest(GetResponseEvent $event)
+    {
+        if (!$event->isMasterRequest()) {
+            return;
+        }
 
-		$request = $event->getRequest();
-		$session = $this->getSession();
-		if (null === $session || $request->hasSession()) {
-			return;
-		}
+        $request = $event->getRequest();
+        $session = $this->getSession();
+        if (null === $session || $request->hasSession()) {
+            return;
+        }
 
-		$request->setSession($session);
-	}
+        $request->setSession($session);
+    }
 
-	public static function getSubscribedEvents()
-	{
-		return array(KernelEvents::REQUEST => array('onKernelRequest', 128),);
-	}
+    public static function getSubscribedEvents()
+    {
+        return array(KernelEvents::REQUEST => array('onKernelRequest', 128),);
+    }
 
-	/**
-	 * Gets the session object.
-	 *
-	 * @return SessionInterface|null A SessionInterface instance or null if no session is available
-	 */
-	abstract protected function getSession();
+    /**
+     * Gets the session object.
+     *
+     * @return SessionInterface|null A SessionInterface instance or null if no session is available
+     */
+    abstract protected function getSession();
 }

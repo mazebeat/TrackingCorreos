@@ -17,30 +17,30 @@ use Symfony\Component\CssSelector\Parser\TokenStream;
 /**
  * CSS selector comment handler.
  *
- * This component is a port of the Python cssselector library,
+ * This component is a port of the Python cssselect library,
  * which is copyright Ian Bicking, @see https://github.com/SimonSapin/cssselect.
  *
  * @author Jean-François Simon <jeanfrancois.simon@sensiolabs.com>
  */
 class CommentHandler implements HandlerInterface
 {
-	/**
-	 * {@inheritdoc}
-	 */
-	public function handle(Reader $reader, TokenStream $stream)
-	{
-		if ('/*' !== $reader->getSubstring(2)) {
-			return false;
-		}
+    /**
+     * {@inheritdoc}
+     */
+    public function handle(Reader $reader, TokenStream $stream)
+    {
+        if ('/*' !== $reader->getSubstring(2)) {
+            return false;
+        }
 
-		$offset = $reader->getOffset('*/');
+        $offset = $reader->getOffset('*/');
 
-		if (false === $offset) {
-			$reader->moveToEnd();
-		} else {
-			$reader->moveForward($offset + 2);
-		}
+        if (false === $offset) {
+            $reader->moveToEnd();
+        } else {
+            $reader->moveForward($offset + 2);
+        }
 
-		return true;
-	}
+        return true;
+    }
 }

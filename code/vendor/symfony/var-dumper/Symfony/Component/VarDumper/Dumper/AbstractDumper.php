@@ -21,115 +21,114 @@ use Symfony\Component\VarDumper\Cloner\DumperInterface;
  */
 abstract class AbstractDumper implements DataDumperInterface, DumperInterface
 {
-	public static $defaultOutput = 'php://output';
+    public static $defaultOutput = 'php://output';
 
-	protected $line = '';
-	protected $lineDumper;
-	protected $outputStream;
-	protected $decimalPoint; // This is locale dependent
-	protected $indentPad = '  ';
+    protected $line = '';
+    protected $lineDumper;
+    protected $outputStream;
+    protected $decimalPoint; // This is locale dependent
+    protected $indentPad = '  ';
 
-	/**
-	 * @param callable|resource|string|null $output A line dumper callable, an opened stream or an output path,
-	 *                                              defaults to static::$defaultOutput.
-	 */
-	public function __construct($output = null)
-	{
-		$this->decimalPoint = (string)0.5;
-		$this->decimalPoint = $this->decimalPoint[1];
-		$this->setOutput($output ?: static::$defaultOutput);
-		if (!$output && is_string(static::$defaultOutput)) {
-			static::$defaultOutput = $this->outputStream;
-		}
-	}
+    /**
+     * @param callable|resource|string|null $output A line dumper callable, an opened stream or an output path, defaults to static::$defaultOutput.
+     */
+    public function __construct($output = null)
+    {
+        $this->decimalPoint = (string)0.5;
+        $this->decimalPoint = $this->decimalPoint[1];
+        $this->setOutput($output ?: static::$defaultOutput);
+        if (!$output && is_string(static::$defaultOutput)) {
+            static::$defaultOutput = $this->outputStream;
+        }
+    }
 
-	/**
-	 * Sets the output destination of the dumps.
-	 *
-	 * @param callable|resource|string $output A line dumper callable, an opened stream or an output path.
-	 *
-	 * @return callable|resource|string The previous output destination.
-	 */
-	public function setOutput($output)
-	{
-		$prev = null !== $this->outputStream ? $this->outputStream : $this->lineDumper;
+    /**
+     * Sets the output destination of the dumps.
+     *
+     * @param callable|resource|string $output A line dumper callable, an opened stream or an output path.
+     *
+     * @return callable|resource|string The previous output destination.
+     */
+    public function setOutput($output)
+    {
+        $prev = null !== $this->outputStream ? $this->outputStream : $this->lineDumper;
 
-		if (is_callable($output)) {
-			$this->outputStream = null;
-			$this->lineDumper   = $output;
-		} else {
-			if (is_string($output)) {
-				$output = fopen($output, 'wb');
-			}
-			$this->outputStream = $output;
-			$this->lineDumper   = array($this, 'echoLine');
-		}
+        if (is_callable($output)) {
+            $this->outputStream = null;
+            $this->lineDumper   = $output;
+        } else {
+            if (is_string($output)) {
+                $output = fopen($output, 'wb');
+            }
+            $this->outputStream = $output;
+            $this->lineDumper   = array($this, 'echoLine');
+        }
 
-		return $prev;
-	}
+        return $prev;
+    }
 
-	/**
-	 * Sets the indentation pad string.
-	 *
-	 * @param string $pad A string the will be prepended to dumped lines, repeated by nesting level.
-	 *
-	 * @return string The indent pad.
-	 */
-	public function setIndentPad($pad)
-	{
-		$prev            = $this->indentPad;
-		$this->indentPad = $pad;
+    /**
+     * Sets the indentation pad string.
+     *
+     * @param string $pad A string the will be prepended to dumped lines, repeated by nesting level.
+     *
+     * @return string The indent pad.
+     */
+    public function setIndentPad($pad)
+    {
+        $prev            = $this->indentPad;
+        $this->indentPad = $pad;
 
-		return $prev;
-	}
+        return $prev;
+    }
 
-	/**
-	 * Dumps a Data object.
-	 *
-	 * @param Data                          $data   A Data object.
-	 * @param callable|resource|string|null $output A line dumper callable, an opened stream or an output path.
-	 */
-	public function dump(Data $data, $output = null)
-	{
-		$exception = null;
-		if ($output) {
-			$prevOutput = $this->setOutput($output);
-		}
-		try {
-			$data->dump($this);
-			$this->dumpLine(-1);
-		} catch (\Exception $exception) {
-			// Re-thrown below
-		}
-		if ($output) {
-			$this->setOutput($prevOutput);
-		}
-		if (null !== $exception) {
-			throw $exception;
-		}
-	}
+    /**
+     * Dumps a Data object.
+     *
+     * @param Data                          $data   A Data object.
+     * @param callable|resource|string|null $output A line dumper callable, an opened stream or an output path.
+     */
+    public function dump(Data $data, $output = null)
+    {
+        $exception = null;
+        if ($output) {
+            $prevOutput = $this->setOutput($output);
+        }
+        try {
+            $data->dump($this);
+            $this->dumpLine(-1);
+        } catch (\Exception $exception) {
+            // Re-thrown below
+        }
+        if ($output) {
+            $this->setOutput($prevOutput);
+        }
+        if (null !== $exception) {
+            throw $exception;
+        }
+    }
 
-	/**
-	 * Dumps the current line.
-	 *
-	 * @param int $depth The recursive depth in the dumped structure for the line being dumped.
-	 */
-	protected function dumpLine($depth)
-	{
-		call_user_func($this->lineDumper, $this->line, $depth, $this->indentPad);
-		$this->line = '';
-	}
+    /**
+     * Dumps the current line.
+     *
+     * @param int $depth The recursive depth in the dumped structure for the line being dumped.
+     */
+    protected function dumpLine($depth)
+    {
+        call_user_func($this->lineDumper, $this->line, $depth, $this->indentPad);
+        $this->line = '';
+    }
 
-	/**
-	 * Generic line dumper callback.
-	 *
-	 * @param string $line  The line to write.
-	 * @param int    $depth The recursive depth in the dumped structure.
-	 */
-	protected function echoLine($line, $depth, $indentPad)
-	{
-		if (-1 !== $depth) {
-			fwrite($this->outputStream, str_repeat($indentPad, $depth) . $line . "\n");
-		}
-	}
+    /**
+     * Generic line dumper callback.
+     *
+     * @param string $line  The line to write.
+     * @param int    $depth The recursive depth in the dumped structure.
+     */
+    protected function echoLine($line, $depth, $indentPad)
+    {
+        if (-1 !== $depth) {
+            fwrite($this->outputStream, str_repeat($indentPad, $depth) . $line . "\n");
+        }
+    }
 }

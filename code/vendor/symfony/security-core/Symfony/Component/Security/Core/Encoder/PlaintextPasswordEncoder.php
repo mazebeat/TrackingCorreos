@@ -20,45 +20,45 @@ use Symfony\Component\Security\Core\Exception\BadCredentialsException;
  */
 class PlaintextPasswordEncoder extends BasePasswordEncoder
 {
-	private $ignorePasswordCase;
+    private $ignorePasswordCase;
 
-	/**
-	 * Constructor.
-	 *
-	 * @param bool $ignorePasswordCase Compare password case-insensitive
-	 */
-	public function __construct($ignorePasswordCase = false)
-	{
-		$this->ignorePasswordCase = $ignorePasswordCase;
-	}
+    /**
+     * Constructor.
+     *
+     * @param bool $ignorePasswordCase Compare password case-insensitive
+     */
+    public function __construct($ignorePasswordCase = false)
+    {
+        $this->ignorePasswordCase = $ignorePasswordCase;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function encodePassword($raw, $salt)
-	{
-		if ($this->isPasswordTooLong($raw)) {
-			throw new BadCredentialsException('Invalid password.');
-		}
+    /**
+     * {@inheritdoc}
+     */
+    public function encodePassword($raw, $salt)
+    {
+        if ($this->isPasswordTooLong($raw)) {
+            throw new BadCredentialsException('Invalid password.');
+        }
 
-		return $this->mergePasswordAndSalt($raw, $salt);
-	}
+        return $this->mergePasswordAndSalt($raw, $salt);
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function isPasswordValid($encoded, $raw, $salt)
-	{
-		if ($this->isPasswordTooLong($raw)) {
-			return false;
-		}
+    /**
+     * {@inheritdoc}
+     */
+    public function isPasswordValid($encoded, $raw, $salt)
+    {
+        if ($this->isPasswordTooLong($raw)) {
+            return false;
+        }
 
-		$pass2 = $this->mergePasswordAndSalt($raw, $salt);
+        $pass2 = $this->mergePasswordAndSalt($raw, $salt);
 
-		if (!$this->ignorePasswordCase) {
-			return $this->comparePasswords($encoded, $pass2);
-		}
+        if (!$this->ignorePasswordCase) {
+            return $this->comparePasswords($encoded, $pass2);
+        }
 
-		return $this->comparePasswords(strtolower($encoded), strtolower($pass2));
-	}
+        return $this->comparePasswords(strtolower($encoded), strtolower($pass2));
+    }
 }

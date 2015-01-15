@@ -11,8 +11,8 @@
 
 namespace Symfony\Component\Security\Core\Event;
 
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 /**
  * This event is dispatched on authentication failure.
@@ -21,17 +21,17 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
  */
 class AuthenticationFailureEvent extends AuthenticationEvent
 {
-	private $authenticationException;
+    private $authenticationException;
 
-	public function __construct(TokenInterface $token, AuthenticationException $ex)
-	{
-		parent::__construct($token);
+    public function __construct(TokenInterface $token, AuthenticationException $ex)
+    {
+        parent::__construct($token);
 
-		$this->authenticationException = $ex;
-	}
+        $this->authenticationException = $ex;
+    }
 
-	public function getAuthenticationException()
-	{
-		return $this->authenticationException;
-	}
+    public function getAuthenticationException()
+    {
+        return $this->authenticationException;
+    }
 }

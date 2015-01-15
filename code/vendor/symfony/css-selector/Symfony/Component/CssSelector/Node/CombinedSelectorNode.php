@@ -14,79 +14,79 @@ namespace Symfony\Component\CssSelector\Node;
 /**
  * Represents a combined node.
  *
- * This component is a port of the Python cssselector library,
+ * This component is a port of the Python cssselect library,
  * which is copyright Ian Bicking, @see https://github.com/SimonSapin/cssselect.
  *
  * @author Jean-François Simon <jeanfrancois.simon@sensiolabs.com>
  */
 class CombinedSelectorNode extends AbstractNode
 {
-	/**
-	 * @var NodeInterface
-	 */
-	private $selector;
+    /**
+     * @var NodeInterface
+     */
+    private $selector;
 
-	/**
-	 * @var string
-	 */
-	private $combinator;
+    /**
+     * @var string
+     */
+    private $combinator;
 
-	/**
-	 * @var NodeInterface
-	 */
-	private $subSelector;
+    /**
+     * @var NodeInterface
+     */
+    private $subSelector;
 
-	/**
-	 * @param NodeInterface $selector
-	 * @param string        $combinator
-	 * @param NodeInterface $subSelector
-	 */
-	public function __construct(NodeInterface $selector, $combinator, NodeInterface $subSelector)
-	{
-		$this->selector    = $selector;
-		$this->combinator  = $combinator;
-		$this->subSelector = $subSelector;
-	}
+    /**
+     * @param NodeInterface $selector
+     * @param string        $combinator
+     * @param NodeInterface $subSelector
+     */
+    public function __construct(NodeInterface $selector, $combinator, NodeInterface $subSelector)
+    {
+        $this->selector    = $selector;
+        $this->combinator  = $combinator;
+        $this->subSelector = $subSelector;
+    }
 
-	/**
-	 * @return NodeInterface
-	 */
-	public function getSelector()
-	{
-		return $this->selector;
-	}
+    /**
+     * @return NodeInterface
+     */
+    public function getSelector()
+    {
+        return $this->selector;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getCombinator()
-	{
-		return $this->combinator;
-	}
+    /**
+     * @return string
+     */
+    public function getCombinator()
+    {
+        return $this->combinator;
+    }
 
-	/**
-	 * @return NodeInterface
-	 */
-	public function getSubSelector()
-	{
-		return $this->subSelector;
-	}
+    /**
+     * @return NodeInterface
+     */
+    public function getSubSelector()
+    {
+        return $this->subSelector;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function getSpecificity()
-	{
-		return $this->selector->getSpecificity()->plus($this->subSelector->getSpecificity());
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function getSpecificity()
+    {
+        return $this->selector->getSpecificity()->plus($this->subSelector->getSpecificity());
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function __toString()
-	{
-		$combinator = ' ' === $this->combinator ? '<followed>' : $this->combinator;
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        $combinator = ' ' === $this->combinator ? '<followed>' : $this->combinator;
 
-		return sprintf('%s[%s %s %s]', $this->getNodeName(), $this->selector, $combinator, $this->subSelector);
-	}
+        return sprintf('%s[%s %s %s]', $this->getNodeName(), $this->selector, $combinator, $this->subSelector);
+    }
 }

@@ -17,11 +17,19 @@ namespace Symfony\Component\ClassLoader;
  * It expects an object implementing a findFile method to find the file. This
  * allows using it as a wrapper around the other loaders of the component (the
  * ClassLoader and the UniversalClassLoader for instance) but also around any
- * other autoloader following this convention (the Composer one for instance)
+ * other autoloaders following this convention (the Composer one for instance).
+ *
+ *     // with a Symfony autoloader
+ *     use Symfony\Component\ClassLoader\ClassLoader;
  *
  *     $loader = new ClassLoader();
+ *     $loader->addPrefix('Symfony\Component', __DIR__.'/component');
+ *     $loader->addPrefix('Symfony',           __DIR__.'/framework');
  *
- *     // register classes with namespaces
+ *     // or with a Composer autoloader
+ *     use Composer\Autoload\ClassLoader;
+ *
+ *     $loader = new ClassLoader();
  *     $loader->add('Symfony\Component', __DIR__.'/component');
  *     $loader->add('Symfony',           __DIR__.'/framework');
  *
@@ -41,96 +49,95 @@ namespace Symfony\Component\ClassLoader;
  */
 class ApcClassLoader
 {
-	private $prefix;
+    private $prefix;
 
-	/**
-	 * The class loader object being decorated.
-	 *
-	 * @var object
-	 *   A class loader object that implements the findFile() method.
-	 */
-	protected $decorated;
+    /**
+     * A class loader object that implements the findFile() method.
+     *
+     * @var object
+     */
+    protected $decorated;
 
-	/**
-	 * Constructor.
-	 *
-	 * @param string $prefix    The APC namespace prefix to use.
-	 * @param object $decorated A class loader object that implements the findFile() method.
-	 *
-	 * @throws \RuntimeException
-	 * @throws \InvalidArgumentException
-	 *
-	 * @api
-	 */
-	public function __construct($prefix, $decorated)
-	{
-		if (!extension_loaded('apc')) {
-			throw new \RuntimeException('Unable to use ApcClassLoader as APC is not enabled.');
-		}
+    /**
+     * Constructor.
+     *
+     * @param string $prefix    The APC namespace prefix to use.
+     * @param object $decorated A class loader object that implements the findFile() method.
+     *
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     *
+     * @api
+     */
+    public function __construct($prefix, $decorated)
+    {
+        if (!extension_loaded('apc')) {
+            throw new \RuntimeException('Unable to use ApcClassLoader as APC is not enabled.');
+        }
 
-		if (!method_exists($decorated, 'findFile')) {
-			throw new \InvalidArgumentException('The class finder must implement a "findFile" method.');
-		}
+        if (!method_exists($decorated, 'findFile')) {
+            throw new \InvalidArgumentException('The class finder must implement a "findFile" method.');
+        }
 
-		$this->prefix    = $prefix;
-		$this->decorated = $decorated;
-	}
+        $this->prefix    = $prefix;
+        $this->decorated = $decorated;
+    }
 
-	/**
-	 * Registers this instance as an autoloader.
-	 *
-	 * @param bool $prepend Whether to prepend the autoloader or not
-	 */
-	public function register($prepend = false)
-	{
-		spl_autoload_register(array($this, 'loadClass'), true, $prepend);
-	}
+    /**
+     * Registers this instance as an autoloader.
+     *
+     * @param bool $prepend Whether to prepend the autoloader or not
+     */
+    public function register($prepend = false)
+    {
+        spl_autoload_register(array($this, 'loadClass'), true, $prepend);
+    }
 
-	/**
-	 * Unregisters this instance as an autoloader.
-	 */
-	public function unregister()
-	{
-		spl_autoload_unregister(array($this, 'loadClass'));
-	}
+    /**
+     * Unregisters this instance as an autoloader.
+     */
+    public function unregister()
+    {
+        spl_autoload_unregister(array($this, 'loadClass'));
+    }
 
-	/**
-	 * Loads the given class or interface.
-	 *
-	 * @param string $class The name of the class
-	 *
-	 * @return bool|null True, if loaded
-	 */
-	public function loadClass($class)
-	{
-		if ($file = $this->findFile($class)) {
-			require $file;
+    /**
+     * Loads the given class or interface.
+     *
+     * @param string $class The name of the class
+     *
+     * @return bool|null True, if loaded
+     */
+    public function loadClass($class)
+    {
+        if ($file = $this->findFile($class)) {
+            require $file;
 
-			return true;
-		}
-	}
+            return true;
+        }
+    }
 
-	/**
-	 * Finds a file by class name while caching lookups to APC.
-	 *
-	 * @param string $class A class name to resolve to file
-	 *
-	 * @return string|null
-	 */
-	public function findFile($class)
-	{
-		if (false === $file = apc_fetch($this->prefix . $class)) {
-			apc_store($this->prefix . $class, $file = $this->decorated->findFile($class));
-		}
+    /**
+     * Finds a file by class name while caching lookups to APC.
+     *
+     * @param string $class A class name to resolve to file
+     *
+     * @return string|null
+     */
+    public function findFile($class)
+    {
+        if (false === $file = apc_fetch($this->prefix . $class)) {
+            apc_store($this->prefix . $class, $file = $this->decorated->findFile($class));
+        }
 
-		return $file;
-	}
+        return $file;
+    }
 
-	/**
-	 * Passes through all unknown calls onto the decorated object.
-	 */
-	public function __call($method, $args)
-	{
-		return call_user_func_array(array($this->decorated, $method), $args);
-	}
+    /**
+     * Passes through all unknown calls onto the decorated object.
+     */
+    public function __call($method, $args)
+    {
+        return call_user_func_array(array($this->decorated, $method), $args);
+    }
 }

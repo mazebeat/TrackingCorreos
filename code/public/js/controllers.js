@@ -18,7 +18,7 @@ trackingCorreos.controller('homeController', ['$scope', '$http', '$window', 'roo
                         .success(function (data) {
                             if (data.ok) {
                                 $scope.message = data.message;
-                                apiFactory.notify('Tracking de Correos', $scope.message, 'success');
+                                //apiFactory.notify('Tracking de Correos', $scope.message, 'success');
                                 if (storageService.getItem('firstTime') != true) {
                                     storageService.create('firstTime', true);
                                 }
@@ -75,8 +75,7 @@ trackingCorreos.controller('adminController', ['$scope', '$http', '$window', 'ro
             $scope.negocios = $scope.user.negocios.split(',');
             $scope.negocio = $scope.negocios[0];
 
-            var params = {negocio: $scope.negocio, fechaDesde: desde, fechaHasta: hasta};
-
+            var params = {negocio: $scope.negocio, fechaDesde: desde, fechaHasta: hasta, nEmpresa: $scope.user.empresa};
             apiFactory.url('GestionMailWS/Resumen/ConsultaFechaDesdeHasta');
             apiFactory.post(params)
                 .then(function (response) {
@@ -120,17 +119,22 @@ trackingCorreos.controller('adminController', ['$scope', '$http', '$window', 'ro
 
     $scope.changeChart = function () {
         var date = new Date();
-        var desde = new Date(date.getFullYear(), parseInt(date.getMonth() - $scope.months), 1);
+        console.log($('#months').spinner('value'));
+        var desde = new Date(date.getFullYear(), parseInt(date.getMonth() - $('#months').spinner('value')), 1);
         var hasta = new Date(date.getFullYear(), parseInt(date.getMonth() + 1), 0);
         desde = apiFactory.formatDates(desde);
         hasta = apiFactory.formatDates(hasta);
 
-        var params = {negocio: $scope.negocio, fechaDesde: desde, fechaHasta: hasta};
+        var params = {negocio: $scope.negocio, fechaDesde: desde, fechaHasta: hasta, nEmpresa: $scope.user.empresa};
         apiFactory.url('GestionMailWS/Resumen/ConsultaFechaDesdeHasta');
         apiFactory.post(params)
             .then(function (response) {
                 if (response.ok) {
                     var json = response.data;
+                    if (response.data == '') {
+                        apiFactory.stackNotify('info', 'top');
+                        return;
+                    }
                     json = JSON.parse('[' + json.substr(0, json.length - 1) + ']');
                     var dataPie = chartService.dashboardPieChart(json);
                     //console.log(dataPie);
@@ -146,6 +150,7 @@ trackingCorreos.controller('adminController', ['$scope', '$http', '$window', 'ro
                     });
                     var dataSerial = chartService.dashboardSerialChart(json);
                     //console.log(dataSerial);
+                    chartdiv2 = new AmCharts.AmSerialChart();
                     chartService.semestral(chartdiv2, 'chartdiv2', dataSerial, 'total', 'fecha', 'campana');
                     /* Botones para exportar */
                     btn2Pdf.click(function (event) {
@@ -157,9 +162,8 @@ trackingCorreos.controller('adminController', ['$scope', '$http', '$window', 'ro
                         chartService.exportGraphToFormat(chartdiv2, 'jpg', 'Grafico_por_rango');
                     });
                     searchButton.stop();
-                    chartdiv1.validateData();
-                    chartdiv2.dataProvider.cleanChart();
-                    chartdiv2.validateData();
+                    chartdiv1.validateNow();
+                    chartdiv2.validateNow();
                 }
                 else {
                     apiFactory.notify('Tracking de Correos', response.message);
@@ -248,7 +252,7 @@ trackingCorreos.controller('adminController', ['$scope', '$http', '$window', 'ro
         searchButton.start();
 
         var date = new Date();
-        var desde = new Date(date.getFullYear(), parseInt(date.getMonth() - $scope.months), 1);
+        var desde = new Date(date.getFullYear(), parseInt(date.getMonth() - $('#months').spinner('value')), 1);
         var hasta = new Date(date.getFullYear(), parseInt(date.getMonth() + 1), 0);
         desde = apiFactory.formatDates(desde);
         hasta = apiFactory.formatDates(hasta);
@@ -256,7 +260,7 @@ trackingCorreos.controller('adminController', ['$scope', '$http', '$window', 'ro
         //$scope.negocio = apiFactory.splitString($scope.user.negocios);
         $scope.negocios = $scope.user.negocios.split(',');
 
-        var params = {negocio: $scope.negocio, fechaDesde: desde, fechaHasta: hasta};
+        var params = {negocio: $scope.negocio, fechaDesde: desde, fechaHasta: hasta, nEmpresa: $scope.user.empresa};
 
         apiFactory.url('GestionMailWS/Resumen/ConsultaFechaDesdeHasta');
         apiFactory.post(params)
@@ -281,7 +285,7 @@ trackingCorreos.controller('adminController', ['$scope', '$http', '$window', 'ro
                         chartService.exportGraphToFormat(chartdiv2, 'jpg', 'Grafico_por_rango');
                     });
                     /* Notifica nuevo grafico */
-                    apiFactory.notify('Tracking de Correos', 'Gráfico actualizado');
+                    //apiFactory.notify('Tracking de Correos', 'Gráfico actualizado');
                     searchButton.stop();
                 }
                 else {
@@ -331,18 +335,41 @@ trackingCorreos.controller('trackingController', ['$scope', '$http', '$q', 'stor
         apiFactory.post(request)
             .then(function (response) {
                 if (response.ok) {
-                    var deferred = $q.defer();
-                    apiFactory.notify('Tracking de Correos', 'Listo!');
+
+                    //apiFactory.notify('Tracking de Correos', 'Listo!');
                     var json = JSON.parse('[' + JSON.stringify(response.data) + ']');
                     var datos = chartService.trackingPieChart(json);
                     chartService.donut(chart, 'resumenTracking', datos, 'value', 'title', 'title', '[[title]]<br>[[value]]</b>([[percents]])');
                     $scope.result = json;
+
                 } else {
                     /* Cambiar messsage por message */
                     $scope.message = response.messsage;
-                    apiFactory.notify('Tracking de Correos', $scope.message);
+                    //apiFactory.notify('Tracking de Correos', $scope.message);
                     $scope.result = [];
                 }
+
+                var params = {
+                    idcampana: $scope.data.campana
+                };
+
+                apiFactory.url('GestionMailWS/Despacho/ConsultaDespacho');
+                apiFactory.post(params)
+                    .then(function (response) {
+                        apiFactory.notify('Tracking de Correos', 'Generando documento a exportar');
+                        //readyDetail.start();
+                        //$('#readyDetail').attr('disabled');
+                        $scope.boolean = 'OK';
+                        if (response.ok) {
+                            var details = response.data.substr(0, response.data.length - 1);
+                            $scope.detail = JSON.parse('[' + details + ']');
+                        }
+                    })
+                    .then(function () {
+                        //readyDetail.stop();
+                        $('#readyDetail').removeAttr('disabled');
+                        apiFactory.notify('Tracking de Correos', 'Documento listo para exportar', 'success');
+                    });
             })
             .catch(function (errorMsg) {
                 apiFactory.notify('Atención!', errorMsg);
@@ -352,7 +379,7 @@ trackingCorreos.controller('trackingController', ['$scope', '$http', '$q', 'stor
 
     $http.get(rootFactory.root + '/dashboard/authUser')
         .success(function (data) {
-            console.log(data);
+            //console.log(data);
             $scope.user = data;
             $scope.negocios = $scope.user.negocios.split(',');
         });
@@ -365,7 +392,7 @@ trackingCorreos.controller('trackingController', ['$scope', '$http', '$q', 'stor
                     if (response.ok) {
                         var camps = response.data.substr(0, response.data.length - 1);
                         $scope.setCampañas(JSON.parse('[' + camps + ']'));
-                        apiFactory.notify('Tracking de Correos', 'Campañas cargadas');
+                        //apiFactory.notify('Tracking de Correos', 'Campañas cargadas');
                     } else {
                         $scope.message = response.message;
                         apiFactory.notify('Tracking de Correos', $scope.message);
@@ -393,8 +420,7 @@ trackingCorreos.controller('trackingController', ['$scope', '$http', '$q', 'stor
         apiFactory.post(params)
             .then(function (response) {
                 if (response.ok) {
-                    var deferred = $q.defer();
-                    apiFactory.notify('Tracking de Correos', 'Listo!');
+                    //apiFactory.notify('Tracking de Correos', 'Listo!');
                     var json = JSON.parse('[' + JSON.stringify(response.data) + ']');
                     var datos = chartService.trackingPieChart(json);
                     chartService.donut(chart, 'resumenTracking', datos, 'value', 'title', 'title', '[[title]]<br>[[value]]</b>([[percents]])');
@@ -408,10 +434,17 @@ trackingCorreos.controller('trackingController', ['$scope', '$http', '$q', 'stor
                     apiFactory.url('GestionMailWS/Despacho/ConsultaDespacho');
                     apiFactory.post(params)
                         .then(function (response) {
+                            //readyDetail.start();
+                            //$('#readyDetail').attr('disabled');
                             if (response.ok) {
                                 var details = response.data.substr(0, response.data.length - 1);
                                 $scope.detail = JSON.parse('[' + details + ']');
                             }
+                        })
+                        .then(function () {
+                            //readyDetail.toggle();
+                            $('#readyDetail').removeAttr('disabled');
+                            apiFactory.notify('Tracking de Correos', 'Documento listo para exportar');
                         });
                 } else {
                     /* Cambiar message por message */

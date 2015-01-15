@@ -11,20 +11,21 @@
 
 namespace Symfony\Component\HttpKernel\Event;
 
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
- * Allows to execute logic after a response was sent
+ * Allows to execute logic after a response was sent.
  *
  * @author Jordi Boggiano <j.boggiano@seld.be>
  */
 class PostResponseEvent extends Event
 {
     /**
-     * The kernel in which this event was thrown
+     * The kernel in which this event was thrown.
+     *
      * @var HttpKernelInterface
      */
     private $kernel;

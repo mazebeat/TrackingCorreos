@@ -12,7 +12,7 @@
 namespace Symfony\Component\Filesystem\Exception;
 
 /**
- * Exception class thrown when a filesystem operation failure happens
+ * Exception class thrown when a filesystem operation failure happens.
  *
  * @author Romain Neutron <imprec@gmail.com>
  * @author Christian Gärtner <christiangaertner.film@googlemail.com>
@@ -22,20 +22,20 @@ namespace Symfony\Component\Filesystem\Exception;
  */
 class IOException extends \RuntimeException implements IOExceptionInterface
 {
-	private $path;
+    private $path;
 
-	public function __construct($message, $code = 0, \Exception $previous = null, $path = null)
-	{
-		$this->path = $path;
+    public function __construct($message, $code = 0, \Exception $previous = null, $path = null)
+    {
+        $this->path = $path;
 
-		parent::__construct($message, $code, $previous);
-	}
+        parent::__construct($message, $code, $previous);
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function getPath()
-	{
-		return $this->path;
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
 }

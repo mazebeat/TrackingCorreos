@@ -12,8 +12,8 @@
 namespace Symfony\Component\HttpKernel\EventListener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 /**
  * Adds configured formats to each request
@@ -22,36 +22,36 @@ use Symfony\Component\HttpKernel\KernelEvents;
  */
 class AddRequestFormatsListener implements EventSubscriberInterface
 {
-	/**
-	 * @var array
-	 */
-	protected $formats;
+    /**
+     * @var array
+     */
+    protected $formats;
 
-	/**
-	 * @param array $formats
-	 */
-	public function __construct(array $formats)
-	{
-		$this->formats = $formats;
-	}
+    /**
+     * @param array $formats
+     */
+    public function __construct(array $formats)
+    {
+        $this->formats = $formats;
+    }
 
-	/**
-	 * Adds request formats
-	 *
-	 * @param GetResponseEvent $event
-	 */
-	public function onKernelRequest(GetResponseEvent $event)
-	{
-		foreach ($this->formats as $format => $mimeTypes) {
-			$event->getRequest()->setFormat($format, $mimeTypes);
-		}
-	}
+    /**
+     * Adds request formats
+     *
+     * @param GetResponseEvent $event
+     */
+    public function onKernelRequest(GetResponseEvent $event)
+    {
+        foreach ($this->formats as $format => $mimeTypes) {
+            $event->getRequest()->setFormat($format, $mimeTypes);
+        }
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public static function getSubscribedEvents()
-	{
-		return array(KernelEvents::REQUEST => 'onKernelRequest');
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSubscribedEvents()
+    {
+        return array(KernelEvents::REQUEST => 'onKernelRequest');
+    }
 }

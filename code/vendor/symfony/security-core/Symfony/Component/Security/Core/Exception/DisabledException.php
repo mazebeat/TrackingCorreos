@@ -19,11 +19,11 @@ namespace Symfony\Component\Security\Core\Exception;
  */
 class DisabledException extends AccountStatusException
 {
-	/**
-	 * {@inheritdoc}
-	 */
-	public function getMessageKey()
-	{
-		return 'Account is disabled.';
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function getMessageKey()
+    {
+        return 'Account is disabled.';
+    }
 }

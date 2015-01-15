@@ -11,12 +11,12 @@
 
 namespace Symfony\Component\HttpKernel\Event;
 
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
- * Allows to filter a Response object
+ * Allows to filter a Response object.
  *
  * You can call getResponse() to retrieve the current response. With
  * setResponse() you can set a new response that will be returned to the
@@ -29,7 +29,8 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 class FilterResponseEvent extends KernelEvent
 {
     /**
-     * The current response object
+     * The current response object.
+     *
      * @var Response
      */
     private $response;
@@ -42,7 +43,7 @@ class FilterResponseEvent extends KernelEvent
     }
 
     /**
-     * Returns the current response object
+     * Returns the current response object.
      *
      * @return Response
      *
@@ -54,7 +55,7 @@ class FilterResponseEvent extends KernelEvent
     }
 
     /**
-     * Sets a new response object
+     * Sets a new response object.
      *
      * @param Response $response
      *

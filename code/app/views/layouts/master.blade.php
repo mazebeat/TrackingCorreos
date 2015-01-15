@@ -30,7 +30,7 @@
     <div class="wrapper-top">
         <div class="row">
             <div class="col-xs-3 col-sm-3 col-md-4 col-lg-4">
-                {{ HTML::image('images/negocios/' . Auth::user()->empresa . '.png', 'Intelidata', array('class' => 'img-responsive')) }}
+                {{ HTML::image('images/negocios/' . Auth::user()->empresa . '.png', 'Intelidata', array('class' => 'img-responsive', 'style' => 'max-height: 60px' )) }}
             </div>
             <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
                 <h2 class="text-center">Tracking de Correos</h2>

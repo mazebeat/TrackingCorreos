@@ -19,35 +19,35 @@ use Symfony\Component\VarDumper\Dumper\HtmlDumper;
  */
 class HtmlDumperTest extends \PHPUnit_Framework_TestCase
 {
-	public function testGet()
-	{
-		require __DIR__ . '/Fixtures/dumb-var.php';
+    public function testGet()
+    {
+        require __DIR__ . '/Fixtures/dumb-var.php';
 
-		$dumper = new HtmlDumper('php://output');
-		$dumper->setColors(false);
-		$dumper->setDumpHeader('<foo></foo>');
-		$dumper->setDumpBoundaries('<bar>', '</bar>');
-		$cloner = new VarCloner();
-		$cloner->addCasters(array(':stream' => function ($res, $a) {
-			unset($a['uri']);
+        $dumper = new HtmlDumper('php://output');
+        $dumper->setColors(false);
+        $dumper->setDumpHeader('<foo></foo>');
+        $dumper->setDumpBoundaries('<bar>', '</bar>');
+        $cloner = new VarCloner();
+        $cloner->addCasters(array(':stream' => function ($res, $a) {
+            unset($a['uri']);
 
-			return $a;
-		},));
-		$data = $cloner->cloneVar($var);
+            return $a;
+        },));
+        $data = $cloner->cloneVar($var);
 
-		ob_start();
-		$dumper->dump($data);
-		$out          = ob_get_clean();
-		$closureLabel = PHP_VERSION_ID >= 50400 ? 'public method' : 'function';
-		$out          = preg_replace('/[ \t]+$/m', '', $out);
-		$var['file']  = htmlspecialchars($var['file'], ENT_QUOTES, 'UTF-8');
-		$intMax       = PHP_INT_MAX;
-		preg_match('/sf-dump-\d+/', $out, $dumpId);
-		$dumpId = $dumpId[0];
-		$res1   = (int)$var['res'];
-		$res2   = (int)$var[8];
+        ob_start();
+        $dumper->dump($data);
+        $out          = ob_get_clean();
+        $closureLabel = PHP_VERSION_ID >= 50400 ? 'public method' : 'function';
+        $out          = preg_replace('/[ \t]+$/m', '', $out);
+        $var['file']  = htmlspecialchars($var['file'], ENT_QUOTES, 'UTF-8');
+        $intMax       = PHP_INT_MAX;
+        preg_match('/sf-dump-\d+/', $out, $dumpId);
+        $dumpId = $dumpId[0];
+        $res1   = (int)$var['res'];
+        $res2   = (int)$var[8];
 
-		$this->assertStringMatchesFormat(<<<EOTXT
+        $this->assertStringMatchesFormat(<<<EOTXT
 <foo></foo><bar><span class=sf-dump-note>array:25</span> [<samp>
   "<span class=sf-dump-key>number</span>" => <span class=sf-dump-num>1</span>
   <span class=sf-dump-key>0</span> => <a class=sf-dump-ref href=#{$dumpId}-ref01 title="2 occurrences">&amp;1</a> <span class=sf-dump-const>null</span>
@@ -106,8 +106,8 @@ class HtmlDumperTest extends \PHPUnit_Framework_TestCase
 </bar>
 
 EOTXT
-			,
+            ,
 
-			$out);
-	}
+            $out);
+    }
 }

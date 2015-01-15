@@ -11,8 +11,8 @@
 
 namespace Symfony\Component\HttpFoundation\File\MimeType;
 
-use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
+use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 
 /**
  * Guesses the mime type using the PECL extension FileInfo.
@@ -36,7 +36,7 @@ class FileinfoMimeTypeGuesser implements MimeTypeGuesserInterface
     }
 
     /**
-     * Returns whether this guesser is supported on the current OS/PHP setup
+     * Returns whether this guesser is supported on the current OS/PHP setup.
      *
      * @return bool
      */

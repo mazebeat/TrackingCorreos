@@ -10,7 +10,7 @@
 
 use Patchwork\PHP\Shim as s;
 
-const GRAPHEME_EXTR_COUNT    = 0;
+const GRAPHEME_EXTR_COUNT = 0;
 const GRAPHEME_EXTR_MAXBYTES = 1;
 const GRAPHEME_EXTR_MAXCHARS = 2;
 

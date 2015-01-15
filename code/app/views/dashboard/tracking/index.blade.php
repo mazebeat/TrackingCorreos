@@ -87,6 +87,7 @@
                         <div class="tab-content">
                             <div id="tabla" class="tab-pane active">
                                 <div id="tablaTracking" class="table-responsive">
+                                    @{{ readyDetail }}
                                     <table class="table">
                                         <thead>
                                         <tr>
@@ -107,11 +108,16 @@
                                         <tbody>
                                         <tr ng-repeat="row in result">
                                             <td>
-                                                <a class="btn btn-default" ng-click="exportData()">
+                                                <button id="readyDetail" type="button"
+                                                        class="ladda-button btn btn-default"
+                                                        data-style="zoom-in"
+                                                        data-spinner-size="20"
+                                                        ng-click="exportData()"
+                                                        disabled>
                                                     <i class="fa fa-download"></i>
-                                                </a>
+                                                </button>
                                             </td>
-                                            <td>@{{row.ano + '/' + row.mes | date:'yyyy/MM'}}</td>
+                                            <td>@{{row.ano + '/' + row.mes | date:'yyyy-MM'}}</td>
                                             <td>@{{row.ciclo}}</td>
                                             <td>@{{row.qemitidos}}</td>
                                             <td>@{{row.qfisicos}}</td>
@@ -130,10 +136,7 @@
                                     <table class="table">
                                         <thead>
                                         <tr>
-                                            {{--<th>ID</th>--}}
                                             <th>Campana</th>
-                                            {{--<th>Id Documento</th>--}}
-                                            {{--<th>Id LogEnvio</th>--}}
                                             <th>Negocio</th>
                                             <th>Fecha Despacho</th>
                                             <th>Fecha Retencion</th>
@@ -142,11 +145,8 @@
                                         </thead>
                                         <tbody>
                                         <tr ng-repeat="row in detail">
-                                            {{--<td>@{{row.id}}</td>--}}
-                                            <td>@{{row.idCampana}}</td>
-                                            {{--<td>@{{row.idDocumento}}</td>--}}
-                                            {{--<td>@{{row.idLogEnvio}}</td>--}}
-                                            <td>@{{row.idNegocio}}</td>
+                                            <td>@{{row.NCampana}}</td>
+                                            <td>@{{row.NNegocio}}</td>
                                             <td>@{{row.fechaDespacho | date:'yyyy/MM/dd'}}</td>
                                             <td>@{{row.fechaRetencion | date:'yyyy/MM/dd'}}</td>
                                             <td>@{{row.mail}}</td>
@@ -192,6 +192,7 @@
     <script type="text/javascript">
         var chart = new AmCharts.AmPieChart();
         var trackingButton = Ladda.create(document.querySelector('#trackingFormButton'));
+        var readyDetail = Ladda.create(document.querySelector('#readyDetail'));
         Ladda.bind('.ladda-button');
         $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
             var news = $(e.target);

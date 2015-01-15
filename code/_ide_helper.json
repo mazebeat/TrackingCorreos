@@ -284,67 +284,7 @@
                     "getDefaultConnection": "()",
                     "setDefaultConnection": "($name)",
                     "extend": "($name, $resolver)",
-                    "getConnections": "()",
-                    "useDefaultQueryGrammar": "()",
-                    "useDefaultSchemaGrammar": "()",
-                    "useDefaultPostProcessor": "()",
-                    "getSchemaBuilder": "()",
-                    "table": "($table)",
-                    "raw": "($value)",
-                    "selectOne": "($query, $bindings = array())",
-                    "selectFromWriteConnection": "($query, $bindings = array())",
-                    "select": "($query, $bindings = array(), $useReadPdo = true)",
-                    "insert": "($query, $bindings = array())",
-                    "update": "($query, $bindings = array())",
-                    "delete": "($query, $bindings = array())",
-                    "statement": "($query, $bindings = array())",
-                    "affectingStatement": "($query, $bindings = array())",
-                    "unprepared": "($query)",
-                    "prepareBindings": "($bindings)",
-                    "transaction": "($callback)",
-                    "beginTransaction": "()",
-                    "commit": "()",
-                    "rollBack": "()",
-                    "transactionLevel": "()",
-                    "pretend": "($callback)",
-                    "logQuery": "($query, $bindings, $time = null)",
-                    "listen": "($callback)",
-                    "getDoctrineColumn": "($table, $column)",
-                    "getDoctrineSchemaManager": "()",
-                    "getDoctrineConnection": "()",
-                    "getPdo": "()",
-                    "getReadPdo": "()",
-                    "setPdo": "($pdo)",
-                    "setReadPdo": "($pdo)",
-                    "setReconnector": "($reconnector)",
-                    "getName": "()",
-                    "getConfig": "($option)",
-                    "getDriverName": "()",
-                    "getQueryGrammar": "()",
-                    "setQueryGrammar": "($grammar)",
-                    "getSchemaGrammar": "()",
-                    "setSchemaGrammar": "($grammar)",
-                    "getPostProcessor": "()",
-                    "setPostProcessor": "($processor)",
-                    "getEventDispatcher": "()",
-                    "setEventDispatcher": "($events)",
-                    "getPaginator": "()",
-                    "setPaginator": "($paginator)",
-                    "getCacheManager": "()",
-                    "setCacheManager": "($cache)",
-                    "pretending": "()",
-                    "getFetchMode": "()",
-                    "setFetchMode": "($fetchMode)",
-                    "getQueryLog": "()",
-                    "flushQueryLog": "()",
-                    "enableQueryLog": "()",
-                    "disableQueryLog": "()",
-                    "logging": "()",
-                    "getDatabaseName": "()",
-                    "setDatabaseName": "($database)",
-                    "getTablePrefix": "()",
-                    "setTablePrefix": "($prefix)",
-                    "withTablePrefix": "($grammar)"
+                    "getConnections": "()"
                 }
             },
             "Eloquent": {
@@ -771,15 +711,6 @@
                     "getTranslator": "()"
                 }
             },
-            "Password": {
-                "functions": {
-                    "remind": "($credentials, $callback = null)",
-                    "sendReminder": "($user, $token, $callback = null)",
-                    "reset": "($credentials, $callback)",
-                    "validator": "($callback)",
-                    "getUser": "($credentials)"
-                }
-            },
             "Queue": {
                 "functions": {
                     "looping": "($callback)",
@@ -991,21 +922,6 @@
                     "getInspector": "()",
                     "getPatterns": "()",
                     "handle": "($request, $type = 1, $catch = true)"
-                }
-            },
-            "Schema": {
-                "functions": {
-                    "hasTable": "($table)",
-                    "hasColumn": "($table, $column)",
-                    "getColumnListing": "($table)",
-                    "table": "($table, $callback)",
-                    "create": "($table, $callback)",
-                    "drop": "($table)",
-                    "dropIfExists": "($table)",
-                    "rename": "($from, $to)",
-                    "getConnection": "()",
-                    "setConnection": "($connection)",
-                    "blueprintResolver": "($resolver)"
                 }
             },
             "Seeder": {
