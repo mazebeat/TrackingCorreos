@@ -7,7 +7,6 @@
  */
 Class Functions
 {
-
 	public static function printr($data)
 	{
 		return "<pre>" . htmlspecialchars(print_r($data, true)) . "</pre>";
@@ -39,14 +38,6 @@ Class Functions
 		return array_pop($args);
 	}
 
-
-	/**
-	 * [arrayToXML function for convert array to xml format]
-	 *
-	 * @param  [array] $array_in [description]
-	 *
-	 * @return [xml]            [description]
-	 */
 	public static function arrayToXML($array_in)
 	{
 		$return     = "";
@@ -71,15 +62,6 @@ Class Functions
 		return $return;
 	}
 
-	/**
-	 * [generateXML Generate ]
-	 *
-	 * @param  [type] $tag_in       [description]
-	 * @param  string $value_in     [description]
-	 * @param  string $attribute_in [description]
-	 *
-	 * @return [type]               [description]
-	 */
 	public static function generateXML($tag_in, $value_in = "", $attribute_in = "")
 	{
 		$return         = "";
@@ -95,29 +77,15 @@ Class Functions
 		return "<" . $tag_in . "" . $attributes_out . ((trim($value_in) == "") ? "/>" : ">" . $value_in . "</" . $tag_in . ">");
 	}
 
-	/**
-	 * Escape any text to be used in a url
-	 *
-	 * @param  {string} data
-	 *
-	 * @return {string} url safe string
-	 */
 	public static function base64urlEncode($data)
 	{
 		return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
 	}
 
-	/**
-	 * Opposite to base64urlEncode
-	 *
-	 * @param {string} url safe string
-	 * @param {string} data
-	 */
 	public static function base64urlDecode($data)
 	{
 		return base64_decode(str_pad(strtr($data, '-_', '+/'), strlen($data) % 4, '=', STR_PAD_RIGHT));
 	}
-
 
 	public static function objectToArray($object)
 	{
@@ -162,11 +130,7 @@ Class Functions
 				$entry = trim($entry);
 				if (preg_match("/^([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)/", $entry, $ip_list)) {
 					// http://www.faqs.org/rfcs/rfc1918.html
-					$private_ip = array('/^0\./',
-						'/^127\.0\.0\.1/',
-						'/^192\.168\..*/',
-						'/^172\.((1[6-9])|(2[0-9])|(3[0-1]))\..*/',
-						'/^10\..*/');
+					$private_ip = array('/^0\./', '/^127\.0\.0\.1/', '/^192\.168\..*/', '/^172\.((1[6-9])|(2[0-9])|(3[0-1]))\..*/', '/^10\..*/');
 
 					$found_ip = preg_replace($private_ip, $client_ip, $ip_list[1]);
 
@@ -184,9 +148,6 @@ Class Functions
 
 	}
 
-	/**
-	 * @return mixed
-	 */
 	public static function serverData()
 	{
 		$data['IP'] = $_SERVER['REMOTE_ADDR'];
@@ -208,29 +169,12 @@ Class Functions
 		return $data;
 	}
 
-	/**
-	 * @param $number
-	 *
-	 * @return array|mixed|string
-	 */
 	public static function convNumberToMonth($number)
 	{
-		$month = array(1  => 'enero',
-		               2  => 'febrero',
-		               3  => 'marzo',
-		               4  => 'abril',
-		               5  => 'mayo',
-		               6  => 'junio',
-		               7  => 'julio',
-		               8  => 'agosto',
-		               9  => 'septiembre',
-		               10 => 'octubre',
-		               11 => 'noviembre',
-		               12 => 'diciembre');
+		$month = array(1 => 'enero', 2 => 'febrero', 3 => 'marzo', 4 => 'abril', 5 => 'mayo', 6 => 'junio', 7 => 'julio', 8 => 'agosto', 9 => 'septiembre', 10 => 'octubre', 11 => 'noviembre', 12 => 'diciembre');
 		$month = array_get($month, $number);
 		$month = studly_case($month);
 
 		return $month;
 	}
-
 }
