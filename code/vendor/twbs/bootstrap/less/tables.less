@@ -2,20 +2,20 @@
 // Tables
 // --------------------------------------------------
 
+
 table {
   background-color: @table-bg;
 }
-
 caption {
   padding-top: @table-cell-padding;
   padding-bottom: @table-cell-padding;
   color: @text-muted;
   text-align: left;
 }
-
 th {
   text-align: left;
 }
+
 
 // Baseline styles
 
@@ -64,6 +64,7 @@ th {
   }
 }
 
+
 // Condensed table w/ half padding
 
 .table-condensed {
@@ -78,6 +79,7 @@ th {
     }
   }
 }
+
 
 // Bordered version
 //
@@ -103,15 +105,17 @@ th {
   }
 }
 
+
 // Zebra-striping
 //
 // Default zebra-stripe styles (alternating gray and transparent backgrounds)
 
 .table-striped {
-  > tbody > tr:nth-child(odd) {
+  > tbody > tr:nth-of-type(odd) {
     background-color: @table-bg-accent;
   }
 }
+
 
 // Hover effect
 //
@@ -123,26 +127,27 @@ th {
   }
 }
 
+
 // Table cell sizing
 //
 // Reset default table behavior
 
 table col[class*="col-"] {
-  position: static; // Prevent border hiding in Firefox and IE9/10 (see https://github.com/twbs/bootstrap/issues/11623)
+  position: static; // Prevent border hiding in Firefox and IE9-11 (see https://github.com/twbs/bootstrap/issues/11623)
   float: none;
   display: table-column;
 }
-
 table {
   td,
   th {
     &[class*="col-"] {
-      position: static; // Prevent border hiding in Firefox and IE9/10 (see https://github.com/twbs/bootstrap/issues/11623)
+      position: static; // Prevent border hiding in Firefox and IE9-11 (see https://github.com/twbs/bootstrap/issues/11623)
       float: none;
       display: table-cell;
     }
   }
 }
+
 
 // Table backgrounds
 //
@@ -155,6 +160,7 @@ table {
 .table-row-variant(info; @state-info-bg);
 .table-row-variant(warning; @state-warning-bg);
 .table-row-variant(danger; @state-danger-bg);
+
 
 // Responsive tables
 //

@@ -20,7 +20,7 @@
                             <div class="row">
                                 <div class="form-group col-xs-4 col-md-2">
                                     {{ Form::label('empresa', 'Empresa (*)', array('class' => 'control-label ')) }}
-                                    {{ Form::select('empresa', array('' => '','pcs' => 'PCS',  'entel' => 'Entel S.A', 'eph' => 'EPH'), Input::old('empresa'), array('class' => 'form-control empresa')) }}
+                                    {{ Form::select('empresa', array(), Input::old('empresa'), array('class' => 'form-control empresa')) }}
                                     <small class="help-block">{{ $errors->first('empresa') }}</small>
                                 </div>
                                 <div class="form-group col-xs-3 col-md-3">

@@ -12,7 +12,9 @@
     {{-- Factory root --}}
     trackingCorreos.factory('rootFactory', function () {
         var servicio = {
-            root: "{{ Request::root() }}"
+            root: "{{ Request::root() }}",
+            store: "{{ storage_path() }}",
+            public: "{{ public_path() }}"
         };
         return servicio;
     });

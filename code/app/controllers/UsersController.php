@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class UsersController
+ */
 class UsersController extends \ApiController
 {
 
@@ -114,5 +117,4 @@ class UsersController extends \ApiController
 
 		return Redirect::route('admin.usuarios.index');
 	}
-
 }

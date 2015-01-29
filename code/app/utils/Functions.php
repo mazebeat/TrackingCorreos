@@ -27,8 +27,9 @@ Class Functions
 		foreach ($args as $n => $field) {
 			if (is_string($field)) {
 				$tmp = array();
-				foreach ($data as $key => $row)
+				foreach ($data as $key => $row) {
 					$tmp[$key] = $row[$field];
+				}
 				$args[$n] = $tmp;
 			}
 		}
@@ -45,14 +46,17 @@ Class Functions
 		foreach ($array_in as $k => $v) {
 			if ($k[0] == "@") {
 				$attributes[str_replace("@", "", $k)] = $v;
-			} else {
+			}
+			else {
 				if (is_array($v)) {
 					$return .= \App\Util\Functions::generateXML($k, \arrayToXML($v), $attributes);
 					$attributes = array();
-				} else if (is_bool($v)) {
+				}
+				else if (is_bool($v)) {
 					$return .= \App\Util\Functions::generateXML($k, (($v == true) ? "true" : "false"), $attributes);
 					$attributes = array();
-				} else {
+				}
+				else {
 					$return .= \App\Util\Functions::generateXML($k, $v, $attributes);
 					$attributes = array();
 				}
@@ -110,7 +114,8 @@ Class Functions
 		foreach ($array as $id => $_array) {
 			if (is_array($_array) && $limit > 0) {
 				$count += count_recursive($_array, $limit - 1);
-			} else {
+			}
+			else {
 				$count += 1;
 			}
 		}
@@ -140,7 +145,8 @@ Class Functions
 					}
 				}
 			}
-		} else {
+		}
+		else {
 			$client_ip = (!empty($_SERVER['REMOTE_ADDR'])) ? $_SERVER['REMOTE_ADDR'] : ((!empty($_ENV['REMOTE_ADDR'])) ? $_ENV['REMOTE_ADDR'] : "unknown");
 		}
 
@@ -151,20 +157,30 @@ Class Functions
 	public static function serverData()
 	{
 		$data['IP'] = $_SERVER['REMOTE_ADDR'];
-		if (preg_match('/' . "Netscape" . '/', $_SERVER["HTTP_USER_AGENT"]))
-			$data['BROWSER'] = "Netscape"; elseif (preg_match('/' . "Firefox" . '/', $_SERVER["HTTP_USER_AGENT"]))
+		if (preg_match('/' . "Netscape" . '/', $_SERVER["HTTP_USER_AGENT"])) {
+			$data['BROWSER'] = "Netscape";
+		}
+		elseif (preg_match('/' . "Firefox" . '/', $_SERVER["HTTP_USER_AGENT"])) {
 			$data['BROWSER'] = "FireFox";
-		elseif (preg_match('/' . "MSIE" . '/', $_SERVER["HTTP_USER_AGENT"]))
+		}
+		elseif (preg_match('/' . "MSIE" . '/', $_SERVER["HTTP_USER_AGENT"])) {
 			$data['BROWSER'] = "MSIE";
-		elseif (preg_match('/' . "Opera" . '/', $_SERVER["HTTP_USER_AGENT"]))
+		}
+		elseif (preg_match('/' . "Opera" . '/', $_SERVER["HTTP_USER_AGENT"])) {
 			$data['BROWSER'] = "Opera";
-		elseif (preg_match('/' . "Konqueror" . '/', $_SERVER["HTTP_USER_AGENT"]))
+		}
+		elseif (preg_match('/' . "Konqueror" . '/', $_SERVER["HTTP_USER_AGENT"])) {
 			$data['BROWSER'] = "Konqueror";
-		elseif (preg_match('/' . "Chrome" . '/', $_SERVER["HTTP_USER_AGENT"]))
+		}
+		elseif (preg_match('/' . "Chrome" . '/', $_SERVER["HTTP_USER_AGENT"])) {
 			$data['BROWSER'] = "Chrome";
-		elseif (preg_match('/' . "Safari" . '/', $_SERVER["HTTP_USER_AGENT"]))
+		}
+		elseif (preg_match('/' . "Safari" . '/', $_SERVER["HTTP_USER_AGENT"])) {
 			$data['BROWSER'] = "Safari";
-		else $data['BROWSER'] = "UNKNOWN";
+		}
+		else {
+			$data['BROWSER'] = "UNKNOWN";
+		}
 
 		return $data;
 	}
@@ -176,5 +192,48 @@ Class Functions
 		$month = studly_case($month);
 
 		return $month;
+	}
+
+	public static function curlRequest($url = null, $postFields = null, $requestType = 'GET', $isFormData = false)
+	{
+		if (!isset($url)) {
+			return json_encode(array('error' => 'URL param is required'));
+		}
+		$client = curl_init();
+		curl_setopt($client, CURLOPT_URL, $url);
+		if ($requestType == 'POST') {
+			curl_setopt($client, CURLOPT_POST, true);
+			curl_setopt($client, CURLOPT_CUSTOMREQUEST, 'POST');
+			if (count($postFields)) {
+				if (isset($postFields) && is_array($postFields)) {
+					if ($isFormData) {
+						$postFields = json_encode($postFields);
+						curl_setopt($client, CURLOPT_POSTFIELDS, $postFields); // multipart/form-data
+						$header = array('Content-Type: application/json', 'Content-Length: ' . strlen($postFields));
+					}
+					else {
+						curl_setopt($client, CURLOPT_POSTFIELDS, http_build_query($postFields)); // application/x-www-form-urlencoded
+						$postFields = json_encode($postFields);
+						$header     = array('Content-Type: application/json', 'Content-Length: ' . strlen($postFields));
+					}
+				}
+			}
+			else {
+				$header = array('Content-Type: application/json');
+			}
+		}
+		else {
+			curl_setopt($client, CURLOPT_POST, false);
+			$header = array('Content-Type: application/json');
+		}
+		curl_setopt($client, CURLOPT_HTTPHEADER, $header);
+		curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($client, CURLOPT_SSL_VERIFYPEER, false);
+		//		curl_setopt($client, CURLOPT_FOLLOWLOCATION, true);
+		$response = curl_exec($client);
+		$result   = json_decode($response);
+		curl_close($client);
+
+		return $result;
 	}
 }

@@ -52,7 +52,6 @@ class HomeController extends ApiController
 			}
 		} catch (Exception $e) {
 			$this->setData(array('message' => array($e->getMessage()), 'ok' => false));
-
 		}
 
 		return Response::json($this->getData(), $this->getStatus(), $this->getHeaders());
@@ -69,6 +68,4 @@ class HomeController extends ApiController
 
 		return Redirect::to('/');
 	}
-
-
 }

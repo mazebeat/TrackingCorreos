@@ -33,6 +33,13 @@
 	{{ HTML::script('js/ladda/dist/spin.min.js') }}
 	{{ HTML::script('js/ladda/dist/ladda.min.js') }}
 	{{ HTML::script('js/pNotify/js/pnotify.custom.min.js') }}
+
+	{{-- AmCharts JS --}}
+	{{ HTML::script('js/amcharts/amcharts.js') }}
+	{{ HTML::script('js/amcharts/pie.js') }}
+	{{ HTML::script('js/amcharts/serial.js') }}
+	{{ HTML::script('http://www.amcharts.com/lib/3/exporting/amexport_combined.js') }}
+	{{ HTML::script('js/amcharts/lang/es.js') }}
 	@yield('file-script')
 	@include('layouts.angularjs')
 	<script>

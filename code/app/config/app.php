@@ -117,8 +117,7 @@ return array(
 		'Barryvdh\Debugbar\ServiceProvider',
 		'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
 		'Fitztrev\LaravelHtmlMinify\LaravelHtmlMinifyServiceProvider',
-		'Way\Generators\GeneratorsServiceProvider',
-		'Barryvdh\VendorCleanup\VendorCleanupServiceProvider',),
+		'Way\Generators\GeneratorsServiceProvider', 'Barryvdh\VendorCleanup\VendorCleanupServiceProvider', 'Maatwebsite\Excel\ExcelServiceProvider',),
 	/*
 	|--------------------------------------------------------------------------
 	| Service Provider Manifest
@@ -183,7 +182,6 @@ return array(
 		'URL'               => 'Illuminate\Support\Facades\URL',
 		'Validator'         => 'Illuminate\Support\Facades\Validator',
 		'View'              => 'Illuminate\Support\Facades\View',
-		'Debugbar'          => 'Barryvdh\Debugbar\Facade',
-		'SoapWrapper'       => 'Artisaninweb\SoapWrapper\Facades\SoapWrapper',),
+		'Debugbar'          => 'Barryvdh\Debugbar\Facade', 'SoapWrapper' => 'Artisaninweb\SoapWrapper\Facades\SoapWrapper', 'Excel' => 'Maatwebsite\Excel\Facades\Excel',),
 
 );

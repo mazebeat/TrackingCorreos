@@ -17,3 +17,16 @@ trackingCorreos.config(['$httpProvider', 'localStorageServiceProvider', function
         .setStorageType('sessionStorage')
         .setNotify(true, true);
 }]);
+
+trackingCorreos.filter('mayorCero', function () {
+    return function (item) {
+        if (item <= 0) {
+            return 'NO';
+        }
+        if (item > 0) {
+            return 'SI';
+        } else {
+            return 'NO';
+        }
+    };
+});

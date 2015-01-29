@@ -84,5 +84,4 @@ class Initialize extends Command
 	{
 		return array(array('seed', 's', InputOption::VALUE_NONE, 'Determine if the DB will be seeded.', null));
 	}
-
 }

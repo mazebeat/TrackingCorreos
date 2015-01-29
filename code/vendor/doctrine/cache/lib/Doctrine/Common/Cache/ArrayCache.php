@@ -32,62 +32,63 @@ namespace Doctrine\Common\Cache;
  */
 class ArrayCache extends CacheProvider
 {
-	/**
-	 * @var array $data
-	 */
-	private $data = array();
+    /**
+     * @var array $data
+     */
+    private $data = array();
 
-	/**
-	 * {@inheritdoc}
-	 */
-	protected function doFetch($id)
-	{
-		return $this->doContains($id) ? $this->data[$id] : false;
-	}
+    /**
+     * {@inheritdoc}
+     */
+    protected function doFetch($id)
+    {
+        return $this->doContains($id) ? $this->data[$id] : false;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	protected function doContains($id)
-	{
-		return isset($this->data[$id]) || array_key_exists($id, $this->data);
-	}
+    /**
+     * {@inheritdoc}
+     */
+    protected function doContains($id)
+    {
+        // isset() is required for performance optimizations, to avoid unnecessary function calls to array_key_exists.
+        return isset($this->data[$id]) || array_key_exists($id, $this->data);
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	protected function doSave($id, $data, $lifeTime = 0)
-	{
-		$this->data[$id] = $data;
+    /**
+     * {@inheritdoc}
+     */
+    protected function doSave($id, $data, $lifeTime = 0)
+    {
+        $this->data[$id] = $data;
 
-		return true;
-	}
+        return true;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	protected function doDelete($id)
-	{
-		unset($this->data[$id]);
+    /**
+     * {@inheritdoc}
+     */
+    protected function doDelete($id)
+    {
+        unset($this->data[$id]);
 
-		return true;
-	}
+        return true;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	protected function doFlush()
-	{
-		$this->data = array();
+    /**
+     * {@inheritdoc}
+     */
+    protected function doFlush()
+    {
+        $this->data = array();
 
-		return true;
-	}
+        return true;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	protected function doGetStats()
-	{
-		return null;
-	}
+    /**
+     * {@inheritdoc}
+     */
+    protected function doGetStats()
+    {
+        return null;
+    }
 }

@@ -141,7 +141,7 @@ trackingCorreos.service('apiFactory', ['$http', '$q', function ($http, $q) {
         /* ('' + month) for string result */
     };
 
-    this.   exportDataToTable = function (id, name) {
+    this.exportDataToTable = function (id, name) {
         var blob = new Blob([document.getElementById(id).innerHTML], {
             type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8"
         });
@@ -149,7 +149,7 @@ trackingCorreos.service('apiFactory', ['$http', '$q', function ($http, $q) {
         saveAs(blob, name + ".xls");
     };
 
-    this.splitString = function(string, nb) {
+    this.splitString = function (string, nb) {
         //console.log(string);
         var array = string.split(',');
         return array[nb];
@@ -157,7 +157,7 @@ trackingCorreos.service('apiFactory', ['$http', '$q', function ($http, $q) {
 }]);
 
 /* Chart Service */
-trackingCorreos.service('chartService', ['rootFactory', '$http', '$window', 'storageService', function (rootFactory, $http, $window, storageService) {
+trackingCorreos.service('chartService', ['rootFactory', '$http', '$window', 'storageService', 'apiFactory', function (rootFactory, $http, $window, storageService, apiFactory) {
     this.urlImages = rootFactory.root + '/js/amcharts/images/';
 
     this.dashboardPieChart = function (data) {
@@ -171,6 +171,9 @@ trackingCorreos.service('chartService', ['rootFactory', '$http', '$window', 'sto
                 if (v.hasOwnProperty('nombreCampana')) {
                     campana = v.nombreCampana;
                 }
+                if (v.hasOwnProperty('nombre_campana')) {
+                    campana = v.nombre_campana;
+                }
                 result.push({
                     campana: campana,
                     total: v.qelectronicos
@@ -183,10 +186,11 @@ trackingCorreos.service('chartService', ['rootFactory', '$http', '$window', 'sto
     };
 
     this.dashboardSerialChart = function (data) {
-        var arreglo = [], config = [], campañas = [], temp = [], fecha = '', id = '', campana = '';
+        var arreglo = [], config = [], campañas = [], temp = [], fecha = '', id = '', campana = '', nombreNegocio = '';
         angular.forEach(data, function (v, k) {
             fecha = v.ano + '-' + v.mes;
             id = v.ano + '' + v.mes;
+            nombreNegocio = v.nombreNegocio;
             if (v.hasOwnProperty('campana')) {
                 campana = v.campana.nombre;
             }
@@ -200,7 +204,7 @@ trackingCorreos.service('chartService', ['rootFactory', '$http', '$window', 'sto
                 arreglo[id][campana] = v.qelectronicos;
                 arreglo[id]['idcampana'] = v.id_campana;
             } else {
-                arreglo[id] = {'fecha': fecha};
+                arreglo[id] = {'fecha': fecha, 'nombreNegocio': nombreNegocio};
                 arreglo[id][campana] = v.qelectronicos;
                 arreglo[id]['idcampana'] = v.id_campana;
             }
@@ -217,7 +221,31 @@ trackingCorreos.service('chartService', ['rootFactory', '$http', '$window', 'sto
         return config;
     };
 
-    this.trackingPieChart = function (data) {
+    this.trackingPieChartGlobal = function (data) {
+        var campana = '', qEmitidos = 0, titulo = '', temp = [], result = [];
+        angular.forEach(data, function (v, k) {
+            if (v.hasOwnProperty('campana')) {
+                campana = v.campana.nombre;
+            }
+            if (v.hasOwnProperty('nombreCampana')) {
+                campana = v.nombreCampana;
+            }
+            if (v.hasOwnProperty('nombre_campana')) {
+                campana = v.nombre_campana;
+            }
+            temp.push({
+                campana: campana,
+                qEmitidos: v.qemitidos
+            });
+        });
+
+        result = this.unique(temp);
+
+        return result;
+    };
+
+
+    this.trackingPieChartDetalle = function (data, idCampana) {
         var mes = 0, ano = 0, titulo = '', campana = '', qClick = 0, qDesinscritos = 0, qElectronicos = 0, qEmitidos = 0, qEnviosFallidos = 0,
             qFisicos = 0, qLeidos = 0, qNoLeidos = 0, qRebotes = 0, qRetenidos = 0, temp = [], result = [];
 
@@ -230,7 +258,9 @@ trackingCorreos.service('chartService', ['rootFactory', '$http', '$window', 'sto
             if (v.hasOwnProperty('nombreCampana')) {
                 campana = v.nombreCampana;
             }
-            //console.log(campana);
+            if (v.hasOwnProperty('nombre_campana')) {
+                campana = v.nombre_campana;
+            }
 
             angular.forEach(v, function (v, k) {
                 switch (k) {
@@ -374,6 +404,64 @@ trackingCorreos.service('chartService', ['rootFactory', '$http', '$window', 'sto
         this.legend(chart);
 
         //chart.exportConfig = this.export();
+        chart.dataProvider = data;
+        chart.write(div);
+    };
+
+    this.trackingGlobal = function (chart, div, data, ejeX, ejey, title, labelTexto) {
+        labelTexto = typeof labelTexto !== 'undefined' || labelTexto != null ? labelTexto : '';
+        chart.titleField = title;
+        chart.valueField = ejeX;
+        chart.outlineColor = "#FFFFFF";
+        chart.outlineAlpha = 0.8;
+        chart.outlineThickness = 2;
+        chart.pullOutOnlyOne = true;
+        chart.labelTexto = labelTexto;
+        /* <--- titulo de cada parte del gráfico */
+        chart.balloonTex = "[[title]]<br><span style='font-size:11px'><b>[[value]]</b> ([[percents]]%)</span>";
+        chart.pathToImages = this.urlImages;
+        chart.categoryField = ejey;
+        chart.language = "es";
+        chart.numberFormatter = this.formatNumber();
+        /* */
+        chart.labelRadius = 5;
+        chart.radius = "35%";
+        chart.innerRadius = "60%";
+        chart.dataDateFormat = "YYYY-MM-DD HH:NN";
+        this.animation(chart, true);
+        this.legend(chart);
+
+        //chart.exportConfig = this.export();
+
+        chart.dataProvider = data;
+        //chart.addListener("clickSlice", eventClick2);
+        chart.write(div);
+    };
+
+    this.trackingDetalle = function (chart, div, data, ejeX, ejey, title, labelTexto) {
+        labelTexto = typeof labelTexto !== 'undefined' || labelTexto != null ? labelTexto : '';
+        chart.titleField = title;
+        chart.valueField = ejeX;
+        chart.outlineColor = "#FFFFFF";
+        chart.outlineAlpha = 0.8;
+        chart.outlineThickness = 2;
+        chart.pullOutOnlyOne = true;
+        chart.labelTexto = labelTexto;
+        /* <--- titulo de cada parte del gráfico */
+        chart.balloonTex = "[[title]]<br><span style='font-size:11px'><b>[[value]]</b> ([[percents]]%)</span>";
+        chart.pathToImages = this.urlImages;
+        chart.categoryField = ejey;
+        chart.language = "es";
+        chart.numberFormatter = this.formatNumber();
+        /* */
+        chart.labelRadius = 5;
+        chart.radius = "35%";
+        chart.innerRadius = "60%";
+        chart.dataDateFormat = "YYYY-MM-DD HH:NN";
+        this.animation(chart, true);
+        this.legend(chart);
+
+        //chart.exportConfig = this.export();
 
         chart.dataProvider = data;
         chart.write(div);
@@ -442,9 +530,10 @@ trackingCorreos.service('chartService', ['rootFactory', '$http', '$window', 'sto
     };
 
     function eventClick(event) {
+        console.log(event);
         var date = event.item.dataContext.fecha;
         var campana = event.item.dataContext.idcampana;
-        var data = {date: date, campana: campana};
+        var data = {date: date, campana: campana, negocio: event.item.dataContext.nombreNegocio};
         if (storageService.isSupported) {
             if (storageService.create('searchTracking', data)) {
                 $window.location.href = rootFactory.root + '/dashboard/tracking/';
@@ -452,11 +541,167 @@ trackingCorreos.service('chartService', ['rootFactory', '$http', '$window', 'sto
         } else {
             $http.post(rootFactory.root + '/dashboard/setSearchTracking', data).
                 success(function (data) {
-                    //console.log('NonSupported');
+                    console.log('NonSupported');
                     //console.log(data);
                 });
         }
     }
+
+    /*
+     function eventClick2(event) {
+     var params = {
+     ano: parseInt(fechas[0]),
+     mes: parseInt(fechas[1]),
+     campana: tracking.campana,
+     nEmpresa: user.empresa,
+     nNegocio: tracking.negocio
+     };
+     apiFactory.url('GestionMailWS/Resumen/ConsultaResumen');
+     apiFactory.post(params)
+     .then(function (response) {
+     if (response.ok) {
+     var json = JSON.parse('[' + response.data.substr(0, response.data.length - 1) + ']');
+     var datos = chartService.trackingPieChartGlobal(json);
+     console.log(datos);
+     chartService.trackingGlobal(chart, 'resumenTracking', datos, 'qEmitidos', 'campana', 'campana', '[[title]]<br>[[value]]</b>([[percents]])');
+     chart.validateNow();
+     chart.animateAgain();
+     $scope.result = json;
+     trackingButton.stop();
+     } else {
+     $scope.message = response.message;
+     apiFactory.notify('Tracking de Correos', $scope.message);
+     trackingButton.stop();
+     $scope.result = [];
+     }
+     })
+     .catch(function (errorMsg) {
+     apiFactory.notify('Atención!', errorMsg);
+     trackingButton.stop();
+     $scope.result = [];
+     });
+
+     console.log(event.dataItem.dataContext);
+     var mes = 0, ano = 0, titulo = '', campana = '', qClick = 0, qDesinscritos = 0, qElectronicos = 0, qEmitidos = 0, qEnviosFallidos = 0,
+     qFisicos = 0, qLeidos = 0, qNoLeidos = 0, qRebotes = 0, qRetenidos = 0, temp = [], result = [];
+
+     console.log(response.data);
+     angular.forEach(response.data, function (v, k) {
+     mes = v.mes;
+     ano = v.ano;
+     idCampana = v;
+     if (v.hasOwnProperty('campana')) {
+     campana = v.campana.nombre;
+     }
+     if (v.hasOwnProperty('nombreCampana')) {
+     campana = v.nombreCampana;
+     }
+     if (v.hasOwnProperty('nombre_campana')) {
+     campana = v.nombre_campana;
+     }
+     console.log(v.nombre_negocio);
+
+     angular.forEach(v, function (v, k) {
+     switch (k) {
+     case 'qclick':
+     titulo = k;
+     qClick += v;
+     break;
+     case 'qdesinscritos':
+     qDesinscritos += v;
+     titulo = k;
+     break;
+     case 'qelectronicos':
+     qElectronicos += v;
+     titulo = k;
+     break;
+     case 'qemitidos':
+     qEmitidos += v;
+     titulo = k;
+     break;
+     case 'qenviosfallidos':
+     qEnviosFallidos += v;
+     titulo = k;
+     break;
+     case 'qfisicos':
+     qFisicos += v;
+     titulo = k;
+     break;
+     case 'qleidos':
+     qLeidos += v;
+     titulo = k;
+     break;
+     case 'qnoleidos':
+     qNoLeidos += v;
+     titulo = k;
+     break;
+     case 'qrebotes':
+     qRebotes += v;
+     titulo = k;
+     break;
+     case 'qretenidos':
+     qRetenidos += v;
+     titulo = k;
+     break;
+     }
+     });
+     });
+     temp.push({
+     campana: campana,
+     qclick: qClick,
+     qdesinscritos: qDesinscritos,
+     qelectronicos: qElectronicos,
+     qemitidos: qEmitidos,
+     qenviosfallidos: qEnviosFallidos,
+     qfisicos: qFisicos,
+     qleidos: qLeidos,
+     qnoleidos: qNoLeidos,
+     qrebotes: qRebotes,
+     qretenidos: qRetenidos
+     });
+     angular.forEach(temp, function (v, k) {
+     var date = new Date(ano + '-' + mes + '-' + '1');
+     var camp = '';
+     angular.forEach(v, function (v, k) {
+     if (k == 'campana') {
+     camp = v;
+     } else {
+     result.push({
+     campana: camp,
+     date: date,
+     title: k,
+     value: v
+     });
+     }
+     });
+     });
+
+     var datos = result;
+
+     gDetail.titleField = 'title';
+     gDetail.valueField = 'value';
+     gDetail.outlineColor = "#FFFFFF";
+     gDetail.outlineAlpha = 0.8;
+     gDetail.outlineThickness = 2;
+     gDetail.balloonTex = "[[title]]<br><span style='font-size:11px'><b>[[value]]</b> ([[percents]]%)</span>";
+     gDetail.pathToImages = rootFactory.root + '/js/amcharts/images/';
+     gDetail.categoryField = 'title';
+     gDetail.language = "es";
+     gDetail.labelRadius = 5;
+     gDetail.radius = "35%";
+     gDetail.innerRadius = "60%";
+     gDetail.dataDateFormat = "YYYY-MM-DD HH:NN";
+     gDetail.pullOutOnlyOne = true;
+     gDetail.dataProvider = datos;
+     gDetail.write('gDetail');
+
+     var modal = $('#mDetail')
+     modal.find('.modal-title').text('Detalle Campaña');
+     modal.find('.modal-subtitle').text('NAVIDAD');
+     $('#mDetail').modal('show')
+     gDetail.validateNow();
+     }
+     */
     this.dots = function (chart, div, data, ejeX, ejey, title, labelTexto) {
         labelTexto = typeof labelTexto !== 'undefined' || labelTexto != null ? labelTexto : '';
         chart.pathToImages = this.urlImages;
@@ -735,3 +980,25 @@ trackingCorreos.factory('storageService', ['localStorageService', function (loca
 
     return storage;
 }]);
+
+//readyDetail.stop();
+$('#readyDetail').removeAttr('disabled');
+apiFactory.notify('Tracking de Correos', 'Generando documento a descargar', 'success');
+
+$http.post('excel', $.param(params))
+    .then(function (response) {
+        console.info(response);
+        apiFactory.notify('Tracking de Correos', 'Generando documento a exportar');
+        //readyDetail.start();
+        //$('#readyDetail').attr('disabled');
+        $scope.boolean = 'OK';
+        if (response.ok) {
+            var details = response.data.substr(0, response.data.length - 1);
+            $scope.detail = JSON.parse('[' + details + ']');
+        }
+    })
+    .then(function () {
+        //readyDetail.stop();
+        $('#readyDetail').removeAttr('disabled');
+        apiFactory.notify('Tracking de Correos', 'Documento listo para exportar', 'success');
+    });

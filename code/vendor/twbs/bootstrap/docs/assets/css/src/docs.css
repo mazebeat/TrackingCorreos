@@ -90,6 +90,26 @@ body {
 
 
 /*
+ * Fancy skip link
+ *
+ * Make it look a bit less "bare bones"
+ */
+
+#skippy {
+  display: block;
+  padding: 1em;
+  color: #fff;
+  background-color: #6f5499;
+  outline: 0;
+}
+
+#skippy .skiplink-text {
+  padding: .5em;
+  outline: 1px dotted;
+}
+
+
+/*
  * Main navigation
  *
  * Turn the `.navbar` at the top of the docs purple.
@@ -893,6 +913,10 @@ h1[id] {
   content: "Example";
 }
 
+.bs-example-padded-bottom {
+  padding-bottom: 24px;
+}
+
 /* Tweak display of the code snippets when following an example */
 .bs-example + .highlight,
 .bs-example + .zero-clipboard + .highlight {
@@ -1146,6 +1170,10 @@ h1[id] {
   overflow: auto;
 }
 
+.bs-example > .nav-pills-stacked-example {
+  max-width: 300px;
+}
+
 /* Simple collapse example */
 #collapseExample .well {
   margin-bottom: 0;
@@ -1155,6 +1183,19 @@ h1[id] {
 .bs-events-table > thead > tr > th:first-child,
 .bs-events-table > tbody > tr > td:first-child {
   white-space: nowrap;
+}
+
+.bs-events-table > thead > tr > th:first-child {
+  width: 150px;
+}
+
+.js-options-table > thead > tr > th:nth-child(1),
+.js-options-table > thead > tr > th:nth-child(2) {
+  width: 100px;
+}
+
+.js-options-table > thead > tr > th:nth-child(3) {
+  width: 50px;
 }
 
 /*
@@ -1411,9 +1452,11 @@ h1[id] {
   border: 2px dashed #eee;
   border-radius: 4px;
 }
-.bs-dropzone h2 {
-  margin-top: 0;
+.bs-dropzone .import-header {
   margin-bottom: 5px;
+}
+.bs-dropzone .glyphicon-download-alt {
+  font-size: 40px;
 }
 .bs-dropzone hr {
   width: 100px;

@@ -27,125 +27,197 @@ namespace Doctrine\Common\Cache;
  */
 abstract class FileCache extends CacheProvider
 {
-	/**
-	 * The cache directory.
-	 *
-	 * @var string
-	 */
-	protected $directory;
+    /**
+     * The cache directory.
+     *
+     * @var string
+     */
+    protected $directory;
 
-	/**
-	 * The cache file extension.
-	 *
-	 * @var string|null
-	 */
-	protected $extension;
+    /**
+     * The cache file extension.
+     *
+     * @var string
+     */
+    private $extension;
 
-	/**
-	 * Constructor.
-	 *
-	 * @param string      $directory The cache directory.
-	 * @param string|null $extension The cache file extension.
-	 *
-	 * @throws \InvalidArgumentException
-	 */
-	public function __construct($directory, $extension = null)
-	{
-		if (!is_dir($directory) && !@mkdir($directory, 0777, true)) {
-			throw new \InvalidArgumentException(sprintf('The directory "%s" does not exist and could not be created.', $directory));
-		}
+    /**
+     * @var string[] regular expressions for replacing disallowed characters in file name
+     */
+    private $disallowedCharacterPatterns = array(
+        '/\-/', // replaced to disambiguate original `-` and `-` derived from replacements
+        '/[^a-zA-Z0-9\-_\[\]]/' // also excludes non-ascii chars (not supported, depending on FS)
+    );
 
-		if (!is_writable($directory)) {
-			throw new \InvalidArgumentException(sprintf('The directory "%s" is not writable.', $directory));
-		}
+    /**
+     * @var string[] replacements for disallowed file characters
+     */
+    private $replacementCharacters = array('__', '-');
 
-		$this->directory = realpath($directory);
-		$this->extension = $extension ?: $this->extension;
-	}
+    /**
+     * Constructor.
+     *
+     * @param string $directory The cache directory.
+     * @param string $extension The cache file extension.
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function __construct($directory, $extension = '')
+    {
+        if ( ! is_dir($directory) && ! @mkdir($directory, 0777, true)) {
+            throw new \InvalidArgumentException(sprintf(
+                'The directory "%s" does not exist and could not be created.',
+                $directory
+            ));
+        }
 
-	/**
-	 * Gets the cache directory.
-	 *
-	 * @return string
-	 */
-	public function getDirectory()
-	{
-		return $this->directory;
-	}
+        if ( ! is_writable($directory)) {
+            throw new \InvalidArgumentException(sprintf(
+                'The directory "%s" is not writable.',
+                $directory
+            ));
+        }
 
-	/**
-	 * Gets the cache file extension.
-	 *
-	 * @return string|null
-	 */
-	public function getExtension()
-	{
-		return $this->extension;
-	}
+        $this->directory = realpath($directory);
+        $this->extension = (string) $extension;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	protected function doDelete($id)
-	{
-		return @unlink($this->getFilename($id));
-	}
+    /**
+     * Gets the cache directory.
+     *
+     * @return string
+     */
+    public function getDirectory()
+    {
+        return $this->directory;
+    }
 
-	/**
-	 * @param string $id
-	 *
-	 * @return string
-	 */
-	protected function getFilename($id)
-	{
-		$hash = hash('sha256', $id);
-		$path = implode(str_split($hash, 16), DIRECTORY_SEPARATOR);
-		$path = $this->directory . DIRECTORY_SEPARATOR . $path;
-		$id   = preg_replace('@[\\\/:"*?<>|]+@', '', $id);
+    /**
+     * Gets the cache file extension.
+     *
+     * @return string|null
+     */
+    public function getExtension()
+    {
+        return $this->extension;
+    }
 
-		return $path . DIRECTORY_SEPARATOR . $id . $this->extension;
-	}
+    /**
+     * @param string $id
+     *
+     * @return string
+     */
+    protected function getFilename($id)
+    {
+        return $this->directory
+            . DIRECTORY_SEPARATOR
+            . implode(str_split(hash('sha256', $id), 2), DIRECTORY_SEPARATOR)
+            . DIRECTORY_SEPARATOR
+            . preg_replace($this->disallowedCharacterPatterns, $this->replacementCharacters, $id)
+            . $this->extension;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	protected function doFlush()
-	{
-		foreach ($this->getIterator() as $name => $file) {
-			@unlink($name);
-		}
+    /**
+     * {@inheritdoc}
+     */
+    protected function doDelete($id)
+    {
+        return @unlink($this->getFilename($id));
+    }
 
-		return true;
-	}
+    /**
+     * {@inheritdoc}
+     */
+    protected function doFlush()
+    {
+        foreach ($this->getIterator() as $name => $file) {
+            @unlink($name);
+        }
 
-	/**
-	 * @return \Iterator
-	 */
-	private function getIterator()
-	{
-		$pattern  = '/^.+\\' . $this->extension . '$/i';
-		$iterator = new \RecursiveDirectoryIterator($this->directory);
-		$iterator = new \RecursiveIteratorIterator($iterator);
+        return true;
+    }
 
-		return new \RegexIterator($iterator, $pattern);
-	}
+    /**
+     * {@inheritdoc}
+     */
+    protected function doGetStats()
+    {
+        $usage = 0;
+        foreach ($this->getIterator() as $file) {
+            $usage += $file->getSize();
+        }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	protected function doGetStats()
-	{
-		$usage = 0;
-		foreach ($this->getIterator() as $file) {
-			$usage += $file->getSize();
-		}
+        $free = disk_free_space($this->directory);
 
-		$free = disk_free_space($this->directory);
+        return array(
+            Cache::STATS_HITS               => null,
+            Cache::STATS_MISSES             => null,
+            Cache::STATS_UPTIME             => null,
+            Cache::STATS_MEMORY_USAGE       => $usage,
+            Cache::STATS_MEMORY_AVAILABLE   => $free,
+        );
+    }
 
-		return array(Cache::STATS_HITS             => null,
-		             Cache::STATS_MISSES           => null,
-		             Cache::STATS_UPTIME           => null,
-		             Cache::STATS_MEMORY_USAGE     => $usage,
-		             Cache::STATS_MEMORY_AVAILABLE => $free,);
-	}
+    /**
+     * Create path if needed.
+     *
+     * @param string $path
+     * @return bool TRUE on success or if path already exists, FALSE if path cannot be created.
+     */
+    private function createPathIfNeeded($path)
+    {
+        if ( ! is_dir($path)) {
+            if (false === @mkdir($path, 0777, true) && !is_dir($path)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Writes a string content to file in an atomic way.
+     *
+     * @param string $filename Path to the file where to write the data.
+     * @param string $content  The content to write
+     *
+     * @return bool TRUE on success, FALSE if path cannot be created, if path is not writable or an any other error.
+     */
+    protected function writeFile($filename, $content)
+    {
+        $filepath = pathinfo($filename, PATHINFO_DIRNAME);
+
+        if ( ! $this->createPathIfNeeded($filepath)) {
+            return false;
+        }
+
+        if ( ! is_writable($filepath)) {
+            return false;
+        }
+
+        $tmpFile = tempnam($filepath, 'swap');
+
+        if (file_put_contents($tmpFile, $content) !== false) {
+            if (@rename($tmpFile, $filename)) {
+                @chmod($filename, 0666 & ~umask());
+
+                return true;
+            }
+
+            @unlink($tmpFile);
+        }
+
+        return false;
+    }
+
+    /**
+     * @return \Iterator
+     */
+    private function getIterator()
+    {
+        return new \RegexIterator(
+            new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($this->directory)),
+            '/^.+' . preg_quote($this->extension, '/') . '$/i'
+        );
+    }
 }

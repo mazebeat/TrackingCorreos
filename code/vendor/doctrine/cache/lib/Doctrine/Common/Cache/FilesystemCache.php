@@ -27,99 +27,85 @@ namespace Doctrine\Common\Cache;
  */
 class FilesystemCache extends FileCache
 {
-	const EXTENSION = '.doctrinecache.data';
+    const EXTENSION = '.doctrinecache.data';
 
-	/**
-	 * {@inheritdoc}
-	 */
-	protected $extension = self::EXTENSION;
+    /**
+     * {@inheritdoc}
+     */
+    public function __construct($directory, $extension = self::EXTENSION)
+    {
+        parent::__construct($directory, $extension);
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	protected function doFetch($id)
-	{
-		$data     = '';
-		$lifetime = -1;
-		$filename = $this->getFilename($id);
+    /**
+     * {@inheritdoc}
+     */
+    protected function doFetch($id)
+    {
+        $data     = '';
+        $lifetime = -1;
+        $filename = $this->getFilename($id);
 
-		if (!is_file($filename)) {
-			return false;
-		}
+        if ( ! is_file($filename)) {
+            return false;
+        }
 
-		$resource = fopen($filename, "r");
+        $resource = fopen($filename, "r");
 
-		if (false !== ($line = fgets($resource))) {
-			$lifetime = (integer)$line;
-		}
+        if (false !== ($line = fgets($resource))) {
+            $lifetime = (integer) $line;
+        }
 
-		if ($lifetime !== 0 && $lifetime < time()) {
-			fclose($resource);
+        if ($lifetime !== 0 && $lifetime < time()) {
+            fclose($resource);
 
-			return false;
-		}
+            return false;
+        }
 
-		while (false !== ($line = fgets($resource))) {
-			$data .= $line;
-		}
+        while (false !== ($line = fgets($resource))) {
+            $data .= $line;
+        }
 
-		fclose($resource);
+        fclose($resource);
 
-		return unserialize($data);
-	}
+        return unserialize($data);
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	protected function doContains($id)
-	{
-		$lifetime = -1;
-		$filename = $this->getFilename($id);
+    /**
+     * {@inheritdoc}
+     */
+    protected function doContains($id)
+    {
+        $lifetime = -1;
+        $filename = $this->getFilename($id);
 
-		if (!is_file($filename)) {
-			return false;
-		}
+        if ( ! is_file($filename)) {
+            return false;
+        }
 
-		$resource = fopen($filename, "r");
+        $resource = fopen($filename, "r");
 
-		if (false !== ($line = fgets($resource))) {
-			$lifetime = (integer)$line;
-		}
+        if (false !== ($line = fgets($resource))) {
+            $lifetime = (integer) $line;
+        }
 
-		fclose($resource);
+        fclose($resource);
 
-		return $lifetime === 0 || $lifetime > time();
-	}
+        return $lifetime === 0 || $lifetime > time();
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	protected function doSave($id, $data, $lifeTime = 0)
-	{
-		if ($lifeTime > 0) {
-			$lifeTime = time() + $lifeTime;
-		}
+    /**
+     * {@inheritdoc}
+     */
+    protected function doSave($id, $data, $lifeTime = 0)
+    {
+        if ($lifeTime > 0) {
+            $lifeTime = time() + $lifeTime;
+        }
 
-		$data     = serialize($data);
-		$filename = $this->getFilename($id);
-		$filepath = pathinfo($filename, PATHINFO_DIRNAME);
+        $data      = serialize($data);
+        $filename  = $this->getFilename($id);
 
-		if (!is_dir($filepath)) {
-			if (false === @mkdir($filepath, 0777, true) && !is_dir($filepath)) {
-				return false;
-			}
-		} elseif (!is_writable($filepath)) {
-			return false;
-		}
-
-		$tmpFile = tempnam($filepath, basename($filename));
-
-		if ((file_put_contents($tmpFile, $lifeTime . PHP_EOL . $data) !== false) && @rename($tmpFile, $filename)) {
-			@chmod($filename, 0666 & ~umask());
-
-			return true;
-		}
-
-		return false;
-	}
+        return $this->writeFile($filename, $lifeTime . PHP_EOL . $data);
+    }
 }

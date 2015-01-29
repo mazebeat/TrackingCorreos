@@ -1,0 +1,1695 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" readonly="true" id="2e8b902c-d24b-4a2e-873f-db4dadfc22a0" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/app/storage/exports/Detalle2015-01-27.xlsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/public/exports/Detalle2015-01-27.xlsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/public/exports/ENTEL_NAVIDAD2015-01-24.xlsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/images/_blank.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/aealarabiya.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/aealarabiya.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/aefurat.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/aefurat.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/images/alpha.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/composer.phar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusans.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusans.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusansb.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusansb.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusansbi.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusansbi.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusanscondensed.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusanscondensed.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusanscondensedb.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusanscondensedb.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusanscondensedbi.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusanscondensedbi.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusanscondensedi.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusanscondensedi.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusansextralight.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusansextralight.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusansi.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusansi.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusansmono.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusansmono.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusansmonob.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusansmonob.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusansmonobi.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusansmonobi.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusansmonoi.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusansmonoi.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavuserif.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavuserif.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavuserifb.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavuserifb.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavuserifbi.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavuserifbi.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavuserifcondensed.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavuserifcondensed.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavuserifcondensedb.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavuserifcondensedb.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavuserifcondensedbi.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavuserifcondensedbi.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavuserifcondensedi.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavuserifcondensedi.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavuserifi.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavuserifi.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_012.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freemono.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freemono.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freemonob.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freemonob.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freemonobi.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freemonobi.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freemonoi.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freemonoi.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freesans.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freesans.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freesansb.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freesansb.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freesansbi.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freesansbi.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freesansi.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freesansi.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freeserif.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freeserif.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freeserifb.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freeserifb.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freeserifbi.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freeserifbi.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freeserifi.ctg.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freeserifi.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/dist/fonts/glyphicons-halflings-regular.woff2" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/fonts/glyphicons-halflings-regular.woff2" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/images/image_demo.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/images/image_with_alpha.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/images/img.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/public/images/login-bg.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/public/images/login-logo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/images/logo_example.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/images/logo_example.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/images/logo_example.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/pdfacourier.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/pdfacourierb.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/pdfacourierbi.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/pdfacourieri.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/pdfahelvetica.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/pdfahelveticab.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/pdfahelveticabi.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/pdfahelveticai.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/pdfasymbol.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/pdfatimes.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/pdfatimesb.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/pdfatimesbi.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/pdfatimesi.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/pdfazapfdingbats.z" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/phing-latest_2.phar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/include/sRGB.icc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/data/cert/tcpdf.fdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/data/cert/tcpdf.p12" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/images/tcpdf_cell.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/images/tcpdf_logo.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/images/tcpdf_signature.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/tools/.htaccess" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavu-fonts-ttf-2.33/AUTHORS" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavu-fonts-ttf-2.34/AUTHORS" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freefont-20100919/AUTHORS" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freefont-20120503/AUTHORS" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavu-fonts-ttf-2.33/BUGS" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavu-fonts-ttf-2.34/BUGS" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/CHANGELOG.TXT" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/ae_fonts_2.0/COPYING" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freefont-20100919/COPYING" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freefont-20120503/COPYING" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freefont-20100919/CREDITS" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freefont-20120503/CREDITS" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/ChainCache.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/ae_fonts_2.0/ChangeLog" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freefont-20100919/ChangeLog" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freefont-20120503/ChangeLog" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/ClearableCache.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/FlushableCache.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freefont-20100919/INSTALL" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freefont-20120503/INSTALL" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/LICENSE.TXT" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavu-fonts-ttf-2.33/LICENSE" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavu-fonts-ttf-2.34/LICENSE" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/Maze.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/MultiGetCache.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavu-fonts-ttf-2.33/NEWS" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavu-fonts-ttf-2.34/NEWS" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/PredisCache.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/README.TXT" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/ae_fonts_2.0/README" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavu-fonts-ttf-2.33/README" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavu-fonts-ttf-2.34/README" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freefont-20100919/README" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freefont-20120503/README" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/SQLite3Cache.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freefont-20120503/TROUBLESHOOTING" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freefont-20120503/USAGE" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/aealarabiya.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/aefurat.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/afr.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/css/src/anchor.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/js/vendor/anchor.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/ara.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/aze.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/bel.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/bra.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/grunt/bs-glyphicons-data-generator.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/bul.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/app/config/packages/maatwebsite/excel/cache.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/cat.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/ces.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/data/chapter_demo_1.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/data/chapter_demo_2.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/chi.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/cid0cs.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/cid0ct.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/cid0jp.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/cid0kr.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/bootstrap/compiled.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/composer.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/app/config/packages/maatwebsite/excel/config.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/tools/convert_fonts_examples.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/courier.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/courierb.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/courierbi.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/courieri.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/app/config/packages/maatwebsite/excel/csv.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/cym.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/dan.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/include/barcodes/datamatrix.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusans.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusansb.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusansbi.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusanscondensed.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusanscondensedb.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusanscondensedbi.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusanscondensedi.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusansextralight.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusansi.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusansmono.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusansmonob.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusansmonobi.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavusansmonoi.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavuserif.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavuserifb.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavuserifbi.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavuserifcondensed.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavuserifcondensedb.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavuserifcondensedbi.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavuserifcondensedi.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavuserifi.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/eng.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/est.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/eus.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_001.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_002.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_003.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_004.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_005.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_006.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_007.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_008.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_009.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_010.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_011.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_012.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_013.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_014.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_015.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_016.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_017.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_018.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_019.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_020.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_021.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_022.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_023.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_024.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_025.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_026.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_027.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_028.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_029.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_030.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_031.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_032.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_033.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_034.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_035.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_036.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_037.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_038.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_039.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_040.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_041.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_042.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_043.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_044.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_045.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_046.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_047.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_048.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_049.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_050.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_051.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_052.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_053.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_054.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_055.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_056.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_057.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_058.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_059.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_060.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_061.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_062.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_063.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_064.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/example_065.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/barcodes/example_1d_html.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/barcodes/example_1d_png.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/barcodes/example_1d_svg.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/barcodes/example_1d_svgi.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/barcodes/example_2d_datamatrix_html.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/barcodes/example_2d_datamatrix_png.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/barcodes/example_2d_datamatrix_svg.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/barcodes/example_2d_datamatrix_svgi.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/barcodes/example_2d_pdf417_html.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/barcodes/example_2d_pdf417_png.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/barcodes/example_2d_pdf417_svg.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/barcodes/example_2d_pdf417_svgi.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/barcodes/example_2d_qrcode_html.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/barcodes/example_2d_qrcode_png.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/barcodes/example_2d_qrcode_svg.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/barcodes/example_2d_qrcode_svgi.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/app/config/packages/maatwebsite/excel/export.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/far.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/app/config/packages/maatwebsite/excel/filters.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/fra.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freemono.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freemonob.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freemonobi.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freemonoi.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freesans.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freesansb.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freesansbi.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freesansi.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freeserif.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freeserifb.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freeserifbi.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/freeserifi.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/ger.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/gle.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/glg.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/hat.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/heb.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/helvetica.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/helveticab.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/helveticabi.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/helveticai.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/hrv.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/hun.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/hye.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/hysmyeongjostdmedium.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/app/config/packages/maatwebsite/excel/import.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/ind.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/index.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/ita.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/jpn.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/kat.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/kor.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/kozgopromedium.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/kozminproregular.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavu-fonts-ttf-2.33/langcover.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavu-fonts-ttf-2.34/langcover.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/laravel-plugin.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/mkd.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/mlt.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/msa.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/msungstdlight.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/nld.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/nob.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/public/js/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/include/barcodes/pdf417.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/pdfacourier.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/pdfacourierb.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/pdfacourierbi.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/pdfacourieri.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/pdfahelvetica.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/pdfahelveticab.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/pdfahelveticabi.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/pdfahelveticai.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/pdfasymbol.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/pdfatimes.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/pdfatimesb.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/pdfatimesbi.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/pdfatimesi.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/pdfazapfdingbats.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/phing.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/php.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/pol.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/por.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/include/barcodes/qrcode.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/ron.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/rus.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/slv.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/spa.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/sqi.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/srp.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavu-fonts-ttf-2.33/status.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavu-fonts-ttf-2.34/status.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/stsongstdlight.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/swa.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/swe.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/symbol.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/symfony2.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/data/table_data_demo.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/data/cert/tcpdf.crt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/tcpdf.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/tools/tcpdf_addfont.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/tcpdf_autoconfig.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/tcpdf_barcodes_1d.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/barcodes/tcpdf_barcodes_1d_include.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/tcpdf_barcodes_2d.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/barcodes/tcpdf_barcodes_2d_include.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/images/tcpdf_box.ai" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/images/tcpdf_box.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/include/tcpdf_colors.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/config/tcpdf_config.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/config/tcpdf_config_alt.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/include/tcpdf_filters.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/include/tcpdf_font_data.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/include/tcpdf_fonts.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/include/tcpdf_images.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/tcpdf_import.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/tcpdf_include.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/tcpdf_parser.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/include/tcpdf_static.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/images/testsvg.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/times.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/timesb.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/timesbi.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/timesi.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/images/tux.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/ukr.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/uni2cid_ac15.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/uni2cid_ag15.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/uni2cid_aj16.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/uni2cid_ak12.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavu-fonts-ttf-2.33/unicover.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/dejavu-fonts-ttf-2.34/unicover.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/urd.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/data/utf8test.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vagrant.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/app/config/packages/maatwebsite/excel/views.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/yid.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/fonts/zapfdingbats.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf/examples/lang/zho.php" />
+      <change type="DELETED" beforePath="E:\Projects\Php\tracking_correos\code\app\views.rar" afterPath="" />
+      <change type="DELETED" beforePath="E:\Projects\Php\tracking_correos\code\app\views\despacho.blade.php" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/.csscomb.json" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/.csscomb.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/public/.htaccess" afterPath="$PROJECT_DIR$/code/public/.htaccess" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/.jscsrc" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/.jscsrc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/grunt/.jshintrc" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/grunt/.jshintrc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/.jshintrc" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/.jshintrc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/unit/.jshintrc" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/unit/.jshintrc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/app/controllers/AdminController.php" afterPath="$PROJECT_DIR$/code/app/controllers/AdminController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/ApcCache.php" afterPath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/ApcCache.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/app/controllers/ApiController.php" afterPath="$PROJECT_DIR$/code/app/controllers/ApiController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/ArrayCache.php" afterPath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/ArrayCache.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/js/vendor/Blob.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/js/vendor/Blob.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/CONTRIBUTING.md" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/CONTRIBUTING.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/Cache.php" afterPath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/Cache.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/CacheProvider.php" afterPath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/CacheProvider.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/CouchbaseCache.php" afterPath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/CouchbaseCache.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/app/controllers/DashboardController.php" afterPath="$PROJECT_DIR$/code/app/controllers/DashboardController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/FileCache.php" afterPath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/FileCache.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/js/vendor/FileSaver.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/js/vendor/FileSaver.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/FilesystemCache.php" afterPath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/FilesystemCache.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/app/utils/Functions.php" afterPath="$PROJECT_DIR$/code/app/utils/Functions.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/Gruntfile.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/Gruntfile.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/app/controllers/HomeController.php" afterPath="$PROJECT_DIR$/code/app/controllers/HomeController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/app/commands/Initialize.php" afterPath="$PROJECT_DIR$/code/app/commands/Initialize.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/LICENSE" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/LICENSE" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/MemcacheCache.php" afterPath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/MemcacheCache.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/MemcachedCache.php" afterPath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/MemcachedCache.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/MongoDBCache.php" afterPath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/MongoDBCache.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/PhpFileCache.php" afterPath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/PhpFileCache.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/README.md" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/RedisCache.php" afterPath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/RedisCache.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/app/controllers/ReporteController.php" afterPath="$PROJECT_DIR$/code/app/controllers/ReporteController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/RiakCache.php" afterPath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/RiakCache.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/app/controllers/TrackingController.php" afterPath="$PROJECT_DIR$/code/app/controllers/TrackingController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/app/controllers/UsersController.php" afterPath="$PROJECT_DIR$/code/app/controllers/UsersController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/Version.php" afterPath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/Version.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/WinCacheCache.php" afterPath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/WinCacheCache.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/XcacheCache.php" afterPath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/XcacheCache.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/ZendDataCache.php" afterPath="$PROJECT_DIR$/code/vendor/doctrine/cache/lib/Doctrine/Common/Cache/ZendDataCache.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/_config.yml" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/_config.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/_ide_helper.json" afterPath="$PROJECT_DIR$/code/_ide_helper.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/about.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/about.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/nav/about.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/nav/about.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/getting-started/accessibility.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/getting-started/accessibility.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/ads.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/ads.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/js/affix.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/js/affix.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/affix.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/affix.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/unit/affix.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/unit/affix.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/visual/alert.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/visual/alert.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/alert.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/alert.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/unit/alert.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/unit/alert.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/alerts.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/alerts.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/js/alerts.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/js/alerts.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/alerts.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/alerts.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/app/views/layouts/angularjs.blade.php" afterPath="$PROJECT_DIR$/code/app/views/layouts/angularjs.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/public/js/app.js" afterPath="$PROJECT_DIR$/code/public/js/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/app/config/app.php" afterPath="$PROJECT_DIR$/code/app/config/app.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/app/config/local/app.php" afterPath="$PROJECT_DIR$/code/app/config/local/app.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/js/src/application.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/js/src/application.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/autoload.php" afterPath="$PROJECT_DIR$/code/vendor/autoload.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/composer/autoload_classmap.php" afterPath="$PROJECT_DIR$/code/vendor/composer/autoload_classmap.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/composer/autoload_namespaces.php" afterPath="$PROJECT_DIR$/code/vendor/composer/autoload_namespaces.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/composer/autoload_psr4.php" afterPath="$PROJECT_DIR$/code/vendor/composer/autoload_psr4.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/composer/autoload_real.php" afterPath="$PROJECT_DIR$/code/vendor/composer/autoload_real.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/badges.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/badges.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/badges.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/badges.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/public/css/bootstrap-reset.css" afterPath="$PROJECT_DIR$/code/public/css/bootstrap-reset.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/dist/css/bootstrap-theme.css.map" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/dist/css/bootstrap-theme.css.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/dist/css/bootstrap-theme.css.map" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/dist/css/bootstrap-theme.css.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/dist/css/bootstrap-theme.css" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/dist/css/bootstrap-theme.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/dist/css/bootstrap-theme.css" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/dist/css/bootstrap-theme.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/dist/css/bootstrap-theme.min.css" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/dist/css/bootstrap-theme.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/dist/css/bootstrap-theme.min.css" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/dist/css/bootstrap-theme.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/dist/css/bootstrap.css.map" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/dist/css/bootstrap.css.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/dist/css/bootstrap.css.map" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/dist/css/bootstrap.css.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/dist/css/bootstrap.css" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/dist/css/bootstrap.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/dist/css/bootstrap.css" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/dist/css/bootstrap.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/dist/js/bootstrap.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/dist/js/bootstrap.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/dist/js/bootstrap.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/dist/js/bootstrap.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/bootstrap.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/bootstrap.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/dist/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/dist/css/bootstrap.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/dist/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/dist/css/bootstrap.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/dist/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/dist/js/bootstrap.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/dist/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/dist/js/bootstrap.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/mixins/border-radius.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/mixins/border-radius.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/bower.json" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/bower.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/breadcrumbs.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/breadcrumbs.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/breadcrumbs.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/breadcrumbs.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/browser-bugs.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/browser-bugs.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_data/browser-bugs.yml" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_data/browser-bugs.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/getting-started/browser-device-support.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/getting-started/browser-device-support.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/grunt/bs-commonjs-generator.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/grunt/bs-commonjs-generator.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/grunt/bs-lessdoc-parser.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/grunt/bs-lessdoc-parser.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/doctrine/cache/build.xml" afterPath="$PROJECT_DIR$/code/vendor/doctrine/cache/build.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/button-groups.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/button-groups.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/button-groups.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/button-groups.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/visual/button.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/visual/button.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/button.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/button.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/unit/button.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/unit/button.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/css/buttons.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/css/buttons.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/buttons.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/buttons.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/mixins/buttons.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/mixins/buttons.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/carousel/carousel.css" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/carousel/carousel.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/js/carousel.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/js/carousel.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/carousel.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/carousel.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/unit/carousel.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/unit/carousel.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/carousel.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/carousel.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/close.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/close.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/css/code.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/css/code.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/js/collapse.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/js/collapse.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/visual/collapse.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/visual/collapse.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/collapse.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/collapse.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/unit/collapse.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/unit/collapse.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/getting-started/community.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/getting-started/community.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/component-animations.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/component-animations.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/nav/components.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/nav/components.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/composer.json" afterPath="$PROJECT_DIR$/code/composer.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/doctrine/cache/composer.json" afterPath="$PROJECT_DIR$/code/vendor/doctrine/cache/composer.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/composer.json" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/composer.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/composer.lock" afterPath="$PROJECT_DIR$/code/composer.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/grunt/configBridge.json" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/grunt/configBridge.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/public/js/controllers.js" afterPath="$PROJECT_DIR$/code/public/js/controllers.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/customize.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/customize.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/nav/customize.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/nav/customize.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/js/customize.min.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/js/customize.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/customizer-variables.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/customizer-variables.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/js/src/customizer.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/js/src/customizer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/dashboard/dashboard.css" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/dashboard/dashboard.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_layouts/default.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_layouts/default.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/getting-started/disabling-responsiveness.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/getting-started/disabling-responsiveness.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/css/src/docs.css" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/css/src/docs.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/css/docs.min.css" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/css/docs.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/js/docs.min.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/js/docs.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/getting-started/download.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/getting-started/download.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/visual/dropdown.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/visual/dropdown.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/dropdown.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/dropdown.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/unit/dropdown.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/unit/dropdown.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/dropdowns.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/dropdowns.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/js/dropdowns.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/js/dropdowns.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/dropdowns.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/dropdowns.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/app/views/dashboard/reportes/electronico.blade.php" afterPath="$PROJECT_DIR$/code/app/views/dashboard/reportes/electronico.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/getting-started/examples.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/getting-started/examples.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/public/js/factories.js" afterPath="$PROJECT_DIR$/code/public/js/factories.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/app/filters.php" afterPath="$PROJECT_DIR$/code/app/filters.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/app/views/dashboard/reportes/fisico.blade.php" afterPath="$PROJECT_DIR$/code/app/views/dashboard/reportes/fisico.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/footer.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/footer.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/css/forms.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/css/forms.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/forms.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/forms.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/mixins/forms.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/mixins/forms.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/getting-started.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/getting-started.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/nav/getting-started.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/nav/getting-started.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/glyphicons.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/glyphicons.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/glyphicons.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/glyphicons.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_data/glyphicons.yml" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_data/glyphicons.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/mixins/gradients.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/mixins/gradients.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/mixins/grid-framework.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/mixins/grid-framework.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/css/grid.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/css/grid.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/grid.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/grid.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/header.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/header.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/css/helpers.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/css/helpers.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/app/views/dashboard/consultas/historica.blade.php" afterPath="$PROJECT_DIR$/code/app/views/dashboard/consultas/historica.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/js/vendor/holder.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/js/vendor/holder.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_layouts/home.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_layouts/home.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/js/ie10-viewport-bug-workaround.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/js/ie10-viewport-bug-workaround.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/js/ie8-responsive-file-warning.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/js/ie8-responsive-file-warning.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/mixins/image.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/mixins/image.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/css/images.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/css/images.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/app/views/dashboard/index.blade.php" afterPath="$PROJECT_DIR$/code/app/views/dashboard/index.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/app/views/dashboard/tracking/index.blade.php" afterPath="$PROJECT_DIR$/code/app/views/dashboard/tracking/index.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/index.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/blog/index.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/blog/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/carousel/index.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/carousel/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/cover/index.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/cover/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/dashboard/index.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/dashboard/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/grid/index.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/grid/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/jumbotron/index.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/jumbotron/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/jumbotron-narrow/index.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/jumbotron-narrow/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/justified-nav/index.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/justified-nav/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/navbar/index.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/navbar/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/navbar-fixed-top/index.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/navbar-fixed-top/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/navbar-static-top/index.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/navbar-static-top/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/non-responsive/index.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/non-responsive/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/offcanvas/index.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/offcanvas/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/signin/index.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/signin/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/starter-template/index.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/starter-template/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/sticky-footer/index.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/sticky-footer/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/sticky-footer-navbar/index.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/sticky-footer-navbar/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/theme/index.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/theme/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/tooltip-viewport/index.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/tooltip-viewport/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/index.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/app/views/dashboard/consultas/individual.blade.php" afterPath="$PROJECT_DIR$/code/app/views/dashboard/consultas/individual.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/input-groups.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/input-groups.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/input-groups.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/input-groups.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/composer/installed.json" afterPath="$PROJECT_DIR$/code/vendor/composer/installed.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/nav/javascript.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/nav/javascript.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/vendor/jquery.min.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/vendor/jquery.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/js/vendor/jszip.min.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/js/vendor/jszip.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/jumbotron-narrow/jumbotron-narrow.css" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/jumbotron-narrow/jumbotron-narrow.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/jumbotron/jumbotron.css" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/jumbotron/jumbotron.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/jumbotron.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/jumbotron.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/jumbotron.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/jumbotron.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/justified-nav/justified-nav.css" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/justified-nav/justified-nav.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/labels.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/labels.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/app/views/dashboard/reportes/lecturatot.blade.php" afterPath="$PROJECT_DIR$/code/app/views/dashboard/reportes/lecturatot.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/css/less.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/css/less.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/js/vendor/less.min.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/js/vendor/less.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/getting-started/license.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/getting-started/license.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/app/views/layouts/login.blade.php" afterPath="$PROJECT_DIR$/code/app/views/layouts/login.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/nav/main.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/nav/main.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/media.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/media.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/media.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/media.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/app/views/layouts/master_modules/menu.blade.php" afterPath="$PROJECT_DIR$/code/app/views/layouts/master_modules/menu.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/migration.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/migration.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/mixins.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/mixins.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/js/modal.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/js/modal.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/visual/modal.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/visual/modal.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/modal.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/modal.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/unit/modal.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/unit/modal.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/modals.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/modals.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/navbar/navbar.css" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/navbar/navbar.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/navbar.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/navbar.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/navs.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/navs.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/navs.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/navs.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/non-responsive/non-responsive.css" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/non-responsive/non-responsive.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/test-infra/npm-shrinkwrap.json" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/test-infra/npm-shrinkwrap.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/offcanvas/offcanvas.css" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/offcanvas/offcanvas.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/offcanvas/offcanvas.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/offcanvas/offcanvas.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/css/overview.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/css/overview.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/js/overview.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/js/overview.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/package.json" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/page-header.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/page-header.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/pagination.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/pagination.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/panels.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/panels.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/unit/phantom.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/unit/phantom.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/visual/popover.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/visual/popover.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/popover.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/popover.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/unit/popover.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/unit/popover.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/js/popovers.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/js/popovers.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/popovers.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/popovers.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/print.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/print.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/progress-bars.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/progress-bars.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/progress-bars.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/progress-bars.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/vendor/qunit.css" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/vendor/qunit.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/vendor/qunit.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/vendor/qunit.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/js/raw-files.min.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/js/raw-files.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/responsive-utilities.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/responsive-utilities.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/app/routes.php" afterPath="$PROJECT_DIR$/code/app/routes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/css/sass.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/css/sass.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/scaffolding.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/scaffolding.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/js/scrollspy.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/js/scrollspy.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/visual/scrollspy.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/visual/scrollspy.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/scrollspy.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/scrollspy.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/unit/scrollspy.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/unit/scrollspy.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/app/views/layouts/simple.blade.php" afterPath="$PROJECT_DIR$/code/app/views/layouts/simple.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/sitemap.xml" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/sitemap.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/social-buttons.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/social-buttons.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/starter-template/starter-template.css" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/starter-template/starter-template.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/sticky-footer-navbar/sticky-footer-navbar.css" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/sticky-footer-navbar/sticky-footer-navbar.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/sticky-footer/sticky-footer.css" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/sticky-footer/sticky-footer.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/visual/tab.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/visual/tab.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tab.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tab.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/unit/tab.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/unit/tab.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/css/tables.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/css/tables.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/tables.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/tables.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/js/tabs.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/js/tabs.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/getting-started/template.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/getting-started/template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/theme.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/theme.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/thumbnails.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/thumbnails.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/thumbnails.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/thumbnails.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/getting-started/tools.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/getting-started/tools.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/tooltip-viewport/tooltip-viewport.css" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/tooltip-viewport/tooltip-viewport.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/tooltip-viewport/tooltip-viewport.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/examples/tooltip-viewport/tooltip-viewport.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/visual/tooltip.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/visual/tooltip.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tooltip.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tooltip.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/unit/tooltip.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/tests/unit/tooltip.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/tooltip.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/tooltip.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/js/tooltips.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/js/tooltips.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/tracking_correos.iml" afterPath="$PROJECT_DIR$/.idea/tracking_correos.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/transition.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/js/transition.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/js/transitions.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/js/transitions.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/type.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/type.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/js/vendor/uglify.min.js" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/assets/js/vendor/uglify.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/variables.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/variables.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/mixins/vendor-prefixes.less" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/less/mixins/vendor-prefixes.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/wells.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/components/wells.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/getting-started/whats-included.html" afterPath="$PROJECT_DIR$/code/vendor/twbs/bootstrap/docs/_includes/getting-started/whats-included.html" />
+    </list>
+    <ignored path="tracking_correos.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="ComposerSettings">
+    <pharConfigPath>E:\Projects\Php\tracking_correos\code\composer.json</pharConfigPath>
+    <pharPath>E:\Projects\Php\tracking_correos\code\composer.phar</pharPath>
+    <phpPath>php.exe</phpPath>
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="DatabaseView">
+    <option name="FLATTEN" value="false" />
+    <option name="GROUP_BY_TYPE" value="true" />
+    <option name="SORT_CHILDREN" value="false" />
+    <option name="SHOW_TABLE_CONSTRAINTS" value="true" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="tracking_correos" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/app/views/dashboard/tracking/index.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2254" max-vertical-offset="4708">
+              <caret line="137" column="0" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/public/js/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="550" max-vertical-offset="836">
+              <caret line="25" column="8" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/app/routes.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="775" max-vertical-offset="1452">
+              <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+              <folding>
+                <element signature="e#6#29#0#PHP" expanded="true" />
+                <element signature="e#991#1095#1#PHP" expanded="true" />
+                <element signature="e#1356#1557#1#PHP" expanded="true" />
+                <element signature="e#1606#1684#1#PHP" expanded="true" />
+                <element signature="e#1793#1882#1#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="menu.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/code/app/views/layouts/master_modules/menu.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.43137255" vertical-offset="1518" max-vertical-offset="2288">
+              <caret line="72" column="18" selection-start-line="72" selection-start-column="18" selection-end-line="72" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/code/app/controllers/AdminController.php" />
+        <option value="$PROJECT_DIR$/code/app/controllers/DashboardController.php" />
+        <option value="$PROJECT_DIR$/code/app/controllers/ReporteController.php" />
+        <option value="$PROJECT_DIR$/code/app/controllers/UsersController.php" />
+        <option value="$PROJECT_DIR$/code/app/commands/Initialize.php" />
+        <option value="$PROJECT_DIR$/code/composer.json" />
+        <option value="$PROJECT_DIR$/code/vendor/dompdf/dompdf/dompdf_config.custom.inc.php" />
+        <option value="$PROJECT_DIR$/code/app/config/packages/maatwebsite/excel/export.php" />
+        <option value="$PROJECT_DIR$/code/public/.htaccess" />
+        <option value="$PROJECT_DIR$/code/app/utils/CustomAuthenticate.php" />
+        <option value="$PROJECT_DIR$/code/app/config/auth.php" />
+        <option value="$PROJECT_DIR$/code/app/controllers/HomeController.php" />
+        <option value="$PROJECT_DIR$/code/app/views/dashboard/index.blade.php" />
+        <option value="$PROJECT_DIR$/code/app/config/app.php" />
+        <option value="$USER_HOME$/Google Drive/Intelidata/Gemini's/488/06/OSI2014-22729_Not_SMS/Test/test.bat" />
+        <option value="$PROJECT_DIR$/code/app/views/dashboard/consultas/historica.blade.php" />
+        <option value="$PROJECT_DIR$/code/app/views/dashboard/consultas/individual.blade.php" />
+        <option value="$PROJECT_DIR$/code/app/views/dashboard/reportes/electronico.blade.php" />
+        <option value="$PROJECT_DIR$/code/app/views/dashboard/reportes/fisico.blade.php" />
+        <option value="$PROJECT_DIR$/code/app/views/dashboard/reportes/lecturatot.blade.php" />
+        <option value="$PROJECT_DIR$/code/app/config/dev/app.php" />
+        <option value="$PROJECT_DIR$/code/public/js/package.json" />
+        <option value="$PROJECT_DIR$/code/app/views/layouts/login.blade.php" />
+        <option value="$PROJECT_DIR$/code/app/filters.php" />
+        <option value="$PROJECT_DIR$/code/app/views/layouts/simple.blade.php" />
+        <option value="$PROJECT_DIR$/code/app/views/layouts/angularjs.blade.php" />
+        <option value="$PROJECT_DIR$/code/app/config/local/app.php" />
+        <option value="$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/standard_7.php" />
+        <option value="$PROJECT_DIR$/code/public/css/bootstrap-reset.css" />
+        <option value="$PROJECT_DIR$/code/public/js/app.js" />
+        <option value="$PROJECT_DIR$/code/app/utils/Functions.php" />
+        <option value="$PROJECT_DIR$/code/public/js/factories.js" />
+        <option value="$PROJECT_DIR$/code/public/js/controllers.js" />
+        <option value="$PROJECT_DIR$/code/app/routes.php" />
+        <option value="$PROJECT_DIR$/code/app/controllers/ApiController.php" />
+        <option value="$PROJECT_DIR$/code/app/controllers/TrackingController.php" />
+        <option value="$PROJECT_DIR$/code/app/views/dashboard/tracking/index.blade.php" />
+        <option value="$PROJECT_DIR$/code/app/views/layouts/master_modules/menu.blade.php" />
+      </list>
+    </option>
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true">
+    <include_path>
+      <path value="$PROJECT_DIR$/code/vendor/tijsverkoyen/css-to-inline-styles" />
+      <path value="$PROJECT_DIR$/code/vendor/twbs/bootstrap" />
+      <path value="$PROJECT_DIR$/code/vendor/jeremeamia/SuperClosure" />
+      <path value="$PROJECT_DIR$/code/vendor/way/generators" />
+      <path value="$PROJECT_DIR$/code/vendor/d11wtq/boris" />
+      <path value="$PROJECT_DIR$/code/vendor/doctrine/common" />
+      <path value="$PROJECT_DIR$/code/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/code/vendor/phpoffice/phpexcel" />
+      <path value="$PROJECT_DIR$/code/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/code/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/code/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/code/vendor/doctrine/collections" />
+      <path value="$PROJECT_DIR$/code/vendor/maatwebsite/excel" />
+      <path value="$PROJECT_DIR$/code/vendor/barryvdh/laravel-debugbar" />
+      <path value="$PROJECT_DIR$/code/vendor/barryvdh/laravel-ide-helper" />
+      <path value="$PROJECT_DIR$/code/vendor/composer" />
+      <path value="$PROJECT_DIR$/code/vendor/tecnick.com/tcpdf" />
+      <path value="$PROJECT_DIR$/code/vendor/swiftmailer/swiftmailer" />
+      <path value="$PROJECT_DIR$/code/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/code/vendor/fitztrev/laravel-html-minify" />
+      <path value="$PROJECT_DIR$/code/vendor/filp/whoops" />
+      <path value="$PROJECT_DIR$/code/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/code/vendor/symfony/security-core" />
+      <path value="$PROJECT_DIR$/code/vendor/stack/builder" />
+      <path value="$PROJECT_DIR$/code/vendor/symfony/filesystem" />
+      <path value="$PROJECT_DIR$/code/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/code/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/code/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/code/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/code/vendor/symfony/class-loader" />
+      <path value="$PROJECT_DIR$/code/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/code/vendor/symfony/dom-crawler" />
+      <path value="$PROJECT_DIR$/code/vendor/symfony/http-kernel" />
+      <path value="$PROJECT_DIR$/code/vendor/symfony/debug" />
+      <path value="$PROJECT_DIR$/code/vendor/symfony/translation" />
+      <path value="$PROJECT_DIR$/code/vendor/symfony/browser-kit" />
+      <path value="$PROJECT_DIR$/code/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/code/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/code/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/code/vendor/predis/predis" />
+      <path value="$PROJECT_DIR$/code/vendor/barryvdh/laravel-vendor-cleanup" />
+      <path value="$PROJECT_DIR$/code/vendor/phpseclib/phpseclib" />
+      <path value="$PROJECT_DIR$/code/vendor/classpreloader/classpreloader" />
+      <path value="$PROJECT_DIR$/code/vendor/maximebf/debugbar" />
+      <path value="$PROJECT_DIR$/code/vendor/lucor/laravel-auth-file-driver" />
+      <path value="$PROJECT_DIR$/code/vendor/laravel/framework" />
+      <path value="$PROJECT_DIR$/code/vendor/nesbot/carbon" />
+      <path value="$PROJECT_DIR$/code/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/code/vendor/patchwork/utf8" />
+      <path value="$PROJECT_DIR$/code/vendor/phpdocumentor/reflection-docblock" />
+      <path value="$PROJECT_DIR$/code/vendor/ircmaxell/password-compat" />
+      <path value="$PROJECT_DIR$/code/vendor/doctrine/annotations" />
+    </include_path>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>General</id>
+          </State>
+          <State>
+            <id>XPath</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Blade files</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tracking_correos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tracking_correos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tracking_correos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tracking_correos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tracking_correos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="code" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tracking_correos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tracking_correos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="code" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tracking_correos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tracking_correos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="code" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tracking_correos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tracking_correos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="code" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layouts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tracking_correos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tracking_correos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="code" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layouts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="master_modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tracking_correos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tracking_correos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="code" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dashboard" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tracking_correos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tracking_correos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="code" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dashboard" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tracking" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tracking_correos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tracking_correos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="code" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dashboard" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="reportes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tracking_correos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tracking_correos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="code" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/code/app/views" />
+    <property name="LayoutCode.rearrangeEntriesPHP" value="true" />
+    <property name="options.lastSelected" value="preferences.sourceCode.PHP" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="FullScreen" value="false" />
+    <property name="LayoutCode.rearrangeEntriesJavaScript 1.5" value="false" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
+      <BehatRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <pass-parent-envs>true</pass-parent-envs>
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+      <method />
+    </configuration>
+    <list size="0" />
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\Maze\AppData\Roaming\Subversion</configuration>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2e8b902c-d24b-4a2e-873f-db4dadfc22a0" name="Default" comment="" />
+      <created>1421949402861</created>
+      <option name="number" value="Default" />
+      <updated>1421949402861</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32952693" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28104576" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Symfony2" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24962178" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952693" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="SvgViewer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28104576" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952693" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="SvgViewer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24962178" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="myTodoPanelSettings">
+      <TodoPanelSettings />
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="28" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="tracking_correos" />
+        <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="tracking_correos" />
+        <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+      </PATH_ELEMENT>
+    </PATH>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/code/app/controllers/ReporteController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6690519" vertical-offset="0" max-vertical-offset="559">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/controllers/UsersController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.72450805" vertical-offset="1003" max-vertical-offset="1562">
+          <caret line="119" column="0" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/readme.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1981982" vertical-offset="0" max-vertical-offset="555">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5804749" vertical-offset="132" max-vertical-offset="1386">
+          <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/config/packages/maatwebsite/excel/export.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.23218997" vertical-offset="3322" max-vertical-offset="4158">
+          <caret line="155" column="27" selection-start-line="155" selection-start-column="27" selection-end-line="155" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/public/.htaccess">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="528">
+          <caret line="1" column="4" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/utils/CustomAuthenticate.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="660" max-vertical-offset="1892">
+          <caret line="48" column="96" selection-start-line="48" selection-start-column="75" selection-end-line="48" selection-end-column="96" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/config/auth.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="66" max-vertical-offset="1584">
+          <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/controllers/HomeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="568" max-vertical-offset="1386">
+          <caret line="46" column="8" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/controllers/DashboardController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8523985" vertical-offset="66" max-vertical-offset="660">
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/config/app.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.48708487" vertical-offset="66" max-vertical-offset="4334">
+          <caret line="15" column="30" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/public/js/spinner-init.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="568">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/views/dashboard/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-20.346153" vertical-offset="2705" max-vertical-offset="3432">
+          <caret line="147" column="17" selection-start-line="134" selection-start-column="5" selection-end-line="147" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/views/dashboard/consultas/visualizar.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.49905482" vertical-offset="264" max-vertical-offset="1276">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/views/dashboard/reportes/electronico.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0831758" vertical-offset="528" max-vertical-offset="1892">
+          <caret line="22" column="69" selection-start-line="22" selection-start-column="69" selection-end-line="22" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/views/dashboard/reportes/lecturatot.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.2079395" vertical-offset="594" max-vertical-offset="1892">
+          <caret line="22" column="69" selection-start-line="22" selection-start-column="69" selection-end-line="22" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/views/dashboard/reportes/fisico.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.95652175" vertical-offset="990" max-vertical-offset="1892">
+          <caret line="22" column="69" selection-start-line="22" selection-start-column="69" selection-end-line="22" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/public/js/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.846154" vertical-offset="484" max-vertical-offset="1386">
+          <caret line="36" column="25" selection-start-line="36" selection-start-column="25" selection-end-line="36" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/views/dashboard/consultas/historica.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.4230769" vertical-offset="1253" max-vertical-offset="1892">
+          <caret line="61" column="14" selection-start-line="61" selection-start-column="14" selection-end-line="61" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/views/dashboard/consultas/individual.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.5384614" vertical-offset="792" max-vertical-offset="1848">
+          <caret line="33" column="69" selection-start-line="33" selection-start-column="69" selection-end-line="33" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/views/layouts/login.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.6538463" vertical-offset="425" max-vertical-offset="1232">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/bootstrap/paths.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="25.384615" vertical-offset="660" max-vertical-offset="1320">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/bootstrap/start.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="40.884617" vertical-offset="1063" max-vertical-offset="1606">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/bootstrap/compiled.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="55770">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/start/global.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.115385" vertical-offset="1059" max-vertical-offset="1628">
+          <caret line="79" column="19" selection-start-line="79" selection-start-column="14" selection-end-line="79" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/start/local.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="543">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/start/artisan.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="395">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/bootstrap/autoload.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.2007368" vertical-offset="1195" max-vertical-offset="1738">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/config/dev/database.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.32412523" vertical-offset="0" max-vertical-offset="543">
+          <caret line="8" column="25" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/views/layouts/master.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.1538463" vertical-offset="1186" max-vertical-offset="1782">
+          <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/standard_7.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3480663" vertical-offset="11603" max-vertical-offset="24596">
+          <caret line="536" column="20" selection-start-line="536" selection-start-column="9" selection-end-line="536" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/filters.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="966" max-vertical-offset="1496">
+          <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/config/local/app.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.692307" vertical-offset="0" max-vertical-offset="528">
+          <caret line="15" column="19" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/config/dev/app.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.692307" vertical-offset="0" max-vertical-offset="528">
+          <caret line="15" column="19" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/DHTML.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="20595" max-vertical-offset="105622">
+          <caret line="945" column="18" selection-start-line="945" selection-start-column="18" selection-end-line="945" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/lib.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25524476" vertical-offset="271268" max-vertical-offset="312334">
+          <caret line="12350" column="8" selection-start-line="12350" selection-start-column="4" selection-end-line="12350" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/config/debug/app.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="569">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/views/layouts/simple.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42895442" vertical-offset="522" max-vertical-offset="1078">
+          <caret line="31" column="88" selection-start-line="31" selection-start-column="88" selection-end-line="31" selection-end-column="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/views/layouts/angularjs.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.51295334" vertical-offset="66" max-vertical-offset="682">
+          <caret line="12" column="40" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/public/css/bootstrap-reset.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17794487" vertical-offset="2745" max-vertical-offset="4642">
+          <caret line="128" column="16" selection-start-line="128" selection-start-column="16" selection-end-line="128" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/public/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0726817" vertical-offset="29" max-vertical-offset="106590">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/public/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="261" max-vertical-offset="836">
+          <caret line="25" column="8" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/controllers/TrackingController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1577061" vertical-offset="0" max-vertical-offset="880">
+          <caret line="4" column="3" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/controllers/ApiController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6605505" vertical-offset="1708" max-vertical-offset="2288">
+          <caret line="137" column="11" selection-start-line="137" selection-start-column="11" selection-end-line="137" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/utils/Functions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.41284403" vertical-offset="4691" max-vertical-offset="5610">
+          <caret line="196" column="109" selection-start-line="196" selection-start-column="109" selection-end-line="196" selection-end-column="109" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/public/js/factories.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.19264448" vertical-offset="0" max-vertical-offset="22374">
+          <caret line="5" column="45" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/public/js/controllers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.73204905" vertical-offset="6270" max-vertical-offset="7062">
+          <caret line="431" column="17" selection-start-line="431" selection-start-column="17" selection-end-line="431" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/config/packages/fitztrev/laravel-html-minify/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="584">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/views/dashboard/tracking/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2254" max-vertical-offset="4708">
+          <caret line="137" column="0" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="775" max-vertical-offset="1452">
+          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+          <folding>
+            <element signature="e#6#29#0#PHP" expanded="true" />
+            <element signature="e#991#1095#1#PHP" expanded="true" />
+            <element signature="e#1356#1557#1#PHP" expanded="true" />
+            <element signature="e#1606#1684#1#PHP" expanded="true" />
+            <element signature="e#1793#1882#1#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/views/layouts/master_modules/menu.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.43137255" vertical-offset="1518" max-vertical-offset="2288">
+          <caret line="72" column="18" selection-start-line="72" selection-start-column="18" selection-end-line="72" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

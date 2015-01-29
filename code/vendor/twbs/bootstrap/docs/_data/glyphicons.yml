@@ -4,6 +4,7 @@
 - glyphicon-asterisk
 - glyphicon-plus
 - glyphicon-euro
+- glyphicon-eur
 - glyphicon-minus
 - glyphicon-cloud
 - glyphicon-envelope
@@ -207,8 +208,6 @@
 - glyphicon-level-up
 - glyphicon-copy
 - glyphicon-paste
-- glyphicon-door
-- glyphicon-key
 - glyphicon-alert
 - glyphicon-equalizer
 - glyphicon-king
@@ -228,8 +227,12 @@
 - glyphicon-piggy-bank
 - glyphicon-scissors
 - glyphicon-bitcoin
+- glyphicon-btc
+- glyphicon-xbt
 - glyphicon-yen
+- glyphicon-jpy
 - glyphicon-ruble
+- glyphicon-rub
 - glyphicon-scale
 - glyphicon-ice-lolly
 - glyphicon-ice-lolly-tasted

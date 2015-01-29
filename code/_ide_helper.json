@@ -1123,6 +1123,20 @@
                     "offsetExists": "($key)",
                     "offsetUnset": "($key)"
                 }
+            },
+            "Excel": {
+                "functions": {
+                    "create": "($filename, $callback = null)",
+                    "load": "($file, $callback = null, $encoding = null)",
+                    "selectSheets": "($sheets = array())",
+                    "selectSheetsByIndex": "($sheets = array())",
+                    "batch": "($files, $callback)",
+                    "shareView": "($view, $data = array(), $mergeData = array())",
+                    "loadView": "($view, $data = array(), $mergeData = array())",
+                    "registerFilters": "($filters = array())",
+                    "filter": "($filter, $class = false)",
+                    "getFilters": "($key = false)"
+                }
             }
         }
     }

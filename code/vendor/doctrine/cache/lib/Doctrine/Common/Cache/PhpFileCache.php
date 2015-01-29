@@ -27,75 +27,83 @@ namespace Doctrine\Common\Cache;
  */
 class PhpFileCache extends FileCache
 {
-	const EXTENSION = '.doctrinecache.php';
+    const EXTENSION = '.doctrinecache.php';
 
-	/**
-	 * {@inheritdoc}
-	 */
-	protected $extension = self::EXTENSION;
+    /**
+     * {@inheritdoc}
+     */
+    public function __construct($directory, $extension = self::EXTENSION)
+    {
+        parent::__construct($directory, $extension);
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	protected function doFetch($id)
-	{
-		$filename = $this->getFilename($id);
+    /**
+     * {@inheritdoc}
+     */
+    protected function doFetch($id)
+    {
+        $filename = $this->getFilename($id);
 
-		if (!is_file($filename)) {
-			return false;
-		}
+        if ( ! is_file($filename)) {
+            return false;
+        }
 
-		$value = include $filename;
+        $value = include $filename;
 
-		if ($value['lifetime'] !== 0 && $value['lifetime'] < time()) {
-			return false;
-		}
+        if ($value['lifetime'] !== 0 && $value['lifetime'] < time()) {
+            return false;
+        }
 
-		return $value['data'];
-	}
+        return $value['data'];
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	protected function doContains($id)
-	{
-		$filename = $this->getFilename($id);
+    /**
+     * {@inheritdoc}
+     */
+    protected function doContains($id)
+    {
+        $filename = $this->getFilename($id);
 
-		if (!is_file($filename)) {
-			return false;
-		}
+        if ( ! is_file($filename)) {
+            return false;
+        }
+        
+        if ( ! is_readable($filename)) {
+            return false;
+        }
 
-		$value = include $filename;
+        $value = include $filename;
 
-		return $value['lifetime'] === 0 || $value['lifetime'] > time();
-	}
+        return $value['lifetime'] === 0 || $value['lifetime'] > time();
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	protected function doSave($id, $data, $lifeTime = 0)
-	{
-		if ($lifeTime > 0) {
-			$lifeTime = time() + $lifeTime;
-		}
+    /**
+     * {@inheritdoc}
+     */
+    protected function doSave($id, $data, $lifeTime = 0)
+    {
+        if ($lifeTime > 0) {
+            $lifeTime = time() + $lifeTime;
+        }
 
-		if (is_object($data) && !method_exists($data, '__set_state')) {
-			throw new \InvalidArgumentException("Invalid argument given, PhpFileCache only allows objects that implement __set_state() " . "and fully support var_export(). You can use the FilesystemCache to save arbitrary object " . "graphs using serialize()/deserialize().");
-		}
+        if (is_object($data) && ! method_exists($data, '__set_state')) {
+            throw new \InvalidArgumentException(
+                "Invalid argument given, PhpFileCache only allows objects that implement __set_state() " .
+                "and fully support var_export(). You can use the FilesystemCache to save arbitrary object " .
+                "graphs using serialize()/deserialize()."
+            );
+        }
 
-		$filename = $this->getFilename($id);
-		$filepath = pathinfo($filename, PATHINFO_DIRNAME);
+        $filename  = $this->getFilename($id);
 
-		if (!is_dir($filepath)) {
-			mkdir($filepath, 0777, true);
-		}
+        $value = array(
+            'lifetime'  => $lifeTime,
+            'data'      => $data
+        );
 
-		$value = array('lifetime' => $lifeTime,
-		               'data'     => $data);
+        $value  = var_export($value, true);
+        $code   = sprintf('<?php return %s;', $value);
 
-		$value = var_export($value, true);
-		$code  = sprintf('<?php return %s;', $value);
-
-		return file_put_contents($filename, $code) !== false;
-	}
+        return $this->writeFile($filename, $code);
+    }
 }

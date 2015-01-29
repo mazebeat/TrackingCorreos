@@ -30,8 +30,8 @@ class ApiController extends BaseController
 	 * @param int   $status
 	 * @param array $headers
 	 */
-	public function __construct($token = null, $data = array(), $status = 200, $headers = array('ContentType' => 'application/json',
-	                                                                                            'charset'     => 'utf-8'))
+	public function __construct($token = null, $data = array(), $status = 200, $headers
+	= array('ContentType' => 'application/json', 'charset' => 'utf-8'))
 	{
 		$this->token   = isset($token) ? $token : Crypt::encrypt(str_random(40));
 		$this->data    = $data;
@@ -133,6 +133,28 @@ class ApiController extends BaseController
 	public function setHeaders($headers)
 	{
 		$this->headers = $headers;
+	}
+
+	public function downloadDetail($data = null, $filename = 'Detalle', $fecha = null, $title = 'Detalle campaña', $sheetName = 'Detalle')
+	{
+		if (!isset($data) && !count($data)) {
+			return false;
+		}
+		if (!isset($fecha)) {
+			$fecha = Carbon::now()->toDateString();
+		}
+		$filename = $filename . '_' . $fecha;
+		Excel::create($filename, function ($excel) use ($data, $title, $sheetName) {
+			$excel->setTitle($title)->setCreator('DPinto')->setCompany('Intelidata')->setDescription($title)->sheet($sheetName, function ($sheet) use ($data) {
+				$sheet->setColumnFormat(array('A' => '@', 'B' => '0', 'C' => '0.00', 'D' => 'yy/mm/dd;@', 'E' => '@', 'F' => '@', 'G' => '@', 'H' => '@'));
+				$sheet->fromArray($data, null, 'A1', false, false);
+				$sheet->prependRow(array('Campaña', 'Negocio', 'Fecha Despacho ', 'Fecha Retención ', 'Email', 'Leído', 'Retenido', 'Fallido'));
+				$sheet->freezeFirstRow();
+				$sheet->setAutoSize(true);
+				$sheet->setAutoFilter();
+				$sheet->setAllBorders('thin');
+			});
+		})->download('xlsx');
 	}
 
 }

@@ -29,7 +29,7 @@
 	{{ HTML::script('js/bootstrap.min.js') }}
 	{{ HTML::script('js/jquery.cookies.js') }}
 
-
+	{{ HTML::script('https://rawgithub.com/eligrey/FileSaver.js/master/FileSaver.js') }}
 	{{-- AmCharts JS --}}
 	{{ HTML::script('js/amcharts/amcharts.js') }}
 	{{ HTML::script('js/amcharts/pie.js') }}

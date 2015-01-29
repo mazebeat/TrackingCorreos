@@ -29,213 +29,249 @@ namespace Doctrine\Common\Cache;
  * @author Roman Borschel <roman@code-factory.org>
  * @author Fabio B. Silva <fabio.bat.silva@gmail.com>
  */
-abstract class CacheProvider implements Cache
+abstract class CacheProvider implements Cache, FlushableCache, ClearableCache, MultiGetCache
 {
-	const DOCTRINE_NAMESPACE_CACHEKEY = 'DoctrineNamespaceCacheKey[%s]';
+    const DOCTRINE_NAMESPACE_CACHEKEY = 'DoctrineNamespaceCacheKey[%s]';
 
-	/**
-	 * The namespace to prefix all cache ids with.
-	 *
-	 * @var string
-	 */
-	private $namespace = '';
+    /**
+     * The namespace to prefix all cache ids with.
+     *
+     * @var string
+     */
+    private $namespace = '';
 
-	/**
-	 * The namespace version.
-	 *
-	 * @var integer|null
-	 */
-	private $namespaceVersion;
+    /**
+     * The namespace version.
+     *
+     * @var integer|null
+     */
+    private $namespaceVersion;
 
-	/**
-	 * Retrieves the namespace that prefixes all cache ids.
-	 *
-	 * @return string
-	 */
-	public function getNamespace()
-	{
-		return $this->namespace;
-	}
+    /**
+     * Sets the namespace to prefix all cache ids with.
+     *
+     * @param string $namespace
+     *
+     * @return void
+     */
+    public function setNamespace($namespace)
+    {
+        $this->namespace        = (string) $namespace;
+        $this->namespaceVersion = null;
+    }
 
-	/**
-	 * Sets the namespace to prefix all cache ids with.
-	 *
-	 * @param string $namespace
-	 *
-	 * @return void
-	 */
-	public function setNamespace($namespace)
-	{
-		$this->namespace        = (string)$namespace;
-		$this->namespaceVersion = null;
-	}
+    /**
+     * Retrieves the namespace that prefixes all cache ids.
+     *
+     * @return string
+     */
+    public function getNamespace()
+    {
+        return $this->namespace;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function fetch($id)
-	{
-		return $this->doFetch($this->getNamespacedId($id));
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function fetch($id)
+    {
+        return $this->doFetch($this->getNamespacedId($id));
+    }
 
-	/**
-	 * Fetches an entry from the cache.
-	 *
-	 * @param string $id The id of the cache entry to fetch.
-	 *
-	 * @return string|boolean The cached data or FALSE, if no cache entry exists for the given id.
-	 */
-	abstract protected function doFetch($id);
+    /**
+     * {@inheritdoc}
+     */
+    public function fetchMultiple(array $keys)
+    {
+        // note: the array_combine() is in place to keep an association between our $keys and the $namespacedKeys
+        $namespacedKeys = array_combine($keys, array_map(array($this, 'getNamespacedId'), $keys));
+        $items          = $this->doFetchMultiple($namespacedKeys);
+        $foundItems     = array();
 
-	/**
-	 * Prefixes the passed id with the configured namespace value.
-	 *
-	 * @param string $id The id to namespace.
-	 *
-	 * @return string The namespaced id.
-	 */
-	private function getNamespacedId($id)
-	{
-		$namespaceVersion = $this->getNamespaceVersion();
+        // no internal array function supports this sort of mapping: needs to be iterative
+        // this filters and combines keys in one pass
+        foreach ($namespacedKeys as $requestedKey => $namespacedKey) {
+            if (isset($items[$namespacedKey])) {
+                $foundItems[$requestedKey] = $items[$namespacedKey];
+            }
+        }
 
-		return sprintf('%s[%s][%s]', $this->namespace, $id, $namespaceVersion);
-	}
+        return $foundItems;
+    }
 
-	/**
-	 * Returns the namespace version.
-	 *
-	 * @return integer
-	 */
-	private function getNamespaceVersion()
-	{
-		if (null !== $this->namespaceVersion) {
-			return $this->namespaceVersion;
-		}
+    /**
+     * {@inheritdoc}
+     */
+    public function contains($id)
+    {
+        return $this->doContains($this->getNamespacedId($id));
+    }
 
-		$namespaceCacheKey = $this->getNamespaceCacheKey();
-		$namespaceVersion  = $this->doFetch($namespaceCacheKey);
+    /**
+     * {@inheritdoc}
+     */
+    public function save($id, $data, $lifeTime = 0)
+    {
+        return $this->doSave($this->getNamespacedId($id), $data, $lifeTime);
+    }
 
-		if (false === $namespaceVersion) {
-			$namespaceVersion = 1;
+    /**
+     * {@inheritdoc}
+     */
+    public function delete($id)
+    {
+        return $this->doDelete($this->getNamespacedId($id));
+    }
 
-			$this->doSave($namespaceCacheKey, $namespaceVersion);
-		}
+    /**
+     * {@inheritdoc}
+     */
+    public function getStats()
+    {
+        return $this->doGetStats();
+    }
 
-		$this->namespaceVersion = $namespaceVersion;
+    /**
+     * {@inheritDoc}
+     */
+    public function flushAll()
+    {
+        return $this->doFlush();
+    }
 
-		return $this->namespaceVersion;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public function deleteAll()
+    {
+        $namespaceCacheKey = $this->getNamespaceCacheKey();
+        $namespaceVersion  = $this->getNamespaceVersion() + 1;
 
-	/**
-	 * Returns the namespace cache key.
-	 *
-	 * @return string
-	 */
-	private function getNamespaceCacheKey()
-	{
-		return sprintf(self::DOCTRINE_NAMESPACE_CACHEKEY, $this->namespace);
-	}
+        $this->namespaceVersion = $namespaceVersion;
 
-	/**
-	 * Puts data into the cache.
-	 *
-	 * @param string $id         The cache id.
-	 * @param string $data       The cache entry/data.
-	 * @param int    $lifeTime   The lifetime. If != 0, sets a specific lifetime for this
-	 *                           cache entry (0 => infinite lifeTime).
-	 *
-	 * @return boolean TRUE if the entry was successfully stored in the cache, FALSE otherwise.
-	 */
-	abstract protected function doSave($id, $data, $lifeTime = 0);
+        return $this->doSave($namespaceCacheKey, $namespaceVersion);
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function contains($id)
-	{
-		return $this->doContains($this->getNamespacedId($id));
-	}
+    /**
+     * Prefixes the passed id with the configured namespace value.
+     *
+     * @param string $id The id to namespace.
+     *
+     * @return string The namespaced id.
+     */
+    private function getNamespacedId($id)
+    {
+        $namespaceVersion  = $this->getNamespaceVersion();
 
-	/**
-	 * Tests if an entry exists in the cache.
-	 *
-	 * @param string $id The cache id of the entry to check for.
-	 *
-	 * @return boolean TRUE if a cache entry exists for the given cache id, FALSE otherwise.
-	 */
-	abstract protected function doContains($id);
+        return sprintf('%s[%s][%s]', $this->namespace, $id, $namespaceVersion);
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function save($id, $data, $lifeTime = 0)
-	{
-		return $this->doSave($this->getNamespacedId($id), $data, $lifeTime);
-	}
+    /**
+     * Returns the namespace cache key.
+     *
+     * @return string
+     */
+    private function getNamespaceCacheKey()
+    {
+        return sprintf(self::DOCTRINE_NAMESPACE_CACHEKEY, $this->namespace);
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function delete($id)
-	{
-		return $this->doDelete($this->getNamespacedId($id));
-	}
+    /**
+     * Returns the namespace version.
+     *
+     * @return integer
+     */
+    private function getNamespaceVersion()
+    {
+        if (null !== $this->namespaceVersion) {
+            return $this->namespaceVersion;
+        }
 
-	/**
-	 * Deletes a cache entry.
-	 *
-	 * @param string $id The cache id.
-	 *
-	 * @return boolean TRUE if the cache entry was successfully deleted, FALSE otherwise.
-	 */
-	abstract protected function doDelete($id);
+        $namespaceCacheKey = $this->getNamespaceCacheKey();
+        $namespaceVersion = $this->doFetch($namespaceCacheKey);
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function getStats()
-	{
-		return $this->doGetStats();
-	}
+        if (false === $namespaceVersion) {
+            $namespaceVersion = 1;
 
-	/**
-	 * Retrieves cached information from the data store.
-	 *
-	 * @since 2.2
-	 *
-	 * @return array|null An associative array with server's statistics if available, NULL otherwise.
-	 */
-	abstract protected function doGetStats();
+            $this->doSave($namespaceCacheKey, $namespaceVersion);
+        }
 
-	/**
-	 * Flushes all cache entries.
-	 *
-	 * @return boolean TRUE if the cache entries were successfully flushed, FALSE otherwise.
-	 */
-	public function flushAll()
-	{
-		return $this->doFlush();
-	}
+        $this->namespaceVersion = $namespaceVersion;
 
-	/**
-	 * Flushes all cache entries.
-	 *
-	 * @return boolean TRUE if the cache entry was successfully deleted, FALSE otherwise.
-	 */
-	abstract protected function doFlush();
+        return $this->namespaceVersion;
+    }
 
-	/**
-	 * Deletes all cache entries.
-	 *
-	 * @return boolean TRUE if the cache entries were successfully deleted, FALSE otherwise.
-	 */
-	public function deleteAll()
-	{
-		$namespaceCacheKey = $this->getNamespaceCacheKey();
-		$namespaceVersion  = $this->getNamespaceVersion() + 1;
+    /**
+     * Default implementation of doFetchMultiple. Each driver that supports multi-get should owerwrite it.
+     *
+     * @param array $keys Array of keys to retrieve from cache
+     * @return array Array of values retrieved for the given keys.
+     */
+    protected function doFetchMultiple(array $keys)
+    {
+        $returnValues = array();
 
-		$this->namespaceVersion = $namespaceVersion;
+        foreach ($keys as $index => $key) {
+            if (false !== ($item = $this->doFetch($key))) {
+                $returnValues[$key] = $item;
+            }
+        }
 
-		return $this->doSave($namespaceCacheKey, $namespaceVersion);
-	}
+        return $returnValues;
+    }
+
+    /**
+     * Fetches an entry from the cache.
+     *
+     * @param string $id The id of the cache entry to fetch.
+     *
+     * @return string|boolean The cached data or FALSE, if no cache entry exists for the given id.
+     */
+    abstract protected function doFetch($id);
+
+    /**
+     * Tests if an entry exists in the cache.
+     *
+     * @param string $id The cache id of the entry to check for.
+     *
+     * @return boolean TRUE if a cache entry exists for the given cache id, FALSE otherwise.
+     */
+    abstract protected function doContains($id);
+
+    /**
+     * Puts data into the cache.
+     *
+     * @param string $id       The cache id.
+     * @param string $data     The cache entry/data.
+     * @param int    $lifeTime The lifetime. If != 0, sets a specific lifetime for this
+     *                           cache entry (0 => infinite lifeTime).
+     *
+     * @return boolean TRUE if the entry was successfully stored in the cache, FALSE otherwise.
+     */
+    abstract protected function doSave($id, $data, $lifeTime = 0);
+
+    /**
+     * Deletes a cache entry.
+     *
+     * @param string $id The cache id.
+     *
+     * @return boolean TRUE if the cache entry was successfully deleted, FALSE otherwise.
+     */
+    abstract protected function doDelete($id);
+
+    /**
+     * Flushes all cache entries.
+     *
+     * @return boolean TRUE if the cache entry was successfully deleted, FALSE otherwise.
+     */
+    abstract protected function doFlush();
+
+    /**
+     * Retrieves cached information from the data store.
+     *
+     * @since 2.2
+     *
+     * @return array|null An associative array with server's statistics if available, NULL otherwise.
+     */
+    abstract protected function doGetStats();
 }

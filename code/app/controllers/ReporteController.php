@@ -18,18 +18,6 @@ class ReporteController extends ApiController
 	/**
 	 * @return mixed
 	 */
-//	public function fisico()
-//	{
-//		return View::make('dashboard.reportes.fisico');
-//	}
-//
-//	/**
-//	 * @return mixed
-//	 */
-//	public function electronico()
-//	{
-//		return View::make('dashboard.reportes.electronico');
-//	}
 	public function lecturatot()
 	{
 		return View::make('dashboard.reportes.lecturatot');

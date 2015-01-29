@@ -45,6 +45,7 @@
                                 </div>
                             </div>
                         </div>
+                        <h4 class="text-center">Campañas por negocio mes actual</h4>
                         <div id="chartdiv1" style="width: 100%; height: 400px; background-color: #FFFFFF;"></div>
                     </div>
                     <div class="col-md-8">
@@ -91,6 +92,7 @@
                                 </form>
                             </div>
                             <div class="col-md-12">
+                                <h4 class="text-center">Cantidad de documentos por campaña anual</h4>
                                 <div id="chartdiv2"
                                      style="width: 100%; height: 400px; background-color: #FFFFFF;"></div>
                             </div>

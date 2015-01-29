@@ -19,7 +19,7 @@
 
 namespace Doctrine\Common\Cache;
 
-use Memcached;
+use \Memcached;
 
 /**
  * Memcached cache provider.
@@ -34,91 +34,99 @@ use Memcached;
  */
 class MemcachedCache extends CacheProvider
 {
-	/**
-	 * @var Memcached|null
-	 */
-	private $memcached;
+    /**
+     * @var Memcached|null
+     */
+    private $memcached;
 
-	/**
-	 * Gets the memcached instance used by the cache.
-	 *
-	 * @return Memcached|null
-	 */
-	public function getMemcached()
-	{
-		return $this->memcached;
-	}
+    /**
+     * Sets the memcache instance to use.
+     *
+     * @param Memcached $memcached
+     *
+     * @return void
+     */
+    public function setMemcached(Memcached $memcached)
+    {
+        $this->memcached = $memcached;
+    }
 
-	/**
-	 * Sets the memcache instance to use.
-	 *
-	 * @param Memcached $memcached
-	 *
-	 * @return void
-	 */
-	public function setMemcached(Memcached $memcached)
-	{
-		$this->memcached = $memcached;
-	}
+    /**
+     * Gets the memcached instance used by the cache.
+     *
+     * @return Memcached|null
+     */
+    public function getMemcached()
+    {
+        return $this->memcached;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	protected function doFetch($id)
-	{
-		return $this->memcached->get($id);
-	}
+    /**
+     * {@inheritdoc}
+     */
+    protected function doFetch($id)
+    {
+        return $this->memcached->get($id);
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	protected function doContains($id)
-	{
-		return (false !== $this->memcached->get($id));
-	}
+    /**
+     * {@inheritdoc}
+     */
+    protected function doFetchMultiple(array $keys)
+    {
+        return $this->memcached->getMulti($keys);
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	protected function doSave($id, $data, $lifeTime = 0)
-	{
-		if ($lifeTime > 30 * 24 * 3600) {
-			$lifeTime = time() + $lifeTime;
-		}
+    /**
+     * {@inheritdoc}
+     */
+    protected function doContains($id)
+    {
+        return (false !== $this->memcached->get($id));
+    }
 
-		return $this->memcached->set($id, $data, (int)$lifeTime);
-	}
+    /**
+     * {@inheritdoc}
+     */
+    protected function doSave($id, $data, $lifeTime = 0)
+    {
+        if ($lifeTime > 30 * 24 * 3600) {
+            $lifeTime = time() + $lifeTime;
+        }
+        return $this->memcached->set($id, $data, (int) $lifeTime);
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	protected function doDelete($id)
-	{
-		return $this->memcached->delete($id);
-	}
+    /**
+     * {@inheritdoc}
+     */
+    protected function doDelete($id)
+    {
+        return $this->memcached->delete($id);
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	protected function doFlush()
-	{
-		return $this->memcached->flush();
-	}
+    /**
+     * {@inheritdoc}
+     */
+    protected function doFlush()
+    {
+        return $this->memcached->flush();
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	protected function doGetStats()
-	{
-		$stats   = $this->memcached->getStats();
-		$servers = $this->memcached->getServerList();
-		$key     = $servers[0]['host'] . ':' . $servers[0]['port'];
-		$stats   = $stats[$key];
-
-		return array(Cache::STATS_HITS             => $stats['get_hits'],
-		             Cache::STATS_MISSES           => $stats['get_misses'],
-		             Cache::STATS_UPTIME           => $stats['uptime'],
-		             Cache::STATS_MEMORY_USAGE     => $stats['bytes'],
-		             Cache::STATS_MEMORY_AVAILABLE => $stats['limit_maxbytes'],);
-	}
+    /**
+     * {@inheritdoc}
+     */
+    protected function doGetStats()
+    {
+        $stats   = $this->memcached->getStats();
+        $servers = $this->memcached->getServerList();
+        $key     = $servers[0]['host'] . ':' . $servers[0]['port'];
+        $stats   = $stats[$key];
+        return array(
+            Cache::STATS_HITS   => $stats['get_hits'],
+            Cache::STATS_MISSES => $stats['get_misses'],
+            Cache::STATS_UPTIME => $stats['uptime'],
+            Cache::STATS_MEMORY_USAGE     => $stats['bytes'],
+            Cache::STATS_MEMORY_AVAILABLE => $stats['limit_maxbytes'],
+        );
+    }
 }

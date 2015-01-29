@@ -16,7 +16,8 @@
         "barryvdh/laravel-debugbar": "~1.7",
         "barryvdh/laravel-ide-helper": "~1.11",
         "fitztrev/laravel-html-minify": "1.*",
-        "barryvdh/laravel-vendor-cleanup": "1.*"
+        "barryvdh/laravel-vendor-cleanup": "1.*",
+        "tecnick.com/tcpdf": "~6.0.0"
     },
     "require-dev": {
         "way/generators": "~2.0",
