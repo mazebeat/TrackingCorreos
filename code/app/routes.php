@@ -1,5 +1,4 @@
 <?php
-use App\Util\Functions;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -52,9 +51,7 @@ Route::group(array('before' => 'auth'), function () {
 		Route::get('authUser', 'DashboardController@authUser');
 		Route::get('getSearchTracking', 'TrackingController@getSearchTracking');
 		Route::post('setSearchTracking', 'TrackingController@setSearchTracking');
-		Route::get('excel', function () {
-
-		});
+		Route::get('excel', 'TrackingController@downloadCSVDetail');
 	});
 });
 
