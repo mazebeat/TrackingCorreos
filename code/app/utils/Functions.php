@@ -194,7 +194,7 @@ Class Functions
 		return $month;
 	}
 
-	public static function curlRequest($url = null, $postFields = null, $requestType = 'GET', $isFormData = false)
+	public static function curlRequest($url = null, $postFields = null, $requestType = 'GET')
 	{
 		if (!isset($url)) {
 			return json_encode(array('error' => 'URL param is required'));
@@ -204,32 +204,13 @@ Class Functions
 		if ($requestType == 'POST') {
 			curl_setopt($client, CURLOPT_POST, true);
 			curl_setopt($client, CURLOPT_CUSTOMREQUEST, 'POST');
-			if (count($postFields)) {
-				if (isset($postFields) && is_array($postFields)) {
-					if ($isFormData) {
-						$postFields = json_encode($postFields);
-						curl_setopt($client, CURLOPT_POSTFIELDS, $postFields); // multipart/form-data
-						$header = array('Content-Type: application/json', 'Content-Length: ' . strlen($postFields));
-					}
-					else {
-						curl_setopt($client, CURLOPT_POSTFIELDS, http_build_query($postFields)); // application/x-www-form-urlencoded
-						$postFields = json_encode($postFields);
-						$header     = array('Content-Type: application/json', 'Content-Length: ' . strlen($postFields));
-					}
-				}
-			}
-			else {
-				$header = array('Content-Type: application/json');
-			}
+			curl_setopt($client, CURLOPT_POSTFIELDS, http_build_query($postFields)); //
 		}
 		else {
 			curl_setopt($client, CURLOPT_POST, false);
-			$header = array('Content-Type: application/json');
 		}
-		curl_setopt($client, CURLOPT_HTTPHEADER, $header);
 		curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($client, CURLOPT_SSL_VERIFYPEER, false);
-		//		curl_setopt($client, CURLOPT_FOLLOWLOCATION, true);
 		$response = curl_exec($client);
 		$result   = json_decode($response);
 		curl_close($client);

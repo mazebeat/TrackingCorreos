@@ -362,11 +362,12 @@ trackingCorreos.controller('trackingController', ['$scope', '$http', '$q', 'stor
                     chart.validateNow();
                     chart.animateAgain();
                     $scope.result = json;
+                    trackingButton.stop();
                 } else {
                     $scope.message = response.message;
                     apiFactory.notify('Tracking de Correos', $scope.message);
-                    trackingButton.stop();
                     $scope.result = [];
+                    trackingButton.stop();
                 }
             })
             .then(function () {
@@ -403,6 +404,7 @@ trackingCorreos.controller('trackingController', ['$scope', '$http', '$q', 'stor
                     modal.find('.modal-subtitle').text('NAVIDAD');
                     $('#mDetail').modal('show')
                     gDetail.validateNow();
+                    trackingButton.stop();
                 } else {
                     $scope.message = response.message;
                     $scope.result = [];
@@ -411,6 +413,7 @@ trackingCorreos.controller('trackingController', ['$scope', '$http', '$q', 'stor
             .catch(function (errorMsg) {
                 apiFactory.notify('Atención!', errorMsg);
                 $scope.result = [];
+                trackingButton.stop();
             });
     }
 
@@ -425,11 +428,12 @@ trackingCorreos.controller('trackingController', ['$scope', '$http', '$q', 'stor
         var params = {
             fechaDesde: apiFactory.formatDates(desde).toString(),
             fechaHasta: apiFactory.formatDates(hasta).toString(),
-            idcampana: pIdCampana,
+            idCampana: pIdCampana,
             campana: pNombreCampana,
             url: 'http://192.168.1.99:9800/GestionMailWS/Despacho/ConsultaDespacho'
         };
-        $http.get('excel', $.param(params))
+        $scope.
+            $http.get('excel', $.param(params))
             .then(function (response) {
                 console.info(response);
                 apiFactory.notify('Tracking de Correos', 'Generando documento a exportar');
@@ -468,4 +472,43 @@ trackingCorreos.controller('trackingController', ['$scope', '$http', '$q', 'stor
         gDetail.validateNow();
         //gDetail.animateAgain();
     });
+
+    $scope.descargaExcel = function (item, event) {
+        Ladda.bind('input[type=submit]');
+        var readyDetail = Ladda.create(document.querySelector('.readyDetail'));
+        var id = this.row.idCampana;
+        var name = this.row.nombre_campana;
+        var date = this.row.fecha;
+        var filename = name + '_' + date;
+
+        $.ajax({
+            method: 'GET',
+            url: 'excel',
+            data: {
+                'fecha': date,
+                'idCampana': id,
+                'campana': name,
+                'url': 'http://192.168.1.99:9800/GestionMailWS/Despacho/ConsultaDespacho'
+            },
+            dataType: 'json',
+            beforeSend: function () {
+                readyDetail.start();
+                $('.readyDetail').css('cursor', 'pointer');
+            },
+            success: function (response) {
+                console.info(response);
+                if(response.ok) {
+                    var data = response.data;
+                    $('#detailDiv').html(data);
+                    //apiFactory.tableToExcel('detailTable', filename)
+                    apiFactory.exportDataToTable('detailTable', filename)
+                    apiFactory.notify('Tracking de Correos', 'Iniciando descarga...', 'success');
+                    $('#detailDiv').html('');
+                } else {
+                    apiFactory.notify('Tracking de Correos', 'Error al generar documento.');
+                }
+                readyDetail.stop();
+            }
+        });
+    };
 }]);

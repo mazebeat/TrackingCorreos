@@ -1,5 +1,8 @@
 <?php
 
+use App\Util\Functions;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\View;
 
 /**
@@ -48,10 +51,24 @@ class TrackingController extends ApiController
 	 */
 	public function downloadCSVDetail()
 	{
-		$url    = 'https://api.twitter.com/1.1/help/configuration.json';
-		$params = array('idcampana' => Input::get('idcampana', ''), 'fechaDesde' => Input::get('fechaDesde', ''), 'fechaHasta' => Input::get('fechaHasta', ''));
-		$result = App\Util\Functions::curlRequest($url, $params, 'POST', true);
-		dd($result);
-		$this->downloadDetail(Functions::objectToArray($result->data), \Str::upper(Input::get('campana', 'DETALLE')));
+		$url        = Input::get('url', 'http://192.168.1.99:9800/GestionMailWS/Despacho/ConsultaDespacho');
+		$fecha      = new Carbon(Input::get('fecha'));
+		$fechaDesde = $fecha->firstOfMonth()->format('Ymd');
+		$fechaHasta = $fecha->lastOfMonth()->format('Ymd');
+		$idcampana  = \Input::get('idCampana', '');
+		$params     = array('fechaDesde' => $fechaDesde, 'fechaHasta' => $fechaHasta, 'idcampana' => (int)$idcampana);
+		$result     = App\Util\Functions::curlRequest($url, $params, 'POST');
+
+		if ($result->ok) {
+			$data = json_decode('[' . substr($result->data, 0, (int)strlen($result->data) - 1) . ']');
+			$structure = array('NCampana' => 'Campaña', 'NNegocio' => 'Negocio', 'fechaDespacho' => 'Fecha Despacho', 'fechaRetencion' => 'Fecha Retención', 'mail' => 'Email');
+//			$this->printExcel(\HTML::tableize($structure, $data, true), \Str::upper(Input::get('campana', 'DETALLE')));
+			return json_encode(array('ok' => true, 'data' => \HTML::tableize($structure, $data, true)));
+//			$this->downloadDetail($data, \Str::upper(Input::get('campana', 'DETALLE')));
+//			Response::download($pathToFile, $name, $headers);
+		}
+		else {
+			return json_encode(array('ok' => false, 'error' => 'error fatal'));
+		}
 	}
-} 
+}

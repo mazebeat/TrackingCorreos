@@ -1,5 +1,6 @@
 <?php
 
+use App\Util\XLSXWriter;
 use Illuminate\Support\Facades\Crypt;
 
 /**
@@ -135,26 +136,63 @@ class ApiController extends BaseController
 		$this->headers = $headers;
 	}
 
+	/**
+	 * @param null   $data
+	 * @param string $filename
+	 * @param null   $fecha
+	 * @param string $title
+	 * @param string $sheetName
+	 *
+	 * @return bool
+	 */
 	public function downloadDetail($data = null, $filename = 'Detalle', $fecha = null, $title = 'Detalle campaña', $sheetName = 'Detalle')
 	{
+		include_once(app_path() . '/utils/xlsxwriter.class.php');
+
 		if (!isset($data) && !count($data)) {
 			return false;
 		}
 		if (!isset($fecha)) {
 			$fecha = Carbon::now()->toDateString();
 		}
-		$filename = $filename . '_' . $fecha;
-		Excel::create($filename, function ($excel) use ($data, $title, $sheetName) {
-			$excel->setTitle($title)->setCreator('DPinto')->setCompany('Intelidata')->setDescription($title)->sheet($sheetName, function ($sheet) use ($data) {
-				$sheet->setColumnFormat(array('A' => '@', 'B' => '0', 'C' => '0.00', 'D' => 'yy/mm/dd;@', 'E' => '@', 'F' => '@', 'G' => '@', 'H' => '@'));
-				$sheet->fromArray($data, null, 'A1', false, false);
-				$sheet->prependRow(array('Campaña', 'Negocio', 'Fecha Despacho ', 'Fecha Retención ', 'Email', 'Leído', 'Retenido', 'Fallido'));
-				$sheet->freezeFirstRow();
-				$sheet->setAutoSize(true);
-				$sheet->setAutoFilter();
-				$sheet->setAllBorders('thin');
-			});
-		})->download('xlsx');
+		$filename = $filename . '_' . $fecha . '.xlsx';
+		$header   = array('Campaña' => 'string', 'Negocio' => 'string', 'Fecha Despacho' => 'string', 'Fecha Retención' => 'string', 'Email' => 'string', 'Leído' => 'string', 'Retenido' => 'string', 'Fallido' => 'string',);
+		$writer   = new \XLSXWriter();
+		$writer->writeSheetHeader($sheetName, $header);
+		foreach ($data as $value) {
+			$writer->writeSheetRow($sheetName, array(utf8_encode($value->NCampana), utf8_encode($value->NNegocio), $value->fechaDespacho, $value->fechaRetencion, utf8_encode($value->mail), 'NO', 'NO', 'NO'));
+		}
+		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+		header('Content-Type: application/force-download');
+		header('Content-Type: application/octet-stream');
+		header('Content-Type: application/download');
+		header('Content-type: application/ms-excel;');
+		header('Content-Disposition: attachment;filename="' . $filename . '"');
+		header('Pragma: public');
+		header('Cache-Control: max-age=0');
+		header('Expires: 0');
+		$writer->writeToStdOut();
+		exit;
+		//		echo '#' . floor((memory_get_peak_usage()) / 1024 / 1024) . "MB" . "\n";
 	}
 
+	public static function printExcel($table, $filename) {
+		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+		header('Content-Type: application/force-download');
+		header('Content-Type: application/octet-stream');
+		header('Content-Type: application/download');
+		header('Content-type: application/ms-excel;');
+		header('Content-Disposition: attachment;filename="' . $filename . '.xls"');
+		header('Pragma: public');
+		header('Cache-Control: max-age=0');
+		header('Expires: 0');
+
+//		header("Content-type: application/octet-stream");
+//		header("Content-Disposition: attachment; filename=" . $filename . ".xls");
+//		header("Pragma: no-cache");
+//		header("Expires: 0");
+
+		echo $table;
+		exit;
+	}
 }

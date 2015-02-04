@@ -25,7 +25,6 @@ App::before(function ($request) {
 	$monolog->info($log, compact('bindings', 'time'));
 });
 
-
 App::after(function ($request, $response) {
 	//	if (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') || strpos($_SERVER['HTTP_USER_AGENT'], 'Safari')) {
 	//		$response->header('P3P', 'CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
@@ -47,7 +46,8 @@ Route::filter('auth', function () {
 	if (Auth::guest()) {
 		if (Request::ajax()) {
 			return Response::make('Unauthorized', 401);
-		} else {
+		}
+		else {
 			//                return Redirect::guest('login');
 			return Redirect::guest('/');
 		}
@@ -62,6 +62,12 @@ Route::filter('basic.once', function () {
 	return Auth::onceBasic();
 });
 
+Route::filter('admin', function () {
+	if (!(Auth::check() && Auth::user()->perfil == 'ADM')) {
+		return Redirect::to('/');
+	}
+});
+
 /**
  * |--------------------------------------------------------------------------
  * | Guest Filter
@@ -74,8 +80,9 @@ Route::filter('basic.once', function () {
  */
 
 Route::filter('guest', function () {
-	if (Auth::check())
+	if (Auth::check()) {
 		return Redirect::to('/');
+	}
 });
 
 /**
@@ -90,14 +97,10 @@ Route::filter('guest', function () {
  */
 
 Route::filter('csrf', function () {
-	if (Request::forged())
+	if (Request::forged()) {
 		return Response::error('500');
+	}
 	if (Session::token() != Input::get('_token')) {
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
-
-
-
-
-

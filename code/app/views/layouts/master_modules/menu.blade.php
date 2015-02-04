@@ -17,12 +17,12 @@
 				<li id="menuHome" class="{{ HTML::activeLink('dashboard') }}">
 					<a href="{{ URL::to('dashboard') }}"><i class="fa fa-home fa-fw"></i> Inicio</a>
 				</li>
-				@if(Auth::check() && (Auth::user()->perfil == 'ADM' || Auth::user()->perfil == 'PUB'))
-					<li id="menuConsultas"
-					    class="dropdown {{ HTML::activeState(array('dashboard/consultas/individual', 'dashboard/consultas/historica', 'dashboard/consultas/visualizacion')) }}">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<i class="fa fa-search fa-fw"></i> Consultas <b class="caret"></b>
-						</a>
+				<li id="menuConsultas"
+				    class="dropdown {{ HTML::activeState(array('dashboard/consultas/individual', 'dashboard/consultas/historica', 'dashboard/consultas/visualizacion')) }}">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						<i class="fa fa-search fa-fw"></i> Consultas <b class="caret"></b>
+					</a>
+					@if(Auth::check() && Auth::user()->perfil == 'ADM')
 						<ul class="dropdown-menu">
 							<li>
 								<a href="{{ URL::to('dashboard/consultas/individual') }}">Consulta Individual</a>
@@ -37,38 +37,41 @@
 								</a>
 							</li>
 						</ul>
-					</li>
-					<li id="menuReportes"
-					    class="dropdown {{ HTML::activeState(array('dashboard/reportes', 'dashboard/reportes/lecturatot')) }}">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-									class="fa fa-bar-chart-o fa-fw"></i>
-							Reportes <b class="caret"></b></a>
+					@endif
+				</li>
+				<li id="menuReportes"
+				    class="dropdown {{ HTML::activeState(array('dashboard/reportes', 'dashboard/reportes/lecturatot')) }}">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+								class="fa fa-bar-chart-o fa-fw"></i>
+						Reportes <b class="caret"></b></a>
+					@if(Auth::check() && Auth::user()->perfil == 'ADM')
 						<ul class="dropdown-menu">
 							<li>
-								<a href="{{ URL::to('dashboard/reportes/lecturatot') }}">Lectura total de Documentos</a>
+								<a href="{{ URL::to('dashboard/reportes/lecturatot') }}">Lectura total de
+									Documentos</a>
 							</li>
 						</ul>
-					</li>
-					<li id="menuTracking" class="{{ HTML::activeLink('dashboard/tracking') }}">
-						<a href="{{ URL::to('dashboard/tracking') }}"><i class="fa fa-envelope fa-fw"></i>
-							Tracking</a>
-					</li>
-				@endif
+					@endif
+				</li>
+				<li id="menuTracking" class="{{ HTML::activeLink('dashboard/tracking') }}">
+					<a href="{{ URL::to('dashboard/tracking') }}"><i class="fa fa-envelope fa-fw"></i>
+						Tracking</a>
+				</li>
 				@if(Auth::check() && Auth::user()->perfil == 'ADM')
 					<li id="menuAdmin"
 					    class="dropdown {{ HTML::activeState(array('dashboard/administracion/cambiopass', 'dashboard/administracion/usuarios')) }}">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog fa-fw"></i>
 							Administración <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li>
-								<a href="{{ URL::to('dashboard/administracion/cambiopass') }}">Cambio
-									contraseñas</a>
-							</li>
-							<li>
-								<a href="{{ URL::to('dashboard/administracion/usuarios') }}">Administración
-									usuarios</a>
-							</li>
-						</ul>
+						{{--<ul class="dropdown-menu">--}}
+							{{--<li>--}}
+								{{--<a href="{{ URL::to('dashboard/administracion/cambiopass') }}">Cambio--}}
+									{{--contraseñas</a>--}}
+							{{--</li>--}}
+							{{--<li>--}}
+								{{--<a href="{{ URL::to('dashboard/administracion/usuarios') }}">Administración--}}
+									{{--usuarios</a>--}}
+							{{--</li>--}}
+						{{--</ul>--}}
 					</li>
 				@endif
 			</ul>

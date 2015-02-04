@@ -1,18 +1,22 @@
 <?php
-use Illuminate\Support\Str;
-use Symfony\Component\HttpFoundation\Response;
-
-ini_set('memory_limit', '1024M');
+//Memory
+ini_set('memory_limit', '3500M');
 ini_set('max_execution_time', '0');
 ini_set('set_time_limit', '0');
+//Iconv
 iconv_set_encoding('internal_encoding', 'UTF-8');
 iconv_set_encoding('input_encoding', 'UTF-8');
 iconv_set_encoding('output_encoding', 'UTF-8');
+//XDebug
 ini_set('xdebug.collect_vars', 'on');
 ini_set('xdebug.collect_params', '4');
 ini_set('xdebug.dump_globals', 'on');
 ini_set('xdebug.dump.SERVER', 'REQUEST_URI');
+//Errors
 error_reporting(E_ALL);
+ini_set('display_errors', true);
+ini_set('display_startup_errors', true);
+
 
 /**
  * |--------------------------------------------------------------------------
@@ -34,17 +38,16 @@ Route::group(array('before' => 'auth'), function () {
 	Route::get('logout', 'HomeController@logout');
 	Route::group(array('prefix' => 'dashboard'), function () {
 		Route::get('/', 'DashboardController@index');
-		Route::group(array('prefix' => 'consultas'), function () {
+		Route::group(array('prefix' => 'consultas', 'before' => 'admin'), function () {
 			Route::get('historica', 'ConsultaController@historica');
 			Route::get('individual', 'ConsultaController@individual');
 			Route::get('visualizar', 'ConsultaController@visualizar');
 		});
-		Route::group(array('prefix' => 'reportes'), function () {
+		Route::group(array('prefix' => 'reportes', 'before' => 'admin'), function () {
 			Route::get('lecturatot', 'ReporteController@lecturatot');
 		});
 		Route::get('tracking', 'TrackingController@index');
-		Route::group(array('prefix' => 'administracion'), function () {
-			//		User resource
+		Route::group(array('prefix' => 'administracion', 'before' => 'admin'), function () {
 			Route::resource('usuarios', 'UsersController');
 		});
 		//
@@ -77,4 +80,14 @@ Route::post('processData', function () {
 	$config['graphs'] = array_unique($camapañas);
 
 	return Response::json($config);
+});
+
+Route::get('curl', function () {
+	header('Content-type: application/vnd.ms-excel');
+	header('Content-disposition: attachment; filename="test.csv"');
+	$f = fopen('php://output', 'w');
+	fwrite($f,'this,is,a,test');
+	fclose($f);
+	readfile('php://output');
+	return;
 });

@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+	<meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8">
 	<div ng-controller="trackingController">
 		<div class="row">
 			<div class="col-md-12">
@@ -81,7 +82,6 @@
 						<div class="tab-content">
 							<div id="tabla" class="tab-pane active">
 								<div id="tablaTracking" class="table-responsive">
-									@{{ readyDetail }}
 									<table class="table">
 										<thead>
 										<tr>
@@ -103,13 +103,25 @@
 										<tbody>
 										<tr ng-repeat="row in result">
 											<td>
-												<button id="readyDetail" type="button"
-												        class="ladda-button btn btn-default"
-												        data-style="zoom-in"
-												        data-spinner-size="20"
-												        ng-click="exportData2(row.idCampana, row.nombre_campana, row.fecha)">
-													<i class="fa fa-download"></i>
-												</button>
+												<a
+														ng-click="descargaExcel()"
+														class="readyDetail ladda-button btn btn-link"
+														data-style="zoom-in">
+														<span class="ladda-label">
+															<i class="fa fa-download fa-fw"></i>
+														</span>
+												</a>
+
+												{{--<form method="post" id="FormularioExportacion">--}}
+												{{--<button type="submit" class="botonExcel">Export</button>--}}
+												{{--<input type="hidden" id="fecha" name="fecha"--}}
+												{{--value="@{{ row.fecha }}"/>--}}
+												{{--<input type="hidden" id="idCampana" name="idCampana"--}}
+												{{--value="@{{ row.idCampana }}"/>--}}
+												{{--<input type="hidden" id="campana" name="campana"--}}
+												{{--value="@{{ row.NCampana  }}"/>--}}
+												{{--<input type="hidden" id="datos_a_enviar" name="datos_a_enviar"/>--}}
+												{{--</form>--}}
 											</td>
 											<td>@{{row.ano + '-' + row.mes | date:'yyyy-MM'}}</td>
 											<td>@{{row.nombre_campana}}</td>
@@ -135,6 +147,9 @@
 						</div>
 					</div>
 				</section>
+
+				<div id="detailDiv" style="display: none"></div>
+
 				<div class="modal fade" id="mDetail" tabindex="-1" role="dialog" aria-labelledby="mDetailLabel"
 				     aria-hidden="true">
 					<div class="modal-dialog">
@@ -185,14 +200,18 @@
 
 	<!--pickers initialization-->
 	{{ HTML::script('js/pickers-init.js') }}
+
+	{{--{{ HTML::script('js/excellentexport.min.js') }}--}}
+	{{--{{ HTML::script('js/download.js') }}--}}
 @endsection
 
 @section('text-script')
 	<script type="text/javascript">
 		var chart = new AmCharts.AmPieChart();
 		var gDetail = new AmCharts.AmPieChart();
+		var readyDetail = Ladda.create(document.querySelector('.readyDetail'));
 		var trackingButton = Ladda.create(document.querySelector('#trackingFormButton'));
-		var readyDetail = Ladda.create(document.querySelector('#readyDetail'));
+
 		Ladda.bind('.ladda-button');
 
 		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
