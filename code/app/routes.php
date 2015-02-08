@@ -4,9 +4,14 @@ ini_set('memory_limit', '3500M');
 ini_set('max_execution_time', '0');
 ini_set('set_time_limit', '0');
 //Iconv
-iconv_set_encoding('internal_encoding', 'UTF-8');
-iconv_set_encoding('input_encoding', 'UTF-8');
-iconv_set_encoding('output_encoding', 'UTF-8');
+if (PHP_VERSION_ID < 50600) {
+	iconv_set_encoding('input_encoding', 'UTF-8');
+	iconv_set_encoding('output_encoding', 'UTF-8');
+	iconv_set_encoding('internal_encoding', 'UTF-8');
+}
+else {
+	ini_set('default_charset', 'UTF-8');
+}
 //XDebug
 ini_set('xdebug.collect_vars', 'on');
 ini_set('xdebug.collect_params', '4');
@@ -14,6 +19,7 @@ ini_set('xdebug.dump_globals', 'on');
 ini_set('xdebug.dump.SERVER', 'REQUEST_URI');
 //Errors
 error_reporting(E_ALL);
+ini_set('display_errors', true);
 ini_set('display_errors', true);
 ini_set('display_startup_errors', true);
 
@@ -86,8 +92,9 @@ Route::get('curl', function () {
 	header('Content-type: application/vnd.ms-excel');
 	header('Content-disposition: attachment; filename="test.csv"');
 	$f = fopen('php://output', 'w');
-	fwrite($f,'this,is,a,test');
+	fwrite($f, 'this,is,a,test');
 	fclose($f);
 	readfile('php://output');
+
 	return;
 });
