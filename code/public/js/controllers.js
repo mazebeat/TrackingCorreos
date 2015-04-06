@@ -15,7 +15,7 @@ trackingCorreos.controller('homeController', ['$scope', '$http', '$window', 'roo
                 if (response.ok) {
                     $scope.message = '';
                     $http.post('login', response.data)
-                        .success(function (data) {
+                    .success(function (data) {
                             if (data.ok) {
                                 $scope.message = data.message;
                                 if (storageService.getItem('firstTime') != true) {
